@@ -1,8 +1,8 @@
 { pkgs, config, ... }: {
 
-       imports = [
-            ../../modules/programs/git.nix
-       ];
+      imports = [
+           ../../modules/programs/git.nix
+      ];
 
        home.username = "semiko";
        home.homeDirectory = "/home/semiko";
