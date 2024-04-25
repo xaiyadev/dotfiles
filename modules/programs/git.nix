@@ -3,7 +3,7 @@
         enable = true;
         package = pkgs.gitFull;
         userName = "Danil Schumin";
-        userEmail = "d.schumin@blmedia.de"; # TODO: add an option to change
+        userEmail = "danil80sch@gmail.com"; # TODO: add an option to change
 
         extraConfig = {
             commit.gpgsign = true;
