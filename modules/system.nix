@@ -34,8 +34,12 @@
         libreoffice
         vlc
 
+        whatsapp-for-linux
+
         adw-gtk3
     ];
+
+    virtualisation.docker.enable = true;
 
     system.stateVersion = "23.11";
 }

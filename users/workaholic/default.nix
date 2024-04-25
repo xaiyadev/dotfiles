@@ -4,6 +4,6 @@
         isNormalUser = true;
         initialPassword = "semiko";
         description = "Workaholic Deluxe";
-        extraGroups = [ "networkmanager" "wheel" ];
+        extraGroups = [ "networkmanager" "wheel" "docker" ];
     };
 }

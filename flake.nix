@@ -19,7 +19,6 @@
 
           # User import
           ./users/semiko
-          ./users/oksana
           ./users/workaholic
 
           home-manager.nixosModules.home-manager
@@ -29,8 +28,30 @@
 
               home-manager.extraSpecialArgs = inputs;
               home-manager.users.semiko = import ./users/semiko/home.nix;
-              home-manager.users.oksana = import ./users/oksana/home.nix;
               home-manager.users.workaholic = import ./users/workaholic/home.nix;
+            }
+          ];
+        };
+
+        nixosConfigurations.nixos-tower = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/nixos-tower
+
+          # User import
+          ./users/semiko
+          ./users/oksana
+
+          home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.extraSpecialArgs = inputs;
+              home-manager.users.semiko = import ./users/semiko/home.nix;
+              home-manager.users.oksana = import ./users/oksana/home.nix;
             }
           ];
         };
