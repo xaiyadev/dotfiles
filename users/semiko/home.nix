@@ -1,7 +1,7 @@
 { pkgs, config, ... }: {
 
       imports = [
-           ../../modules/programs/git.nix
+           ../../modules/programs/git/gitlab.nix
       ];
 
        home.username = "semiko";

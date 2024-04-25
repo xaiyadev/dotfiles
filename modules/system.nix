@@ -25,7 +25,6 @@
         wget
         
         git
-        gitkraken
         nodejs_21
 
         chromium
