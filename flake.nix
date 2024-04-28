@@ -31,7 +31,7 @@
               home-manager.users.workaholic = import ./users/workaholic/home.nix;
             }
           ];
-        };
+        };t
 
         nixosConfigurations.nixos-tower = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
