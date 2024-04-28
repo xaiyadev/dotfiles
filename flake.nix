@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.url = "github:nix-community/modules-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -31,7 +31,7 @@
               home-manager.users.workaholic = import ./users/workaholic/home.nix;
             }
           ];
-        };t
+        };
 
         nixosConfigurations.nixos-tower = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

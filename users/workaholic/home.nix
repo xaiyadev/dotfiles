@@ -1,6 +1,6 @@
 { pkgs, config, ... }: {
        home.username = "workaholic";
-       home.homeDirectory = "/home/workaholic";
+       home.homeDirectory = "/modules/workaholic";
 
         home.packages = with pkgs; [
               jetbrains.phpstorm

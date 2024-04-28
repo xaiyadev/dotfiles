@@ -5,7 +5,7 @@
       ];
 
        home.username = "semiko";
-       home.homeDirectory = "/home/semiko";
+       home.homeDirectory = "/modules/semiko";
 
         home.packages = with pkgs; [
               jetbrains.webstorm
