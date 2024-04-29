@@ -1,24 +1,27 @@
 { pkgs, config, ... }: {
+   home.username = "workaholic";
+   home.homeDirectory = "/home/workaholic";
 
-       imports = [
-            ../../modules/programs/git.nix
-       ];
+    home.packages = with pkgs; [
+          jetbrains.phpstorm
+          teams-for-linux
+          enpass
+          thunderbird
+    ];
 
-       services.git = {
-         enable = true;
-         service = "bitbucket";
-       };
+   programs.git = {
+     enable = true;
+     package = pkgs.gitFull;
+     userName = "Danil Schumin";
+     userEmail = "d.schumin@blmedia.de";
 
-       home.username = "workaholic";
-       home.homeDirectory = "/home/workaholic";
+     extraConfig = {
+         commit.gpgsign = true;
+         gpg.format = "ssh";
+         user.signingkey = "~/.ssh/bitbucket_ssh_key.pub";
+     };
+   };
 
-        home.packages = with pkgs; [
-              jetbrains.phpstorm
-              teams-for-linux
-              enpass
-              thunderbird
-	];
-
-       home.stateVersion = "23.11";
-       programs.home-manager.enable = true;
+   home.stateVersion = "23.11";
+   programs.home-manager.enable = true;
 }

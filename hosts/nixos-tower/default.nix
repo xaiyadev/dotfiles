@@ -4,7 +4,7 @@
   imports =
     [
       ../../modules/system.nix
-      ../../modules/desktop/gnome
+      ../../modules/gnome
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
