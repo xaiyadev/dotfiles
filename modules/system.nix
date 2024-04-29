@@ -23,8 +23,7 @@
     environment.systemPackages = with pkgs; [
         vim
         wget
-        
-        git
+
         nodejs_21
 
         chromium

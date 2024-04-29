@@ -2,6 +2,8 @@
    home.username = "workaholic";
    home.homeDirectory = "/home/workaholic";
 
+   imports = [ ../../modules/spotify ];
+
     home.packages = with pkgs; [
           jetbrains.phpstorm
           teams-for-linux
