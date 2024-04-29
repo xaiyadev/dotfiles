@@ -1,11 +1,16 @@
 { pkgs, config, ... }: {
 
       imports = [
-           ../../modules/programs/git/gitlab.nix
+           ../../modules/programs/git.nix
       ];
 
+      services.git = {
+        enable = true;
+        service = "gitlab";
+      };
+
        home.username = "semiko";
-       home.homeDirectory = "/modules/semiko";
+       home.homeDirectory = "/home/semiko";
 
         home.packages = with pkgs; [
               jetbrains.webstorm
