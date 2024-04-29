@@ -3,9 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    spicetify-nix.url = "github:the-argus/spicetify-nix";
+    home-manager.url = "github:nix-community/home-manager";
+
   };
 
   outputs = inputs@{self, nixpkgs, home-manager, ... }: {

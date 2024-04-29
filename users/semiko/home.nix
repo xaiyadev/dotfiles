@@ -2,6 +2,8 @@
    home.username = "semiko";
    home.homeDirectory = "/home/semiko";
 
+   imports = [ ../../modules/spotify ];
+
     home.packages = with pkgs; [
           jetbrains.webstorm
     ];

@@ -28,7 +28,6 @@
         nodejs_21
 
         chromium
-        spotify
         discord
         libreoffice
         vlc
