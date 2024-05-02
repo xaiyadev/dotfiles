@@ -23,11 +23,11 @@
   };
 
     networking = {
+        hostName = "nixos-tower";
         networkmanager.enable = true;
-        networking.hostName = "nixos-tower";
 
-        networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
-        networking.resolvconf.dnsSingleRequest = true;
+        nameservers = [ "1.1.1.1" "8.8.8.8" ];
+        resolvconf.dnsSingleRequest = true;
     };
 
   system.stateVersion = "23.11";
