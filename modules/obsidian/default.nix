@@ -1,12 +1,15 @@
 { pkgs, ...}: {
 
-  # Create
-  systemd.user.services.obsidianSync = {
-    description = "Sync Obsidian Vault";
-    script = "${./clone-vault.sh}";
-    wantedBy = [ "multi-user.target" ];
-    environment = {
-      HOME = config.home.homeDirectory;
+    # Install Obsidian
+    home.packages = with pkgs; [
+        obsidian
+    ];
+
+    # Install Vault
+    home.file."Documents/Obsidian/Vault/" = {
+        source = fetchGit {
+           url = "https://git.semiko.dev/Synchroniser/obsidian-sync";
+        };
     };
-  };
+
 }
