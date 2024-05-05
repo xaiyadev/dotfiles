@@ -5,6 +5,7 @@
     [
       ../../modules/system.nix
       ../../modules/gnome
+      ../../modules/obsidian
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix

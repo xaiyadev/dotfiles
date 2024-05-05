@@ -4,7 +4,6 @@
 
    imports = [
         ../../modules/spotify
-        ../../modules/obsidian
     ];
 
     home.packages = with pkgs; [
