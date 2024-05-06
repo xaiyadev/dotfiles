@@ -2,7 +2,10 @@
    home.username = "workaholic";
    home.homeDirectory = "/home/workaholic";
 
-   imports = [ ../../modules/spotify ];
+   imports = [
+        ../../modules/spotify
+        ../../modules/obsidian/home-config.nix
+   ];
 
     home.packages = with pkgs; [
           jetbrains.phpstorm
