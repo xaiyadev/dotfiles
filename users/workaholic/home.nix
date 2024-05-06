@@ -12,8 +12,11 @@
           teams-for-linux
           enpass
           thunderbird
+                  ungoogled-chromium
     ];
 
+
+   # Programm Settings for only that specific User
    programs.git = {
      enable = true;
      package = pkgs.gitFull;
@@ -26,6 +29,40 @@
          user.signingkey = "~/.ssh/bitbucket_ssh_key.pub";
          safe.directory = "/srv/shared/obsidian/obsidian-sync";
      };
+   };
+
+
+   programs.chromium = {
+   enable = true;
+    initialPrefs = {
+        "first_run_tabs" = [
+            "https://semiko.dev"
+            "https://timebutler.de"
+            "https://trello.com"
+            "https://bl-projekte.de"
+        ];
+    };
+
+    extraOpts = {
+      "PasswordManagerEnabled" = false;
+      "SpellcheckEnabled" = true;
+      "SpellcheckLanguage" = [
+        "de"
+        "en-US"
+      ];
+    };
+
+    extensions = [
+      "kmcfomidfpdkfieipokbalgegidffkal" # enpass
+      "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+      "oldceeleldhonbafppcapldpdifcinji" # Language Tool
+      "kedbaefjfjpplphppofakpfldhimhcio" # NS Lookup
+      "gppongmhjkpfnbhagpmjfkannfbllamg" # Wappalyzer - Lookup Website Info
+      "mmioliijnhnoblpgimnlajmefafdfilb" # Shazam
+      "dhdgffkkebhmkfjojejmpbldmpobfkfo" # Tampermonkey // TODO: Add JSON local
+      "kililblhcfpodipkcbobnbgnbbhgbkji" # Pretty JSON
+    ];
+
    };
 
    home.stateVersion = "23.11";

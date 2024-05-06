@@ -26,7 +26,6 @@
 
         nodejs_21
 
-        chromium
         discord
         libreoffice
         vlc
