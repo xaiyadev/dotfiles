@@ -1,12 +1,6 @@
 { pkgs, ...}: {
     # This module is completly over the system, that way every user can acess that folder!
 
-
-    # Install Obsidian
-    environment.systemPackages = with pkgs; [
-        obsidian
-    ];
-
     systemd.services."obsidianVaultInstall" = {
         enable = true;
         path = with pkgs; [
@@ -20,6 +14,8 @@
                     cd /srv/shared/obsidian/
 
                     git clone https://git.semiko.dev/Synchroniser/obsidian-sync
+                    git pull
+                    # fix HEAD_FETCH no permission when new folder
                     chmod -R a+rw /srv/shared/
                 else
                     cd /srv/shared/obsidian/obsidian-sync/

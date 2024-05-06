@@ -24,6 +24,7 @@
          commit.gpgsign = true;
          gpg.format = "ssh";
          user.signingkey = "~/.ssh/bitbucket_ssh_key.pub";
+         safe.directory = "/srv/shared/obsidian/obsidian-sync";
      };
    };
 
