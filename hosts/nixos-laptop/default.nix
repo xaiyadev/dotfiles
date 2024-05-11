@@ -5,6 +5,8 @@
     [
       ../../modules/system.nix
       ../../modules/gnome
+
+      ../../modules/chromium
       ../../modules/obsidian
 
       # Include the results of the hardware scan.

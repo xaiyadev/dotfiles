@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
     services.xserver = {
         enable = true;
 
@@ -10,4 +10,28 @@
         variant = "";
         };
     };
+
+    environment.gnome.excludePackages = (with pkgs; [
+        gnome-photos
+        gnome-tour
+    ]) ++ (with pkgs.gnome; [
+        cheese
+        gnome-music
+        epiphany
+        evince
+        totem
+        tali
+        iagno
+        hitori
+        atomix
+    ]);
+
+
+    environment.systemPackages = with pkgs; [
+        gnome.gnome-tweaks
+        gnome-extension-manager
+
+        gnomeExtensions.weather-oclock
+        gnomeExtensions.open-bar
+    ];
 }

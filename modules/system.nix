@@ -26,13 +26,15 @@
 
         nodejs_21
 
+        gnome.dconf-editor
+        chromium
         discord
         libreoffice
         vlc
 
         whatsapp-for-linux
 
-        adw-gtk3
+        gtk4
     ];
 
     virtualisation.docker.enable = true;

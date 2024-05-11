@@ -29,40 +29,5 @@
          safe.directory = "/srv/shared/obsidian/obsidian-sync";
      };
    };
-
-  programs.chromium = {
-  enable = true;
-   # TODO: extra Opts and other shit make working, thy :3
-
-   /*initialPrefs = {
-       "first_run_tabs" = [
-           "https://semiko.dev"
-       ];
-   };
-*/
-
-/*   extraOpts = {
-     "PasswordManagerEnabled" = false;
-     "SpellcheckEnabled" = true;
-     "SpellcheckLanguage" = [
-       "de"
-       "en-US"
-     ];
-   };
-*/
-
-   # TODO: Automated setup for extensions
-   extensions = [
-     "kmcfomidfpdkfieipokbalgegidffkal" # enpass
-     "nngceckbapebfimnlniiiahkandclblb" # bitwarden
-     "oldceeleldhonbafppcapldpdifcinji" # Language Tool
-     "kedbaefjfjpplphppofakpfldhimhcio" # NS Lookup
-     "gppongmhjkpfnbhagpmjfkannfbllamg" # Wappalyzer - Lookup Website Info
-     "mmioliijnhnoblpgimnlajmefafdfilb" # Shazam
-     "dhdgffkkebhmkfjojejmpbldmpobfkfo" # Tampermonkey
-     "kililblhcfpodipkcbobnbgnbbhgbkji" # Pretty JSON
-   ];
-
-  };
 }
 
