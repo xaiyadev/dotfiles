@@ -6,6 +6,9 @@
       ../../modules/system.nix
       ../../modules/gnome
 
+      ../../modules/chromium
+      ../../modules/obsidian
+
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
@@ -16,9 +19,8 @@
 
     grub = {
       enable = true;
-      device = "/dev/sda";  #  "nodev"
+      device = "nodev";
       efiSupport = true;
-      useOSProber = true;
     };
   };
 

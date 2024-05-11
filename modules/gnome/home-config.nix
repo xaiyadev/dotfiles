@@ -11,7 +11,7 @@
         settings."org/gnome/desktop/background".primary-color = "#B2B2B2";
         settings."org/gnome/desktop/background".secondary-color = "#000000";
 
-        settings."org.gnome.shell.extensions.user-theme".name = "BreakingCustomShell";
+        settings."org/gnome.shell/extensions/user-theme".name = "BreakingCustomShell";
 
         settings."org/gnome/desktop/background".picture-ui = "file:///home/semiko/.config/nixos/wallpapers/wallpaper-1.png";
 
