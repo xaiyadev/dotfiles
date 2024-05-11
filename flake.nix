@@ -5,12 +5,14 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    agenix.url = "github.com:ryantm/agenix";
+
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     home-manager.url = "github:nix-community/home-manager";
 
   };
 
-  outputs = inputs@{self, nixpkgs, home-manager, ... }: {
+  outputs = inputs@{self, nixpkgs, home-manager, agenix, ... }: {
 
         nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -23,6 +25,7 @@
           ./users/semiko
           ./users/workaholic
 
+          agenix.nixosModules.default
           home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -46,6 +49,7 @@
           ./users/semiko
           ./users/oksana
 
+          agenix.nixosModules.default
           home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

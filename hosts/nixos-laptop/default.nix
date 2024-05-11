@@ -16,9 +16,12 @@
   # Bootloader.
   boot.loader = {
     efi.canTouchEfiVariables = true;
-    systemd-boot = {
-    enable = true;
-    configurationLimit = 12;
+
+    grub = {
+      enable = true;
+      device = "/dev/sda";  #  "nodev"
+      efiSupport = true;
+      useOSProber = true;
     };
   };
 
