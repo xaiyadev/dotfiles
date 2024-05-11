@@ -19,9 +19,8 @@
 
     grub = {
       enable = true;
-      device = "/dev/sda";  #  "nodev"
+      device = "nodev"; 
       efiSupport = true;
-      useOSProber = true;
     };
   };
 

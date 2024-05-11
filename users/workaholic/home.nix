@@ -5,6 +5,7 @@
    imports = [
         ../../modules/spotify
         ../../modules/obsidian/home-config.nix
+	../../modules/gnome/home-config.nix
    ];
 
     home.packages = with pkgs; [
