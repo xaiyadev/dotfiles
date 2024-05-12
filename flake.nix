@@ -7,10 +7,9 @@
 
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     home-manager.url = "github:nix-community/home-manager";
-
   };
 
-  outputs = inputs@{self, nixpkgs, home-manager, ... }: {
+  outputs = {self, nixpkgs, home-manager, ... } @ inputs: {
 
         nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -25,6 +24,7 @@
 
           home-manager.nixosModules.home-manager
             {
+	      home-manager.backupFileExtension = "backup";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
@@ -45,9 +45,9 @@
           # User import
           ./users/semiko
           ./users/oksana
-
           home-manager.nixosModules.home-manager
             {
+	      home-manager.backupFileExtension = "backup";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 

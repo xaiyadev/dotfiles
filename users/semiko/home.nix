@@ -9,7 +9,10 @@
     ];
 
     home.packages = with pkgs; [
-          jetbrains.webstorm
+	  # Jetbrains IDE for specific languages » TODO: Config for all these
+      jetbrains.webstorm
+	  jetbrains.pycharm-professional
+	  jetbrains.idea-ultimate
     ];
 
    home.stateVersion = "23.11";

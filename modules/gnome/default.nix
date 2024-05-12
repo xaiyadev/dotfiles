@@ -28,7 +28,8 @@
 
 
     environment.systemPackages = with pkgs; [
-        gnome.gnome-tweaks
+        gnome.dconf-editor
+	    gnome.gnome-tweaks
         gnome-extension-manager
 
         gnomeExtensions.weather-oclock

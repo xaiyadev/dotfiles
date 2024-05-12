@@ -24,15 +24,11 @@
         vim
         wget
 
-        nodejs_21
+        nodejs
 
-        gnome.dconf-editor
         chromium
         discord
-        libreoffice
         vlc
-
-        whatsapp-for-linux
 
         gtk4
     ];
