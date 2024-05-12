@@ -3,8 +3,10 @@
    home.homeDirectory = "/home/workaholic";
 
    imports = [
-        ../../modules/spotify
-        ../../modules/obsidian/home-config.nix
+     ../../modules/spotify
+     ../../modules/vesktop
+
+    ../../modules/obsidian/home-config.nix
 	../../modules/gnome/home-config.nix
    ];
 

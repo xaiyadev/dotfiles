@@ -1,21 +1,9 @@
 { pkgs, lib, spicetify-nix, fetchgit, ... }:
 let
   spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
-  coverAmbience = fetchgit {
-        url = "https://github.com/Theblockbuster1/spicetify-extensions/";
-        rev = "main";
-        hash = "eb0075e6e3e380b12ee29f580028b96b0b7cdf59";
-  };
 in
 {
-
-  # allow spotify to be installed if you don't have unfree enabled already
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "spotify"
-  ];
-
   imports = [ spicetify-nix.homeManagerModule ];
-
   programs.spicetify =
     {
       enable = true;
@@ -57,7 +45,6 @@ in
         lastfm
         skipStats
         /* genre */
-
 
         playlistIcons
         showQueueDuration

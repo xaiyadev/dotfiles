@@ -4,8 +4,10 @@
 
    imports = [
         ../../modules/spotify
+	    ../../modules/vesktop
+
         ../../modules/obsidian/home-config.nix
-	../../modules/gnome/home-config.nix
+	    ../../modules/gnome/home-config.nix
     ];
 
     home.packages = with pkgs; [

@@ -27,7 +27,6 @@
         nodejs
 
         chromium
-        discord
         vlc
 
         gtk4
