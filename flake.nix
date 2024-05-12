@@ -13,7 +13,6 @@
 
         nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/nixos-laptop
@@ -24,6 +23,9 @@
 
           home-manager.nixosModules.home-manager
             {
+
+
+
 	      home-manager.backupFileExtension = "backup";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

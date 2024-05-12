@@ -1,9 +1,6 @@
-This file is just here to test the configuration of my git config
+TO-DO List for this configuration:
+- SSH Keys (probably in 100 years)
+- Gaming Account (Somehow manage with windows, and vanguard, and Anticheats and AAAAAAH)
+- Auto Install with ISO
 
-TODO:
-- Add ssh keys to nixos file
-- setup qtile
-- add configuration for other programs
-
-Some lorem ipsum for you:
-lorem ipsum lorem ipsum
+More stuff will be added :3
