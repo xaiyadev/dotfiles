@@ -4,6 +4,7 @@
     [
       ../../modules/system.nix
       ../../modules/gnome
+      ../../modules/Filesystem/RAID
 
       ../../modules/chromium
       ../../modules/obsidian
@@ -27,6 +28,8 @@
   };
 
     networking = {
+        firewall.enable = true;
+
         hostName = "nixos-tower";
         networkmanager.enable = true;
 
