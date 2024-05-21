@@ -1,4 +1,3 @@
-{ config, pkgs, ... }:
 {
     users.users.oksana = {
         isNormalUser = true;

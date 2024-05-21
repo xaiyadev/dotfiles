@@ -1,8 +1,8 @@
 {
     users.users.semiko = {
         isNormalUser = true;
-        initialPassword = "semiko";
-        description = "Danil Schumin";
+        initialPassword = "server";
+        description = "Server User";
         extraGroups = [ "networkmanager" "wheel" "docker" ];
     };
 }

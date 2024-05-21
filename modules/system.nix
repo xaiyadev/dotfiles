@@ -1,8 +1,11 @@
 { config, pkgs, ... }: {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
     services.openssh.enable = true;
 
     time.timeZone = "Europe/Berlin";
+   
+    hardware.pulseaudio.enable = true;
 
     i18n.defaultLocale = "en_US.UTF-8";
     i18n.extraLocaleSettings = {
@@ -32,7 +35,11 @@
         gtk4
     ];
 
-    virtualisation.docker.enable = true;
+    virtualisation = {
+	    docker.enable = true;
+        waydroid.enable = true;
+    };
+    hardware.opengl.driSupport32Bit = true;
 
     system.stateVersion = "23.11";
 }

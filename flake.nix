@@ -19,6 +19,7 @@
 
           # User import
           ./users/semiko
+          ./users/gaming
           ./users/workaholic
 
           home-manager.nixosModules.home-manager
@@ -32,7 +33,8 @@
 
               home-manager.extraSpecialArgs = inputs;
               home-manager.users.semiko = import ./users/semiko/home.nix;
-              home-manager.users.workaholic = import ./users/workaholic/home.nix;
+              home-manager.users.gaming = import ./users/gaming/home.nix;
+	      home-manager.users.workaholic = import ./users/workaholic/home.nix;
             }
           ];
         };
@@ -56,6 +58,27 @@
               home-manager.extraSpecialArgs = inputs;
               home-manager.users.semiko = import ./users/semiko/home.nix;
               home-manager.users.oksana = import ./users/oksana/home.nix;
+            }
+          ];
+        };
+
+        nixosConfigurations.nixos-server = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/nixos-server
+
+          # User import
+          ./users/server
+          home-manager.nixosModules.home-manager
+            {
+	          home-manager.backupFileExtension = "backup";
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.extraSpecialArgs = inputs;
+              home-manager.users.server = import ./users/server/home.nix;
             }
           ];
         };
