@@ -9,6 +9,7 @@
         layout = "de";
         variant = "";
         };
+
     };
 
     environment.gnome.excludePackages = (with pkgs; [
@@ -34,5 +35,9 @@
 
         gnomeExtensions.weather-oclock
         gnomeExtensions.open-bar
+        gnomeExtensions.appindicator
+        gnomeExtensions.spotify-tray
     ];
+
+    services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 }

@@ -24,17 +24,14 @@
 
           home-manager.nixosModules.home-manager
             {
-
-
-
-	      home-manager.backupFileExtension = "backup";
+              home-manager.backupFileExtension = "backup";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
               home-manager.extraSpecialArgs = inputs;
               home-manager.users.semiko = import ./users/semiko/home.nix;
               home-manager.users.gaming = import ./users/gaming/home.nix;
-	      home-manager.users.workaholic = import ./users/workaholic/home.nix;
+              home-manager.users.workaholic = import ./users/workaholic/home.nix;
             }
           ];
         };
