@@ -8,8 +8,6 @@
         settings."org/gnome/desktop/wm/preferences".button-layout = ":minimize,maximize,close";
 
         settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-        settings."org/gnome/desktop/background".primary-color = "#B2B2B2";
-        settings."org/gnome/desktop/background".secondary-color = "#000000";
 
         settings."org/gnome.shell/extensions/user-theme".name = "BreakingCustomShell";
 

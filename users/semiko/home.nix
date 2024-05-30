@@ -6,16 +6,17 @@
         ../../modules/spotify
 	    ../../modules/vesktop
 
-        ../../modules/obsidian/home-config.nix
 	    ../../modules/gnome/home-config.nix
     ];
 
     home.packages = with pkgs; [
 	  # Jetbrains IDE for specific languages » TODO: Sync all thes config via Repository, not Settings Sync
 
-      jetbrains.webstorm
-	  jetbrains.pycharm-professional
-	  jetbrains.idea-ultimate
+      	  jetbrains.webstorm
+          jetbrains.pycharm-professional
+          jetbrains.idea-ultimate
+
+          obsidian
     ];
 
    home.stateVersion = "23.11";

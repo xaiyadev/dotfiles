@@ -4,12 +4,7 @@
   imports =
     [
       ../../modules/system.nix
-      ../../modules/gnome
 
-      ../../modules/chromium
-      ../../modules/obsidian
-
-      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -19,21 +14,18 @@
 
     grub = {
       enable = true;
-      device = "nodev"; 
+      device = "nodev";
       efiSupport = true;
     };
   };
 
     networking = {
-        hostName = "nixos-laptop";
+        hostName = "nixos-server";
         networkmanager.enable = true;
 
         nameservers = [ "1.1.1.1" "8.8.8.8" ];
         resolvconf.dnsSingleRequest = true;
     };
-
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
 
   system.stateVersion = "23.11";
 

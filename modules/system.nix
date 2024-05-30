@@ -31,7 +31,6 @@
 
         chromium
         vlc
-
         gtk4
     ];
 
