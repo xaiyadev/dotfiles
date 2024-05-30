@@ -38,14 +38,8 @@
         /* --- Extension Settings --- */
         settings."org/gnome/shell/extensions/user-theme".name = "BreakingCustomShell";
 
-        settings."org/gnome/shell/extensions/blur-my-shell".pipelines = ''
-            {'pipeline_default': {'
-                name': <'Default'>,
-                'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_74528647072874'>, 'params': <{'unscaled_radius': <50>, 'brightness': <1>}>}>,
-                <{'type': <'corner'>, 'id': <'effect_24643051571055'>, 'params': <{'radius': <20>, 'corners_top': <true>, 'corners_bottom': <true>}>}>]>
-                }
-            }
-        '';
+        # TODO: Pipeline needs a fix, only can give string, does not want a string :(
+        settings."org/gnome/shell/extensions/blur-my-shell".pipelines = ''{'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000000'>, 'params': <{'radius': <30>, 'brightness': <1>, 'unscaled_radius': <50>}>}>, <{'type': <'corner'>, 'id': <'effect_02185216467698'>, 'params': <@a{sv} {}>}>]>}, 'pipeline_default_rounded': {'name': <'Default rounded'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000001'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>}>}>, <{'type': <'corner'>, 'id': <'effect_000000000002'>, 'params': <{'radius': <24>}>}>]>}} '';
 
         settings."org/gnome/shell/extensions/blur-my-shell/appfolder" = {
             brightness = 1;
@@ -101,7 +95,7 @@
             hidden-when-paused = false;
             logo-position = 0;
             marquee-length = 47;
-            marquee-length = " ~ ";
+            marquee-tail = " ~ ";
             paused = "⏸️ | ";
             podcat-format = "»{track}«";
             position = 1;

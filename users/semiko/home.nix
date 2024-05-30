@@ -11,12 +11,11 @@
 
     home.packages = with pkgs; [
 	  # Jetbrains IDE for specific languages » TODO: Sync all thes config via Repository, not Settings Sync
+      jetbrains.webstorm
+      jetbrains.pycharm-professional
+      jetbrains.idea-ultimate
 
-      	  jetbrains.webstorm
-          jetbrains.pycharm-professional
-          jetbrains.idea-ultimate
-
-          obsidian
+      obsidian
     ];
 
    home.stateVersion = "23.11";
