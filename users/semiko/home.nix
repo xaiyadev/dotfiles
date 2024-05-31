@@ -3,26 +3,35 @@
    home.homeDirectory = "/home/semiko";
 
    imports = [
+        # --- GENERAL --- #
         ../../modules/spotify
 	    ../../modules/vesktop
 
 	    ../../modules/gnome/home-config.nix
+
+	    # --- GAMING --- #
+        ../../modules/minecraft/lunar.nix
+
     ];
 
     home.packages = with pkgs; [
 	  # Jetbrains IDE for specific languages » TODO: Sync all thes config via Repository, not Settings Sync
+
+	  # --- DEVELOPMENT/GENERAL --- #
       jetbrains.webstorm
       jetbrains.pycharm-professional
       jetbrains.idea-ultimate
 
       obsidian
-    ];
 
-   home.stateVersion = "23.11";
-   programs.home-manager.enable = true;
+      # --- GAMING --- #
+      steam
+      lunar-client
 
+      lutris
+      vkd3d-proton
+   ];
 
-   # Programm Settings for only that specific User
    programs.git = {
      enable = true;
      package = pkgs.gitFull;
@@ -36,5 +45,9 @@
          safe.directory = "/srv/shared/obsidian/obsidian-sync";
      };
    };
+
+  home.stateVersion = "23.11";
+  programs.home-manager.enable = true;
+
 }
 

@@ -19,7 +19,6 @@
 
           # User import
           ./users/semiko
-          ./users/gaming
           ./users/workaholic
 
           home-manager.nixosModules.home-manager
@@ -30,7 +29,6 @@
 
               home-manager.extraSpecialArgs = inputs;
               home-manager.users.semiko = import ./users/semiko/home.nix;
-              home-manager.users.gaming = import ./users/gaming/home.nix;
               home-manager.users.workaholic = import ./users/workaholic/home.nix;
             }
           ];

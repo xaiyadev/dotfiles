@@ -36,7 +36,6 @@
 
     virtualisation = {
 	    docker.enable = true;
-        waydroid.enable = true;
     };
     hardware.opengl.driSupport32Bit = true;
 
