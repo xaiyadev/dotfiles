@@ -22,6 +22,8 @@
       jetbrains.pycharm-professional
       jetbrains.idea-ultimate
 
+      virt-manager
+
       obsidian
 
       # --- GAMING --- #

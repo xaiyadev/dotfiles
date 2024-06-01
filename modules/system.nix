@@ -35,6 +35,7 @@
     ];
 
     virtualisation = {
+        libvirtd.enable = true;
 	    docker.enable = true;
     };
     hardware.opengl.driSupport32Bit = true;
