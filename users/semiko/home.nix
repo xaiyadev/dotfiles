@@ -32,6 +32,8 @@
 
       lutris
       vkd3d-proton
+
+      rpcs3
    ];
 
    programs.git = {

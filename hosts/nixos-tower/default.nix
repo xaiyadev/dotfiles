@@ -4,7 +4,10 @@
     [
       ../../modules/system.nix
       ../../modules/gnome
+
+/*
       ../../modules/Filesystem/RAID
+*/
 
       ../../modules/chromium
       ../../modules/obsidian
