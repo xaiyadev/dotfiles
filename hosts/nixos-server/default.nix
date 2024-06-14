@@ -5,6 +5,8 @@
     [
       ../../modules/system.nix
 
+
+       /* This configuration is of a VM TODO: Change that! */
       ./hardware-configuration.nix
     ];
 

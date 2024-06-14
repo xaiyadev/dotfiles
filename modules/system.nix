@@ -26,19 +26,13 @@
     environment.systemPackages = with pkgs; [
         vim
         wget
-
         nodejs
-
-        chromium
-        vlc
-        gtk4
     ];
 
     virtualisation = {
         libvirtd.enable = true;
 	    docker.enable = true;
     };
-    hardware.opengl.driSupport32Bit = true;
 
     system.stateVersion = "23.11";
 }

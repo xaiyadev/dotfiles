@@ -29,6 +29,8 @@
 
 
     environment.systemPackages = with pkgs; [
+        gtk4
+
         gnome.dconf-editor
 	    gnome.gnome-tweaks
         gnome-extension-manager

@@ -12,6 +12,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+    programs.virt-manager.enable = true;
 
   # Bootloader.
   boot.loader = {
@@ -25,6 +26,8 @@
   };
 
     networking = {
+        firewall.enable = true;
+
         hostName = "nixos-laptop";
         networkmanager.enable = true;
 
@@ -32,8 +35,13 @@
         resolvconf.dnsSingleRequest = true;
     };
 
+    hardware = {
+        opengl.driSupport32Bit = true;
+        xpadneo.enable = true;
+    };
 
-  programs.virt-manager.enable = true;
+
+
 
   system.stateVersion = "23.11";
 
