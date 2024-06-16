@@ -4,13 +4,13 @@
 
    imports = [
         # --- GENERAL --- #
-        ../../modules/spotify
-	    ../../modules/vesktop
+        ../../modules/graphical/spotify
+	    ../../modules/graphical/vesktop
 
-	    ../../modules/gnome/home-config.nix
+	    ../../modules/graphical/gnome/home-config.nix
 
 	    # --- GAMING --- #
-        ../../modules/minecraft/lunar.nix
+        ../../modules/graphical/lunar.nix
 
     ];
 
@@ -28,7 +28,6 @@
 
       # --- GAMING --- #
       steam
-      lunar-client
 
       lutris
       vkd3d-proton

@@ -1,15 +1,15 @@
 { config, pkgs, ... }:
 {
   imports = [
-  ../../modules/system.nix
-  ../../modules/gnome
+  ../../modules/core/system.nix
+  ../../modules/graphical/gnome
 
 /*
   ../../modules/Filesystem/RAID
 */
 
-  ../../modules/chromium
-  ../../modules/obsidian
+  ../../modules/graphical/chromium
+  ../../modules/graphical/obsidian
 
   # Include the results of the hardware scan.
   ./hardware-configuration.nix

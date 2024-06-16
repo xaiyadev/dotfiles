@@ -3,5 +3,5 @@
             lunar-client
         ];
 
-        # TODO: add options from .minecraft
+        # TODO: add options from .lunar
 }
