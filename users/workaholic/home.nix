@@ -3,9 +3,10 @@
    home.homeDirectory = "/home/workaholic";
 
    imports = [
-     ../../modules/spotify
-     ../../modules/vesktop
-     ../../modules/gnome/home-config.nix
+     ../../modules/graphical/spotify
+     ../../modules/graphical/vesktop    
+
+     ../../modules/graphical/gnome/home-config.nix
    ];
 
     home.packages = with pkgs; [
@@ -14,6 +15,8 @@
           enpass
           thunderbird
 	  obsidian
+
+	  chromium
     ];
 
 

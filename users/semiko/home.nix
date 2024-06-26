@@ -6,7 +6,6 @@
         # --- GENERAL --- #
         ../../modules/graphical/spotify
 	    ../../modules/graphical/vesktop
-
 	    ../../modules/graphical/gnome/home-config.nix
 
 	    # --- GAMING --- #
@@ -21,6 +20,8 @@
       jetbrains.webstorm
       jetbrains.pycharm-professional
       jetbrains.idea-ultimate
+
+      chromium
 
       virt-manager
 
