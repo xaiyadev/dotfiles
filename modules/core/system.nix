@@ -1,5 +1,13 @@
 { config, pkgs, ... }: {
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+    nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    substituters = [ "https://ezkea.cachix.org" ];
+    trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
+    };
+
+
+    imports = [ ../../cachix.nix ];
 
     services.openssh.enable = true;
 
@@ -33,7 +41,6 @@
         libvirtd.enable = true;
 	    docker.enable = true;
     };
-
     system.stateVersion = "23.11";
 }
 

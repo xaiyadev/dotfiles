@@ -1,8 +1,13 @@
-{ lib, pkgs, config, ... }: {
+{ lib, pkgs, config, ... }:
+let
+  aagl-gtk-on-nix = import (builtins.fetchTarball "https://github.com/ezKEa/aagl-gtk-on-nix/archive/main.tar.gz");
+in
+{
    home.username = "semiko";
    home.homeDirectory = "/home/semiko";
 
    imports = [
+
         # --- GENERAL --- #
         ../../modules/graphical/spotify
 	    ../../modules/graphical/vesktop
@@ -13,12 +18,14 @@
 
     ];
 
+
+
+
     home.packages = with pkgs; [
 	  # Jetbrains IDE for specific languages » TODO: Sync all thes config via Repository, not Settings Sync
 
 	  # --- DEVELOPMENT/GENERAL --- #
       jetbrains.webstorm
-      jetbrains.pycharm-professional
       jetbrains.idea-ultimate
 
       chromium
@@ -34,6 +41,8 @@
       vkd3d-proton
 
       rpcs3
+
+      aagl-gtk-on-nix.sleepy-launcher
    ];
 
    programs.git = {

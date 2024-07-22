@@ -7,14 +7,18 @@
 
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     home-manager.url = "github:nix-community/home-manager";
+
+    aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-24.05";
+    aagl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = {self, nixpkgs, home-manager, ... } @ inputs: {
+  outputs = {self, nixpkgs, home-manager, aagl, ... } @ inputs: {
 
         nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
+
           ./hosts/nixos-laptop
 
           # User import
