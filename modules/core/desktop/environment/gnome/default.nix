@@ -1,7 +1,7 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
-    cfg = config.services.gnome-config;
+    cfg = config.services.gnome;
 in
 {
     options.services.gnome = {
@@ -16,7 +16,7 @@ in
             desktopManager.gnome.enable = true;
         };
 
-          environment.gnome.excludePackages = with pkgs.gnome; [
+          environment.gnome.excludePackages = with pkgs; [
             cheese      # photo booth
             eog         # image viewer
             epiphany    # web browser
@@ -28,16 +28,16 @@ in
             geary       # email client
             seahorse    # password manager
 
-            gnome-calculator gnome-calendar gnome-clocks gnome-contacts
-            gnome-font-viewer gnome-logs gnome-maps gnome-music gnome-photos gnome-screenshot
-            gnome-system-monitor gnome-weather gnome-disk-utility pkgs.gnome-connections
+            gnome-calculator gnome-calendar
+            gnome-font-viewer gnome-photos gnome-screenshot
+            gnome-system-monitor gnome-disk-utility pkgs.gnome-connections
           ];
 
           environment.systemPackages = with pkgs; [
              gtk4
 
-             gnome.dconf-editor
-             gnome.gnome-tweaks
+             dconf-editor
+             gnome-tweaks
              gnome-extension-manager
 
              gnomeExtensions.weather-oclock

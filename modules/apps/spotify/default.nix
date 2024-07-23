@@ -30,9 +30,6 @@ in
                 newReleases
                 historyInSidebar
             ];
-
-             theme = spicePkgs.themes.catppuccin;
-             colorScheme = "mocha";
        };
     };
 }

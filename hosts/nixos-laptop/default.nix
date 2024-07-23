@@ -7,7 +7,10 @@
       ../../modules/core/locale
       ../../modules/core/ssh
       ../../modules/core/zsh
+	
+      ../../modules/core/virtualization/docker
       ../../modules/core/boot/loader/grub
+      ../../modules/core/desktop/environment/gnome
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -19,6 +22,7 @@
     services.locale.enable = true;
     hardware.pulseaudio.enable = true;
     services.grub.enable = true;
+    services.gnome.enable = true;
 
     services.zsh.enable = true;
     services.ssh.enable = true;
@@ -26,6 +30,8 @@
         enable = true;
         hostName = "nixos-laptop";
     };
+
+    services.docker.enable = true;
 
     environment.systemPackages = with pkgs; [
         vim
