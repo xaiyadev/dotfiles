@@ -22,15 +22,12 @@ There will be 4 Users:
 
 ### Rebuild commands
 > [!WARNING]
-> If you get the error `cant install not pure...` then use the `--impure` argument
+> If you get the error "cant install not pure..." then use the `--impure` argument
 
-`sudo nixos-rebuild switch --flake .#nixos-laptop` - Will rebuild the configuration for the laptop
-
----
-`sudo nixos-rebuild switch --flake .#nixos-tower` - Will rebuild the configuration for my Tower PC
-
----
-`sudo nixos-rebuild switch --flake .#nixos-server` - Will rebuild the configuration for my Server
+This process requirs you to have nixos already installed and flakes supported
+- `sudo nixos-rebuild switch --flake .#nixos-laptop` Rebuild configuration for laptop systems
+- `sudo nixos-rebuild switch --flake .#nixos-tower` Rebuid configuration for tower
+- `sudo nixos-rebuild switch --flake .#nixos-server` Rebuild configuration for Server
 
 ### Other ways to install
 > [!IMPORTANT]
