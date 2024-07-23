@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e229c60d-1a23-450e-a05d-d02981690d98" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2fb89EUGWDKxpKYwXl3aXyMHE8W" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "v2",
+    "last_opened_file_path": "/home/semiko/Documents/Development/grooviex/grooveix-server",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.sburlyaev.cmd.plugin.PluginSettings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/modules/Services/firefly" />
+      <recent name="$PROJECT_DIR$/modules" />
+      <recent name="$PROJECT_DIR$/modules/Filesystem/NFS/obsidian" />
+      <recent name="$PROJECT_DIR$/modules/desktop/gnome" />
+      <recent name="$PROJECT_DIR$/modules/programs/git" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e229c60d-1a23-450e-a05d-d02981690d98" name="Changes" comment="" />
+      <created>1714058265889</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714058265889</updated>
+      <workItem from="1714058267855" duration="9694000" />
+      <workItem from="1714070568920" duration="160000" />
+      <workItem from="1714343787021" duration="2363000" />
+      <workItem from="1714409163433" duration="5658000" />
+      <workItem from="1714415240876" duration="1848000" />
+      <workItem from="1714665369731" duration="12588000" />
+      <workItem from="1714742812032" duration="1431000" />
+      <workItem from="1714858294063" duration="780000" />
+      <workItem from="1714859200319" duration="951000" />
+      <workItem from="1714861994836" duration="33000" />
+      <workItem from="1714912822664" duration="214000" />
+      <workItem from="1714946104858" duration="2858000" />
+      <workItem from="1715012213075" duration="11268000" />
+      <workItem from="1715029663662" duration="1579000" />
+      <workItem from="1715099606989" duration="2281000" />
+      <workItem from="1715116971515" duration="710000" />
+      <workItem from="1715344270056" duration="1185000" />
+      <workItem from="1715345517941" duration="1322000" />
+      <workItem from="1715346976039" duration="1533000" />
+      <workItem from="1715354502436" duration="1070000" />
+      <workItem from="1715421050917" duration="1382000" />
+      <workItem from="1715422565670" duration="1779000" />
+      <workItem from="1715617761265" duration="7000" />
+      <workItem from="1715710199764" duration="53000" />
+      <workItem from="1715788482705" duration="2600000" />
+      <workItem from="1715874857107" duration="1411000" />
+      <workItem from="1715876280263" duration="50000" />
+      <workItem from="1716199591526" duration="3382000" />
+      <workItem from="1716209729335" duration="47000" />
+      <workItem from="1716226220826" duration="157000" />
+      <workItem from="1716256095044" duration="293000" />
+      <workItem from="1716909910402" duration="799000" />
+      <workItem from="1717165697052" duration="1893000" />
+      <workItem from="1717174708800" duration="3763000" />
+      <workItem from="1717184754096" duration="26000" />
+      <workItem from="1717198388416" duration="1987000" />
+      <workItem from="1717430888626" duration="13000" />
+      <workItem from="1718123559941" duration="1524000" />
+      <workItem from="1718386892124" duration="1285000" />
+      <workItem from="1718405734419" duration="1593000" />
+      <workItem from="1719237463185" duration="828000" />
+      <workItem from="1719420467658" duration="5753000" />
+      <workItem from="1719855829705" duration="20000" />
+      <workItem from="1721668959129" duration="7971000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
