@@ -55,5 +55,34 @@
             }
           ];
         };
+
+
+        nixosConfigurations.nixos-tower = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; inherit spicetify-nix; };
+        modules = [
+          ./hosts/nixos-laptop
+
+          # User import
+          ./users/semiko
+
+          catppuccin.nixosModules.catppuccin
+          home-manager.nixosModules.home-manager
+            {
+              home-manager.backupFileExtension = "backup";
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.extraSpecialArgs = inputs;
+
+              home-manager.users.semiko = {
+                imports = [
+                    ./users/semiko/home.nix
+                    catppuccin.homeManagerModules.catppuccin
+                 ];
+              };
+            }
+          ];
+        };
   };
 }
