@@ -16,36 +16,36 @@ in
             desktopManager.gnome.enable = true;
         };
 
-          environment.gnome.excludePackages = with pkgs; [
-            cheese      # photo booth
-            eog         # image viewer
-            epiphany    # web browser
-            simple-scan # document scanner
-            totem       # video player
-            yelp        # help viewer
-            evince      # document viewer
-            file-roller # archive manager
-            geary       # email client
-            seahorse    # password manager
+        environment.gnome.excludePackages = with pkgs; [
+          cheese      # photo booth
+          eog         # image viewer
+          epiphany    # web browser
+          simple-scan # document scanner
+          totem       # video player
+          yelp        # help viewer
+          evince      # document viewer
+          file-roller # archive manager
+          geary       # email client
+          seahorse    # password manager
 
-            gnome-calculator gnome-calendar
-            gnome-font-viewer gnome-photos gnome-screenshot
-            gnome-system-monitor gnome-disk-utility pkgs.gnome-connections
-          ];
+          gnome-calculator gnome-calendar
+          gnome-font-viewer gnome-photos gnome-screenshot
+          gnome-system-monitor gnome-disk-utility pkgs.gnome-connections
+        ];
 
-          environment.systemPackages = with pkgs; [
-             gtk4
+        environment.systemPackages = with pkgs; [
+           gtk4
 
-             dconf-editor
-             gnome-tweaks
-             gnome-extension-manager
+           dconf-editor
+           gnome-tweaks
+           gnome-extension-manager
 
-             gnomeExtensions.weather-oclock
-             gnomeExtensions.open-bar
-             gnomeExtensions.appindicator
-             gnomeExtensions.spotify-tray
-          ];
+           gnomeExtensions.weather-oclock
+           gnomeExtensions.open-bar
+           gnomeExtensions.appindicator
+           gnomeExtensions.spotify-tray
+        ];
 
-          services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+        services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
     };
 }

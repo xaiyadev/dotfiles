@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    catppuccin.url = "github:catppuccin/nix";
+
     home-manager = {
         url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -15,18 +17,19 @@
     };
   };
 
-  outputs = {self, nixpkgs, home-manager, spicetify-nix, ... } @ inputs: {
+  outputs = {self, nixpkgs, home-manager, spicetify-nix, catppuccin, ... } @ inputs: {
 
         nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; inherit spicetify-nix; };
         modules = [
-
           ./hosts/nixos-laptop
 
           # User import
           ./users/semiko
           ./users/workaholic
+
+          catppuccin.nixosModules.catppuccin
 
           home-manager.nixosModules.home-manager
             {
@@ -35,8 +38,20 @@
               home-manager.useUserPackages = true;
 
               home-manager.extraSpecialArgs = inputs;
-              home-manager.users.semiko = import ./users/semiko/home.nix;
-              home-manager.users.workaholic = import ./users/workaholic/home.nix;
+
+              home-manager.users.semiko = {
+                imports = [
+                    ./users/semiko/home.nix
+                    catppuccin.homeManagerModules.catppuccin
+                 ];
+              };
+
+              home-manager.users.workaholic = {
+                imports = [
+                    ./users/workaholic/home.nix
+                    catppuccin.homeManagerModules.catppuccin
+                 ];
+              };
             }
           ];
         };

@@ -23,6 +23,8 @@ in
                { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
 
                { id = "kmcfomidfpdkfieipokbalgegidffkal"; } # enpass
+
+               { id = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; } # catppuccin
             ];
 
             dictionaries = with pkgs.hunspellDictsChromium; [
