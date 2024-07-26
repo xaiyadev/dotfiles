@@ -15,9 +15,14 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    aagl = {
+        url = "github:ezKEa/aagl-gtk-on-nix/release-24.05";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {self, nixpkgs, home-manager, spicetify-nix, catppuccin, ... } @ inputs: {
+  outputs = {self, nixpkgs, home-manager, spicetify-nix, catppuccin, aagl, ... } @ inputs: {
 
         nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -28,6 +33,7 @@
           # User import
           ./users/semiko
           ./users/workaholic
+          ./users/helloKitty
 
           catppuccin.nixosModules.catppuccin
 
@@ -43,6 +49,14 @@
                 imports = [
                     ./users/semiko/home.nix
                     catppuccin.homeManagerModules.catppuccin
+                 ];
+              };
+
+              home-manager.users.helloKitty = {
+                imports = [
+                    ./users/helloKitty/home.nix
+                    catppuccin.homeManagerModules.catppuccin
+                    aagl.nixosModules.default
                  ];
               };
 

@@ -1,4 +1,4 @@
-{ config, lib, cattpuccin, ... }:
+{ config, lib, cattpuccin, pkgs, ... }:
 with lib;
 let
     cfg = config.services.gnome-config;
@@ -26,14 +26,27 @@ in
 
           gtk = {
             enable = true;
-            catppuccin = {
-                enable = true;
+                theme = {
+                      name = "Colloid-Dark-Catppuccin";
+                      package = pkgs.colloid-gtk-theme.override {
+                        themeVariants = ["default"];
+                        colorVariants = ["dark"];
+                        sizeVariants = ["standard"];
+                        tweaks = ["catppuccin"];
+                      };
+                    };
+
+            iconTheme = {
+                package = pkgs.colloid-icon-theme;
+                name = "Colloid";
             };
           };
 
           dconf = {
               enable = true;
               settings."org/gnome/desktop/background".picture-ui = cfg.wallpaper;
+
+              settings."org/gnome/shell/extensions/user-theme".name = "Colloid-Dark-Catppuccin";
 
               settings."org/gnome/desktop/wm/preferences" = {
                   audible-bell = false;

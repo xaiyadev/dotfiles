@@ -42,6 +42,7 @@ in
 
            gnomeExtensions.weather-oclock
            gnomeExtensions.open-bar
+           gnomeExtensions.user-themes
            gnomeExtensions.appindicator
            gnomeExtensions.spotify-tray
         ];
