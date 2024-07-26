@@ -56,7 +56,6 @@
                 imports = [
                     ./users/helloKitty/home.nix
                     catppuccin.homeManagerModules.catppuccin
-                    aagl.nixosModules.default
                  ];
               };
 
