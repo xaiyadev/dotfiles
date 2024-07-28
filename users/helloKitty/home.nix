@@ -10,9 +10,11 @@
         ../../modules/apps/spotify
         ../../modules/apps/vesktop
         ../../modules/apps/chromium
+
         ../../modules/apps/AAGL/sleepy-launcher
         ../../modules/apps/AAGL/anime-game-launcher
 	../../modules/apps/steam
+	../../modules/apps/lunar
 
         # -- CONFIG LOADER -- #
         ../../modules/apps/desktop/environment/gnome-config
