@@ -33,6 +33,8 @@
         hostName = "nixos-tower";
     };
 
+    boot.supportedFilesystems = [ "ntfs" ];
+
     services.docker.enable = true;
 
     environment.systemPackages = with pkgs; [

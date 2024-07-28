@@ -24,6 +24,18 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
+  fileSystems."/mnt/win10" = 
+    { device = "/dev/disk/by-uuid/A40897C408979440";
+      fsType = "ntfs-3g";
+      options = [ "rw" ];
+    };
+  
+  fileSystems."/mnt/games" =
+    { device = "/dev/disk/by-uuid/F4462E50462E13C0";
+      fsType = "ntfs-3g";
+      options = [ "rw" ];
+    };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

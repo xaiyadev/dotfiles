@@ -30,7 +30,7 @@ in
 
           gnome-calculator gnome-calendar
           gnome-font-viewer gnome-photos gnome-screenshot
-          gnome-system-monitor gnome-disk-utility pkgs.gnome-connections
+          gnome-system-monitor gnome-connections
         ];
 
         environment.systemPackages = with pkgs; [
