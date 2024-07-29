@@ -33,7 +33,6 @@
           # User import
           ./users/semiko
           ./users/workaholic
-          ./users/helloKitty
 
           catppuccin.nixosModules.catppuccin
 
@@ -48,13 +47,6 @@
               home-manager.users.semiko = {
                 imports = [
                     ./users/semiko/home.nix
-                    catppuccin.homeManagerModules.catppuccin
-                 ];
-              };
-
-              home-manager.users.helloKitty = {
-                imports = [
-                    ./users/helloKitty/home.nix
                     catppuccin.homeManagerModules.catppuccin
                  ];
               };
@@ -78,7 +70,6 @@
 
           # User import
           ./users/semiko
-          ./users/helloKitty
 
           catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
@@ -92,13 +83,6 @@
               home-manager.users.semiko = {
                 imports = [
                     ./users/semiko/home.nix
-                    catppuccin.homeManagerModules.catppuccin
-                 ];
-              };
-
-              home-manager.users.helloKitty = {
-                imports = [
-                    ./users/helloKitty/home.nix
                     catppuccin.homeManagerModules.catppuccin
                  ];
               };

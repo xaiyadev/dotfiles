@@ -11,9 +11,7 @@ v2 of my Nixos Configuration. Rewritten and more organized!
 > Not every System will have the same Users or Setup, because I sometimes don't need to have some accounts on different Systems...
 
 There will be 4 Users:
-- Semiko - The Main Account, where most of the coding happens
-- Oksana - 2nd Account, for my family members
-- Gamerholic (name WIP) - All the Gaming stuff (besides Riot Games...)
+- Semiko - The Main Account, where all private things happen
 - Workaholic - All Work related projects
 
 
