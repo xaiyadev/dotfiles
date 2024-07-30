@@ -18,7 +18,14 @@
 
     catppuccin.flavor = "mocha";
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings = {
+        substituters = [ "https://ezkea.cachix.org" ];
+        trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
+
+        trusted-users = [ "root" "semiko" ];
+        experimental-features = [ "nix-command" "flakes" ];
+    };
+    
     nixpkgs.config.allowUnfree = true;
 
     services.locale.enable = true;
@@ -41,6 +48,8 @@
         vim
         wget
         nodejs
+
+	devenv
     ];
 
     system.stateVersion = "23.11";

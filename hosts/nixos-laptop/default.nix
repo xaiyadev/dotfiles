@@ -48,6 +48,8 @@
         vim
         wget
         nodejs
+
+	devenv
     ];
 
     system.stateVersion = "23.11";
