@@ -10,7 +10,7 @@ v2 of my Nixos Configuration. Rewritten and more organized!
 > [!NOTE]
 > Not every System will have the same Users or Setup, because I sometimes don't need to have some accounts on different Systems...
 
-There will be 4 Users:
+There will be 2 Users:
 - Semiko - The Main Account, where all private things happen
 - Workaholic - All Work related projects
 
