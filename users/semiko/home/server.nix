@@ -5,7 +5,7 @@
 
    imports = [
         # --- CORE --- #
-        ../../modules/core/git
+		../../../modules/core/git
     ];
 
    services.git = {

@@ -99,7 +99,8 @@
 
           # User import
           ./users/semiko
-
+           
+          catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
             {
               home-manager.backupFileExtension = "backup";
