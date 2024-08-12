@@ -82,9 +82,34 @@
 
               home-manager.users.semiko = {
                 imports = [
-                    ./users/semiko/home.nix
+                    ./users/semiko/home
                     catppuccin.homeManagerModules.catppuccin
                  ];
+              };
+            }
+          ];
+        };
+
+        /* Virt-machine for transforming my ubuntu Server into a NixOS server */
+        nixosConfigurations.nixos-virt = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/nixos-virt
+
+          # User import
+          ./users/semiko
+
+          home-manager.nixosModules.home-manager
+            {
+              home-manager.backupFileExtension = "backup";
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.extraSpecialArgs = inputs;
+
+              home-manager.users.semiko = {
+                imports = [ ./users/semiko/home/server.nix ];
               };
             }
           ];

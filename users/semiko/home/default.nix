@@ -1,10 +1,8 @@
-{ lib, pkgs, config, ... }: let
-    aagl-gtk-on-nix = import (builtins.fetchTarball "https://github.com/ezKEa/aagl-gtk-on-nix/archive/main.tar.gz");
-in {
+{ lib, pkgs, config, ... }:
+{
    home.username = "semiko";
    home.homeDirectory = "/home/semiko";
 
-   /* TODO: Add Support for Server Account (no grahpical apps) */
    imports = [
         # --- CORE --- #
         ../../modules/core/git
@@ -22,6 +20,8 @@ in {
         # -- CONFIG LOADER -- #
         ../../modules/apps/desktop/environment/gnome-config
     ];
+
+
    services.spotify.enable = true;
 
    services.intellij.enable = true;
@@ -30,13 +30,12 @@ in {
 
    services.chromium.enable = true;
    services.vesktop.enable = true;
+   services.gnome-config.enable = true;
 
    services.git = {
         enable = true;
         email = "danil80sch@gmail.com";
    };
-
-   services.gnome-config.enable = true;
 
 
   home.stateVersion = "23.11";
