@@ -12,6 +12,7 @@
      ../../modules/apps/chromium
 
      ../../modules/apps/jetbrains/phpstorm
+     ../../modules/apps/virt-manager
 
      # -- CONFIG LOADER -- #
      ../../modules/apps/desktop/environment/gnome-config
@@ -19,7 +20,7 @@
 
     home.packages = with pkgs; [
           teams-for-linux
-
+	      enpass
     ];
    services.spotify.enable = true;
    services.chromium.enable = true;
@@ -32,6 +33,7 @@
         enable = true;
         email = "d.schumin@blmedia.de";
    };
+
    services.gnome-config.enable = true;
 
 

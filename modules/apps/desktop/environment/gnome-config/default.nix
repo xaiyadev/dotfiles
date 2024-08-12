@@ -15,14 +15,10 @@ in
                 "spotify.desktop"
             ];
         };
-
-        wallpaper = mkOption {
-            type = types.str;
-            default =  "file:///home/semiko/.config/nixos/wallpapers/rainbow-cat.png";
-        };
     };
 
     config = mkIf cfg.enable {
+         home.file.".config/wallpapers/rainbow-cat.png".source = ./wallpapers/rainbow-cat.png;
 
           gtk = {
             enable = true;
@@ -44,7 +40,7 @@ in
 
           dconf = {
               enable = true;
-              settings."org/gnome/desktop/background".picture-ui = cfg.wallpaper;
+              settings."org/gnome/desktop/background".picture-ui = "./wallpapers/rainbow-cat.png";
 
               settings."org/gnome/shell/extensions/user-theme".name = "Colloid-Dark-Catppuccin";
 
@@ -69,6 +65,7 @@ in
                       "dash-to-dock@micxgx.gmail.com"
                        "blur-my-shell@aunetx"
                        "user-theme@gnome-shell-extensions.gcampax.github.com"
+                       "stopwatch@aliaskeiz.github.com"
                   ];
               };
 

@@ -49,8 +49,10 @@
         wget
         nodejs
 
-	devenv
+	    devenv
     ];
+
+    virtualisation.libvirtd.enable = true;
 
     system.stateVersion = "23.11";
 }

@@ -1,5 +1,6 @@
-{ lib, pkgs, config, ... }:
-{
+{ lib, pkgs, config, ... }: let
+    aagl-gtk-on-nix = import (builtins.fetchTarball "https://github.com/ezKEa/aagl-gtk-on-nix/archive/main.tar.gz");
+in {
    home.username = "semiko";
    home.homeDirectory = "/home/semiko";
 
@@ -15,6 +16,7 @@
 
         ../../modules/apps/jetbrains/intellij
         ../../modules/apps/jetbrains/webstorm
+        ../../modules/apps/virt-manager
 
 
         # -- CONFIG LOADER -- #
@@ -24,6 +26,7 @@
 
    services.intellij.enable = true;
    services.webstorm.enable = true;
+   services.virt-manager.enable = true;
 
    services.chromium.enable = true;
    services.vesktop.enable = true;
@@ -32,8 +35,8 @@
         enable = true;
         email = "danil80sch@gmail.com";
    };
-   services.gnome-config.enable = true;
 
+   services.gnome-config.enable = true;
 
 
   home.stateVersion = "23.11";
