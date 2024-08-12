@@ -35,7 +35,7 @@
     services.grub.enable = true;
 
     services.postgreSQL.enable = true;
-    services.nextcloud.enable = true;
+    services.nextcloudCustom.enable = true;
     services.adminerevo.enable = true;
 
     services.zsh.enable = true;

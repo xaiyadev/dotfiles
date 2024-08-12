@@ -1,19 +1,19 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-    cfg = config.services.nextcloud;
+    cfg = config.services.nextcloudCustom;
 in
 {
-    options.services.nextcloud = {
+    options.services.nextcloudCustom = {
         enable = mkEnableOption "custom nextcloud service";
     };
 
     config = mkIf cfg.enable {
 
     users.users.nextcloud = {
-        isNormalUser = true;
+        isSystemUser = true;
         initialPassword = "nextcloud";
-        description = "Danil Schumin";
+        description = "Nextcloud";
         extraGroups = [ "networkmanager" "wheel" "nextcloud" ];
     };
 
@@ -23,7 +23,9 @@ in
         enable = true;
         package = pkgs.nextcloud29;
 
-        home = ''/home/nextcloud/files/'';
+	hostName = "cloud.semiko.dev";
+
+        home = "/home/nextcloud/files/";
 
         settings = {
             trusted_proxies = [
@@ -66,7 +68,7 @@ in
         };
 
 
-        database.createLocally = true;
+        database.createLocally = false;
         config = {
             adminpassFile  = ''/find/good/position/to/save''; /* TODO */
             adminuser = ''nextcloud'';
@@ -84,11 +86,6 @@ in
         /* TODO: Add Apps! :3 */
 
         };
-
-        phpExtraExtensions = all: [
-            /* Used for settings.log_types */
-            php-systemd
-        ];
 
     };
   };

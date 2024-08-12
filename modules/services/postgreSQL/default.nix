@@ -10,9 +10,15 @@ in
 
     config = mkIf cfg.enable {
 
-      config.services.postgresql = {
+      services.postgresql = {
         enable = true;
-        ensureUsers = [ "nextcloud" ];
+        ensureUsers = 
+	[ 
+	  {
+	    name = "nextcloud";	
+	  }
+
+	];
         ensureDatabases = [ "nextcloud" ];
       };
   };

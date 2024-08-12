@@ -16,11 +16,10 @@ in
         grub = {
           enable = true;
           device = "nodev";
-          efiSupport = true;
-          useOSProber = true;
+	  efiSupport = true;
+	  useOSProber = true;
 
-          catppuccin.enable = true;
-        };
+	};
       };
   };
 }
