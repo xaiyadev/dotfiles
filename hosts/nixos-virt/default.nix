@@ -8,6 +8,10 @@
       ../../modules/core/ssh
       ../../modules/core/zsh
 
+      ../../modules/services/adminerevo
+      ../../modules/services/nextcloud
+      ../../modules/services/postgreSQL
+
       ../../modules/core/virtualization/docker
       ../../modules/core/boot/loader/grub
 
@@ -30,6 +34,10 @@
     hardware.pulseaudio.enable = true;
     services.grub.enable = true;
 
+    services.postgreSQL.enable = true;
+    services.nextcloud.enable = true;
+    services.adminerevo.enable = true;
+
     services.zsh.enable = true;
     services.ssh.enable = true;
     services.network = {
@@ -46,6 +54,7 @@
 
 	    devenv
     ];
+
 
     virtualisation.libvirtd.enable = true;
 

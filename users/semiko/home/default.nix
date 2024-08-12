@@ -5,20 +5,20 @@
 
    imports = [
         # --- CORE --- #
-        ../../modules/core/git
+        ../../../modules/core/git
 
         # --- APPS --- #
-        ../../modules/apps/spotify
-        ../../modules/apps/vesktop
-        ../../modules/apps/chromium
+        ../../../modules/apps/spotify
+        ../../../modules/apps/vesktop
+        ../../../modules/apps/chromium
 
-        ../../modules/apps/jetbrains/intellij
-        ../../modules/apps/jetbrains/webstorm
-        ../../modules/apps/virt-manager
+        ../../../modules/apps/jetbrains/intellij
+        ../../../modules/apps/jetbrains/webstorm
+        ../../../modules/apps/virt-manager
 
 
         # -- CONFIG LOADER -- #
-        ../../modules/apps/desktop/environment/gnome-config
+        ../../../modules/apps/desktop/environment/gnome-config
     ];
 
 
