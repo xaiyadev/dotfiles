@@ -16,6 +16,9 @@
       ./hardware-configuration.nix
     ];
 
+    # Steam workign settings
+    hardware.opengl.driSupport32Bit = true;
+
     catppuccin.flavor = "mocha";
 
 

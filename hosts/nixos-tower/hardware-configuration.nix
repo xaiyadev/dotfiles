@@ -4,6 +4,14 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
+
+  # Installing NVIDIA drivers
+  hardware.nvidia = {
+    modesetting.enable = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
@@ -27,13 +35,13 @@
   fileSystems."/mnt/win10" = 
     { device = "/dev/disk/by-uuid/A40897C408979440";
       fsType = "ntfs-3g";
-      options = [ "rw" ];
+      options = [ "rw" "uid=1000" "gid=100" "user" "exec" "umask=000" ]; # important: change uid and gid to the right numbers :D
     };
   
   fileSystems."/mnt/games" =
     { device = "/dev/disk/by-uuid/F4462E50462E13C0";
       fsType = "ntfs-3g";
-      options = [ "rw" ];
+      options = [ "rw" "uid=1000" "gid=100" "user" "exec" "umask=000" ]; # important: change uid and gid to the right numbers :D
     };
 
   swapDevices = [ ];

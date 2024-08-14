@@ -16,6 +16,9 @@
       ./hardware-configuration.nix
     ];
 
+    # Steam workign settings
+    hardware.graphics.enable32Bit = true;
+
     catppuccin.flavor = "mocha";
 
     nix.settings = {

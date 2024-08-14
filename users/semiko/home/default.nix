@@ -12,6 +12,9 @@
         ../../../modules/apps/vesktop
         ../../../modules/apps/chromium
 
+        ../../../modules/apps/steam
+        ../../../modules/apps/AAGL/sleepy
+
         ../../../modules/apps/jetbrains/intellij
         ../../../modules/apps/jetbrains/webstorm
         ../../../modules/apps/virt-manager
@@ -31,6 +34,10 @@
    services.chromium.enable = true;
    services.vesktop.enable = true;
    services.gnome-config.enable = true;
+
+
+   services.steam.enable = true;
+   services.sleepy.enable = true;
 
    services.git = {
         enable = true;
