@@ -1,4 +1,4 @@
-{ config, pkgs, catppuccin, ... }:
+{ config, pkgs, catppuccin, inputs, ... }:
 
 {
   imports =
@@ -42,7 +42,7 @@
     services.ssh.enable = true;
     services.network = {
         enable = true;
-        hostName = "nixos-laptop";
+        hostName = "pineapple";
     };
 
     services.docker.enable = true;
@@ -51,8 +51,9 @@
         vim
         wget
         nodejs
-
 	    devenv
+
+        inputs.agenix.packages."${system}".default
     ];
 
     virtualisation.libvirtd.enable = true;

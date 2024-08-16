@@ -8,7 +8,7 @@ in
         enable = mkEnableOption "custom network service";
         hostName = mkOption {
             type = types.str;
-            default = "nixos-tower";
+            default = "huckleberry";
         };
     };
 

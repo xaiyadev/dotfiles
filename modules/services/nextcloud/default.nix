@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-    cfg = config.services.nextcloudCustom;
+    cfg = config.services.nextcloud;
 in
 {
-    options.services.nextcloudCustom = {
+    options.services.nextcloud = {
         enable = mkEnableOption "custom nextcloud service";
     };
 
@@ -14,17 +14,17 @@ in
         isSystemUser = true;
         initialPassword = "nextcloud";
         description = "Nextcloud";
-        extraGroups = [ "networkmanager" "wheel" "nextcloud" ];
+        extraGroups = [ "networkmanager" "nextcloud" ];
+        home = "/home/nextcloud/";  /* home = "/mnt/raid/netxloud/"; TODO: change when RAID installed */
     };
 
 
-    /* TODO: add redis! */
+    /* Nextcloud install && configuration */
     services.nextcloud = {
         enable = true;
         package = pkgs.nextcloud29;
 
-	hostName = "cloud.semiko.dev";
-
+	    hostName = "cloud.semiko.dev";
         home = "/home/nextcloud/files/";
 
         settings = {
@@ -38,20 +38,9 @@ in
                 ''10.0.0.2''
             ];
 
-            skeletondirectory = ''/home/nextcloud/skeltonDirectory/'';
+            skeletondirectory = ''/home/nextcloud/skeltonDirectory/''; /* TODO: change to: /mnt/raid/netxloud/ when RAID is installed */
             overwriteprotocol = ''https'';
 
-           /* Log Levels
-            * 0 (debug): Log all activity.
-            *
-            *  1 (info): Log activity such as user logins and file activities, plus warnings, errors, and fatal errors.
-            *
-            *  2 (warn): Log successful operations, as well as warnings of potential problems, errors and fatal errors.
-            *
-            *  3 (error): Log failed operations and fatal errors.
-            *
-            *  4 (fatal): Log only fatal errors that cause the server to stop.
-            */
             loglevel = 2;
             logtypes = ''systemd'';
 
@@ -60,6 +49,16 @@ in
             "profile.enabled" = true;
 
         };
+
+        # Setup Redis
+        memcache.distributed = "\OC\Memcache\Redis";
+        memcache.locking = "\OC\Memcache\Redis";
+        filelocking.enabled = true;
+        redis = {
+           host = "/run/redis-nextcloud/redis.sock";
+           port = 0;
+        };
+
         https = true;
 
         autoUpdateApps = {
@@ -84,9 +83,15 @@ in
         appstoreEnable = true; /* TODO: false when extra Apps got apps added */
         extraApps = {
         /* TODO: Add Apps! :3 */
-
         };
 
+    };
+
+    /* Redis COnfiguration */
+    services.redis.servers.nextcloud = {
+       enable = true;
+       user = "nextcloud";
+       unixSocket = "/run/redis-nextcloud/redis.sock";
     };
   };
 }

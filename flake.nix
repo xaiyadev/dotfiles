@@ -2,6 +2,8 @@
   description = "Breaking's Nixos Configuration v2";
 
   inputs = {
+    agenix.url = "github:ryantm/agenix";
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     catppuccin.url = "github:catppuccin/nix";
@@ -22,19 +24,21 @@
     };
   };
 
-  outputs = {self, nixpkgs, home-manager, spicetify-nix, catppuccin, aagl, ... } @ inputs: {
+  outputs = {self, nixpkgs, home-manager, spicetify-nix, catppuccin, aagl, agenix, ... } @ inputs: {
 
-        nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; inherit spicetify-nix; };
         modules = [
-          ./hosts/nixos-laptop
+          ./hosts/pineapple
 
           # User import
           ./users/semiko
           ./users/workaholic
 
           catppuccin.nixosModules.catppuccin
+          agenix.nixosModules.default
+
 
           home-manager.nixosModules.home-manager
             {
@@ -62,16 +66,19 @@
         };
 
 
-        nixosConfigurations.nixos-tower = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.tower = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; inherit spicetify-nix; };
         modules = [
-          ./hosts/nixos-tower
+          ./hosts/huckleberry
 
           # User import
           ./users/semiko
 
           catppuccin.nixosModules.catppuccin
+          agenix.nixosModules.default
+
+
           home-manager.nixosModules.home-manager
             {
               home-manager.backupFileExtension = "backup";
@@ -91,16 +98,19 @@
         };
 
         /* Virt-machine for transforming my ubuntu Server into a NixOS server */
-        nixosConfigurations.nixos-virt = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.server = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/nixos-virt
+          ./hosts/apricot
 
           # User import
           ./users/semiko
            
           catppuccin.nixosModules.catppuccin
+          agenix.nixosModules.default
+
+
           home-manager.nixosModules.home-manager
             {
               home-manager.backupFileExtension = "backup";

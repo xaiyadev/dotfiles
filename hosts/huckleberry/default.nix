@@ -1,4 +1,4 @@
-{ config, pkgs, catppuccin, ... }:
+{ config, pkgs, catppuccin, inputs, ... }:
 
 {
   imports =
@@ -8,16 +8,18 @@
       ../../modules/core/ssh
       ../../modules/core/zsh
 
-      ../../modules/services/adminerevo
-      ../../modules/services/nextcloud
-      ../../modules/services/postgreSQL
-
       ../../modules/core/virtualization/docker
       ../../modules/core/boot/loader/grub
+      ../../modules/core/desktop/environment/gnome
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+
+    # Steam workign settings
+    hardware.graphics.enable32Bit = true;
+
+    catppuccin.flavor = "mocha";
 
     nix.settings = {
         substituters = [ "https://ezkea.cachix.org" ];
@@ -26,24 +28,22 @@
         trusted-users = [ "root" "semiko" ];
         experimental-features = [ "nix-command" "flakes" ];
     };
-
-
+    
     nixpkgs.config.allowUnfree = true;
 
     services.locale.enable = true;
     hardware.pulseaudio.enable = true;
     services.grub.enable = true;
-
-    services.postgreSQL.enable = true;
-    services.nextcloudCustom.enable = true;
-    services.adminerevo.enable = true;
+    services.gnome.enable = true;
 
     services.zsh.enable = true;
     services.ssh.enable = true;
     services.network = {
         enable = true;
-        hostName = "nixos-virt";
+        hostName = "huckleberry";
     };
+
+    boot.supportedFilesystems = [ "ntfs" ];
 
     services.docker.enable = true;
 
@@ -51,10 +51,10 @@
         vim
         wget
         nodejs
+        devenv
 
-	    devenv
+        inputs.agenix.packages."${system}".default
     ];
-
 
     virtualisation.libvirtd.enable = true;
 
