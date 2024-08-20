@@ -22,7 +22,7 @@ in
          extraConfig = {
              commit.gpgsign = true;
              gpg.format = "ssh";
-             user.signingkey = "~/.ssh/git_ssh_key.pub";
+             user.signingkey = "~/.ssh/id_rsa.pub";
          };
        };
     };
