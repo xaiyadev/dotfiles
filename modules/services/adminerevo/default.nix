@@ -9,8 +9,6 @@ in
     };
 
     config = mkIf cfg.enable {
-      environment.systemPackages = with pkgs; [
-        adminerevo
-      ];
+      environment.systemPackages = with pkgs; [ adminerevo ];
   };
 }

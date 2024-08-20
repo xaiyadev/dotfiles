@@ -15,7 +15,7 @@ in
         initialPassword = "nextcloud";
         description = "Nextcloud";
         extraGroups = [ "networkmanager" "nextcloud" ];
-        home = "/home/nextcloud/";  /* home = "/mnt/raid/netxloud/"; TODO: change when RAID installed */
+        home = "/home/nextcloud/";  /* home = "/mnt/raid/services/netxloud/"; TODO: change when RAID installed */
     };
 
 
@@ -25,7 +25,7 @@ in
         package = pkgs.nextcloud29;
 
 	    hostName = "cloud.semiko.dev";
-        home = "/home/nextcloud/files/";
+        home = "/home/nextcloud/files/"; /* home = "/mnt/raid/services/netxloud/files"; TODO: change when RAID installed */
 
         settings = {
             trusted_proxies = [
@@ -59,8 +59,9 @@ in
            port = 0;
         };
 
-        https = true;
+        /* */
 
+        https = true;
         autoUpdateApps = {
             enable = true;
             startAt = ''Sun 14:00:00'';
@@ -87,7 +88,7 @@ in
 
     };
 
-    /* Redis COnfiguration */
+    /* Redis Configuration */
     services.redis.servers.nextcloud = {
        enable = true;
        user = "nextcloud";

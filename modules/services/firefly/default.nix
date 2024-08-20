@@ -17,6 +17,8 @@ in
           initialPassword = "firefly";
           description = "Firefly";
           extraGroups = [ "networkmanager" "firefly" ];
+          home = "/home/firefly/";  /* home = "/mnt/raid/services/firefly/"; TODO: change when RAID installed */
+
       };
 
       services.firefly-iii = {
@@ -28,7 +30,7 @@ in
         settings = {
             APP_ENV= "production";
             SITE_OWNER = "danil80sch@gmail.com";
-            APP_KEY_FILE = "./SECRET.txt"; # TODO: LEARN AGE! PLEASE
+            APP_KEY_FILE = "./SECRET.txt"; # TODO:
             DEFAULT_LANGUAGE="en_US";
             TRUSTED_PROXIES="**";
 
