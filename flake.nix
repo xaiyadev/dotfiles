@@ -50,7 +50,7 @@
 
               home-manager.users.semiko = {
                 imports = [
-                    ./users/semiko/home.nix
+                    ./users/semiko/home/default.nix
                     catppuccin.homeManagerModules.catppuccin
                  ];
               };
