@@ -1,7 +1,7 @@
 { config, pkgs, catppuccin, inputs, ... }:
 
 {
-  imports =
+    imports =
     [
       ../../modules/core/network
       ../../modules/core/locale
@@ -30,11 +30,6 @@
 
     /* Enable NGINX */
     services.nginx.enable = true;
-    services.nginx.virtualHosts."cloud.semiko.dev" = {
-        addSSL = true;
-        enableACME = true;
-    };
-
     security.acme = {
         acceptTerms = true;
         defaults.emal = "danil80sch@gmail.com";
@@ -43,20 +38,36 @@
     /* --- */
 
     /* Enable Database */
+    age.secrets.postgresql.file = ../../secrets/postgresql.age;
+
     services.postgresql = {
       enable = true;
-      ensureUsers = [
-        { name = "nextcloud"; ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES"; }
-        { name = "firefly"; }
-      ];
-      ensureDatabases = [ "nextcloud" "firefly" ];
+      ensureUsers = [ { name = "postgresql"; ensurePermissions."DATABASE postgresql" = "ALL PRIVILEGES"; } ];
+      ensureDatabases = [ "nextcloud" "firefly" "vaultwarden" ];
     };
+
+    # Set the authentik postgresql password
+    systemd.services.postgresql.postStart = ''
+      $PSQL -tA <<'EOF'
+        DO $$
+        DECLARE password TEXT;
+        BEGIN
+          password := trim(both from replace(pg_read_file('${config.age.secrets.postgresql.path}'), E'\n', '''));
+          EXECUTE format('ALTER ROLE postgresql WITH PASSWORD '''%s''';', password);
+        END $$;
+      EOF
+    '';
 
 
     /* Enable Custom Services */
-    services.nextcloud.enable = true;
     services.adminerevo.enable = true;
     services.firefly.enable = true;
+    services.homepage.enable = true;
+    services.nextcloud.enable = true;
+    services.vaultwarden.enable = true;
+
+    # services.plex.enable = true;
+    # services.plex.enable = true;
 
     /* Default Settings Services */
     services.locale.enable = true;

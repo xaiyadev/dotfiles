@@ -25,6 +25,16 @@
     ];
 
 
+   # TODO: make modules
+   home.packages = with pkgs;[
+        # Gaming
+        steam
+
+        # School :3
+        teams-for-linux
+
+
+   ];
    services.spotify.enable = true;
 
    services.intellij.enable = true;

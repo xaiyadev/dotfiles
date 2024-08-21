@@ -20,12 +20,10 @@ let
    allKeys = userKeys ++ systemKeys;
 in
 {
-    # Firefly III
-    "firefly-app-key.age".publicKeys = allKeys;
-    "firefly-db.age".publicKeys = allKeys;
+    "postgresql.age".publicKeys = allKeys;
 
-    # Nextcloud
-    "nextcloud-admin".publicKeys = allKeys;
-    "nextcloud-db".publicKeys = allKeys;
+    "firefly.age".publicKeys = allKeys;
+
+    "nextcloud.age".publicKeys = allKeys;
 
 }

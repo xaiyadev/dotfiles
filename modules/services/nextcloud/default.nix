@@ -15,9 +15,10 @@ in
         initialPassword = "nextcloud";
         description = "Nextcloud";
         extraGroups = [ "networkmanager" "nextcloud" ];
-        home = "/home/nextcloud/";  /* home = "/mnt/raid/services/netxloud/"; TODO: change when RAID installed */
     };
 
+
+    age.secrets.postgresql.file = ../../../secrets/nextcloud.age;
 
     /* Nextcloud install && configuration */
     services.nextcloud = {
@@ -25,7 +26,7 @@ in
         package = pkgs.nextcloud29;
 
 	    hostName = "cloud.semiko.dev";
-        home = "/home/nextcloud/files/"; /* home = "/mnt/raid/services/netxloud/files"; TODO: change when RAID installed */
+        home = "/mnt/raid/services/netxloud/files";
 
         settings = {
             trusted_proxies = [
@@ -70,10 +71,10 @@ in
 
         database.createLocally = false;
         config = {
-            adminpassFile  = ''/find/good/position/to/save''; /* TODO */
+            adminpassFile  = config.age.secrets.firefly-app-key.path;
             adminuser = ''nextcloud'';
 
-            dbpassFile = ''/find/good/position/to/save'' /* TODO */;
+            dbpassFile = config.age.secrets.postgresql.path;
             dbtype = ''pgsql'';
             dbuser = ''nextcloud'';
             dbname = ''nextcloud'';
@@ -81,12 +82,16 @@ in
         };
 
 
-        appstoreEnable = true; /* TODO: false when extra Apps got apps added */
-        extraApps = {
-        /* TODO: Add Apps! :3 */
-        };
+        appstoreEnable = true;
+        extraApps = { };
 
     };
+
+    services.nginx.virtualHosts."cloud.semiko.dev" = {
+        addSSL = true;
+        enableACME = true;
+    };
+
 
     /* Redis Configuration */
     services.redis.servers.nextcloud = {

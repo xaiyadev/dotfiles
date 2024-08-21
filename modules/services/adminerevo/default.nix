@@ -8,7 +8,12 @@ in
         enable = mkEnableOption "custom adminerevo service";
     };
 
+    # TODO: continue coding!
     config = mkIf cfg.enable {
+      services.adminer = {
+        enable = true;
+        package = pkgs.adminerevo;
+      };
       environment.systemPackages = with pkgs; [ adminerevo ];
   };
 }
