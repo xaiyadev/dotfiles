@@ -20,10 +20,8 @@ let
    allKeys = userKeys ++ systemKeys;
 in
 {
+    # TODO: change secrets files when completly done!
     "postgresql.age".publicKeys = allKeys;
 
     "firefly.age".publicKeys = allKeys;
-
-    "nextcloud.age".publicKeys = allKeys;
-
 }

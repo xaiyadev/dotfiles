@@ -8,6 +8,8 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
+    copyparty.url  = "github:9001/copyparty";
+
     home-manager = {
         url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +26,7 @@
     };
   };
 
-  outputs = {self, nixpkgs, home-manager, spicetify-nix, catppuccin, aagl, agenix, ... } @ inputs: {
+  outputs = {self, nixpkgs, home-manager, spicetify-nix, catppuccin, aagl, agenix, copyparty, ... } @ inputs: {
 
         nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -100,7 +102,7 @@
         /* Virt-machine for transforming my ubuntu Server into a NixOS server */
         nixosConfigurations.server = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs; inherit copyparty; };
         modules = [
           ./hosts/apricot
 
@@ -109,6 +111,7 @@
            
           catppuccin.nixosModules.catppuccin
           agenix.nixosModules.default
+          copyparty.nixosModules.default
 
 
           home-manager.nixosModules.home-manager

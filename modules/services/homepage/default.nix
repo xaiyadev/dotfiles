@@ -10,11 +10,9 @@ in
 
     config = mkIf cfg.enable {
 
-        servies.homepage-dashboard = {
+        services.homepage-dashboard = {
             enable = true;
             listenPort = 3000;
-
-            homepageLocation = ''https://semiko.dev'';
 
             settings = {
                 title = ''Semiko'';
@@ -84,6 +82,19 @@ in
                 ];
 
             };
+        };
+
+        services.nginx.virtualHosts."semiko.dev" = {
+            addSSL = true;
+            enableACME = true;
+            serverAliases = [ "www.semiko.dev" ];
+            locations."/".proxyPass = "http://127.0.0.1:8080";
+            extraConfig =
+              # required when the target is also TLS server with multiple hosts
+              "proxy_ssl_server_name on;" +
+              # required when the server wants to use HTTP Authentication
+              "proxy_pass_header Authorization;"
+              ;
         };
     };
 }

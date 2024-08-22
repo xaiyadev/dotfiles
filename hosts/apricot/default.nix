@@ -9,7 +9,13 @@
       ../../modules/core/zsh
 
       ../../modules/services/adminerevo
-      ../../modules/services/nextcloud
+      ../../modules/services/copyParty
+      ../../modules/services/firefly
+      ../../modules/services/git
+      ../../modules/services/homepage
+      ../../modules/services/mail
+      ../../modules/services/plex
+      ../../modules/services/vaultwarden
 
       ../../modules/core/virtualization/docker
       ../../modules/core/boot/loader/grub
@@ -32,7 +38,7 @@
     services.nginx.enable = true;
     security.acme = {
         acceptTerms = true;
-        defaults.emal = "danil80sch@gmail.com";
+        defaults.email = "danil80sch@gmail.com";
     };
 
     /* --- */
@@ -42,8 +48,11 @@
 
     services.postgresql = {
       enable = true;
-      ensureUsers = [ { name = "postgresql"; ensurePermissions."DATABASE postgresql" = "ALL PRIVILEGES"; } ];
+      ensureUsers = [ { name = "postgresql"; } ];
       ensureDatabases = [ "nextcloud" "firefly" "vaultwarden" ];
+      initialScript = ''
+
+      '';
     };
 
     # Set the authentik postgresql password
@@ -59,15 +68,15 @@
     '';
 
 
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
     /* Enable Custom Services */
     services.adminerevo.enable = true;
     services.firefly.enable = true;
     services.homepage.enable = true;
-    services.nextcloud.enable = true;
-    services.vaultwarden.enable = true;
+    services.vaultwardenService.enable = true;
+    services.copypartyService.enable = true;
+    # services.plex.enable = true;
 
-    # services.plex.enable = true;
-    # services.plex.enable = true;
 
     /* Default Settings Services */
     services.locale.enable = true;

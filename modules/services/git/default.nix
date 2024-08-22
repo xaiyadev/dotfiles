@@ -1,59 +1,52 @@
+
+{ config, lib, pkgs, modulesPath, ... }:
+with lib;
+let
+    cfg = config.services.git;
+    sshdPort = 8888;
+    softServePort = 22;
+in
 {
-  pkgs,
-  modulesPath,
-  lib,
-  ...
-}: let
-     sshdPort = 8888;
-     softServePort = 22;
-in {
-  networking.firewall.allowedTCPPorts = [sshdPort softServePort];
-  services.openssh.ports = [sshdPort];
+    options.services.git = {
+        enable = mkEnableOption "custom git service";
+    };
 
-  environment.systemPackages = with pkgs; [
-    alejandra
-    duf
-    git
-    helix
-    htop
-    nil
-    soft-serve
-    tmux
-    tree
-  ];
+    config = mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [sshdPort softServePort];
+      services.openssh.ports = [sshdPort];
 
-  users.users.git = {
-    isSystemUser = true;
-    extraGroups = ["wheel"];
-  };
+      environment.systemPackages = with pkgs; [ soft-serve ];
 
-  users.users.git = {
-      isSystemUser = true;
-      initialPassword = "git";
-      description = "Git Server";
-      extraGroups = [ "networkmanager" "git" ];
-  };
+      users.users.git = {
+          isSystemUser = true;
+          initialPassword = "git";
+          description = "Git Server";
+          extraGroups = [ "networkmanager" "git" ];
+      };
 
-  services.soft-serve = {
-      enable = true;
-      settings = {
-        name = "Semiko Git Server";
-        log_format = "json";
+      services.soft-serve = {
+          enable = true;
 
-        ssh = {
-            listen_addr = ":23231";
-            public_url = "ssh://git.semiko.dev";
-            max_timeout = 30;
-            idle_timeout = 120;
-        };
+          settings = {
+            name = "Semiko Git Server";
+            log_format = "json";
 
-        http.listen_addr = "2508";
+            ssh = {
+                listen_addr = ":23231";
+                public_url = "ssh://git.semiko.dev";
+                max_timeout = 30;
+                idle_timeout = 120;
+            };
+
+            http.listen_addr = "2508";
+          };
+      };
+
+      services.nginx.virtualHosts."git.semiko.dev" = {
+          addSSL = true;
+          enableACME = true;
+          locations."/".proxyPass = "http://127.0.0.1:23231";
+
       };
   };
-
-  services.nginx.virtualHosts."cloud.semiko.dev" = {
-      addSSL = true;
-      enableACME = true;
-  };
-
 }

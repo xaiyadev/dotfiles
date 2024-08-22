@@ -8,12 +8,9 @@ in
         enable = mkEnableOption "custom adminerevo service";
     };
 
-    # TODO: continue coding!
     config = mkIf cfg.enable {
-      services.adminer = {
-        enable = true;
-        package = pkgs.adminerevo;
-      };
-      environment.systemPackages = with pkgs; [ adminerevo ];
+        # Adminer will only be accessable in local network
+        # TODO: learn where it is saved etc.
+        environment.systemPackages = with pkgs; [ adminerevo ];
   };
 }
