@@ -19,7 +19,7 @@ in
         group = "firefly"; # Firefly requirs you to add this group this way
     };
 
-    age.secrets.firefly.file = ../../../secrets/firefly-app-key.age;
+    age.secrets.firefly.file = ../../../secrets/firefly.age;
 
     services.firefly-iii = {
         enable = true;
@@ -31,15 +31,16 @@ in
         settings = {
             APP_ENV= "production";
             SITE_OWNER = "danil80sch@gmail.com";
-            APP_KEY_FILE = config.age.secrets.firefly-app-key.path;
+            APP_KEY_FILE = config.age.secrets.firefly.path;
             DEFAULT_LANGUAGE="en_US";
             TRUSTED_PROXIES="**";
 
             DB_CONNECTION="pgsql";
-            DB_PORT="5432";
+            DB_PORT=5432;
             DB_DATABASE="firefly";
             DB_USERNAME="firefly";
-            DB_PASSWORD_FILE = config.age.secrets.postgresql.path;
+/*          DB_PASSWORD_FILE = config.age.secrets.postgresql.path; TODO: replace when Postgress password is set*/
+            DB_PASSWORD="postgresql";
         };
     };
 
