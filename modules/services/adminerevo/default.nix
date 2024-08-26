@@ -19,6 +19,11 @@ in
         # Adminer will only be accessable in local network
         # TODO: learn where it is saved etc.
         environment.systemPackages = with pkgs; [ adminerevo php ];
-        processes.adminer.exec = "php -S 8000 -t ${cfg.package} ${cfg.package}/adminer.php";
+        systemd.services.adminerevo = {
+            enable = true;
+            serviceConfig = {
+                ExecStart = "php -S 8000 -t ${cfg.package} ${cfg.package}/adminer.php";
+            };
+        };
   };
 }

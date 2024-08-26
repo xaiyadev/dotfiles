@@ -9,11 +9,6 @@ in
     };
 
     config = mkIf cfg.enable {
-
-         environment = {
-             HOMEPAGE_CONFIG_DIR = "/mnt/raid/services/homepage/";
-         };
-
         services.homepage-dashboard = {
             enable = true;
             listenPort = 3000;
