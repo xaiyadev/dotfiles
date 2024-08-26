@@ -13,16 +13,5 @@ in
             enable = true;
             banner = " Welcome to Breakings System! ";
         };
-
-        programs.ssh.extraConfig = "
-        HOST github.com
-            PreferredAuthentications publickey
-            IdentityFile ~/.ssh/git_ssh_key
-
-         HOST bitbucket.org
-            PreferredAuthentications publickey
-            IdentityFile ~/.ssh/bitbucket_ssh_key";
-
-
    };
 }

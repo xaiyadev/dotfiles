@@ -76,6 +76,7 @@
 
           # User import
           ./users/semiko
+          ./users/medea
 
           catppuccin.nixosModules.catppuccin
           agenix.nixosModules.default
@@ -92,6 +93,12 @@
               home-manager.users.semiko = {
                 imports = [
                     ./users/semiko/home
+                    catppuccin.homeManagerModules.catppuccin
+                 ];
+              };
+              home-manager.users.medea = {
+                imports = [
+                    ./users/medea/home.nix
                     catppuccin.homeManagerModules.catppuccin
                  ];
               };
