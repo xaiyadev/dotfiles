@@ -9,7 +9,8 @@
       ../../modules/core/zsh
 
       ../../modules/services/adminerevo
-      ../../modules/services/copyParty
+      ../../modules/services/fileSystem/copyParty
+      ../../modules/services/fileSystem/syncthing
       ../../modules/services/firefly
       ../../modules/services/git
       ../../modules/services/homepage
@@ -94,6 +95,7 @@
     services.homepage.enable = true;
     services.vaultwardenService.enable = true;
     services.copypartyService.enable = true;
+    services.syncthingService.enable = true;
     # services.plex.enable = true;
 
 

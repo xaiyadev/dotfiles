@@ -16,13 +16,14 @@ in
     };
 
     config = mkIf cfg.enable {
-        # Adminer will only be accessable in local network
-        # TODO: learn where it is saved etc.
+        # !! Adminer will only be accessable in local network
+
         environment.systemPackages = with pkgs; [ adminerevo php ];
+
         systemd.services.adminerevo = {
             enable = true;
             serviceConfig = {
-                ExecStart = "php -S 8000 -t ${cfg.package} ${cfg.package}/adminer.php";
+                ExecStart = "php -S 127.0.0.1:8000 -t ${cfg.package} ${cfg.package}/adminer.php";
             };
         };
   };
