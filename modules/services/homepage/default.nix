@@ -10,6 +10,10 @@ in
 
     config = mkIf cfg.enable {
 
+         environment = {
+             HOMEPAGE_CONFIG_DIR = "/mnt/raid/services/homepage/";
+         };
+
         services.homepage-dashboard = {
             enable = true;
             listenPort = 3000;
@@ -88,7 +92,7 @@ in
             addSSL = true;
             enableACME = true;
             serverAliases = [ "www.semiko.dev" ];
-            locations."/".proxyPass = "http://127.0.0.1:8080";
+            locations."/".proxyPass = "http://127.0.0.1:3000";
             extraConfig =
               # required when the target is also TLS server with multiple hosts
               "proxy_ssl_server_name on;" +
