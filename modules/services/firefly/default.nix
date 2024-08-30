@@ -19,7 +19,6 @@ in
         group = "firefly"; # Firefly requirs you to add this group this way
     };
 
-    age.secrets.firefly.file = ../../../secrets/firefly.age;
 
     services.firefly-iii = {
         enable = true;

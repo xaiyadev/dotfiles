@@ -25,6 +25,13 @@
       ./hardware-configuration.nix
     ];
 
+    # Load all age Keys
+    age.secrets = {
+        postgresql.file = ../../secrets/postgresql.age;
+        cloudflare.file = ../../secrets/cloudflare.age;
+        firefly.file    = ../../secrets/firefly.age;
+    };
+
     environment.systemPackages = with pkgs; [
         vim
         wget
@@ -42,10 +49,12 @@
 
     services.zsh.enable = true;
     services.ssh.enable = true;
+
     services.network = {
         enable = true;
         hostName = "apricot";
     };
+    networking.defaultGateway6 = { address = "fe80::1"; interface = "eno1"; };
 
     /* Default Settings Services */
     services.locale.enable = true;
@@ -53,21 +62,23 @@
     services.grub.enable = true;
 
 
-
     /* Enable NGINX */
     services.nginx.enable = true;
     security.acme = {
         acceptTerms = true;
         defaults.email = "danil80sch@gmail.com";
+        certs."semiko.dev" = {
+            domain = "*.semiko.dev";
+            dnsProvider = "cloudflare";
+
+            group = "nginx";
+            environmentFile = config.age.secrets.cloudflare.path;
+        };
     };
 
     /* --- */
 
     /* Enable Database */
-    age.secrets.postgresql = {
-        file = /home/semiko/.config/nixos/secrets/postgresql.age;
-        mode = "600";
-    };
 
     services.postgresql = {
       enable = true;
@@ -90,12 +101,12 @@
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     /* Enable Custom Services */
-    services.adminerevo.enable = true;
-    services.firefly.enable = true;
+    #services.adminerevo.enable = true;
+    #services.firefly.enable = true;
     services.homepage.enable = true;
-    services.vaultwardenService.enable = true;
-    services.copypartyService.enable = true;
-    services.syncthingService.enable = true;
+    #services.vaultwardenService.enable = true;
+    #services.copypartyService.enable = true;
+    #services.syncthingService.enable = true;
     # services.plex.enable = true;
 
 

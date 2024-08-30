@@ -16,7 +16,6 @@ in
             settings = {
                 title = ''Semiko'';
                 headerStyle = ''clean'';
-                target = ''_blank'';
 
                 color = ''gray'';
                 background = {
@@ -25,18 +24,32 @@ in
                 };
             };
 
-            widgets = {
-                search = {
-                    provider = [''google'' ''duckduckgo''];
-                    focus = true;
-                    target = ''_blank'';
-                };
+            widgets =
+            [
+                {
+                   resources = {
+                        label = ''System'';
+                        cpu = true;
+                        memory = true;
+                        uptime = true;
+                    };
+                }
 
-                resources = {
-                    label = ''Disks'';
-                    /*  TODO: ADD DISKS SOMEHOW */
-                };
+                {
+                   resources = {
+                        label = ''Disks'';
+                        disk = [ "/" "/mnt/raid" ];
+                    };
+                }
 
+                {
+                    search = {
+                        provider = [''google'' ''duckduckgo''];
+                        focus = true;
+                        target = ''_blank'';
+                    };
+                }
+                {
                 datetime = {
                     text_size = ''x1'';
 
@@ -44,56 +57,135 @@ in
                         dateStyle = ''short'';
                         timeStyle = ''short'';
                         hourCycle = ''h23'';
+                        };
                     };
-                };
+                }
+            ];
 
-                services = [
-                    {
-                        "Remote" = [{
-                            "Nextcloud" = {
-                                href = ''https://cloud.semiko.dev'';
-                                icon = ''nextcloud'';
-                                description = ''Self-Hosted Cloud Platform'';
-                            };
-
+            services =
+            [
+                {
+                    "Remote" =
+                    [
+                        # CopyParty
+                        # Syncthing
+                        # Soft-Server (?)
+                        # Plex
+                        {
                             "Firefly 3" = {
                                 href = ''https://cash.semiko.dev'';
                                 icon = ''firefly'';
                                 description = ''Finance managment software'';
                             };
+                        }
 
+                        {
                             "Vaultwarden" = {
                                 href = ''https://vault.semiko.dev'';
                                 icon = ''vaultwarden'';
                                 description = ''Password Manager Service'';
                             };
+                        }
+                    ];
+                }
 
-                        }];
-
-                        "Local (only with VPN)" = [{
-                            "Fritz!Box" = {
-                                href = ''http://192.168.1.1'';
-                                icon = ''avmfritzbox'';
-                                description = ''Router configuration interface'';
+                {
+                    "Local (only with VPN)" = [{
+                        "Fritz!Box" = {
+                            href = ''http://192.168.1.1'';
+                            icon = ''avmfritzbox'';
+                            description = ''Router configuration interface'';
+                            widget = {
+                                type = "fritzbox";
+                                url = "http://192.168.1.1/";
                             };
-                        }];
-                    }
-                ];
+                        };
+                    }];
+                    # Adminer
+                }
+            ];
 
-            };
+            bookmarks =
+            [
+                {
+                    School =
+                    [
+                        {
+                            "Office 360" = [{
+                                icon = "mdi-file-edit";
+                                href = "https://office.com";
+                            }];
+                        }
+                        {
+                            "Sharepoint" = [{
+                                icon = "mdi-microsoft-sharepoint";
+                                href = "https://btahaus-my.sharepoint.com/";
+                            }];
+                        }
+                        {
+                            "WebUntis" = [{
+                                icon = "mdi-calendar-blank-multiple";
+                                href = "https://webuntis.com/";
+                            }];
+                        }
+
+                        {
+                            "Anton" = [{
+                                icon = "mdi-emoticon";
+                                href = "https://anton.app/";
+                            }];
+                        }
+                        {
+                            "SUA Code" = [{
+                                icon = "mdi-book";
+                                href = "https://github.com/BreakingTV/09-U1";
+                            }];
+                        }
+                    ];
+                }
+                {
+                    Dotfiles =
+                    [
+                        {
+                            "MyNixos" = [{
+                                icon = "mdi-snowflake-variant";
+                                href = "https://mynixos.com/";
+                            }];
+                        }
+                        {
+                            "Nixos Search" = [{
+                                icon = "mdi-weather-snowy-heavy";
+                                href = "https://search.nixos.org/";
+                            }];
+                        }
+                        {
+                            "Homemanager Options Search" = [{
+                                icon = "mdi-home-flood";
+                                href = "https://home-manager-options.extranix.com/";
+                            }];
+                        }
+                        {
+                            "Dotfiles" = [{
+                                icon = "mdi-dots-circle";
+                                href = "https://github.com/BreakingTV/dotfiles";
+                            }];
+                        }
+                    ];
+                }
+            ];
+
         };
 
+        # NixOS
+            # Github Repository - dotfiles
+
         services.nginx.virtualHosts."semiko.dev" = {
-            addSSL = true;
-            enableACME = true;
+            forceSSL = true;
+            useACMEHost = "semiko.dev";
+
             serverAliases = [ "www.semiko.dev" ];
-            locations."/".proxyPass = "http://127.0.0.1:3000";
-            extraConfig =
-              # required when the target is also TLS server with multiple hosts
-              "proxy_ssl_server_name on;" +
-              # required when the server wants to use HTTP Authentication
-              "proxy_pass_header Authorization;"
-              ;
+            locations."/".proxyPass = "http://[::1]:3000";
+            extraConfig = "proxy_ssl_server_name on;";
         };
     };
 }
