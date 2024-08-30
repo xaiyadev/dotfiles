@@ -16,6 +16,7 @@ in
     };
 
     config = mkIf cfg.enable {
+        networking.firewall.allowedTCPPorts = [ 8000 ];
         # !! Adminer will only be accessable in local network
 
         environment.systemPackages = with pkgs; [ adminerevo php ];

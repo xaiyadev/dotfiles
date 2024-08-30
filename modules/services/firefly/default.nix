@@ -23,7 +23,7 @@ in
     services.firefly-iii = {
         enable = true;
         enableNginx = true;
-        # dataDir = "/mnt/raid/services/firefly/";
+        #dataDir = "/mnt/raid/services/firefly/";
         group = "firefly";
         user = "firefly";
 
@@ -31,28 +31,21 @@ in
             APP_ENV= "production";
             SITE_OWNER = "danil80sch@gmail.com";
             APP_KEY_FILE = config.age.secrets.firefly.path;
-            DEFAULT_LANGUAGE="en_US";
+            DEFAULT_LANGUAGE="de_DE";
             TRUSTED_PROXIES="**";
 
             DB_CONNECTION="pgsql";
-            DB_PORT=5432;
             DB_DATABASE="firefly";
-            DB_USERNAME="firefly";
-/*          DB_PASSWORD_FILE = config.age.secrets.postgresql.path; TODO: replace when Postgress password is set*/
-            DB_PASSWORD="postgresql";
+            DB_HOST="/run/postgresql";
+            DB_PORT = 5432;
         };
     };
 
     services.nginx.virtualHosts."cash.semiko.dev" = {
-        addSSL = true;
-        enableACME = true;
-        locations."/".proxyPass = "http://127.0.0.1:8080";
-        extraConfig =
-          # required when the target is also TLS server with multiple hosts
-          "proxy_ssl_server_name on;" +
-          # required when the server wants to use HTTP Authentication
-          "proxy_pass_header Authorization;"
-          ;
+        forceSSL = true;
+        useACMEHost = "semiko.dev";
+        locations."/".proxyPass = "http://[::1]:8080";
+        extraConfig = "proxy_ssl_server_name on;";
     };
   };
 }

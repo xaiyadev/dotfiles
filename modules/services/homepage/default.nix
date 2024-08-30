@@ -90,17 +90,29 @@ in
                 }
 
                 {
-                    "Local (only with VPN)" = [{
-                        "Fritz!Box" = {
-                            href = ''http://192.168.1.1'';
-                            icon = ''avmfritzbox'';
-                            description = ''Router configuration interface'';
-                            widget = {
-                                type = "fritzbox";
-                                url = "http://192.168.1.1/";
+                    "Local (only with VPN)" = [
+                        {
+                            "Fritz!Box" = {
+                                href = ''http://192.168.1.1'';
+                                icon = ''avmfritzbox'';
+                                description = ''Router configuration interface'';
+                                widget = {
+                                    type = "fritzbox";
+                                    url = "http://192.168.1.1/";
+                                };
+                                ping = "http://192.168.1.1/";
                             };
-                        };
-                    }];
+                        }
+
+/*                        {
+                            "Adminerevo" = {
+                                href = ''http://192.168.1.126:8000/'';
+                                icon = ''sqlitebrowser'';
+                                description = ''Check database and maintain it'';
+                                ping = "http://192.168.1.126:8000/";
+                            };
+                        }*/
+                    ];
                     # Adminer
                 }
             ];
@@ -175,9 +187,6 @@ in
             ];
 
         };
-
-        # NixOS
-            # Github Repository - dotfiles
 
         services.nginx.virtualHosts."semiko.dev" = {
             forceSSL = true;

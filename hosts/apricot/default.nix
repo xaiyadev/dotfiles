@@ -82,27 +82,14 @@
 
     services.postgresql = {
       enable = true;
-      ensureUsers = [ { name = "postgresql"; } ];
       ensureDatabases = [ "nextcloud" "firefly" "vaultwarden" ];
     };
-
-    # Set the postgresql password TODO: make it agenix encrypted!
-    systemd.services.postgresql.postStart = ''
-      $PSQL -tA <<'EOF'
-        DO $$
-        DECLARE password TEXT;
-        BEGIN
-          password := trim(both from replace(postgresql), E'\n', '''));
-          EXECUTE format('ALTER ROLE postgresql WITH PASSWORD '''%s''';', password);
-        END $$;
-      EOF
-    '';
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     /* Enable Custom Services */
     #services.adminerevo.enable = true;
-    #services.firefly.enable = true;
+    services.firefly.enable = true;
     services.homepage.enable = true;
     #services.vaultwardenService.enable = true;
     #services.copypartyService.enable = true;
