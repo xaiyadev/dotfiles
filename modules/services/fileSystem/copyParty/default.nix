@@ -23,10 +23,10 @@ in
                 ignored-flag = false;
             };
 
-            accounts = { semiko.passwordFile = ""; };
+            accounts = { semiko.passwordFile = config.age.secrets.copyparty-semiko.path; };
 
             volumes = {
-                # Create a volume at "/raid" (cloud.semiko.dev/raid)
+                # Create a volume at "/raid" (files.semiko.dev/raid)
                 "/raid" = {
                     # this volume points to "/mnt/raid"
                     path = "/mnt/raid/";
@@ -53,16 +53,11 @@ in
 
 
         networking.firewall.allowedTCPPorts = [ 3210 ];
-        services.nginx.virtualHosts."cloud.semiko.dev" = {
+        services.nginx.virtualHosts."files.semiko.dev" = {
             addSSL = true;
             enableACME = true;
             locations."/".proxyPass = "http://127.0.0.1:3210";
-            extraConfig =
-              # required when the target is also TLS server with multiple hosts
-              "proxy_ssl_server_name on;" +
-              # required when the server wants to use HTTP Authentication
-              "proxy_pass_header Authorization;"
-              ;
+            extraConfig = "proxy_ssl_server_name on;";
         };
     };
 }

@@ -19,31 +19,27 @@ in
                 DOMAIN = "https://vault.semiko.dev";
                 SIGNUPS_ALLOWED = false;
 
-                # DATA_FOLDER = "/mnt/raid/services/vaultwarden/data/";
-                # WEB_VAULT_FOLDER = "/mnt/raid/services/vaultwarden/web-vault/";
+                # TODO: look how to save data their
+                #DATA_FOLDER = "/mnt/raid/services/vaultwarden/data/";
+                #WEB_VAULT_FOLDER = "/mnt/raid/services/vaultwarden/web-vault/";
 
-                DATABASE_URL = "postgresql://postgresql:postgresql/vaultwarden";
+                #DATABASE_URL = "/run/postgresql";
 
-                ROCKET_ADRESS = "127.0.0.1";
-                ROCKET_PORT = "9000";
-                ROCKET_LOG = "critical";
+                ROCKET_ADRESS = "[::]";
+                ROCKET_PORT = 9000;
 
                 # TODO: add Mail Server
             };
 
         };
+
         services.bitwarden-directory-connector-cli.domain = "https://vault.semiko.dev";
 
         services.nginx.virtualHosts."vault.semiko.dev" = {
-            addSSL = true;
-            enableACME = true;
-            locations."/".proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
-           extraConfig =
-             # required when the target is also TLS server with multiple hosts
-             "proxy_ssl_server_name on;" +
-             # required when the server wants to use HTTP Authentication
-             "proxy_pass_header Authorization;"
-             ;
+            forceSSL = true;
+            useACMEHost = "semiko.dev";
+            locations."/".proxyPass = "http://[::1]:9000";
+            extraConfig = "proxy_ssl_server_name on;";
         };
 
     };

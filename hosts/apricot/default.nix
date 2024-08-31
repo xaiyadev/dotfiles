@@ -30,6 +30,11 @@
         postgresql.file = ../../secrets/postgresql.age;
         cloudflare.file = ../../secrets/cloudflare.age;
         firefly.file    = ../../secrets/firefly.age;
+
+        copyparty-semiko = {
+            file = ../../secrets/copyparty-semiko.age;
+            owner = "copyparty";
+        };
     };
 
     environment.systemPackages = with pkgs; [
@@ -80,20 +85,31 @@
 
     /* Enable Database */
 
-    services.postgresql = {
+    # TODO: Add Functional Postgres Database when Passwords are save
+/*    services.postgresql = {
       enable = true;
       ensureDatabases = [ "nextcloud" "firefly" "vaultwarden" ];
-    };
+    };*/
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     /* Enable Custom Services */
+    # Adminerevo only working localy (?)
     #services.adminerevo.enable = true;
-    services.firefly.enable = true;
+
+    # Firefly Buggy, needs fixes
+    #services.firefly.enable = true;
+
     services.homepage.enable = true;
+
+    # Vaultwarden ROCKET not givin adresses
     #services.vaultwardenService.enable = true;
-    #services.copypartyService.enable = true;
+
+    # works, rejected by cors needs to be fixed!s
+    services.copypartyService.enable = true;
+
     #services.syncthingService.enable = true;
+
     # services.plex.enable = true;
 
 

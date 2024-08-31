@@ -65,17 +65,32 @@ in
             services =
             [
                 {
+                    "File Managment" =
+                    [
+
+                        {
+                            "copyParty" = {
+                                href = ''https://files.semiko.dev'';
+                                icon = ''synology-photo-station'';
+                                description = ''Manage and view Files!'';
+                            };
+                        }
+                    ];
+                }
+
+                {
                     "Remote" =
                     [
                         # CopyParty
                         # Syncthing
                         # Soft-Server (?)
                         # Plex
+
                         {
                             "Firefly 3" = {
                                 href = ''https://cash.semiko.dev'';
                                 icon = ''firefly'';
-                                description = ''Finance managment software'';
+                                description = ''Finance managment software !! NOT WORKING'';
                             };
                         }
 
@@ -83,7 +98,7 @@ in
                             "Vaultwarden" = {
                                 href = ''https://vault.semiko.dev'';
                                 icon = ''vaultwarden'';
-                                description = ''Password Manager Service'';
+                                description = ''Password Manager Service  !! NOT WORKING'';
                             };
                         }
                     ];
