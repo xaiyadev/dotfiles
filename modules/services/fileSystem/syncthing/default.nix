@@ -22,38 +22,22 @@ in
           enable = true;
           user = "syncthing";
           dataDir = "/mnt/raid/services/syncthing/default/";
-          configDir = "/mnt/raid/services/syncthing/config/";
+          #configDir = "/mnt/raid/services/syncthing/config/";
 
           # Change that in the future
           overrideDevices = true;     # overrides any devices added or deleted through the WebUI
           overrideFolders = true;     # overrides any folders added or deleted through the WebUI
 
-          settings = {
-            devices = {
-                "device1" = { id = "ADD_ID"; };
-                "device2" = { id = "ADD_ID"; };
-            };
 
-            folders = {
-                "default" = {
-                    path = "/mnt/raid/services/syncthing/default/";
-                    devices = [ "device1" "device2" ];
-                };
-            };
-          };
       };
 
       /* TODO: Check wich ports to show */
       services.nginx.virtualHosts."sync.semiko.dev" = {
           addSSL = true;
           enableACME = true;
-          locations."/".proxyPass = "http://127.0.0.1:8384";
+          locations."/".proxyPass = "http://[::1]:8384";
           extraConfig =
-            # required when the target is also TLS server with multiple hosts
-            "proxy_ssl_server_name on;" +
-            # required when the server wants to use HTTP Authentication
-            "proxy_pass_header Authorization;"
-            ;
+            "proxy_ssl_server_name on;";
       };
   };
 }

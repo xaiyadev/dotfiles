@@ -11,11 +11,14 @@ in
     config = mkIf cfg.enable {
 
 
+        networking.firewall.allowedTCPPorts = [ 8000 ];
+
 
         # Vaultwarden creates System User, no need for manual creation!
         services.vaultwarden = {
             enable = true;
             dbBackend = "sqlite";
+
 
             config = {
                 DOMAIN = "https://vault.semiko.dev";
@@ -27,19 +30,18 @@ in
 
                 #DATABASE_URL = "/run/postgresql";
 
-                ROCKET_ADRESS = "::";
-                ROCKET_PORT = 8000;
-
                 # TODO: add Mail Server
+
+                ROCKET_ENV="staging";
+                ROCKET_ADRESS="::";
+                ROCKET_PORT = 8000;
             };
 
         };
 
-        services.bitwarden-directory-connector-cli.domain = "https://vault.semiko.dev";
-
         services.nginx.virtualHosts."vault.semiko.dev" = {
-            forceSSL = true;
-            useACMEHost = "semiko.dev";
+            #forceSSL = true;
+            #useACMEHost = "semiko.dev";
             locations."/".proxyPass = "http://[::1]:8000";
             extraConfig = "proxy_ssl_server_name on;";
         };

@@ -59,6 +59,7 @@
         enable = true;
         hostName = "apricot";
     };
+
     networking.defaultGateway6 = { address = "fe80::1"; interface = "eno1"; };
 
     /* Default Settings Services */
@@ -68,7 +69,14 @@
 
 
     /* Enable NGINX */
-    services.nginx.enable = true;
+    services.nginx = {
+        enable = true;
+        recommendedGzipSettings = true;
+        recommendedOptimisation = true;
+        recommendedProxySettings = true;
+        recommendedTlsSettings = true;
+    };
+
     security.acme = {
         acceptTerms = true;
         defaults.email = "danil80sch@gmail.com";
@@ -94,23 +102,22 @@
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     /* Enable Custom Services */
-    # Adminerevo only working localy (?)
-    #services.adminerevo.enable = true;
 
-    # Firefly Buggy, needs fixes
+    # TODO: fix these Services ALL WEB NOT WORKING GOD DAAAMAMN
     #services.firefly.enable = true;
-
-    services.homepage.enable = true;
-
-    # Vaultwarden ROCKET not givin adresses
-    services.vaultwardenService.enable = true;
+    #services.vaultwardenService.enable = true;
+    #services.adminerevo.enable = true;
+    #services.syncthingService.enable = true;
 
     # works, rejected by cors needs to be fixed!s
     services.copypartyService.enable = true;
 
-    #services.syncthingService.enable = true;
+    services.homepage.enable = true;
 
     # services.plex.enable = true;
+
+
+
 
 
     system.stateVersion = "23.11";
