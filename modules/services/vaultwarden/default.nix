@@ -10,6 +10,8 @@ in
 
     config = mkIf cfg.enable {
 
+
+
         # Vaultwarden creates System User, no need for manual creation!
         services.vaultwarden = {
             enable = true;
@@ -25,8 +27,8 @@ in
 
                 #DATABASE_URL = "/run/postgresql";
 
-                ROCKET_ADRESS = "[::]";
-                ROCKET_PORT = 9000;
+                ROCKET_ADRESS = "::";
+                ROCKET_PORT = 8000;
 
                 # TODO: add Mail Server
             };
@@ -38,7 +40,7 @@ in
         services.nginx.virtualHosts."vault.semiko.dev" = {
             forceSSL = true;
             useACMEHost = "semiko.dev";
-            locations."/".proxyPass = "http://[::1]:9000";
+            locations."/".proxyPass = "http://[::1]:8000";
             extraConfig = "proxy_ssl_server_name on;";
         };
 

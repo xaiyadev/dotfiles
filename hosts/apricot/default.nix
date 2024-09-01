@@ -103,7 +103,7 @@
     services.homepage.enable = true;
 
     # Vaultwarden ROCKET not givin adresses
-    #services.vaultwardenService.enable = true;
+    services.vaultwardenService.enable = true;
 
     # works, rejected by cors needs to be fixed!s
     services.copypartyService.enable = true;
