@@ -106,7 +106,6 @@
           ];
         };
 
-        /* Virt-machine for transforming my ubuntu Server into a NixOS server */
         nixosConfigurations.server = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; inherit copyparty; };
@@ -131,6 +130,35 @@
 
               home-manager.users.semiko = {
                 imports = [ ./users/semiko/home/server.nix ];
+              };
+            }
+          ];
+        };
+
+        nixosConfigurations.pi = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; inherit copyparty; };
+        modules = [
+          ./hosts/raspberry
+
+          # User import
+          ./users/semiko
+
+          catppuccin.nixosModules.catppuccin
+          agenix.nixosModules.default
+          copyparty.nixosModules.default
+
+
+          home-manager.nixosModules.home-manager
+            {
+              home-manager.backupFileExtension = "backup";
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.extraSpecialArgs = inputs;
+
+              home-manager.users.semiko = {
+                imports = [ ./users/semiko/home ];
               };
             }
           ];

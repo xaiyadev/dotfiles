@@ -32,7 +32,7 @@
 
         # School :3
         teams-for-linux
-
+	obsidian
 
    ];
    services.spotify.enable = true;
