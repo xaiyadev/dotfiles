@@ -6,6 +6,13 @@ in
 {
     options.services.firefly = {
         enable = mkEnableOption "custom firefly service";
+
+        asDockerContainer = mkOption {
+            type = types.bool;
+            default = false;
+            example = true;
+            description = "should this service run as a docker container or not";
+        };
     };
 
     config = mkIf cfg.enable {
@@ -21,7 +28,7 @@ in
 
 
     services.firefly-iii = {
-        enable = true;
+        enable = !cfg.asDockerContainer;
         enableNginx = true;
         #dataDir = "/mnt/raid/services/firefly/";
         group = "firefly";
@@ -41,10 +48,21 @@ in
         };
     };
 
+      /* --- Docker container --- */
+      systemd.services.firefly-compose = {
+          enable = cfg.asDockerContainer;
+          wantedBy = ["multi-user.target"];
+          after = ["docker.service" "docker.socket"];
+          path = [ pkgs.docker ];
+
+          script = ''docker compose -f ${./docker-compose.yml} --env-file ${config.age.secrets.firefly.path} up'';
+      };
+
+    networking.firewall.allowedTCPPorts = [ 8023 ];
     services.nginx.virtualHosts."cash.semiko.dev" = {
         forceSSL = true;
         useACMEHost = "semiko.dev";
-        locations."/".proxyPass = "http://[::1]:8080";
+        locations."/".proxyPass = "http://127.0.0.1:8023";
         extraConfig = "proxy_ssl_server_name on;";
     };
   };

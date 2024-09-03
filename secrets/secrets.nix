@@ -22,8 +22,11 @@ in
 {
     # Services API Keys and Passwords
     "postgresql.age".publicKeys = allKeys;
-    "firefly.age".publicKeys = allKeys;
+
+    "firefly.env.age".publicKeys = allKeys;
+
     "copyparty-semiko.age".publicKeys = allKeys;
+    "copyparty-sergej.age".publicKeys = allKeys;
 
     # Certifcate and Domain related things
     "cloudflare.age".publicKeys = allKeys;

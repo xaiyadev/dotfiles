@@ -1,0 +1,13 @@
+version: "3"
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: no
+    ports:
+      - 9445:80
+    volumes:
+      - /mnt/raid/services/vaultwarden/data:/data:rw
+    environment:
+      - SIGNUPS_ALLOWED=false
+      - DOMAIN=https://vault.semiko.dev

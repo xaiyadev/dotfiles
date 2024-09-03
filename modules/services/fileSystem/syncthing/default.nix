@@ -6,6 +6,13 @@ in
 {
     options.services.syncthingService = {
         enable = mkEnableOption "custom syncthingService service";
+
+        asDockerContainer = mkOption {
+            type = types.bool;
+            default = false;
+            example = true;
+            description = "should this service run as a docker container or not";
+        };
     };
 
     config = mkIf cfg.enable {
@@ -19,16 +26,25 @@ in
       # Account will be created from service
 
       services.syncthing = {
-          enable = true;
+          enable = !cfg.asDockerContainer;
           user = "syncthing";
           dataDir = "/mnt/raid/services/syncthing/default/";
           #configDir = "/mnt/raid/services/syncthing/config/";
 
           # Change that in the future
-          overrideDevices = true;     # overrides any devices added or deleted through the WebUI
           overrideFolders = true;     # overrides any folders added or deleted through the WebUI
 
 
+      };
+
+      /* --- Docker container --- */
+      systemd.services.syncthing-compose = {
+          enable = cfg.asDockerContainer;
+          wantedBy = ["multi-user.target"];
+          after = ["docker.service" "docker.socket"];
+          path = [ pkgs.docker ];
+
+          script = ''docker compose -f ${./docker-compose.yml} up '';
       };
 
       /* TODO: Check wich ports to show */

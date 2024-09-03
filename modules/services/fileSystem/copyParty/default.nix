@@ -23,7 +23,10 @@ in
                 ignored-flag = false;
             };
 
-            accounts = { semiko.passwordFile = config.age.secrets.copyparty-semiko.path; };
+            accounts = {
+                semiko.passwordFile = config.age.secrets.copyparty-semiko.path;
+                sergej.passwordFile = config.age.secrets.copyparty-sergej.path;
+             };
 
             volumes = {
                 # Create a volume at "/raid" (files.semiko.dev/raid)
@@ -32,7 +35,7 @@ in
                     path = "/mnt/raid/";
 
                     access = {
-                        rw = [ "semiko" ];
+                        rw = [ "semiko" "sergej" ];
                     };
 
                     flags = {

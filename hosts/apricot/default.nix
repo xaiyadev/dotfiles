@@ -29,10 +29,15 @@
     age.secrets = {
         postgresql.file = ../../secrets/postgresql.age;
         cloudflare.file = ../../secrets/cloudflare.age;
-        firefly.file    = ../../secrets/firefly.age;
+        firefly.file    = ../../secrets/firefly.env.age;
 
         copyparty-semiko = {
             file = ../../secrets/copyparty-semiko.age;
+            owner = "copyparty";
+        };
+
+        copyparty-sergej = {
+            file = ../../secrets/copyparty-sergej.age;
             owner = "copyparty";
         };
     };
@@ -103,19 +108,32 @@
 
     /* Enable Custom Services */
 
+    services.docker.enable = true;
+
+
     # TODO: fix these Services ALL WEB NOT WORKING GOD DAAAMAMN
-    #services.firefly.enable = true;
-    #services.vaultwardenService.enable = true;
-    #services.adminerevo.enable = true;
-    #services.syncthingService.enable = true;
+    services.vaultwardenService = {
+        enable = true;
+        asDockerContainer = true;
+    };
 
-    # works, rejected by cors needs to be fixed!s
+    # TODO: Needs fix.
+    services.firefly = {
+        enable = true;
+        asDockerContainer = true;
+    };
+
+    services.syncthingService = {
+        enable = true;
+        asDockerContainer = true;
+    };
+
     services.copypartyService.enable = true;
-
     services.homepage.enable = true;
 
     # services.plex.enable = true;
-
+    #services.adminerevo.enable = true;
+    #services.soft-serve.enable = true;
 
 
 
