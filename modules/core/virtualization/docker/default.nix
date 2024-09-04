@@ -9,9 +9,9 @@ in
     };
 
     config = mkIf cfg.enable {
-        virtualisation.docker = {
-            enable = true;
-            enableOnBoot = true;
+        virtualisation = {
+            oci-containers.backend = "docker";
+            docker.enable = true;
         };
     };
 }

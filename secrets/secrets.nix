@@ -23,6 +23,8 @@ in
     # Services API Keys and Passwords
     "postgresql.age".publicKeys = allKeys;
 
+    "vaultwarden.env.age".publicKeys = allKeys;
+
     "firefly.env.age".publicKeys = allKeys;
 
     "copyparty-semiko.age".publicKeys = allKeys;

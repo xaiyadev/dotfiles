@@ -29,7 +29,9 @@
     age.secrets = {
         postgresql.file = ../../secrets/postgresql.age;
         cloudflare.file = ../../secrets/cloudflare.age;
+
         firefly.file    = ../../secrets/firefly.env.age;
+        vaultwarden.file    = ../../secrets/vaultwarden.env.age;
 
         copyparty-semiko = {
             file = ../../secrets/copyparty-semiko.age;
@@ -118,10 +120,10 @@
     };
 
     # TODO: Needs fix.
-    services.firefly = {
+    /*services.firefly = {
         enable = true;
         asDockerContainer = true;
-    };
+    };*/
 
     services.syncthingService = {
         enable = true;

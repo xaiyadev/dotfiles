@@ -41,18 +41,26 @@ in
                         ROCKET_ADRESS="::";
                         ROCKET_PORT = 9445;
                     };
-
-                };
-
-            /* --- Docker container --- */
-            systemd.services.vaultwarden-compose = {
-                enable = cfg.asDockerContainer;
-                wantedBy = ["multi-user.target"];
-                after = ["docker.service" "docker.socket"];
-                path = [ pkgs.docker ];
-
-                script = ''docker compose -f ${./docker-compose.yml} up '';
             };
+
+          /* --- Docker container --- */
+          virtualisation.oci-containers.containers.vaultwarden = mkIf cfg.asDockerContainer {
+                image = "vaultwarden/server";
+                autoStart = true;
+                hostname = "apricot";
+                volumes =
+                [
+                    "/mnt/raid/services/vaultwarden/data:/data:rw"
+                    #"/mnt/raid/services/vaultwarden/web-vault:/web-vault:rw"
+                ];
+                ports =
+                [
+                    "9445:80" # WEB-UI
+                ];
+                environmentFiles = [
+                    config.age.secrets.vaultwarden.path
+                ];
+          };
 
 
 

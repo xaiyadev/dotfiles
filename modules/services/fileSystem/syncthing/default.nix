@@ -38,13 +38,22 @@ in
       };
 
       /* --- Docker container --- */
-      systemd.services.syncthing-compose = {
-          enable = cfg.asDockerContainer;
-          wantedBy = ["multi-user.target"];
-          after = ["docker.service" "docker.socket"];
-          path = [ pkgs.docker ];
-
-          script = ''docker compose -f ${./docker-compose.yml} up '';
+      virtualisation.oci-containers.containers.syncthing = mkIf cfg.asDockerContainer {
+            image = "syncthing/syncthing";
+            autoStart = true;
+            hostname = "apricot";
+            volumes =
+            [
+                "/mnt/raid/services/syncthing/config:/var/syncthing/config"
+                "/mnt/raid/:/var/syncthing"
+            ];
+            ports =
+            [
+                "8384:8384" # Web UI
+                "22000:22000/tcp" # TCP file transfers
+                "22000:22000/udp" # QUIC file transfers
+                "21027:21027/udp" # Receive local discovery broadcasts
+            ];
       };
 
       /* TODO: Check wich ports to show */
