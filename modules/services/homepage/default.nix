@@ -72,7 +72,15 @@ in
                             "copyParty" = {
                                 href = ''https://files.semiko.dev'';
                                 icon = ''synology-photo-station'';
-                                description = ''Manage and view Files!'';
+                                description = ''Manage and view Files! // Searching for replacment!'';
+                            };
+                        }
+
+                        {
+                            "Syncthing" = {
+                                href = ''https://sync.semiko.dev'';
+                                icon = ''syncthing'';
+                                description = ''Sync Files Remotely!'';
                             };
                         }
                     ];
@@ -90,7 +98,7 @@ in
                             "Firefly 3" = {
                                 href = ''https://cash.semiko.dev'';
                                 icon = ''firefly'';
-                                description = ''Finance managment software !! NOT WORKING'';
+                                description = ''Finance managment software'';
                             };
                         }
 
@@ -98,7 +106,7 @@ in
                             "Vaultwarden" = {
                                 href = ''https://vault.semiko.dev'';
                                 icon = ''vaultwarden'';
-                                description = ''Password Manager Service  !! NOT WORKING'';
+                                description = ''Password Manager Service'';
                             };
                         }
                     ];
@@ -118,17 +126,7 @@ in
                                 ping = "http://192.168.1.1/";
                             };
                         }
-
-/*                        {
-                            "Adminerevo" = {
-                                href = ''http://192.168.1.126:8000/'';
-                                icon = ''sqlitebrowser'';
-                                description = ''Check database and maintain it'';
-                                ping = "http://192.168.1.126:8000/";
-                            };
-                        }*/
                     ];
-                    # Adminer
                 }
             ];
 

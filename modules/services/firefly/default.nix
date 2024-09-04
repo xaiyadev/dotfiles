@@ -17,16 +17,6 @@ in
 
     config = mkIf cfg.enable {
 
-    users.groups.firefly = {};
-    users.users.firefly = {
-        isSystemUser = true;
-        initialPassword = "firefly";
-        description = "Firefly";
-        extraGroups = [ "networkmanager" ];
-        group = "firefly"; # Firefly requirs you to add this group this way
-    };
-
-
     services.firefly-iii = {
         enable = !cfg.asDockerContainer;
         enableNginx = true;
@@ -48,15 +38,66 @@ in
         };
     };
 
-      /* --- Docker container --- */
-      systemd.services.firefly-compose = {
-          enable = cfg.asDockerContainer;
-          wantedBy = ["multi-user.target"];
-          after = ["docker.service" "docker.socket"];
-          path = [ pkgs.docker ];
-
-          script = ''docker compose -f ${./docker-compose.yml} --env-file ${config.age.secrets.firefly.path} up'';
+      systemd.services = {
+          firefly-network = {
+                description = "Create the network bridge for firefly.";
+                after = [ "network.target" ];
+                wantedBy = [ "multi-user.target" ];
+                serviceConfig.Type = "oneshot";
+                script = ''
+                      check=$(${pkgs.docker}/bin/docker network ls | grep "firefly" || true)
+                  if [ -z "$check" ]; then
+                    ${pkgs.docker}/bin/docker network create firefly
+                  else
+                    echo "Firefly network already exists in docker!"
+                  fi
+                '';
+          };
       };
+
+      virtualisation.oci-containers = mkIf cfg.asDockerContainer {
+            containers = {
+                firefly-app = {
+                  image = "fireflyiii/core";
+                  autoStart = true;
+                  hostname = "app";
+                  dependsOn = [ "firefly-db" ];
+                  extraOptions = [ "--network=firefly" ];
+
+                  volumes =
+                  [
+                      "/mnt/raid/services/firefly/upload:/var/www/html/storage/upload:rw"
+                  ];
+
+                  ports =
+                  [
+                      "8023:8080" # WEB-UI
+                  ];
+
+                  environmentFiles = [
+                      config.age.secrets.firefly.path
+                  ];
+                };
+
+                firefly-db = {
+                  image = "mariadb";
+                  autoStart = true;
+                  hostname = "db";
+                  extraOptions = [ "--network=firefly" ];
+
+                  volumes =
+                    [
+                        "/mnt/raid/services/firefly/database:/var/lib/mysql:rw"
+                    ];
+
+                  environmentFiles = [
+                      config.age.secrets.firefly.path
+                  ];
+
+                };
+            };
+
+        };
 
     networking.firewall.allowedTCPPorts = [ 8023 ];
     services.nginx.virtualHosts."cash.semiko.dev" = {

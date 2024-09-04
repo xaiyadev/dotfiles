@@ -49,14 +49,15 @@ in
                 autoStart = true;
                 hostname = "apricot";
                 volumes =
-                [
-                    "/mnt/raid/services/vaultwarden/data:/data:rw"
-                    #"/mnt/raid/services/vaultwarden/web-vault:/web-vault:rw"
-                ];
+                    [
+                        "/mnt/raid/services/vaultwarden/data:/data:rw"
+                        #"/mnt/raid/services/vaultwarden/web-vault:/web-vault:rw"
+                    ];
                 ports =
-                [
-                    "9445:80" # WEB-UI
-                ];
+                    [
+                        "9445:80" # WEB-UI
+                    ];
+
                 environmentFiles = [
                     config.age.secrets.vaultwarden.path
                 ];

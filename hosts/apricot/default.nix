@@ -9,10 +9,9 @@
       ../../modules/core/zsh
 
       ../../modules/services/adminerevo
-      ../../modules/services/fileSystem/copyParty
       ../../modules/services/fileSystem/syncthing
       ../../modules/services/firefly
-      ../../modules/services/git
+      ../../modules/services/soft-serve
       ../../modules/services/homepage
       ../../modules/services/mail
       ../../modules/services/plex
@@ -27,21 +26,12 @@
 
     # Load all age Keys
     age.secrets = {
-        postgresql.file = ../../secrets/postgresql.age;
-        cloudflare.file = ../../secrets/cloudflare.age;
+        cloudflare.file = ../../secrets/cloudflare.env.age;
 
-        firefly.file    = ../../secrets/firefly.env.age;
-        vaultwarden.file    = ../../secrets/vaultwarden.env.age;
+        firefly.file     = ../../secrets/firefly.env.age;
+        vaultwarden.file = ../../secrets/vaultwarden.env.age;
+        soft-serve.file  = ../../secrets/soft-serve.env.age;
 
-        copyparty-semiko = {
-            file = ../../secrets/copyparty-semiko.age;
-            owner = "copyparty";
-        };
-
-        copyparty-sergej = {
-            file = ../../secrets/copyparty-sergej.age;
-            owner = "copyparty";
-        };
     };
 
     environment.systemPackages = with pkgs; [
@@ -98,45 +88,36 @@
 
     /* --- */
 
-    /* Enable Database */
-
-    # TODO: Add Functional Postgres Database when Passwords are save
-/*    services.postgresql = {
-      enable = true;
-      ensureDatabases = [ "nextcloud" "firefly" "vaultwarden" ];
-    };*/
-
     networking.firewall.allowedTCPPorts = [ 80 443 ];
-
     /* Enable Custom Services */
 
     services.docker.enable = true;
-
-
-    # TODO: fix these Services ALL WEB NOT WORKING GOD DAAAMAMN
     services.vaultwardenService = {
         enable = true;
         asDockerContainer = true;
     };
 
-    # TODO: Needs fix.
-    /*services.firefly = {
+    services.firefly = {
         enable = true;
         asDockerContainer = true;
-    };*/
+    };
 
     services.syncthingService = {
         enable = true;
         asDockerContainer = true;
     };
 
-    services.copypartyService.enable = true;
+
+    /* TODO: a bit complicated :/ */
+/*    services.soft-serve-services = {
+        enable = true;
+        asDockerContainer = true;
+    };*/
+
+
     services.homepage.enable = true;
 
     # services.plex.enable = true;
-    #services.adminerevo.enable = true;
-    #services.soft-serve.enable = true;
-
 
 
 

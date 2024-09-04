@@ -20,7 +20,7 @@ in
 
             ohMyZsh = {
               enable = true;
-              plugins = [ "git" ];
+              plugins = [ "soft-serve" ];
               theme = "agnoster";
             };
 

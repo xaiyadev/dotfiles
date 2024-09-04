@@ -20,16 +20,12 @@ let
    allKeys = userKeys ++ systemKeys;
 in
 {
-    # Services API Keys and Passwords
-    "postgresql.age".publicKeys = allKeys;
-
+    # Env Files
     "vaultwarden.env.age".publicKeys = allKeys;
-
     "firefly.env.age".publicKeys = allKeys;
+    "soft-serve.env.age".publicKeys = allKeys;
 
-    "copyparty-semiko.age".publicKeys = allKeys;
-    "copyparty-sergej.age".publicKeys = allKeys;
 
     # Certifcate and Domain related things
-    "cloudflare.age".publicKeys = allKeys;
+    "cloudflare.env.age".publicKeys = allKeys;
 }
