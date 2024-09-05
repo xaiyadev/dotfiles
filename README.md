@@ -1,31 +1,20 @@
-# Breaking's Nixos Configuration! (v2)
-v2 of my Nixos Configuration. Rewritten and more organized!
+# Breaking's Nixos Configuration! Now (again) rewritten! (v3)
+v3 of my Nixos Configuration. Rewritten and more organized!
 
-## Difference between v1 and v2
-- A new and more Organized File Structure
-- More automized installation
-- Better written nix files
-
-## User and System Information
 > [!NOTE]
-> Not every System will have the same Users or Setup, because I sometimes don't need to have some accounts on different Systems...
+> This configuration will continue to grow, and with it this README!
+> This is not the end yet...
 
-There will be 2 Users:
-- Semiko - The Main Account, where all private things happen
-- Workaholic - All Work related projects
-
-
+## Difference between v2 and v3
+- Snowflake lib usage
+- I learned more and more in my v2 Configuration, and now I can optimize it here!
+- git actions, and more new functions!
 
 ## Installation
 
 ### Rebuild commands
 > [!WARNING]
 > If you get the error "cant install not pure..." then use the `--impure` argument
-
-This process requirs you to have nixos already installed and flakes supported
-- `sudo nixos-rebuild switch --flake .#laptop` Rebuild configuration for laptop systems
-- `sudo nixos-rebuild switch --flake .#tower` Rebuid configuration for tower
-- `sudo nixos-rebuild switch --flake .#server` Rebuild configuration for Server
 
 ### Other ways to install
 > [!IMPORTANT]
