@@ -108,13 +108,6 @@
     };
 
 
-    /* TODO: a bit complicated :/ */
-/*    services.soft-serve-services = {
-        enable = true;
-        asDockerContainer = true;
-    };*/
-
-
     services.homepage.enable = true;
 
     # services.plex.enable = true;

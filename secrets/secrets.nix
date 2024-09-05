@@ -23,7 +23,6 @@ in
     # Env Files
     "vaultwarden.env.age".publicKeys = allKeys;
     "firefly.env.age".publicKeys = allKeys;
-    "soft-serve.env.age".publicKeys = allKeys;
 
 
     # Certifcate and Domain related things
