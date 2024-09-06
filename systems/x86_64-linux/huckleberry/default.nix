@@ -24,18 +24,17 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  boot.supportedFilesystems = [ "ntfs" ];
-  boot.loader = {
-  efi.canTouchEfiVariables = true;
+  ${namespace} = {
+    desktop.gnome.enable = true;
 
-  grub = {
-    enable = true;
-    device = "nodev";
-    efiSupport = true;
-    useOSProber = true;
+    common = {
+      grub.enable = true;
+      ssh.enable = true;
+      nix.enable = true;
+      locale.enable = true;
+      networking.enable = true;
     };
   };
-
 
   system.stateVersion = "24.11";
 }

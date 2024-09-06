@@ -12,6 +12,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    catppuccin.url = "github:catppuccin/nix";
+
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
@@ -25,6 +33,8 @@
 
       # configure snowfall settings!
       snowfall = {
+        namespace = "semiko"; 
+
         # Adds flake Metada
         meta = {
           name = "breakings-awesome-dotfiles";
@@ -32,14 +42,17 @@
         };
       };
 
-      nix.settings = {
-        auto-optimise-store = true;
-        builders-use-substitutes = true;
-        experimental-features = [ "nix-command" "flakes" ];
-        keep-derivations = true;
-        keep-outputs = true;
-        max-jobs = "auto";
-        warn-dirty = false;
+      systems.hosts.huckleberry.modules = with inputs; [
+        catppuccin.nixosModules.catppuccin
+      ];
+
+      homes.users."semiko@huckleberry".modules = with inputs; [
+        catppuccin.homeManagerModules.catppuccin
+      ];
+
+      systems.hosts.huckleberry.specialArgs = {
+          host-name = "huckleberry";
+          cattpuccin.flavor = "mocha";
       };
 
     };
