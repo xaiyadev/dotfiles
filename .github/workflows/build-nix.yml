@@ -1,4 +1,4 @@
-name: "Test"
+name: "Build Nix!"
 on:
   pull_request:
   push:
@@ -10,5 +10,4 @@ jobs:
       - uses: cachix/install-nix-action@v27
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - run: nix build
-      - run: nix flake check
+      - run: nixos-rebuild --flake .#huckleberry
