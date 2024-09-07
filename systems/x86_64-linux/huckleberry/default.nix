@@ -28,13 +28,20 @@
     desktop.gnome.enable = true;
 
     common = {
+      locale.enable = true;
+      nix.enable = true;
+      secrets.enable = true;
+
       grub.enable = true;
       ssh.enable = true;
-      nix.enable = true;
-      locale.enable = true;
       networking.enable = true;
     };
   };
+
+  # Needs to be installen globally...
+  # TODO: understand how aagl wants you to use flakes with home-manager
+  programs.anime-game-launcher.enable = true;
+  programs.sleepy-launcher.enable = true;
 
   system.stateVersion = "24.11";
 }

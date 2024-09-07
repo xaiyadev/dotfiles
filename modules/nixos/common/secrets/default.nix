@@ -16,18 +16,17 @@
 }:
 with lib;
 let
-    cfg = config.${namespace}.programs.vesktop;
+    cfg = config.${namespace}.common.secrets;
 in
 {
-    options.${namespace}.programs.vesktop = {
-        enable = mkEnableOption "Install and setup vesktop";
-    };
+    options.${namespace}.common.secrets = {
+        enable = mkEnableOption "Load all Age Keys; Deactivate if you have no SSH Keys...";
 
-    config = mkIf cfg.enable {
-         home.file.".config/vesktop/themes/mocha.theme.css".source = ./themes/mocha.theme.css;
-
-        home.packages = with pkgs; [
-            vesktop
-        ];
     };
+  config = mkIf cfg.enable {
+    # TODO: use "lib.snowfall.fs.get-file" if it works someday...
+    age.secrets = {
+        wifi-profiles.file =  ../../../../secrets/wifi-profiles.env.age;
+    };
+  };
 }

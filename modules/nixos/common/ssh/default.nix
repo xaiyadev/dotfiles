@@ -30,8 +30,8 @@ in
       services.openssh = {
         enable = true;
         knownHosts = {
-          "192.168.1.126".publicKey = ./pubFiles/apricot_ssh_host.pub;
-          "github.com".publicKey = ./pubFiles/github_ssh_host.pub;
+          "192.168.1.126".publicKeyFile = ./pubFiles/apricot_ssh_host.pub;
+          "github.com".publicKeyFile = ./pubFiles/github_ssh_host.pub;
         };
       };
     };

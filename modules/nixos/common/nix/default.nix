@@ -24,14 +24,29 @@ in
 
     };
   config = mkIf cfg.enable {
-    nix.settings = {
-      auto-optimise-store = true;
-      builders-use-substitutes = true;
-      experimental-features = [ "nix-command" "flakes" ];
-      keep-derivations = true;
-      keep-outputs = true;
-      max-jobs = "auto";
-      warn-dirty = false;
+    nix = {
+      settings = {
+        substituters = [ "https://ezkea.cachix.org" ];
+        trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
+
+        experimental-features = [ "nix-command" "flakes" ];
+        builders-use-substitutes = true;
+        auto-optimise-store = true;
+        keep-derivations = true;
+        keep-outputs = true;
+        warn-dirty = false;
+        max-jobs = "auto";
+      };
+
+      # Garbage collection configuration.
+      gc = {
+        automatic = true;
+        dates = "daily";
+        options = "--delete-older-than 3d";
+      };
+
     };
+
+
   };
 }

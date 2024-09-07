@@ -12,11 +12,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    aagl = {
+      url = "github:ezKEa/aagl-gtk-on-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    agenix.url = "github:ryantm/agenix";
 
     catppuccin.url = "github:catppuccin/nix";
 
@@ -42,11 +48,13 @@
         };
       };
 
-      systems.hosts.huckleberry.modules = with inputs; [
+      systems.modules.nixos = with inputs; [
         catppuccin.nixosModules.catppuccin
+        agenix.nixosModules.default
+        aagl.nixosModules.default
       ];
 
-      homes.users."semiko@huckleberry".modules = with inputs; [
+      homes.modules = with inputs; [
         catppuccin.homeManagerModules.catppuccin
       ];
 

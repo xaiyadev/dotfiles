@@ -51,9 +51,4 @@ in
             ];
        };
     };
-
-
-    options.${namespace}.programs.spotify = {
-        enable = mkEnableOption "Install and setup spotify";
-    };
 }

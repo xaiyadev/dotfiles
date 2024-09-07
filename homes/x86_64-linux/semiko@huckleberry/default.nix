@@ -18,17 +18,16 @@
     # All other arguments come from the home home.
     config,
     ...
-}:
-{
+}: {
      home.packages = with pkgs; [
        obsidian
        jetbrains.webstorm
 
-       # TODO: Add AAGL
+       /* --- Games --- */
        steam
      ];
 
-    # TODO: infinite loop when using ${namespace}
+    # TODO: infinite loop when using ${namespace} (?)
     semiko = {
       desktop.dconf.enable = true;
 
@@ -36,8 +35,14 @@
         spotify.enable = true;
         vesktop.enable = true;
       };
+
+      tools = {
+        git.enable = true;
+        zsh.enable = true;
+      };
     };
 
+     # Will be created here, makes it easier with extension managment
      programs.chromium = {
          enable = true;
 
