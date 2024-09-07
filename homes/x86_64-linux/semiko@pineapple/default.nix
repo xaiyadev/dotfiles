@@ -22,12 +22,12 @@
      home.packages = with pkgs; [
        obsidian
        jetbrains.webstorm
+       teams-for-linux
 
        /* --- Games --- */
        steam
      ];
 
-    # TODO: infinite loop when using ${namespace} (?)
     semiko = {
       desktop.dconf.enable = true;
 

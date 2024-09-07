@@ -21,13 +21,10 @@
 }: {
      home.packages = with pkgs; [
        obsidian
-       jetbrains.webstorm
-
-       /* --- Games --- */
-       steam
+       jetbrains.phpstorm
+       teams-for-linux
      ];
 
-    # TODO: infinite loop when using ${namespace} (?)
     semiko = {
       desktop.dconf.enable = true;
 
@@ -37,7 +34,10 @@
       };
 
       tools = {
-        git.enable = true;
+        git = {
+          enable = true;
+          email = "d.schumin@blmedia.de";
+        };
         zsh.enable = true;
       };
     };
@@ -50,6 +50,9 @@
             { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
             { id = "oldceeleldhonbafppcapldpdifcinji"; } # Language Tool
             { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
+
+            { id = "kmcfomidfpdkfieipokbalgegidffkal"; } # enpass
+
 
             { id = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; } # catppuccin Theme
          ];

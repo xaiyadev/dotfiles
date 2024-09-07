@@ -20,24 +20,14 @@
     ...
 }: {
      home.packages = with pkgs; [
-       obsidian
-       jetbrains.webstorm
-
-       /* --- Games --- */
-       steam
+       onlyoffice-bin
+       zoom-us
      ];
 
-    # TODO: infinite loop when using ${namespace} (?)
     semiko = {
       desktop.dconf.enable = true;
 
-      programs = {
-        spotify.enable = true;
-        vesktop.enable = true;
-      };
-
       tools = {
-        git.enable = true;
         zsh.enable = true;
       };
     };
@@ -47,10 +37,6 @@
          enable = true;
 
          extensions = [
-            { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
-            { id = "oldceeleldhonbafppcapldpdifcinji"; } # Language Tool
-            { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
-
             { id = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; } # catppuccin Theme
          ];
 

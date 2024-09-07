@@ -22,7 +22,7 @@ in
     options.${namespace}.common.networking = {
         enable = mkEnableOption "Setup Locale settings; time/keyboard etc.";
 
-        enableWIFI = mkIf {
+        enableWIFI = mkOption {
           type = types.bool;
           default = false;
           example = true;
