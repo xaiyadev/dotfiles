@@ -56,6 +56,6 @@
 
          dictionaries = with pkgs.hunspellDictsChromium; [ en_US de_DE ];
      };
-
-    home.stateVersion = "24.05";
+    
+      home.stateVersion = "24.05";
 }

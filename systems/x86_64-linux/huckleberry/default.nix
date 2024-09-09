@@ -43,5 +43,6 @@
   programs.anime-game-launcher.enable = true;
   programs.sleepy-launcher.enable = true;
 
+  home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";
 }

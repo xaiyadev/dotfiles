@@ -38,5 +38,6 @@
     # TODO: add services for server
   };
 
+  home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";
 }
