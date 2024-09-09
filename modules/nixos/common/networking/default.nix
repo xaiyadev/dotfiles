@@ -31,15 +31,20 @@ in
     };
 
     config = mkIf cfg.enable {
+        /* Only fix right now, else it would add automaticly not wanted DNS */
+        environment.etc."resolv.conf".text =  "nameserver 1.1.1.1\nnameserver 8.8.8.8\noptions single-request edns0";
         networking = {
+/*            resolvconf = {
+                enable = true;
+                dnsSingleRequest = true;
+            };*/
+
+
             hostName = specialArgs.host-name;
             nameservers = [ "1.1.1.1" "8.8.8.8" ];
 
 
-            resolvconf = {
-                enable = true;
-                dnsSingleRequest = true;
-            };
+
 
             firewall.enable = true;
             networkmanager = {
