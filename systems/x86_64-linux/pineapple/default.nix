@@ -24,6 +24,14 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
+	users.defaultUserShell = pkgs.zsh;
+	environment.shells = [ pkgs.zsh ];
+	programs.zsh.enable = true; # Special treatment or something idk ._.
+
+  environment.systemPackages = with pkgs; [
+    vim
+  ];
+
   ${namespace} = {
     desktop.gnome.enable = true;
 
@@ -33,7 +41,10 @@
       secrets.enable = true;
 
       grub.enable = true;
+
       ssh.enable = true;
+      zsh.enable = true;
+
       networking = {
         enable = true;
         enableWIFI = true;

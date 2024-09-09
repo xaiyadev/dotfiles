@@ -38,7 +38,6 @@
           enable = true;
           email = "d.schumin@blmedia.de";
         };
-        zsh.enable = true;
       };
     };
 

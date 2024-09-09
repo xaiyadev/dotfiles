@@ -52,6 +52,15 @@ in {
             enable = true;
             flavor = specialArgs.cattpuccin.flavor;
           };
+
+          extraEntries = ''
+            menuentry "Reboot" {
+              reboot
+            }
+            menuentry "Poweroff" {
+              halt
+            }
+          '';
         };
       };
   };

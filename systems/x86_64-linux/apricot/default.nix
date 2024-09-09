@@ -24,6 +24,10 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
+  environment.systemPackages = with pkgs; [
+    vim
+  ];
+
   ${namespace} = {
     common = {
       locale.enable = true;
@@ -31,8 +35,11 @@
       secrets.enable = true;
 
       grub.enable = true;
-      ssh.enable = true;
       networking.enable = true;
+
+      ssh.enable = true;
+      zsh.enable = true;
+
     };
 
     # TODO: add services for server

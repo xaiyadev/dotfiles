@@ -26,22 +26,20 @@
 
     semiko = {
       desktop.dconf.enable = true;
-
-      tools = {
-        zsh.enable = true;
-      };
     };
 
-     # Will be created here, makes it easier with extension managment
-     programs.chromium = {
-         enable = true;
 
-         extensions = [
-            { id = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; } # catppuccin Theme
-         ];
 
-         dictionaries = with pkgs.hunspellDictsChromium; [ en_US de_DE ];
-     };
+    # Will be created here, makes it easier with extension managment
+    programs.chromium = {
+      enable = true;
+
+      extensions = [
+        { id = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; } # catppuccin Theme
+      ];
+
+     dictionaries = with pkgs.hunspellDictsChromium; [ en_US de_DE ];
+    };
 
     home.stateVersion = "24.05";
 }

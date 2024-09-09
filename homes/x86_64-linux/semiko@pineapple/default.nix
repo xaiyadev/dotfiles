@@ -38,7 +38,6 @@
 
       tools = {
         git.enable = true;
-        zsh.enable = true;
       };
     };
 

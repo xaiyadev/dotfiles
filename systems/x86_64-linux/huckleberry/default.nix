@@ -24,6 +24,10 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
+  environment.systemPackages = with pkgs; [
+    vim
+  ];
+
   ${namespace} = {
     desktop.gnome.enable = true;
 
@@ -32,8 +36,14 @@
       nix.enable = true;
       secrets.enable = true;
 
-      grub.enable = true;
+      grub = {
+        enable = true;
+        windowsSupport = true;
+      };
+
       ssh.enable = true;
+      zsh.enable = true;
+
       networking.enable = true;
     };
   };
