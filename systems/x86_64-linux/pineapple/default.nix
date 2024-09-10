@@ -30,6 +30,7 @@
 
   environment.systemPackages = with pkgs; [
     vim
+    devenv
   ];
 
   ${namespace} = {
