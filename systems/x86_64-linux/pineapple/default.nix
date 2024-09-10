@@ -33,15 +33,23 @@
     devenv
   ];
 
+  virtualisation.docker.enable = true;
+  users.users.semiko.extraGroups = [ "docker" ];
+  users.users.workaholic.extraGroups = [ "docker" ];
+
   ${namespace} = {
     desktop.gnome.enable = true;
 
     common = {
       locale.enable = true;
-      nix.enable = true;
       secrets.enable = true;
 
       grub.enable = true;
+
+      nix = {
+        enable = true;
+        use-lix = true;
+      };
 
       ssh.enable = true;
       zsh.enable = true;

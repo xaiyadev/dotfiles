@@ -27,15 +27,22 @@
   environment.systemPackages = with pkgs; [
     vim
   ];
-
+  
+  virtualisation.docker.enable = true;
+  users.users.semiko.extraGroups = [ "dialout" "docker" ];
+  
   ${namespace} = {
     common = {
       locale.enable = true;
-      nix.enable = true;
       secrets.enable = true;
 
       grub.enable = true;
       networking.enable = true;
+
+      nix = {
+        enable = true;
+        use-lix = true;
+      };
 
       ssh.enable = true;
       zsh.enable = true;

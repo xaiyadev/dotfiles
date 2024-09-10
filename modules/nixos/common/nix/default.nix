@@ -21,10 +21,16 @@ in
 {
     options.${namespace}.common.nix = {
         enable = mkEnableOption "Default nix settings setup and configured";
+        use-lix = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Use Lix instead of Nix";
+        };
 
     };
   config = mkIf cfg.enable {
     nix = {
+      package = mkIf cfg.use-lix pkgs.lix; # Enable LIX
       settings = {
         substituters = [ "https://ezkea.cachix.org" ];
         trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
@@ -44,9 +50,6 @@ in
         dates = "daily";
         options = "--delete-older-than 3d";
       };
-
     };
-
-
   };
 }
