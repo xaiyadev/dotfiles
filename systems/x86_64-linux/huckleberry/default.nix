@@ -30,9 +30,11 @@
   ];
 
   virtualisation.docker.enable = true;
-  users.users.semiko.extraGroups = [ "docker" ];
+  hardware.sane.enable = true;
+  users.users.semiko.extraGroups = [ "scanner" "docker" ];
 
   ${namespace} = {
+    #desktop.sway.enable = true;
     desktop.gnome.enable = true;
 
     common = {

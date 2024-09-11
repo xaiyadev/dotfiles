@@ -36,7 +36,6 @@
   virtualisation.docker.enable = true;
   users.users.semiko.extraGroups = [ "docker" ];
   users.users.workaholic.extraGroups = [ "docker" ];
-  fonts.packages = with pkgs; [ jetbrains-mono ];
 
   ${namespace} = {
     #desktop.sway.enable = true;

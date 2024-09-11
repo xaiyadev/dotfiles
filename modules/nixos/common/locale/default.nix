@@ -49,7 +49,7 @@ in
     };
 
     xdg.portal.config.common.default = "*";
-
+    fonts.packages = with pkgs; [ jetbrains-mono ];
 
   };
 }

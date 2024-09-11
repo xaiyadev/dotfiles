@@ -57,7 +57,7 @@
         catppuccin.nixosModules.catppuccin
         agenix.nixosModules.default
         aagl.nixosModules.default
-	lix-module.nixosModules.default
+	      lix-module.nixosModules.default
       ];
 
       homes.modules = with inputs; [
