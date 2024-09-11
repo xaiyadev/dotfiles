@@ -36,10 +36,11 @@
   virtualisation.docker.enable = true;
   users.users.semiko.extraGroups = [ "docker" ];
   users.users.workaholic.extraGroups = [ "docker" ];
+  fonts.packages = with pkgs; [ jetbrains-mono ];
 
   ${namespace} = {
+    #desktop.sway.enable = true;
     desktop.gnome.enable = true;
-
     common = {
       locale.enable = true;
       secrets.enable = true;

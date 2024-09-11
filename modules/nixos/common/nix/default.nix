@@ -28,28 +28,29 @@ in
         };
 
     };
-  config = mkIf cfg.enable {
-    nix = {
-      package = mkIf cfg.use-lix pkgs.lix; # Enable LIX
-      settings = {
-        substituters = [ "https://ezkea.cachix.org" ];
-        trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
 
-        experimental-features = [ "nix-command" "flakes" ];
-        builders-use-substitutes = true;
-        auto-optimise-store = true;
-        keep-derivations = true;
-        keep-outputs = true;
-        warn-dirty = false;
-        max-jobs = "auto";
-      };
+    config = mkIf cfg.enable {
+      nix = {
+        package = mkIf cfg.use-lix pkgs.lix; # Enable LIX
+        settings = {
+          substituters = [ "https://ezkea.cachix.org" ];
+          trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
 
-      # Garbage collection configuration.
-      gc = {
-        automatic = true;
-        dates = "daily";
-        options = "--delete-older-than 3d";
+          experimental-features = [ "nix-command" "flakes" ];
+          builders-use-substitutes = true;
+          auto-optimise-store = true;
+          keep-derivations = true;
+          keep-outputs = true;
+          warn-dirty = false;
+          max-jobs = "auto";
+        };
+
+        # Garbage collection configuration.
+        gc = {
+          automatic = true;
+          dates = "daily";
+          options = "--delete-older-than 3d";
+        };
       };
     };
-  };
 }

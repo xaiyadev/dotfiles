@@ -25,11 +25,16 @@
 
        /* --- Games --- */
        steam
+
+       cmartix
+
+       jetbrains-mono
+       nerdfont
      ];
 
     # TODO: infinite loop when using ${namespace} (?)
     semiko = {
-      desktop.dconf.enable = true;
+      desktop.config.gnome.enable = true;
 
       programs = {
         spotify.enable = true;

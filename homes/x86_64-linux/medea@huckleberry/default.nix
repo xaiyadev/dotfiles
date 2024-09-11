@@ -25,7 +25,7 @@
      ];
 
     semiko = {
-      desktop.dconf.enable = true;
+      desktop.config.gnome.enable = true;
     };
 
 

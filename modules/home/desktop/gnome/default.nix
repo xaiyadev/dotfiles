@@ -16,11 +16,25 @@
 }:
 with lib;
 let
-    cfg = config.${namespace}.desktop.dconf;
+    cfg = config.${namespace}.desktop.config.gnome;
 in
 {
-    options.${namespace}.desktop.dconf = {
+    options.${namespace}.desktop.config.gnome = {
         enable = mkEnableOption "setup gnome and dconf settings!";
+
+        gtk = mkOption {
+          type = types.bool;
+          default = true;
+          example = false;
+          description = "If gtk should be enabled and used";
+        };
+
+        dconf = mkOption {
+          type = types.bool;
+          default = true;
+          example = false;
+          description = "If dconf should be enabled and used";
+        };
 
         favorite-apps = mkOption {
             type = types.listOf types.str;
@@ -43,7 +57,7 @@ in
     config = mkIf cfg.enable {
          home.file.".config/wallpapers/rainbow-cat.png".source = ./wallpapers/${cfg.wallpaper};
 
-          gtk = {
+          gtk = mkIf cfg.gtk {
             enable = true;
                 theme = {
                       name = "Colloid-Dark-Catppuccin";
@@ -61,7 +75,7 @@ in
             };
           };
 
-          dconf = {
+          dconf = mkIf cfg.dconf {
               enable = true;
               settings."org/gnome/desktop/background".picture-ui = ".config/wallpapers/${cfg.wallpaper}";
 
