@@ -38,8 +38,8 @@
   users.users.workaholic.extraGroups = [ "docker" ];
 
   ${namespace} = {
-    #desktop.sway.enable = true;
-    desktop.gnome.enable = true;
+    desktop.sway.enable = true;
+    #desktop.gnome.enable = true;
     common = {
       locale.enable = true;
       secrets.enable = true;

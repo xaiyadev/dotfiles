@@ -24,16 +24,49 @@ in
     };
 
     config = mkIf cfg.enable {
+      home.file.".config/wallpapers/something-beautiful-in-nature.jpg".source = ./wallpapers/something-beautiful-in-nature.jpg;
+
+
       home.packages = with pkgs; [
           dmenu
+
+          (pkgs.python3Full.withPackages (python-pkgs: [
+            python-pkgs.pygobject3
+            python-pkgs.gst-python
+            pkgs.playerctl
+          ]))
+
+          playerctl
+          gobject-introspection
       ];
 
       wayland.windowManager.sway = {
         enable = true;
+        checkConfig = false;
+
         config = {
           bars = [ ];
 
+          output = {
+            "*" = {
+              bg = "~/.config/wallpapers/something-beautiful-in-nature.jpg fill";
+            };
+
+            # Laptop Setup
+            "eDP-1" = {
+              pos = "0 227";
+            };
+            "DP-1" = {
+              pos = "4480 0";
+            };
+            "HDMI-A-1" = {
+              pos = "1920 0";
+            };
+
+          };
+
           input = { "*" = { xkb_layout = "de"; }; };
+
           modifier = "Mod4";
           terminal = "alacritty";
 
@@ -47,9 +80,6 @@ in
 
           };
         };
-	extraConfig = ''
-	  exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-	'';
       };
 
       ${namespace} = {

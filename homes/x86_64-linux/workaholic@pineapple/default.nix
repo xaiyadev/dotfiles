@@ -23,6 +23,7 @@
        obsidian
        jetbrains.phpstorm
        teams-for-linux
+       enpass
      ];
 
     semiko = {

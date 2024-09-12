@@ -24,6 +24,9 @@ in
     };
 
     config = mkIf cfg.enable {
+      home.file.".config/waybar/scripts/mediaplayer.py".source = ./scripts/mediaplayer.py;
+
+
       programs.waybar = {
         enable = true;
         systemd.enable = true;
@@ -33,10 +36,9 @@ in
             layer = "top";
             position = "top";
             height = 26;
-            # TODO: output
 
             modules-left = [ "custom/logo" "sway/workspaces" ];
-            modules-center = [ "clock" ];
+            modules-center = [ "clock" /*"custom/mediaplayer"*/ ];
             modules-right = [ "battery" ];
 
             "custom/logo" = {
@@ -45,10 +47,28 @@ in
               on-click = ''bemenu-run --accept-single  -n -p "Launch" --hp 4 --hf "#ffffff" --sf "#ffffff" --tf "#ffffff" '';
             };
 
+ /*           "custom/spotify" = {
+              exec = "~/.config/waybar/scripts/mediaplayer.py --player spotify";
+              format = "{} 🎸";
+              return-type = "json";
+              on-click = "playerctl play-pause";
+            };*/
+
             "sway/workspaces" = {
               disable-scroll = true;
-              all-outputs = true;
+              all-outputs = false;
               disable-click = true;
+
+              format = "{name}: {icon}";
+
+              format-icons = {
+                "1" = "🔥";
+                "2" = "✨";
+                "3" = "🎉";
+                "4" = "🎸";
+                "5" = "🧋";
+                "default" = "🔆";
+              };
             };
 
             "clock" = {
