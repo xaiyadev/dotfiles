@@ -28,8 +28,6 @@ in
 
 
       home.packages = with pkgs; [
-          dmenu
-
           (pkgs.python3Full.withPackages (python-pkgs: [
             python-pkgs.pygobject3
             python-pkgs.gst-python
@@ -45,6 +43,7 @@ in
         checkConfig = false;
 
         config = {
+          menu = "${pkgs.wofi}/bin/wofi --show run";
           bars = [ ];
 
           output = {
@@ -65,13 +64,19 @@ in
 
           };
 
-          input = { "*" = { xkb_layout = "de"; }; };
+          input = {
+            "*" = {
+              xkb_layout = "de";
+              accel_profile = "flat";
+              pointer_accel = "-0.6";
+            };
+          };
 
           modifier = "Mod4";
           terminal = "alacritty";
 
           window = {
-            border = 2;
+            border = 4;
             titlebar = false;
           };
 
@@ -79,13 +84,34 @@ in
             inner = 10;
 
           };
+
+          colors = {
+            # Rose Pine color theme
+            focused = {
+              background = "#31748f";
+              border = "#ebbcba";
+              childBorder = "#ebbcba";
+              text = "#e0def4";
+              indicator = "#ebbcba";
+            };
+            
+            unfocused = {
+              background = "#9ccfd8";
+              border = "#6e6a86";
+              childBorder = "#6e6a86";
+              text = "#e0def4";
+              indicator = "#6e6a86";
+            };
+          };
         };
+	      extraConfig = ''exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK '';
       };
 
       ${namespace} = {
         tools = {
           alacritty.enable = true;
           waybar.enable = true;
+          wofi.enable = true;
         };
         desktop.config.gnome = {
             enable = true;

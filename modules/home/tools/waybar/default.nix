@@ -16,7 +16,7 @@
 }:
 with lib;
 let
-    cfg = config.${namespace}.desktop.config.sway;
+    cfg = config.${namespace}.tools.waybar;
 in
 {
     options.${namespace}.tools.waybar = {
@@ -27,6 +27,7 @@ in
       home.file.".config/waybar/scripts/mediaplayer.py".source = ./scripts/mediaplayer.py;
 
 
+      # TODO: fix long startup time
       programs.waybar = {
         enable = true;
         systemd.enable = true;
@@ -44,7 +45,7 @@ in
             "custom/logo" = {
               format = "🎉";
               tooltip = false;
-              on-click = ''bemenu-run --accept-single  -n -p "Launch" --hp 4 --hf "#ffffff" --sf "#ffffff" --tf "#ffffff" '';
+              on-click = ''wofi --show run'';
             };
 
  /*           "custom/spotify" = {

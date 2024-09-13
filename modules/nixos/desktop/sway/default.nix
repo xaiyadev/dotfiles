@@ -27,9 +27,15 @@ in
       /* Packages and other things that need to be installed */
       services.gnome.gnome-keyring.enable = true;
       services.dbus.enable = true;
-      
-      services.xserver.displayManager.gdm.enable = true;
-      services.xserver.enable = true;
+
+      services.xserver = {
+	      enable = true;
+	      displayManager.gdm = {
+	        enable =  true;
+	        wayland = true;
+	        banner = "Frohe Weinachten!";
+      };
+    };
 
       environment.systemPackages = with pkgs; [
         sway
@@ -40,6 +46,7 @@ in
         slurp
         wl-clipboard
         mako
+        dbus
       ];
 
       /* Desktop and window manager thingies */
@@ -48,6 +55,10 @@ in
         wlr.enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
       };
-
+    
+      programs.sway = {
+	      enable = true;
+	      wrapperFeatures.gtk = true;
+      };
     };
 }
