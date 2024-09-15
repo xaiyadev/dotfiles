@@ -70,6 +70,12 @@ in
               accel_profile = "flat";
               pointer_accel = "-0.6";
             };
+
+            /* Laptop Touchpad */
+            "2:14:ETPS/2_Elantech_Touchpad" = {
+              pointer_accel = "0";
+              natural_scroll = "enabled";
+            };
           };
 
           modifier = "Mod4";
