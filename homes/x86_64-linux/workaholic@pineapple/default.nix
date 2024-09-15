@@ -27,7 +27,8 @@
      ];
 
     semiko = {
-      desktop.config.gnome.enable = true;
+      desktop.config.sway.enable = true;
+      #desktop.config.gnome.enable = true;
 
       programs = {
         spotify.enable = true;
