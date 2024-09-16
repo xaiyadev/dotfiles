@@ -33,6 +33,7 @@
     semiko = {
       desktop.config.sway.enable = true;
       #desktop.config.gnome.enable = true;
+
       programs = {
         spotify.enable = true;
         vesktop.enable = true;
@@ -52,7 +53,7 @@
             { id = "oldceeleldhonbafppcapldpdifcinji"; } # Language Tool
             { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
 
-            { id = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; } # catppuccin Theme
+            { id = "noimedcjdohhokijigpfcbjcfcaaahej"; } # rose pine Theme
          ];
 
          dictionaries = with pkgs.hunspellDictsChromium; [ en_US de_DE ];

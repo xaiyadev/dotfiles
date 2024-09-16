@@ -1,0 +1,5 @@
+* {
+    /* reference the color by using @color-name */
+    background: @base;
+}
+

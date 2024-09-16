@@ -16,18 +16,20 @@
 }:
 with lib;
 let
-    cfg = config.${namespace}.tools.waybar;
+    cfg = config.${namespace}.desktop.config.sway.tools.waybar;
 in
 {
-    options.${namespace}.tools.waybar = {
+    options.${namespace}.desktop.config.sway.tools.waybar = {
         enable = mkEnableOption "Setup Waybar!";
     };
 
     config = mkIf cfg.enable {
       home.file.".config/waybar/scripts/mediaplayer.py".source = ./scripts/mediaplayer.py;
 
+      home.file.".config/waybar/rose-pine.css".source = ./style/rose-pine.css;
+      home.file.".config/waybar/index.css".source = ./style/index.css;
 
-      # TODO: fix long startup time
+
       programs.waybar = {
         enable = true;
         systemd.enable = true;
@@ -38,15 +40,9 @@ in
             position = "top";
             height = 26;
 
-            modules-left = [ "custom/logo" "sway/workspaces" ];
+            modules-left = [ "sway/workspaces" ];
             modules-center = [ "clock" /*"custom/mediaplayer"*/ ];
-            modules-right = [ "battery" ];
-
-            "custom/logo" = {
-              format = "🎉";
-              tooltip = false;
-              on-click = ''wofi --show run'';
-            };
+            modules-right = [ "disk" "network" "cpu" "memory" "battery" ];
 
  /*           "custom/spotify" = {
               exec = "~/.config/waybar/scripts/mediaplayer.py --player spotify";
@@ -77,13 +73,44 @@ in
               format = "{:%a %d/%m %I:%M}";
             };
 
+
+
+            "cpu" = {
+                interval = 10;
+                format = "⚙️ CPU: {}%";
+            };
+
+            "memory" = {
+                interval =  10;
+                format = "RAM: {}%";
+             };
+
             "battery" = {
               tooltip = false;
-              format = "{icon} {capacity}% // Time left: {time}";
+              format = "{icon} {capacity}% // {time}";
+              format-charging = "{icon} {capacity}% // {time}";
+              format-full = "{icon} {capacity}%";
               format-icons = [ "🍎⚠️" "🌻" "🍃" ];
             };
+
+            "network" = {
+              interval = 10;
+              format = "🌐⚡ {essid} // {ipaddr}";
+            };
+
+            "disk" = {
+              interval = 10;
+              format = "/ {percentage_free}% free";
+              path = "/";
+            };
+
           };
         };
+
+        style = ''
+          @import "./rose-pine.css";
+          @import "./index.css";
+        '';
 
       };
     };

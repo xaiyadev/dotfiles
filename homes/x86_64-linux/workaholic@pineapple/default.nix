@@ -55,7 +55,7 @@
             { id = "kmcfomidfpdkfieipokbalgegidffkal"; } # enpass
 
 
-            { id = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; } # catppuccin Theme
+            { id = "noimedcjdohhokijigpfcbjcfcaaahej"; } # rose pine Theme
          ];
 
          dictionaries = with pkgs.hunspellDictsChromium; [ en_US de_DE ];

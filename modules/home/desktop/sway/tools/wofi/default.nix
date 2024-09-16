@@ -16,10 +16,10 @@
 }:
 with lib;
 let
-    cfg = config.${namespace}.tools.wofi;
+    cfg = config.${namespace}.desktop.config.sway.tools.wofi;
 in
 {
-    options.${namespace}.tools.wofi = {
+    options.${namespace}.desktop.config.sway.tools.wofi = {
         enable = mkEnableOption "Setup Wofi!";
     };
 

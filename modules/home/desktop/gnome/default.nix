@@ -59,27 +59,26 @@ in
 
           gtk = mkIf cfg.gtk {
             enable = true;
-                theme = {
-                      name = "Colloid-Dark-Catppuccin";
-                      package = pkgs.colloid-gtk-theme.override {
-                        themeVariants = ["default"];
-                        colorVariants = ["dark"];
-                        sizeVariants = ["standard"];
-                        tweaks = ["catppuccin"];
-                      };
-                    };
+            theme = {
+                  name = "rose-pine-gtk";
+                  package = pkgs.rose-pine-gtk-theme;
+                };
 
             iconTheme = {
-                package = pkgs.colloid-icon-theme;
-                name = "Colloid";
+                package = pkgs.rose-pine-icon-theme;
+                name = "rose-pine-icons";
             };
+
+            gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+            gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
           };
 
-          dconf = mkIf cfg.dconf {
-              enable = true;
-              settings."org/gnome/desktop/background".picture-ui = ".config/wallpapers/${cfg.wallpaper}";
 
-              settings."org/gnome/shell/extensions/user-theme".name = "Colloid-Dark-Catppuccin";
+          dconf = {
+              enable = true;
+              settings."org/gnome/desktop/background".picture-ui = mkIf cfg.dconf ".config/wallpapers/${cfg.wallpaper}";
+
+              settings."org/gnome/shell/extensions/user-theme".name = "rose-pine-gtk";
 
               settings."org/gnome/desktop/wm/preferences" = {
                   audible-bell = false;
@@ -92,7 +91,7 @@ in
                   show-battery-percentage = true;
               };
 
-              settings."org/gnome/shell" = {
+              settings."org/gnome/shell" = mkIf cfg.dconf {
                   favorite-apps = cfg.favorite-apps;
 
                   enabled-extensions = [
@@ -107,7 +106,7 @@ in
 
               /* --- Extension Settings --- */
 
-              settings."org/gnome/shell/extensions/dash-to-dock" = {
+              settings."org/gnome/shell/extensions/dash-to-dock" = mkIf cfg.dconf {
                   apply-custom-theme = false;
                   background-color = "rgb(38,38,38)";
                   background-opacity = 0.4;
@@ -139,7 +138,7 @@ in
               };
 
 
-              settings."org/gnome/shell/extensions/sp-tray" = {
+              settings."org/gnome/shell/extensions/sp-tray" = mkIf cfg.dconf {
                   display-format = "{artist} » {track}";
                   display-mode = 1;
                   hidden-when-paused = false;

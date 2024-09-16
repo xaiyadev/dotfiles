@@ -26,7 +26,6 @@ in
     config = mkIf cfg.enable {
       home.file.".config/wallpapers/something-beautiful-in-nature.jpg".source = ./wallpapers/something-beautiful-in-nature.jpg;
 
-
       home.packages = with pkgs; [
           (pkgs.python3Full.withPackages (python-pkgs: [
             python-pkgs.pygobject3
@@ -34,9 +33,18 @@ in
             pkgs.playerctl
           ]))
 
-          playerctl
-          gobject-introspection
       ];
+
+      xdg.portal = {
+        enable = true;
+        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+        config.common = {
+          default = [
+            "gtk"
+            "wlr"
+          ];
+        };
+      };
 
       wayland.windowManager.sway = {
         enable = true;
@@ -87,7 +95,7 @@ in
           };
 
           gaps = {
-            inner = 10;
+            inner = 15;
 
           };
 
@@ -114,17 +122,19 @@ in
       };
 
       ${namespace} = {
-        tools = {
-          alacritty.enable = true;
-          waybar.enable = true;
-          wofi.enable = true;
-        };
-        desktop.config.gnome = {
+        tools.alacritty.enable = true;
+        desktop.config = {
+          gnome = {
             enable = true;
             dconf = false;
+          };
+
+          sway.tools = {
+            waybar.enable = true;
+            wofi.enable = true;
+          };
+
         };
-
       };
-
     };
 }
