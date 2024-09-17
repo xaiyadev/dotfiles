@@ -33,7 +33,7 @@ in
       nix = {
         package = mkIf cfg.use-lix pkgs.lix; # Enable LIX
         settings = {
-          substituters = [ "https://ezkea.cachix.org" ];
+          substituters = [ ""https://cache.nixos.org/"" "https://ezkea.cachix.org" ];
           trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
 
           experimental-features = [ "nix-command" "flakes" ];

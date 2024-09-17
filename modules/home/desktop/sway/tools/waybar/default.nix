@@ -40,9 +40,9 @@ in
             position = "top";
             height = 26;
 
-            modules-left = [ "sway/workspaces" ];
-            modules-center = [ "clock" /*"custom/mediaplayer"*/ ];
-            modules-right = [ "disk" "network" "cpu" "memory" "battery" ];
+            modules-left = [ "sway/workspaces" "sway/window" ];
+            modules-center = [ "clock" ];
+            modules-right = [  "pulseaudio" "network" "disk" "battery"  ];
 
  /*           "custom/spotify" = {
               exec = "~/.config/waybar/scripts/mediaplayer.py --player spotify";
@@ -53,7 +53,7 @@ in
 
             "sway/workspaces" = {
               disable-scroll = true;
-              all-outputs = false;
+              all-outputs = true;
               disable-click = true;
 
               format = "{name}: {icon}";
@@ -64,8 +64,20 @@ in
                 "3" = "🎉";
                 "4" = "🎸";
                 "5" = "🧋";
-                "default" = "🔆";
+                "6" = "🐈‍⬛";
+                "7" = "🎯";
+                "8" = "🎇";
+                "9" = "〽️";
+                "10" = "✴️";
               };
+            };
+
+            "sway/window" = { 
+              all-outputs = true;
+              "format" = "{title}";
+              "icon" = true;
+              "icon-size" = 18;
+              "max-length" = 50;
             };
 
             "clock" = {
@@ -73,29 +85,27 @@ in
               format = "{:%a %d/%m %I:%M}";
             };
 
-
-
-            "cpu" = {
-                interval = 10;
-                format = "⚙️ CPU: {}%";
-            };
-
-            "memory" = {
-                interval =  10;
-                format = "RAM: {}%";
-             };
-
-            "battery" = {
-              tooltip = false;
-              format = "{icon} {capacity}% // {time}";
-              format-charging = "{icon} {capacity}% // {time}";
-              format-full = "{icon} {capacity}%";
-              format-icons = [ "🍎⚠️" "🌻" "🍃" ];
+            "pulseaudio" = {
+                "format" = "{icon} {volume}%";
+                "format-bluetooth" = "{volume}% {icon} » {desc}";
+                "format-icons" = {
+                  "hdmi" = "🖥️";
+                  "default" = "🔊";
+                };
             };
 
             "network" = {
               interval = 10;
               format = "🌐⚡ {essid} // {ipaddr}";
+            };
+
+            "battery" = {
+              interval = 10;
+              tooltip = false;
+              format = "{icon} {capacity}% // {time}";
+              format-charging = "{icon} {capacity}% // {time}";
+              format-full = "{icon} {capacity}%";
+              format-icons = [ "🍎⚠️" "🌻" "🍃" ];
             };
 
             "disk" = {

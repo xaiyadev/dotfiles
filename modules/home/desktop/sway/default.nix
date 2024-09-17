@@ -32,9 +32,7 @@ in
             python-pkgs.gst-python
             pkgs.playerctl
           ]))
-
       ];
-
       xdg.portal = {
         enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];

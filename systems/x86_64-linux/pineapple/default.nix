@@ -28,14 +28,23 @@
 	environment.shells = [ pkgs.zsh ];
 	programs.zsh.enable = true; # Special treatment or something idk ._.
 
+  hardware.pulseaudio = {
+    enable = true;
+    support32Bit = true;
+  };
+
+  hardware.bluetooth.enable = true;
+  services.upower.enable = true;
+
+
   environment.systemPackages = with pkgs; [
     vim
     devenv
   ];
 
   virtualisation.docker.enable = true;
-  users.users.semiko.extraGroups = [ "docker" ];
-  users.users.workaholic.extraGroups = [ "docker" ];
+  users.users.semiko.extraGroups = [ "docker" "audio" ];
+  users.users.workaholic.extraGroups = [ "docker" "audio" ];
 
   ${namespace} = {
     desktop.sway.enable = true;

@@ -1,5 +1,56 @@
+/* General */
 * {
-    /* reference the color by using @color-name */
-    background: @base;
+    color: @text;
 }
 
+.module {
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.modules-right .module,
+.modules-center .module {
+    border: 2px solid @highlightHigh;
+    padding: 5px;
+}
+
+.modules-left .module {
+    background: @overlay;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+window#waybar.empty {
+    background-color: transparent;
+}
+
+
+/* Workspaces */
+#workspaces {
+    background-color: transparent;
+}
+
+#workspaces button:not(:nth-child(1)) {
+    margin-left: 5px;
+}
+
+#workspaces button {
+    background: @overlay;
+}
+
+#workspaces button.focused {
+    background: @base;
+
+}
+
+/* Audio thingies */
+#pulseaudio.bluetooth {
+    background-color: @pine;
+}
+
+#pulseaudio.muted {
+    background-color: @love;
+
+}

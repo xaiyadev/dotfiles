@@ -29,6 +29,9 @@
     devenv
   ];
 
+  hardware.pulseaudio.enable = true;
+
+
   virtualisation.docker.enable = true;
   hardware.sane.enable = true;
   users.users.semiko.extraGroups = [ "scanner" "docker" ];
