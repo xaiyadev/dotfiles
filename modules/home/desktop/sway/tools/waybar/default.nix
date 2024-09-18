@@ -95,13 +95,21 @@ in
             };
 
             "network" = {
-              interval = 10;
-              format = "🌐⚡ {essid} // {ipaddr}";
+              interval = 3;
+              format-wifi = "{icon} {essid} // {ipaddr} // signal: {signalStrength}%";
+              format-disconnected = "{icon} no connection :/";
+              format-icons = [ "🌐⚡" ];
+
             };
 
             "battery" = {
               interval = 10;
               tooltip = false;
+              states = {
+                "full" = 90;
+                "warning" = 30;
+                "critical" = 10;
+              };
               format = "{icon} {capacity}% // {time}";
               format-charging = "{icon} {capacity}% // {time}";
               format-full = "{icon} {capacity}%";

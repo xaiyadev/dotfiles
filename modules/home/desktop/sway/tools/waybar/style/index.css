@@ -54,3 +54,35 @@ window#waybar.empty {
     background-color: @love;
 
 }
+
+/* Battery format */
+#battery.full {
+    background-color: @pine;
+}
+
+#battery.charging {
+    background-color: @pine;
+}
+
+#battery.warning {
+    background-color: @gold;
+}
+
+#battery.critical {
+    background-color: @love;
+}
+
+/* Network */
+#network.disconnected,
+#network.disabled {
+    background-color: @love;
+
+}
+
+#network.ethernet {
+    background-color: @gold;
+}
+
+#network.wifi {
+    background-color: @pine;
+}
