@@ -181,10 +181,12 @@ in
               };
             };
 
-            wireguard.interfaces = mkIf cfg.enableVPN {
+            wg-quick.interfaces = mkIf cfg.enableVPN {
               wg0 = {
-                ips = [ "192.168.1.201/24" ];
+                address = [ "192.168.1.201/24" ];
+                listenPort = 51820;
                 privateKeyFile = config.age.secrets.wg-vpn.path;
+                autostart = false;
 
                 peers = [{
                   publicKey = "Twgc0wLcy9CgMdIgMsHEW1BZcTHpGql/aQDrJFYZaiY=";
@@ -196,5 +198,6 @@ in
               };
             };
         };
+
   };
 }

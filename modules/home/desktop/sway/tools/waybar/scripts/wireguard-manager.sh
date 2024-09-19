@@ -2,7 +2,7 @@
 
 # Code from: https://raw.githubusercontent.com/Klafyvel/wireguard-manager/refs/heads/main/wireguard-manager.sh
 
-SERVICE_NAME="wireguard-wg0-peer-Twgc0wLcy9CgMdIgMsHEW1BZcTHpGql-aQDrJFYZaiY\\x3d"
+SERVICE_NAME="wg-quick-wg0"
 STATUS_CONNECTED_STR='{"text":"Connected","class":"connected","alt":"connected"}'
 STATUS_DISCONNECTED_STR='{"text":"Disconnected","class":"disconnected","alt":"disconnected"}'
 
