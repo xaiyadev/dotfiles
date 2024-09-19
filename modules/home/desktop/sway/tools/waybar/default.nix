@@ -25,6 +25,10 @@ in
 
     config = mkIf cfg.enable {
       home.file.".config/waybar/scripts/mediaplayer.py".source = ./scripts/mediaplayer.py;
+      home.file.".config/waybar/scripts/wireguard-manager.sh" = {
+        source = ./scripts/wireguard-manager.sh;
+        executable = true;
+      };
 
       home.file.".config/waybar/rose-pine.css".source = ./style/rose-pine.css;
       home.file.".config/waybar/index.css".source = ./style/index.css;
@@ -42,7 +46,7 @@ in
 
             modules-left = [ "sway/workspaces" "sway/window" ];
             modules-center = [ "clock" ];
-            modules-right = [  "pulseaudio" "network" "disk" "battery"  ];
+            modules-right = [  "pulseaudio" "network" "custom/wireguard-manager" "disk" "battery"  ];
 
  /*           "custom/spotify" = {
               exec = "~/.config/waybar/scripts/mediaplayer.py --player spotify";
@@ -87,7 +91,7 @@ in
 
             "pulseaudio" = {
                 "format" = "{icon} {volume}%";
-                "format-bluetooth" = "{volume}% {icon} » {desc}";
+                "format-bluetooth" = "{icon} {volume}%";
                 "format-icons" = {
                   "hdmi" = "🖥️";
                   "default" = "🔊";
@@ -99,7 +103,22 @@ in
               format-wifi = "{icon} {essid} // {ipaddr} // signal: {signalStrength}%";
               format-disconnected = "{icon} no connection :/";
               format-icons = [ "🌐⚡" ];
+            };
 
+
+            /* TODO: Not loading after login, but waybar command shows it */
+            "custom/wireguard-manager" = {
+                interval = 3;
+                return-type = "json";
+
+                format-icons = {
+                    connected = "<span color=\"#50fa7b\">VPN: 🔒</span>";
+                    disconnected = "<span color=\"#ff5555\">VPN: 🔓</span>";
+                };
+
+                on-click = "exec ~/.config/waybar/scripts/wireguard-manager.sh -t";
+                format = "{icon}";
+                exec = "exec ~/.config/waybar/scripts/wireguard-manager.sh -s";
             };
 
             "battery" = {

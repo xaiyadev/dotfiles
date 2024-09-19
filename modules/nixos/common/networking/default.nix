@@ -28,6 +28,14 @@ in
           example = true;
           description = "If wifi should be enabled with these settings";
         };
+
+        enableVPN = mkOption {
+          type = types.bool;
+          default = false;
+          example = true;
+          description = "If the local VPN from the 'frit.box' should be activated";
+        };
+
     };
 
     config = mkIf cfg.enable {
@@ -44,9 +52,12 @@ in
             nameservers = [ "1.1.1.1" "8.8.8.8" ];
 
 
+            firewall = {
+              enable = true;
+              allowedUDPPorts = [ 51820 ];
+              checkReversePath = mkIf cfg.enableVPN "loose";
+            };
 
-
-            firewall.enable = true;
             networkmanager = {
               enable = true;
               ensureProfiles = {
@@ -166,39 +177,22 @@ in
                       psk = "$HOTSPOT_PASSWORD";
                     };
                   };
-
-                  wg_config = {
-                    connection = {
-                      autoconnect = "false";
-                      id = "Semiko - Home";
-                      interface-name = "wg_config";
-                      type = "wireguard";
-                      uuid = "157a62d6-a8d6-446c-a663-1c8fe20062e3";
-                    };
-                    ipv4 = {
-                      address1 = "192.168.1.201/24";
-                      dns = "192.168.1.126;192.168.1.1;";
-                      dns-search = "fritz.box;";
-                      method = "manual";
-                    };
-                    ipv6 = {
-                      addr-gen-mode = "default";
-                      method = "disabled";
-                    };
-                    proxy = { };
-                    wireguard = {
-                      listen-port = "51820";
-                      private-key = "$VPN_KEY";
-                    };
-                    "wireguard-peer.Twgc0wLcy9CgMdIgMsHEW1BZcTHpGql/aQDrJFYZaiY=" = {
-                      allowed-ips = "192.168.1.0/24;0.0.0.0/0;";
-                      endpoint = "fl01m63nwx4c3xvz.myfritz.net:59408";
-                      persistent-keepalive = "25";
-                      preshared-key = "2ZIh/4CLnawfw5tpNeo3l0ON9GismlUE/Ibu/uNZ0Us=";
-                      preshared-key-flags = "0";
-                    };
-                  };
                 };
+              };
+            };
+
+            wireguard.interfaces = mkIf cfg.enableVPN {
+              wg0 = {
+                ips = [ "192.168.1.201/24" ];
+                privateKeyFile = config.age.secrets.wg-vpn.path;
+
+                peers = [{
+                  publicKey = "Twgc0wLcy9CgMdIgMsHEW1BZcTHpGql/aQDrJFYZaiY=";
+                  allowedIPs = [ "192.168.1.0/24" "0.0.0.0/0" ];
+                  endpoint = "fl01m63nwx4c3xvz.myfritz.net:59408";
+                  presharedKeyFile = config.age.secrets.wg-vpn-paired.path;
+                  persistentKeepalive = 25;
+                }];
               };
             };
         };

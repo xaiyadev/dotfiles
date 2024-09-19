@@ -23,6 +23,10 @@ in
     # Env Files
     "wifi-profiles.env.age".publicKeys = allKeys;
 
+    # Privat Keys
+    "wg-vpn.key.age".publicKeys = allKeys;
+    "wg-vpn.paired-key.age".publicKeys = allKeys;
+
     # Server Files
     "cloudflare.env.age".publicKeys = allKeys;
 }

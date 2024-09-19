@@ -27,6 +27,9 @@ in
     # TODO: use "lib.snowfall.fs.get-file" if it works someday...
     age.secrets = {
         wifi-profiles.file =  ../../../../secrets/wifi-profiles.env.age;
+
+        wg-vpn.file = ../../../../secrets/wg-vpn.key.age;
+        wg-vpn-paired.file = ../../../../secrets/wg-vpn.paired-key.age;
     };
   };
 }

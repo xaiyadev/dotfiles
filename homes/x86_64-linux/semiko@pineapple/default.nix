@@ -27,7 +27,7 @@
 
 
        /* --- Games --- */
-       steam
+       # steam TODO: cant be installed on home-manager; needs to be system-wide
 
        inputs.agenix.packages.${system}.default
      ];

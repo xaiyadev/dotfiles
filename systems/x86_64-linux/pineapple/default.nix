@@ -49,6 +49,7 @@
   ${namespace} = {
     desktop.sway.enable = true;
     #desktop.gnome.enable = true;
+
     common = {
       locale.enable = true;
       secrets.enable = true;
@@ -66,12 +67,15 @@
       networking = {
         enable = true;
         enableWIFI = true;
+        enableVPN = true;
       };
+    };
+
+    apps = {
+      steam.enable = true;
     };
   };
 
-  # Needs to be installen globally...
-  # TODO: understand how aagl wants you to use flakes with home-manager
   programs.anime-game-launcher.enable = true;
   programs.sleepy-launcher.enable = true;
 
