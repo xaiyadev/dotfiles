@@ -22,4 +22,7 @@ in
 {
     # Env Files
     "wifi-profiles.env.age".publicKeys = allKeys;
+
+    # Server Files
+    "cloudflare.env.age".publicKeys = allKeys;
 }

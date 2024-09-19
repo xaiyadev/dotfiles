@@ -24,13 +24,16 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
+
+
   environment.systemPackages = with pkgs; [
     vim
+    wget
   ];
-  
+
   virtualisation.docker.enable = true;
   users.users.semiko.extraGroups = [ "dialout" "docker" ];
-  
+
   ${namespace} = {
     common = {
       locale.enable = true;
@@ -51,6 +54,8 @@
 
     # TODO: add services for server
   };
+
+  networking.defaultGateway6 = { address = "fe80::1"; interface = "eno1"; };
 
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";

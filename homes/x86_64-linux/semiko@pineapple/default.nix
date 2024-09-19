@@ -28,6 +28,8 @@
 
        /* --- Games --- */
        steam
+
+       inputs.agenix.packages.${system}.default
      ];
 
     semiko = {
