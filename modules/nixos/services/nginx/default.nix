@@ -24,7 +24,7 @@ in
         enable-acme = mkOption {
           type = types.bool;
           default = true;
-          description = "Use Lix instead of Nix";
+          description = "Enable ACME for certificate management.";
         };
 
     };
