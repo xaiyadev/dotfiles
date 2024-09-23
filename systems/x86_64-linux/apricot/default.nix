@@ -55,7 +55,7 @@
     services = {
       nginx.enable = true;
 
-      homepage.
+      homepage.enable = true;
 
       firefly.enable = true;
       vaultwarden.enable = true;
