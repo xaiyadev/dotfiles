@@ -31,7 +31,10 @@
     wget
   ];
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    oci-containers.backend = "docker";
+  };
   users.users.semiko.extraGroups = [ "dialout" "docker" ];
 
   ${namespace} = {
