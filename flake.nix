@@ -54,10 +54,11 @@
       };
 
       systems.modules.nixos = with inputs; [
-        catppuccin.nixosModules.catppuccin
-        agenix.nixosModules.default
-        aagl.nixosModules.default
 	      lix-module.nixosModules.default
+        agenix.nixosModules.default
+
+        catppuccin.nixosModules.catppuccin
+        aagl.nixosModules.default
       ];
 
       homes.modules = with inputs; [

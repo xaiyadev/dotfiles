@@ -30,10 +30,12 @@ in
     };
 
     config = mkIf cfg.enable {
+      # Install nix langauges server
+      environment.systemPackages = with pkgs; [ nil ];
       nix = {
         package = mkIf cfg.use-lix pkgs.lix; # Enable LIX
         settings = {
-          substituters = [ ""https://cache.nixos.org/"" "https://ezkea.cachix.org" ];
+          substituters = [ "https://cache.nixos.org/" "https://ezkea.cachix.org" ];
           trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
 
           experimental-features = [ "nix-command" "flakes" ];
@@ -45,6 +47,9 @@ in
           max-jobs = "auto";
         };
 
+        # configure nix language server nixPath
+        nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+
         # Garbage collection configuration.
         gc = {
           automatic = true;
@@ -52,5 +57,6 @@ in
           options = "--delete-older-than 3d";
         };
       };
+
     };
 }

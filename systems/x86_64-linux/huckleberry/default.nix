@@ -42,7 +42,6 @@
 
     common = {
       locale.enable = true;
-      secrets.enable = true;
 
       grub = {
         enable = true;

@@ -16,10 +16,10 @@
 }:
 with lib;
 let
-    cfg = config.${namespace}.common.services.nginx;
+    cfg = config.${namespace}.services.nginx;
 in
 {
-    options.${namespace}.common.services.nginx = {
+    options.${namespace}.services.nginx = {
         enable = mkEnableOption "Setup NGINX server. For the other services to work you need this enabled!";
         enable-acme = mkOption {
           type = types.bool;
@@ -30,6 +30,10 @@ in
     };
 
     config = mkIf cfg.enable {
+        # Load keys
+        age.secrets.cloudflare.file = ../../../../secrets/cloudflare.env.age;
+
+
         networking.firewall.allowedTCPPorts = [ 80 443 ];
 
         services.nginx = {
@@ -40,6 +44,7 @@ in
             recommendedTlsSettings = true;
         };
 
+        # Create cert for nginx
         security.acme = mkIf cfg.enable-acme {
             acceptTerms = true;
             defaults.email = "danil80sch@gmail.com";

@@ -20,7 +20,7 @@ let
    allKeys = userKeys ++ systemKeys;
 in
 {
-    # Env Files
+    # Desktop env files
     "wifi-profiles.env.age".publicKeys = allKeys;
 
     # Privat Keys
@@ -29,4 +29,6 @@ in
 
     # Server Files
     "cloudflare.env.age".publicKeys = allKeys;
+    "firefly.env.age".publicKeys = allKeys;
+    "vaultwarden.env.age".publicKeys = allKeys;
 }

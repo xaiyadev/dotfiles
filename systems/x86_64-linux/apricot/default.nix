@@ -37,7 +37,6 @@
   ${namespace} = {
     common = {
       locale.enable = true;
-      secrets.enable = true;
 
       grub.enable = true;
       networking.enable = true;
@@ -53,6 +52,10 @@
     };
 
     # TODO: add services for server
+    services = {
+      nginx.enable = true;
+      firefly.enable = true;
+    };
   };
 
   networking.defaultGateway6 = { address = "fe80::1"; interface = "eno1"; };

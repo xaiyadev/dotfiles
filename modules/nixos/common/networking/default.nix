@@ -39,6 +39,14 @@ in
     };
 
     config = mkIf cfg.enable {
+        # Load keys
+        age.secrets = {
+          wifi-profiles.file = ../../../../secrets/wifi-profiles.env.age;
+
+          wg-vpn.file = ../../../../secrets/wg-vpn.key.age;
+          wg-vpn-paired.file = ../../../../secrets/wg-vpn.paired-key.age;
+        };
+
         /* Only fix right now, else it would add automaticly not wanted DNS */
         environment.etc."resolv.conf".text =  "nameserver 1.1.1.1\nnameserver 8.8.8.8\noptions single-request edns0";
         networking = {
