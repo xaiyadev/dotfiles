@@ -54,7 +54,11 @@
     # TODO: add services for server
     services = {
       nginx.enable = true;
+
+      homepage.
+
       firefly.enable = true;
+      vaultwarden.enable = true;
     };
   };
 

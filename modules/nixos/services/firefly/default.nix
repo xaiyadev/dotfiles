@@ -75,7 +75,7 @@ in
       services.nginx.virtualHosts."cash.semiko.dev" = {
           forceSSL = true;
           useACMEHost = "semiko.dev";
-          locations."/".proxyPass = "http://127.0.0.1:8023";
+          locations."/".proxyPass = "http://[::1]:8023";
           extraConfig = "proxy_ssl_server_name on;";
       };
     };
