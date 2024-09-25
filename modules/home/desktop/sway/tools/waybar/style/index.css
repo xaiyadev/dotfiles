@@ -52,20 +52,11 @@ window#waybar.empty {
 
 #pulseaudio.muted {
     background-color: @love;
-
 }
 
 /* Battery format */
-#battery.full {
-    background-color: @pine;
-}
-
 #battery.charging {
     background-color: @pine;
-}
-
-#battery.warning {
-    background-color: @gold;
 }
 
 #battery.critical {
@@ -81,8 +72,4 @@ window#waybar.empty {
 
 #network.ethernet {
     background-color: @gold;
-}
-
-#network.wifi {
-    background-color: @pine;
 }

@@ -106,7 +106,6 @@ in
             };
 
 
-            /* TODO: Not loading after login, but waybar command shows it */
             "custom/wireguard-manager" = {
                 interval = 3;
                 return-type = "json";
@@ -125,13 +124,12 @@ in
               interval = 10;
               tooltip = false;
               states = {
-                "full" = 90;
+                "full" = 100;
                 "warning" = 30;
                 "critical" = 10;
               };
+
               format = "{icon} {capacity}% // {time}";
-              format-charging = "{icon} {capacity}% // {time}";
-              format-full = "{icon} {capacity}%";
               format-icons = [ "🍎⚠️" "🌻" "🍃" ];
             };
 
