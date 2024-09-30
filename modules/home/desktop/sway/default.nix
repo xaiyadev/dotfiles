@@ -57,16 +57,22 @@ in
               bg = "~/.config/wallpapers/something-beautiful-in-nature.jpg fill";
             };
 
-            # Laptop Setup
-            # TODO: add Desktop Setup
             "eDP-1" = {
               pos = "0 227";
             };
-            "DP-1" = {
+
+            "DP-1" =  {
               pos = "4480 0";
             };
-            "HDMI-A-1" = {
+
+            "HDMI-A-1" = if builtins.getEnv "HOSTNAME" == "pineapple" then {
               pos = "1920 0";
+            } else {
+              pos = "5760 0";
+            };
+
+            "DP-2" = {
+              pos = "3840 0";
             };
 
           };
