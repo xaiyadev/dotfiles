@@ -46,6 +46,7 @@
      # Will be created here, makes it easier with extension managment
      programs.chromium = {
          enable = true;
+         package = pkgs.chromium.override { enableWideVine = true; };
 
          extensions = [
             { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
