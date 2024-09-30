@@ -40,6 +40,7 @@
   environment.systemPackages = with pkgs; [
     vim
     devenv
+    premid # TODO: add module
   ];
 
   virtualisation.docker.enable = true;

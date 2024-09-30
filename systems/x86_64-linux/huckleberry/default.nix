@@ -27,6 +27,7 @@
   environment.systemPackages = with pkgs; [
     vim
     devenv
+    premid # TODO: add module
   ];
 
   hardware.pulseaudio.enable = true;

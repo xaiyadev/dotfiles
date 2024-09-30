@@ -55,6 +55,7 @@
             { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
             { id = "oldceeleldhonbafppcapldpdifcinji"; } # Language Tool
             { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
+            { id = "agjnjboanicjcpenljmaaigopkgdnihi"; } # premid extension
 
             { id = "noimedcjdohhokijigpfcbjcfcaaahej"; } # rose pine Theme
          ];
