@@ -35,6 +35,7 @@
       programs = {
         spotify.enable = true;
         vesktop.enable = true;
+        vscode.enable = true;
       };
 
       tools = {
