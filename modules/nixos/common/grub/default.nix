@@ -42,6 +42,7 @@ in {
         boot.loader = {
         efi.canTouchEfiVariables = true;
 
+        # TODO: fix windows not found
         grub = {
           enable = true;
           device = cfg.device;

@@ -37,8 +37,8 @@
   users.users.semiko.extraGroups = [ "scanner" "docker" ];
 
   ${namespace} = {
-    #desktop.sway.enable = true;
-    desktop.gnome.enable = true;
+    desktop.sway.enable = true;
+    #desktop.gnome.enable = true;
 
     common = {
       locale.enable = true;

@@ -58,6 +58,7 @@ in
             };
 
             # Laptop Setup
+            # TODO: add Desktop Setup
             "eDP-1" = {
               pos = "0 227";
             };
