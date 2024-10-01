@@ -30,7 +30,7 @@
 
   fileSystems."/mnt/win10" =
     {
-      device = "/dev/disk/by-uuid/A40897C408979440";
+      device = "/dev/disk/by-uuid/60BCF29FBCF26EC2";
       fsType = "ntfs-3g";
       options = [ "rw" "uid=1000" "gid=100" "user" "exec" "umask=000" ]; # important: change uid and gid to the right numbers :D
     };

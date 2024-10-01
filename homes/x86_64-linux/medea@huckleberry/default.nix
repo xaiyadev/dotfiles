@@ -25,7 +25,11 @@
      ];
 
     semiko = {
-      desktop.config.gnome.enable = true;
+      desktop.config.sway.enable = true;
+
+      tools = {
+        git.enable = true;
+      };
     };
 
 

@@ -36,6 +36,7 @@
   virtualisation.docker.enable = true;
   hardware.sane.enable = true;
   users.users.semiko.extraGroups = [ "scanner" "docker" ];
+  users.users.medea.extraGroups = [ "docker" ];
 
   ${namespace} = {
     desktop.sway.enable = true;
