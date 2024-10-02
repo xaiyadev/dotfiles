@@ -81,35 +81,8 @@ in
           services =
           [
               {
-                  "File Managment" =
-                  [
-
-                      {
-                          "copyParty" = {
-                              href = ''https://files.semiko.dev'';
-                              icon = ''synology-photo-station'';
-                              description = ''Manage and view Files! // Searching for replacment!'';
-                          };
-                      }
-
-                      {
-                          "Syncthing" = {
-                              href = ''https://sync.semiko.dev'';
-                              icon = ''syncthing'';
-                              description = ''Sync Files Remotely!'';
-                          };
-                      }
-                  ];
-              }
-
-              {
                   "Remote" =
                   [
-                      # CopyParty
-                      # Syncthing
-                      # Soft-Server (?)
-                      # Plex
-
                       {
                           "Firefly 3" = {
                               href = ''https://cash.semiko.dev'';
