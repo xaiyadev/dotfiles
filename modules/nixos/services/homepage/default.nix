@@ -20,7 +20,7 @@ let
 in
 {
     options.${namespace}.services.homepage = {
-        enable = mkEnableOption "Create a personalized homepage with all the services on the server!";
+        enable = mkEnableOption "Create a personalized homepage with yall the services on the server!";
 
     };
 
@@ -123,6 +123,13 @@ in
                               href = ''https://vault.semiko.dev'';
                               icon = ''vaultwarden'';
                               description = ''Password Manager Service'';
+                          };
+                      }
+                      {
+                          "YouTrack" = {
+                              href = ''https://issues.semiko.dev'';
+                              icon = ''jetbrains-youtrack'';
+                              description = ''Issue tracking platform'';
                           };
                       }
                   ];
