@@ -45,12 +45,6 @@ in
           keep-outputs = true;
           warn-dirty = false;
           max-jobs = "auto";
-
-          # devenv cashix
-          extraOptions = ''
-            extra-substituters = https://devenv.cachix.org;
-            extra-trusted-public-keys = devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=;
-          '';
         };
 
         # configure nix language server nixPath
