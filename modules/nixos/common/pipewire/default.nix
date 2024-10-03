@@ -25,7 +25,7 @@ in
     };
 
     config = mkIf cfg.enable {
-      environment.systemPackages = [ pavucontrol ];
+      environment.systemPackages = with pkgs; [ pavucontrol ];
 
 
       security.rtkit.enable = true;
