@@ -28,10 +28,12 @@
     vim
     devenv
     premid # TODO: add module
+  
+    pavucontrol
   ];
 
   hardware.pulseaudio.enable = true;
-
+  
 
   virtualisation.docker.enable = true;
   hardware.sane.enable = true;
