@@ -45,6 +45,8 @@ in
           keep-outputs = true;
           warn-dirty = false;
           max-jobs = "auto";
+
+          trusted-users = [ "semiko" "workaholic" ];
         };
 
         # configure nix language server nixPath
