@@ -53,6 +53,7 @@
 
     common = {
       locale.enable = true;
+      pipewire.enable = true;
 
       grub.enable = true;
 
