@@ -36,6 +36,11 @@
         spotify.enable = true;
         vesktop.enable = true;
         vscode.enable = true;
+
+        minecraft = {
+          enable = true;
+          lunar-client = true;
+        };
       };
 
       tools = {
