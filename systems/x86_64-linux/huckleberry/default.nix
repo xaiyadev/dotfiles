@@ -56,6 +56,10 @@
       ssh.enable = true;
       zsh.enable = true;
 
+      programs = {
+        steam.enable = true;
+      };
+
       networking.enable = true;
     };
   };

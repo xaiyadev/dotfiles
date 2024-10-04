@@ -16,10 +16,10 @@
 }:
 with lib;
 let
-   cfg = config.${namespace}.apps.steam;
+   cfg = config.${namespace}.programs.steam;
 in {
 
-   options.${namespace}.apps.steam = {
+   options.${namespace}.programs.steam = {
      enable = mkEnableOption "Install steam on the whole system";
    };
 
