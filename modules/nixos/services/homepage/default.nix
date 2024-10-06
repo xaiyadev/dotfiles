@@ -38,6 +38,12 @@ in
                   image = ''https://images.unsplash.com/photo-1689351060804-fca36e095da4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80'';
                   blur = ''sm'';
               };
+
+              layout = {
+                "Development" = {
+                  style = ''row'';
+                };
+              };
           };
 
           widgets =
@@ -81,8 +87,20 @@ in
           services =
           [
               {
-                  "Remote" =
+                  "Development" =
                   [
+                      {
+                          "YouTrack" = {
+                              href = ''https://issues.semiko.dev'';
+                              icon = ''jetbrains-youtrack'';
+                              description = ''Issue tracking platform'';
+                          };
+                      }
+                  ];
+              }
+
+              {
+                  "Services" = [
                       {
                           "Firefly 3" = {
                               href = ''https://cash.semiko.dev'';
@@ -98,18 +116,11 @@ in
                               description = ''Password Manager Service'';
                           };
                       }
-                      {
-                          "YouTrack" = {
-                              href = ''https://issues.semiko.dev'';
-                              icon = ''jetbrains-youtrack'';
-                              description = ''Issue tracking platform'';
-                          };
-                      }
                   ];
               }
 
               {
-                  "Local (only with VPN)" = [
+                  "Local & External" = [
                       {
                           "Fritz!Box" = {
                               href = ''http://192.168.1.1'';
@@ -120,6 +131,18 @@ in
                                   url = "http://192.168.1.1/";
                               };
                               ping = "http://192.168.1.1/";
+                          };
+                      }
+                      {
+                          "Proton Mail" = {
+                              href = ''https://mail.proton.me'';
+                              icon = ''proton-mail'';
+                          };
+                      }
+                      {
+                          "Google Calendar" = {
+                              href = ''https://calendar.google.com'';
+                              icon = ''google-calendar'';
                           };
                       }
                   ];
