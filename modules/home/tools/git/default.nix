@@ -23,7 +23,7 @@ in
         enable = mkEnableOption "Install and configure git for all users";
         email = mkOption {
             type = types.str;
-            default = "danil80sch@gmail.com";
+            default = "d.schumin@proton.me";
             example = "d.schumin@blmedia.de";
         };
     };
