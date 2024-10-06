@@ -72,7 +72,7 @@
       };
     };
 
-    apps = {
+    programs = {
       steam.enable = true;
     };
   };
