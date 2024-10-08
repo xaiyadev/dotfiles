@@ -34,7 +34,7 @@
 
   environment.systemPackages = with pkgs; [
     vim
-    devenv
+    # TODO: wait for devenv install fix
     premid # TODO: add module
   ];
 
