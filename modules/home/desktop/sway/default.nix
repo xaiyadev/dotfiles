@@ -93,7 +93,7 @@ in
           };
 
           modifier = "Mod4";
-          terminal = "alacritty";
+          terminal = "kitty";
 
           window = {
             border = 4;
@@ -128,7 +128,7 @@ in
       };
 
       ${namespace} = {
-        tools.alacritty.enable = true;
+        tools.kitty.enable = true;
         desktop.config = {
           gnome = {
             enable = true;
