@@ -28,11 +28,6 @@
 	environment.shells = [ pkgs.zsh ];
 	programs.zsh.enable = true; # Special treatment or something idk ._.
 
-  hardware.pulseaudio = {
-    enable = true;
-    support32Bit = true;
-  };
-
   hardware.bluetooth.enable = true;
   services.upower.enable = true;
 
