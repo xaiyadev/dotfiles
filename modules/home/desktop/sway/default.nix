@@ -9,6 +9,7 @@
   format, # A normalized name for the system target (eg. `iso`).
   virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
   systems, # An attribute map of your defined hosts.
+  host,
 
   config,
   specialArgs,
@@ -27,7 +28,7 @@ in
       home.file.".config/wallpapers/something-beautiful-in-nature.jpg".source = ./wallpapers/something-beautiful-in-nature.jpg;
 
       home.packages = with pkgs; [
-          (pkgs.python3Full.withPackages (python-pkgs: [
+          (python3Full.withPackages (python-pkgs: [
             python-pkgs.pygobject3
             python-pkgs.gst-python
             pkgs.playerctl
@@ -65,7 +66,7 @@ in
               pos = "4480 0";
             };
 
-            "HDMI-A-1" = if builtins.getEnv "HOSTNAME" == "pineapple" then {
+            "HDMI-A-1" = if host == "pineapple" then {
               pos = "1920 0";
             } else {
               pos = "5760 0";
