@@ -53,7 +53,7 @@ in
           };
 
           firefly-db = {
-            image = "mariadb";
+            image = "mysql";
             autoStart = true;
             hostname = "db";
             extraOptions = [ "--network=firefly" ];

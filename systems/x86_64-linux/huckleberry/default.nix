@@ -30,9 +30,6 @@
     premid # TODO: add module
   ];
 
-  hardware.pulseaudio.enable = true;
-
-
   virtualisation.docker.enable = true;
   hardware.sane.enable = true;
   users.users.semiko.extraGroups = [ "scanner" "docker" ];
@@ -44,6 +41,7 @@
 
     common = {
       locale.enable = true;
+      pipewire.enable = true;
 
       grub = {
         enable = true;
@@ -57,6 +55,10 @@
 
       ssh.enable = true;
       zsh.enable = true;
+
+      programs = {
+        steam.enable = true;
+      };
 
       networking.enable = true;
     };

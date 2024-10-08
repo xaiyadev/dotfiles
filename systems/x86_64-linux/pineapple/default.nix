@@ -28,11 +28,6 @@
 	environment.shells = [ pkgs.zsh ];
 	programs.zsh.enable = true; # Special treatment or something idk ._.
 
-  hardware.pulseaudio = {
-    enable = true;
-    support32Bit = true;
-  };
-
   hardware.bluetooth.enable = true;
   services.upower.enable = true;
 
@@ -53,6 +48,7 @@
 
     common = {
       locale.enable = true;
+      pipewire.enable = true;
 
       grub.enable = true;
 
@@ -71,7 +67,7 @@
       };
     };
 
-    apps = {
+    programs = {
       steam.enable = true;
     };
   };
