@@ -24,6 +24,8 @@ in {
    };
 
     config = mkIf cfg.enable {
+      environment.systemPackages = with pkgs; [ protontricks ];
+
       programs.steam = {
         enable = true;
         remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
