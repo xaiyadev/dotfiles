@@ -27,13 +27,6 @@ in
     config = mkIf cfg.enable {
       home.file.".config/wallpapers/something-beautiful-in-nature.jpg".source = ./wallpapers/something-beautiful-in-nature.jpg;
 
-      home.packages = with pkgs; [
-          (python3Full.withPackages (python-pkgs: [
-            python-pkgs.pygobject3
-            python-pkgs.gst-python
-            pkgs.playerctl
-          ]))
-      ];
       xdg.portal = {
         enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];

@@ -29,6 +29,13 @@
     premid # TODO: add module
   ];
 
+  fonts.packages = with pkgs; [
+    font-awesome
+    iosevka
+    material-design-icons
+    nerdfonts
+  ];
+
   virtualisation.docker.enable = true;
   hardware.sane.enable = true;
   users.users.semiko.extraGroups = [ "scanner" "docker" ];

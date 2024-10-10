@@ -24,14 +24,14 @@ in
     };
 
     config = mkIf cfg.enable {
-      home.file.".config/waybar/scripts/mediaplayer.py".source = ./scripts/mediaplayer.py;
-      home.file.".config/waybar/scripts/wireguard-manager.sh" = {
-        source = ./scripts/wireguard-manager.sh;
-        executable = true;
-      };
+      home.packages = with pkgs; [
+          waybar-mpris
+      ];
 
+      /* Default Style */
       home.file.".config/waybar/rose-pine.css".source = ./style/rose-pine.css;
       home.file.".config/waybar/index.css".source = ./style/index.css;
+
 
 
       programs.waybar = {
@@ -42,25 +42,19 @@ in
           mainBar = {
             layer = "top";
             position = "top";
+
+            margin = "3";
             height = 26;
 
             modules-left = [ "sway/workspaces" "sway/window" ];
-            modules-center = [ "clock" ];
-            modules-right = [  "pulseaudio" "network" "custom/wireguard-manager" "disk" "battery"  ];
-
- /*           "custom/spotify" = {
-              exec = "~/.config/waybar/scripts/mediaplayer.py --player spotify";
-              format = "{} 🎸";
-              return-type = "json";
-              on-click = "playerctl play-pause";
-            };*/
+            modules-right = [  "pulseaudio" "network" "disk" "battery" "clock" ];
 
             "sway/workspaces" = {
               disable-scroll = true;
               all-outputs = true;
               disable-click = true;
 
-              format = "{name}: {icon}";
+              format = "{name} {icon}";
 
               format-icons = {
                 "1" = "🔥";
@@ -78,64 +72,46 @@ in
 
             "sway/window" = { 
               all-outputs = true;
-              "format" = "{title}";
-              "icon" = true;
+              "format" = "| {title}";
+              "icon" = false;
               "icon-size" = 18;
-              "max-length" = 50;
+              "max-length" = 30;
             };
 
             "clock" = {
               interval = 60;
-              format = "{:%a %d/%m %I:%M}";
+
+              timezone = "Europe/Berlin";
+              locale = "de_DE.UTF-8";
+              format = " {:%H:%M}";
             };
 
             "pulseaudio" = {
-                "format" = "{icon} {volume}%";
-                "format-bluetooth" = "{icon} {volume}%";
-                "format-icons" = {
-                  "hdmi" = "🖥️";
-                  "default" = "🔊";
-                };
+                format = "{icon} {volume}%";
+                format-bluetooth = "󰂰 {icon} {volume}%";
+                format-source-muted = " ";
+                format-icons = [ " " ];
             };
 
             "network" = {
               interval = 3;
-              format-wifi = "{icon} {essid} // {ipaddr} // signal: {signalStrength}%";
-              format-disconnected = "{icon} no connection :/";
-              format-icons = [ "🌐⚡" ];
-            };
-
-
-            "custom/wireguard-manager" = {
-                interval = 3;
-                return-type = "json";
-
-                format-icons = {
-                    connected = "<span color=\"#50fa7b\">VPN: 🔒</span>";
-                    disconnected = "<span color=\"#ff5555\">VPN: 🔓</span>";
-                };
-
-                on-click = "exec ~/.config/waybar/scripts/wireguard-manager.sh -t";
-                format = "{icon}";
-                exec = "exec ~/.config/waybar/scripts/wireguard-manager.sh -s";
+              format-wifi = "{icon} {essid} {signalStrength}%";
+              format-disconnected = "{icon} ";
+              format-ethernet = "󰌗 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
+              format-icons = [ " " ];
             };
 
             "battery" = {
               interval = 10;
               tooltip = false;
-              states = {
-                "full" = 100;
-                "warning" = 30;
-                "critical" = 10;
-              };
 
-              format = "{icon} {capacity}% // {time}";
-              format-icons = [ "🍎⚠️" "🌻" "🍃" ];
+              format = "{icon} {capacity}% {time}";
+              format-icons = [ " " " " " " " " " " ];
             };
 
             "disk" = {
               interval = 10;
-              format = "/ {percentage_free}% free";
+              format = "󰆼 {percentage_free}% free";
               path = "/";
             };
 
