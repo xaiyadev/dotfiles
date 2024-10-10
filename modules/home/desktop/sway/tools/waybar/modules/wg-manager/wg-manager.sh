@@ -3,7 +3,7 @@
 # Code from: https://raw.githubusercontent.com/Klafyvel/wireguard-manager/refs/heads/main/wireguard-manager.sh
 
 function askpass() {
-  wofi -dmenu -password -no-fixed-num-lines -p "Sudo password : " -theme ~/.config/waybar/modules/wg-manager/wg-manager.css
+  wofi --show dmenu --password
 }
 
 SERVICE_NAME="wg-quick-wg0"

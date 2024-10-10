@@ -33,7 +33,7 @@ in
         source = ./modules/wg-manager/wg-manager.sh;
         executable = true;
       };
-      home.file.".config/waybar/modules/wg-manager.css".source = ./modules/wg-manager/wg-manager.css;
+      home.file.".config/waybar/modules/wg-manager/wg-manager.css".source = ./modules/wg-manager/wg-manager.css;
 
       /* Default Style */
       home.file.".config/waybar/rose-pine.css".source = ./style/rose-pine.css;
