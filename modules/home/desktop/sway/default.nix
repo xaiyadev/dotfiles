@@ -50,7 +50,7 @@ in
         checkConfig = false;
 
         config = {
-          menu = "${pkgs.wofi}/bin/wofi --show run";
+          menu = "${pkgs.wofi}/bin/wofi --allow-images --show drun";
           bars = [ ];
 
           output = {
