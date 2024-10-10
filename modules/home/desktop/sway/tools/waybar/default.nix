@@ -28,13 +28,6 @@ in
       /* Mediaplayer */
       home.file.".config/waybar/modules/mediaplayer.py".source = ./modules/mediaplayer.py;
 
-      /* Wireguard Manager */
-      home.file.".config/waybar/modules/wg-manager/wg-manager.sh" = {
-        source = ./modules/wg-manager/wg-manager.sh;
-        executable = true;
-      };
-      home.file.".config/waybar/modules/wg-manager/wg-manager.css".source = ./modules/wg-manager/wg-manager.css;
-
       /* Default Style */
       home.file.".config/waybar/rose-pine.css".source = ./style/rose-pine.css;
       home.file.".config/waybar/index.css".source = ./style/index.css;
@@ -52,7 +45,7 @@ in
 
             modules-left = [ "sway/workspaces" "sway/window" ];
             modules-center = [ "clock" ];
-            modules-right = [  "pulseaudio" "network" "custom/wireguard-manager" "disk" "battery"  ];
+            modules-right = [  "pulseaudio" "network" "disk" "battery"  ];
 
  /*           "custom/spotify" = {
               exec = "~/.config/waybar/scripts/mediaplayer.py --player spotify";
@@ -109,21 +102,6 @@ in
               format-wifi = "{icon} {essid} // {ipaddr} // signal: {signalStrength}%";
               format-disconnected = "{icon} no connection :/";
               format-icons = [ "🌐⚡" ];
-            };
-
-
-            "custom/wireguard-manager" = {
-                interval = 3;
-                return-type = "json";
-
-                format-icons = {
-                    connected = "<span color=\"#50fa7b\">VPN: 🔒</span>";
-                    disconnected = "<span color=\"#ff5555\">VPN: 🔓</span>";
-                };
-
-                on-click = "exec ~/.config/waybar/modules/wg-manager/wg-manager.sh -t";
-                format = "{icon}";
-                exec = "exec ~/.config/waybar/modules/wg-manager/wg-manager.sh -s";
             };
 
             "battery" = {
