@@ -24,13 +24,16 @@ in
     };
 
     config = mkIf cfg.enable {
-      /* Import of external modules */
-      /* Mediaplayer */
-      home.file.".config/waybar/modules/mediaplayer.py".source = ./modules/mediaplayer.py;
+      home.packages = with pkgs; [
+          waybar-mpris
+      ];
+
+      /* Import Files */
 
       /* Default Style */
       home.file.".config/waybar/rose-pine.css".source = ./style/rose-pine.css;
       home.file.".config/waybar/index.css".source = ./style/index.css;
+
 
 
       programs.waybar = {
@@ -44,15 +47,8 @@ in
             height = 26;
 
             modules-left = [ "sway/workspaces" "sway/window" ];
-            modules-center = [ "clock" "spotify" ];
+            modules-center = [ "clock" ];
             modules-right = [  "pulseaudio" "network" "disk" "battery"  ];
-
- /*           "custom/spotify" = {
-              exec = "~/.config/waybar/scripts/mediaplayer.py --player spotify";
-              format = "{} 🎸";
-              return-type = "json";
-              on-click = "playerctl play-pause";
-            };*/
 
             "sway/workspaces" = {
               disable-scroll = true;
