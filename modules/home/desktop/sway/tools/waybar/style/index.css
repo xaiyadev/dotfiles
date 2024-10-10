@@ -8,9 +8,11 @@
 }
 
 window#waybar {
-    background: transparent;
-}
+    background: rgba(33, 32, 46, 0.4); /* Like the color as a background ;3 */
 
+    border-radius: 10px;
+    border: 1px @highlightHigh solid;
+}
 
 .modules-left,
 .modules-right {

@@ -28,8 +28,6 @@ in
           waybar-mpris
       ];
 
-      /* Import Files */
-
       /* Default Style */
       home.file.".config/waybar/rose-pine.css".source = ./style/rose-pine.css;
       home.file.".config/waybar/index.css".source = ./style/index.css;
@@ -44,6 +42,8 @@ in
           mainBar = {
             layer = "top";
             position = "top";
+
+            margin = "3";
             height = 26;
 
             modules-left = [ "sway/workspaces" "sway/window" ];
