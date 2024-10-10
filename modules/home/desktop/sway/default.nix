@@ -50,7 +50,7 @@ in
         checkConfig = false;
 
         config = {
-          menu = "${pkgs.wofi}/bin/wofi --show run";
+          menu = "${pkgs.wofi}/bin/wofi --allow-images --show drun";
           bars = [ ];
 
           output = {
@@ -122,6 +122,11 @@ in
               text = "#e0def4";
               indicator = "#6e6a86";
             };
+          };
+
+          keybindings = let modifier = config.wayland.windowManager.sway.config.modifier;
+          in lib.mkOptionDefault {
+              "${modifier}+e" = "exec ${pkgs.wofi-emoji}/bin/wofi-emoji";
           };
         };
 	      extraConfig = ''exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK '';
