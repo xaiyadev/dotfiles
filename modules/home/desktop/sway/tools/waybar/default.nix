@@ -90,7 +90,7 @@ in
                 format = "{icon} {volume}%";
                 format-bluetooth = "󰂰 {icon} {volume}%";
                 format-source-muted = " ";
-                format-icons = [ "" ];
+                format-icons = [ " " ];
             };
 
             "network" = {
@@ -98,20 +98,15 @@ in
               format-wifi = "{icon} {essid} {signalStrength}%";
               format-disconnected = "{icon} ";
               format-ethernet = "󰌗 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
-              format-icons = [ "" ];
+              format-icons = [ " " ];
             };
 
             "battery" = {
               interval = 10;
               tooltip = false;
-              states = {
-                "full" = 100;
-                "warning" = 30;
-                "critical" = 10;
-              };
 
-              format = "{icon} {capacity}% // {time}";
-              format-icons = [ "🍎⚠️" "🌻" "🍃" ];
+              format = "{icon} {capacity}% {time}";
+              format-icons = [ " " " " " " " " " " ];
             };
 
             "disk" = {

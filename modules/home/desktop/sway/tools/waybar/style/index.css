@@ -50,6 +50,10 @@ window#waybar {
     color: @foam;
 }
 
+#battery {
+    color: @rose;
+}
+
 #clock {
     color: @iris;
 }
