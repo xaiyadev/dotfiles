@@ -47,15 +47,14 @@ in
             height = 26;
 
             modules-left = [ "sway/workspaces" "sway/window" ];
-            modules-center = [ "clock" ];
-            modules-right = [  "pulseaudio" "network" "disk" "battery"  ];
+            modules-right = [  "pulseaudio" "network" "disk" "battery" "clock" ];
 
             "sway/workspaces" = {
               disable-scroll = true;
               all-outputs = true;
               disable-click = true;
 
-              format = "{name}: {icon}";
+              format = "{name} {icon}";
 
               format-icons = {
                 "1" = "🔥";
@@ -73,15 +72,18 @@ in
 
             "sway/window" = { 
               all-outputs = true;
-              "format" = "{title}";
-              "icon" = true;
+              "format" = "| {title}";
+              "icon" = false;
               "icon-size" = 18;
-              "max-length" = 50;
+              "max-length" = 30;
             };
 
             "clock" = {
               interval = 60;
-              format = "{:%a %d/%m %I:%M}";
+
+              timezone = "Europe/Berlin";
+              locale = "de_DE.UTF-8";
+              format = "{:%H:%M}";
             };
 
             "pulseaudio" = {
@@ -89,7 +91,7 @@ in
                 "format-bluetooth" = "{icon} {volume}%";
                 "format-icons" = {
                   "hdmi" = "🖥️";
-                  "default" = "🔊";
+                  "default" = "";
                 };
             };
 
