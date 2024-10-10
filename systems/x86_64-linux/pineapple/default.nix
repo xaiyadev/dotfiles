@@ -31,6 +31,13 @@
   hardware.bluetooth.enable = true;
   services.upower.enable = true;
 
+  fonts.packages = with pkgs; [
+    font-awesome
+    iosevka
+    material-design-icons
+    nerdfonts
+  ];
+
 
   environment.systemPackages = with pkgs; [
     vim

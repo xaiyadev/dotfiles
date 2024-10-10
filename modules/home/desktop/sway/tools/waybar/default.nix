@@ -83,23 +83,22 @@ in
 
               timezone = "Europe/Berlin";
               locale = "de_DE.UTF-8";
-              format = "{:%H:%M}";
+              format = " {:%H:%M}";
             };
 
             "pulseaudio" = {
-                "format" = "{icon} {volume}%";
-                "format-bluetooth" = "{icon} {volume}%";
-                "format-icons" = {
-                  "hdmi" = "🖥️";
-                  "default" = "";
-                };
+                format = "{icon} {volume}%";
+                format-bluetooth = "󰂰 {icon} {volume}%";
+                format-source-muted = " ";
+                format-icons = [ "" ];
             };
 
             "network" = {
               interval = 3;
-              format-wifi = "{icon} {essid} // {ipaddr} // signal: {signalStrength}%";
-              format-disconnected = "{icon} no connection :/";
-              format-icons = [ "🌐⚡" ];
+              format-wifi = "{icon} {essid} {signalStrength}%";
+              format-disconnected = "{icon} ";
+              format-ethernet = "󰌗 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
+              format-icons = [ "" ];
             };
 
             "battery" = {
@@ -117,7 +116,7 @@ in
 
             "disk" = {
               interval = 10;
-              format = "/ {percentage_free}% free";
+              format = "󰆼 {percentage_free}% free";
               path = "/";
             };
 
