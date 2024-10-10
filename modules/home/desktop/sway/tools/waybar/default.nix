@@ -44,7 +44,7 @@ in
             height = 26;
 
             modules-left = [ "sway/workspaces" "sway/window" ];
-            modules-center = [ "clock" ];
+            modules-center = [ "clock" "spotify" ];
             modules-right = [  "pulseaudio" "network" "disk" "battery"  ];
 
  /*           "custom/spotify" = {
