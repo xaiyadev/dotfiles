@@ -26,7 +26,6 @@
 
   environment.systemPackages = with pkgs; [
     vim
-    devenv
     premid # TODO: add module
   ];
 
@@ -56,11 +55,11 @@
       ssh.enable = true;
       zsh.enable = true;
 
-      programs = {
-        steam.enable = true;
-      };
-
       networking.enable = true;
+    };
+
+    programs = {
+    	steam.enable = true;
     };
   };
 
