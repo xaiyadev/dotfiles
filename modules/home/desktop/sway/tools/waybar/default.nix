@@ -24,12 +24,18 @@ in
     };
 
     config = mkIf cfg.enable {
-      home.file.".config/waybar/scripts/mediaplayer.py".source = ./scripts/mediaplayer.py;
-      home.file.".config/waybar/scripts/wireguard-manager.sh" = {
-        source = ./scripts/wireguard-manager.sh;
+      /* Import of external modules */
+      /* Mediaplayer */
+      home.file.".config/waybar/modules/mediaplayer.py".source = ./modules/mediaplayer.py;
+
+      /* Wireguard Manager */
+      home.file.".config/waybar/modules/wg-manager/wg-manager.sh" = {
+        source = ./modules/wg-manager/wg-manager.sh;
         executable = true;
       };
+      home.file.".config/waybar/modules/wg-manager.css".source = ./modules/wg-manager/wg-manager.css;
 
+      /* Default Style */
       home.file.".config/waybar/rose-pine.css".source = ./style/rose-pine.css;
       home.file.".config/waybar/index.css".source = ./style/index.css;
 
@@ -115,9 +121,9 @@ in
                     disconnected = "<span color=\"#ff5555\">VPN: 🔓</span>";
                 };
 
-                on-click = "exec ~/.config/waybar/scripts/wireguard-manager.sh -t";
+                on-click = "exec ~/.config/waybar/modules/wg-manager/wg-manager.sh -t";
                 format = "{icon}";
-                exec = "exec ~/.config/waybar/scripts/wireguard-manager.sh -s";
+                exec = "exec ~/.config/waybar/modules/wg-manager/wg-manager.sh -s";
             };
 
             "battery" = {

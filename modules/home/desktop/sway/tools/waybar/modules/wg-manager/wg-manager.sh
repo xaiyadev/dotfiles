@@ -2,6 +2,10 @@
 
 # Code from: https://raw.githubusercontent.com/Klafyvel/wireguard-manager/refs/heads/main/wireguard-manager.sh
 
+function askpass() {
+  wofi -dmenu -password -no-fixed-num-lines -p "Sudo password : " -theme ~/.config/waybar/modules/wg-manager/wg-manager.css
+}
+
 SERVICE_NAME="wg-quick-wg0"
 STATUS_CONNECTED_STR='{"text":"Connected","class":"connected","alt":"connected"}'
 STATUS_DISCONNECTED_STR='{"text":"Disconnected","class":"disconnected","alt":"disconnected"}'
@@ -13,8 +17,8 @@ function status_wireguard() {
 
 function toggle_wireguard() {
   status_wireguard && \
-     SUDO_ASKPASS=~/.config/waybar/scripts/wireguard-manager.sh sudo -A systemctl stop $SERVICE_NAME || \
-     SUDO_ASKPASS=~/.config/waybar/scripts/wireguard-manager.sh sudo -A systemctl start $SERVICE_NAME
+     SUDO_ASKPASS=~/.config/waybar/modules/wg-manager/wg-manager.sh sudo -A systemctl stop $SERVICE_NAME || \
+     SUDO_ASKPASS=~/.config/waybar/modules/wg-manager/wg-manager.sh sudo -A systemctl start $SERVICE_NAME
 }
 
 case $1 in
