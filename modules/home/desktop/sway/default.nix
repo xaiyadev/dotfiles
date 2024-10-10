@@ -123,6 +123,11 @@ in
               indicator = "#6e6a86";
             };
           };
+
+          keybindings = let modifier = config.wayland.windowManager.sway.config.modifier;
+          in lib.mkOptionDefault {
+              "${modifier}+e" = "exec ${pkgs.wofi-emoji}/bin/wofi-emoji";
+          };
         };
 	      extraConfig = ''exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK '';
       };

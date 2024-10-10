@@ -24,6 +24,8 @@ in
     };
 
     config = mkIf cfg.enable {
+      home.packages = with pkgs; [ wofi-emoji ];
+
       programs.wofi = {
         enable = true;
         /* source: https://github.com/cement-drinker/wofi-rose-pine */
