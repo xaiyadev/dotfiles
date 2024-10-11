@@ -27,6 +27,7 @@ in
     config = mkIf cfg.enable {
       home.file.".config/wallpapers/something-beautiful-in-nature.jpg".source = ./wallpapers/something-beautiful-in-nature.jpg;
 
+      /* Desktop Environment */
       xdg.portal = {
         enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
@@ -38,6 +39,7 @@ in
         };
       };
 
+      /* Sway configuration */
       wayland.windowManager.sway = {
         enable = true;
         checkConfig = false;
@@ -121,9 +123,60 @@ in
           in lib.mkOptionDefault {
               "${modifier}+e" = "exec ${pkgs.wofi-emoji}/bin/wofi-emoji";
           };
+
         };
 	      extraConfig = ''exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK '';
       };
+
+
+      /* Swaylock configuration */
+      programs.swaylock = {
+        enable = true;
+        package = pkgs.swaylock-effects;
+
+        settings = {
+          ignore-empty-password = true;
+          font = "JetBrainsMono Nerd Font";
+
+          /* Colors in this theme inspired from https://rosepinetheme.com/ */
+          color = "#1f1d2e";
+          text-color = "#e0def4";
+          indicator = true;
+
+
+          inside-color = "#26233a";
+          inside-caps-lock-color = "#26233a";
+          inside-ver-color = "#26233a";
+          inside-wrong-color = "#26233a";
+          inside-clear-color = "#26233a";
+
+          key-hl-color = "#9ccfd8";
+          ring-color = "#403d52";
+          ring-clear-color = "#eb6f92";
+          ring-caps-lock-color = "#eb6f92";
+          ring-ver-color = "#31748f";
+          ring-wrong-color = "#eb6f92";
+
+
+          indicator-radius = 100;
+          indicator-thickness = 5;
+
+          /*
+           * Swaylock Effects Settings
+           * remove this if you use swaylock from the terminal
+           */
+
+          effect-blur = "7x5";
+          effect-vignette = "0.8:0.8";
+
+          grace = 2;
+
+          screenshots = true;
+          clock = true;
+        };
+      };
+
+
 
       ${namespace} = {
         tools.kitty.enable = true;
