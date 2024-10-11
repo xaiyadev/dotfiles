@@ -25,7 +25,8 @@ in
     };
 
     config = mkIf cfg.enable {
-      home.file.".config/wallpapers/something-beautiful-in-nature.jpg".source = ./wallpapers/something-beautiful-in-nature.jpg;
+      /*home.file.".config/wallpapers/something-beautiful-in-nature.jpg".source = ./wallpapers/something-beautiful-in-nature.jpg;*/
+      home.file.".config/wallpapers/girls.jpeg".source = ./wallpapers/girls.jpeg;
 
       /* Desktop Environment */
       xdg.portal = {
@@ -50,7 +51,8 @@ in
 
           output = {
             "*" = {
-              bg = "~/.config/wallpapers/something-beautiful-in-nature.jpg fill";
+              /*bg = "~/.config/wallpapers/something-beautiful-in-nature.jpg fill";*/
+              bg = "~/.config/wallpapers/girls.jpeg fill";
             };
 
             "eDP-1" = {
