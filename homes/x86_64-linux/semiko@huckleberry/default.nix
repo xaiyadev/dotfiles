@@ -25,6 +25,7 @@
 
        /* --- Games --- */
        steam
+       dconf
      ];
 
     # TODO: infinite loop when using ${namespace} (?)

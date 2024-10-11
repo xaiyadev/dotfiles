@@ -23,22 +23,14 @@ in
         enable = mkEnableOption "Activate all the neceasery tools for sway to work";
     };
 
+
     config = mkIf cfg.enable {
+
       /* Packages and other things that need to be installed */
       services.gnome.gnome-keyring.enable = true;
       services.dbus.enable = true;
 
-      services.xserver = {
-	      enable = true;
-	      displayManager.gdm = {
-	        enable =  true;
-	        wayland = true;
-	        banner = "Frohe Weinachten!";
-      };
-    };
-
       environment.systemPackages = with pkgs; [
-        sway
         wayland
         xdg-utils
         glib
@@ -47,18 +39,61 @@ in
         wl-clipboard
         mako
         dbus
+
+        swayfx
       ];
 
+
       /* Desktop and window manager thingies */
+      services.xserver = {
+      	enable = true;
+      };
+      services.displayManager = {
+        sddm = {
+          enable =  true;
+          wayland.enable = true;
+        };
+
+        sessionPackages = let
+         custom-sway = pkgs.writeTextFile {
+                   name = "sway.desktop";
+                   destination = "/share/wayland-sessions/sway.desktop";
+                   text = ''
+                    [Desktop Entry]
+                    Comment=Fuck. You. Nvidia.
+                    Exec=${pkgs.swayfx}/bin/sway --unsupported-gpu
+                    Name=custom-sway
+                    Type=Application
+                   '';
+                   checkPhase = ''${pkgs.buildPackages.desktop-file-utils}/bin/desktop-file-validate "$target"'';
+                   derivationArgs = { passthru.providedSessions = [ "sway" ]; };
+                 };
+         in [ custom-sway ];
+      };
+
       xdg.portal = {
         enable = true;
         wlr.enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
       };
-    
-      programs.sway = {
+
+      # Required for Sway as per https://nixos.wiki/wiki/Sway
+      security.polkit.enable = true;
+
+/*      programs.sway = {
 	      enable = true;
+	      package = pkgs.swayfx;
+
 	      wrapperFeatures.gtk = true;
-      };
+
+        # Add Unsupported GPUs for huckleberry // nvidia devices
+	      extraOptions = [
+	        "--unsupported-gpu"
+	      ];
+
+	      extraSessionCommands = ''
+          export WLR_RENDERER=vulkan
+	      '';
+      };*/
     };
 }

@@ -31,9 +31,8 @@
 
   fonts.packages = with pkgs; [
     font-awesome
-    iosevka
     material-design-icons
-    nerdfonts
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   virtualisation.docker.enable = true;
@@ -70,6 +69,7 @@
     };
   };
 
+  programs.dconf.enable = true;
   # Needs to be installen globally...
   # TODO: understand how aagl wants you to use flakes with home-manager
   programs.anime-game-launcher.enable = true;

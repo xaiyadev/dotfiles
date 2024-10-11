@@ -27,6 +27,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+
     agenix.url = "github:ryantm/agenix";
 
     catppuccin.url = "github:catppuccin/nix";
@@ -52,6 +54,8 @@
           title = "Breakings Awesome Dotfiles";
         };
       };
+
+      nixpkgs.overlays = [ inputs.nixpkgs-wayland.overlay ];
 
       systems.modules.nixos = with inputs; [
 	      lix-module.nixosModules.default
