@@ -122,6 +122,7 @@ in
           keybindings = let modifier = config.wayland.windowManager.sway.config.modifier;
           in lib.mkOptionDefault {
               "${modifier}+e" = "exec ${pkgs.wofi-emoji}/bin/wofi-emoji";
+              "${modifier}+l" = "exec ${pkgs.swaylock-effects}/bin/swaylock";
           };
 
         };
