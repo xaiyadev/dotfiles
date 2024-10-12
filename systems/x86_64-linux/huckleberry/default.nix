@@ -26,8 +26,13 @@
 
   environment.systemPackages = with pkgs; [
     vim
-    devenv
     premid # TODO: add module
+  ];
+
+  fonts.packages = with pkgs; [
+    font-awesome
+    material-design-icons
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   virtualisation.docker.enable = true;
@@ -56,11 +61,11 @@
       ssh.enable = true;
       zsh.enable = true;
 
-      programs = {
-        steam.enable = true;
-      };
-
       networking.enable = true;
+    };
+
+    programs = {
+    	steam.enable = true;
     };
   };
 

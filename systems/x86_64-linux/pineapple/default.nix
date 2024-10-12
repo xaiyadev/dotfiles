@@ -31,10 +31,9 @@
   hardware.bluetooth.enable = true;
   services.upower.enable = true;
 
-
   environment.systemPackages = with pkgs; [
     vim
-    devenv
+    # TODO: wait for devenv install fix
     premid # TODO: add module
   ];
 

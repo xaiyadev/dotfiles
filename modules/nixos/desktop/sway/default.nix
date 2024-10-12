@@ -23,42 +23,76 @@ in
         enable = mkEnableOption "Activate all the neceasery tools for sway to work";
     };
 
+
     config = mkIf cfg.enable {
-      /* Packages and other things that need to be installed */
+
+      programs.sway = {
+        enable = true;
+        package = pkgs.swayfx; /* https://github.com/nix-community/nixpkgs-wayland/issues/468 */
+
+        wrapperFeatures.gtk = true;
+        extraPackages = with pkgs; [
+          wayland
+
+          wl-clipboard
+          wlroots
+
+          mako # notifaction system
+
+          /* Screenshot Utilities */
+          grim
+          slurp
+        ];
+
+        extraSessionCommands = ''
+          export WLR_RENDERER=vulkan
+          export SDL_VIDEODRIVER=wayland
+          export QT_QPA_PLATFORM=wayland
+          export _JAVA_AWT_WM_NONREPARENTING=1
+          export MOZ_ENABLE_WAYLAND=1
+        '';
+
+      };
+
+      xdg.portal = {
+        enable = true;
+        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+        config.common = {
+          default = [
+            "gtk"
+            "wlr"
+          ];
+        };
+      };
+
+      /* Small important things that will be activated */
       services.gnome.gnome-keyring.enable = true;
       services.dbus.enable = true;
 
-      services.xserver = {
-	      enable = true;
-	      displayManager.gdm = {
-	        enable =  true;
-	        wayland = true;
-	        banner = "Frohe Weinachten!";
-      };
-    };
+      /* Activate Display Manager and add a custom sway session */
+      services.xserver.enable = true;
+      services.displayManager = {
+        sddm = {
+          enable =  true;
+          wayland.enable = true;
+        };
 
-      environment.systemPackages = with pkgs; [
-        sway
-        wayland
-        xdg-utils
-        glib
-        grim
-        slurp
-        wl-clipboard
-        mako
-        dbus
-      ];
+        sessionPackages = let
+         swayFXEntry = pkgs.writeTextFile {
+                   name = "sway.desktop";
+                   destination = "/share/wayland-sessions/sway.desktop";
+                   text = ''
+                    [Desktop Entry]
+                    Name=SwayFX with unsupported GPU
+                    Comment=SwayFX Startup with Unsupported GPU
+                    Exec=env ${pkgs.swayfx}/bin/sway --unsupported-gpu
+                    Type=Application
+                   '';
+                   checkPhase = ''${pkgs.buildPackages.desktop-file-utils}/bin/desktop-file-validate "$target"'';
+                   derivationArgs = { passthru.providedSessions = [ "sway" ]; };
+                 };
+         in [ swayFXEntry ];
+      };
 
-      /* Desktop and window manager thingies */
-      xdg.portal = {
-        enable = true;
-        wlr.enable = true;
-        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-      };
-    
-      programs.sway = {
-	      enable = true;
-	      wrapperFeatures.gtk = true;
-      };
     };
 }

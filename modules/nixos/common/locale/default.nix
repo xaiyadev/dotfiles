@@ -26,6 +26,17 @@ in
     };
 
     config = mkIf cfg.enable {
+
+      /* install nerdfonts and icons */
+      fonts.packages = with pkgs; [
+        jetbrains-mono
+
+        font-awesome
+        material-design-icons
+        (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      ];
+
+
       console.keyMap = "de";
 
       time.timeZone = "Europe/Berlin";
@@ -44,12 +55,8 @@ in
       };
 
 
-    services.xserver = {
-      xkb.layout = "de";
-    };
-
-    xdg.portal.config.common.default = "*";
-    fonts.packages = with pkgs; [ jetbrains-mono ];
-
+      services.xserver = {
+        xkb.layout = "de";
+      };
   };
 }
