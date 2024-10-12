@@ -1,8 +1,9 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  # Installing NVIDIA drivers TODO: find a good fix
+  /* --- Manual Added code --- */
 
+  /* Install and configure NVIDIA drivers */
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware = {
@@ -42,7 +43,7 @@
 
 
 
-  /* Auto generated code */
+  /* --- Auto generated code --- */
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];

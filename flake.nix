@@ -55,7 +55,8 @@
         };
       };
 
-      nixpkgs.overlays = [ inputs.nixpkgs-wayland.overlay ];
+      /* Add External Overlays */
+      overlays = [ inputs.nixpkgs-wayland.overlay ];
 
       systems.modules.nixos = with inputs; [
 	      lix-module.nixosModules.default

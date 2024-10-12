@@ -28,18 +28,6 @@ in
       /*home.file.".config/wallpapers/something-beautiful-in-nature.jpg".source = ./wallpapers/something-beautiful-in-nature.jpg;*/
       home.file.".config/wallpapers/girls.jpeg".source = ./wallpapers/girls.jpeg;
 
-      /* Desktop Environment */
-      xdg.portal = {
-        enable = true;
-        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-        config.common = {
-          default = [
-            "gtk"
-            "wlr"
-          ];
-        };
-      };
-
       /* Sway configuration */
       wayland.windowManager.sway = {
         enable = true;
@@ -63,14 +51,12 @@ in
               pos = "4480 0";
             };
 
-            "HDMI-A-1" = if host == "pineapple" then {
+            "HDMI-A-1" = {
               pos = "1920 0";
-            } else {
-              pos = "5760 0";
             };
 
-            "DP-2" = {
-              pos = "3840 0";
+            "DP-3" = {
+              pos = "0 0";
             };
 
           };

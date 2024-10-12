@@ -31,13 +31,6 @@
   hardware.bluetooth.enable = true;
   services.upower.enable = true;
 
-  fonts.packages = with pkgs; [
-    font-awesome
-    material-design-icons
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-  ];
-
-
   environment.systemPackages = with pkgs; [
     vim
     # TODO: wait for devenv install fix

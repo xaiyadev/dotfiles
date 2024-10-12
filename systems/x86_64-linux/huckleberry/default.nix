@@ -69,7 +69,6 @@
     };
   };
 
-  programs.dconf.enable = true;
   # Needs to be installen globally...
   # TODO: understand how aagl wants you to use flakes with home-manager
   programs.anime-game-launcher.enable = true;

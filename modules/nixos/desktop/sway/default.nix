@@ -26,28 +26,51 @@ in
 
     config = mkIf cfg.enable {
 
-      /* Packages and other things that need to be installed */
+      programs.sway = {
+        enable = true;
+        package = pkgs.swayfx; /* https://github.com/nix-community/nixpkgs-wayland/issues/468 */
+
+        wrapperFeatures.gtk = true;
+        extraPackages = with pkgs; [
+          wayland
+
+          wl-clipboard
+          wlroots
+
+          mako # notifaction system
+
+          /* Screenshot Utilities */
+          grim
+          slurp
+        ];
+
+        extraSessionCommands = ''
+          export WLR_RENDERER=vulkan
+          export SDL_VIDEODRIVER=wayland
+          export QT_QPA_PLATFORM=wayland
+          export _JAVA_AWT_WM_NONREPARENTING=1
+          export MOZ_ENABLE_WAYLAND=1
+        '';
+
+      };
+
+      xdg.portal = {
+        enable = true;
+        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+        config.common = {
+          default = [
+            "gtk"
+            "wlr"
+          ];
+        };
+      };
+
+      /* Small important things that will be activated */
       services.gnome.gnome-keyring.enable = true;
       services.dbus.enable = true;
 
-      environment.systemPackages = with pkgs; [
-        wayland
-        xdg-utils
-        glib
-        grim
-        slurp
-        wl-clipboard
-        mako
-        dbus
-
-        swayfx
-      ];
-
-
-      /* Desktop and window manager thingies */
-      services.xserver = {
-      	enable = true;
-      };
+      /* Activate Display Manager and add a custom sway session */
+      services.xserver.enable = true;
       services.displayManager = {
         sddm = {
           enable =  true;
@@ -55,45 +78,21 @@ in
         };
 
         sessionPackages = let
-         custom-sway = pkgs.writeTextFile {
+         swayFXEntry = pkgs.writeTextFile {
                    name = "sway.desktop";
                    destination = "/share/wayland-sessions/sway.desktop";
                    text = ''
                     [Desktop Entry]
-                    Comment=Fuck. You. Nvidia.
-                    Exec=${pkgs.swayfx}/bin/sway --unsupported-gpu
-                    Name=custom-sway
+                    Name=SwayFX with unsupported GPU
+                    Comment=SwayFX Startup with Unsupported GPU
+                    Exec=env ${pkgs.swayfx}/bin/sway --unsupported-gpu
                     Type=Application
                    '';
                    checkPhase = ''${pkgs.buildPackages.desktop-file-utils}/bin/desktop-file-validate "$target"'';
                    derivationArgs = { passthru.providedSessions = [ "sway" ]; };
                  };
-         in [ custom-sway ];
+         in [ swayFXEntry ];
       };
 
-      xdg.portal = {
-        enable = true;
-        wlr.enable = true;
-        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-      };
-
-      # Required for Sway as per https://nixos.wiki/wiki/Sway
-      security.polkit.enable = true;
-
-/*      programs.sway = {
-	      enable = true;
-	      package = pkgs.swayfx;
-
-	      wrapperFeatures.gtk = true;
-
-        # Add Unsupported GPUs for huckleberry // nvidia devices
-	      extraOptions = [
-	        "--unsupported-gpu"
-	      ];
-
-	      extraSessionCommands = ''
-          export WLR_RENDERER=vulkan
-	      '';
-      };*/
     };
 }
