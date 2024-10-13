@@ -111,6 +111,7 @@ in
           in lib.mkOptionDefault {
               "${modifier}+e" = "exec ${pkgs.wofi-emoji}/bin/wofi-emoji";
               "${modifier}+l" = "exec ${pkgs.swaylock-effects}/bin/swaylock";
+              "${modifier}+Escape" = "exec ${pkgs.wlogout}/bin/wlogout";
           };
 
         };
@@ -169,6 +170,7 @@ in
 
       ${namespace} = {
         tools.kitty.enable = true;
+
         desktop.config = {
           gnome = {
             enable = true;
@@ -178,6 +180,7 @@ in
           sway.tools = {
             waybar.enable = true;
             wofi.enable = true;
+            wlogout.enable = true;
           };
 
         };
