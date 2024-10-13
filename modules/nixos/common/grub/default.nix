@@ -49,11 +49,6 @@ in {
 	        efiSupport = true;
 
 	        useOSProber = cfg.windowsSupport;
-
-          catppuccin = {
-            enable = true;
-            flavor = specialArgs.cattpuccin.flavor;
-          };
         };
       };
   };

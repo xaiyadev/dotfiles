@@ -33,8 +33,8 @@ in
        programs.spicetify = {
             enable = true;
 
-            theme = spicePkgs.themes.catppuccin;
-            colorScheme = "Mocha";
+            theme = spicePkgs.themes.ziro;
+            colorScheme = "rose-pine";
 
             enabledExtensions = with spicePkgs.extensions; [
                bookmark

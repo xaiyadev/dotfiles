@@ -72,18 +72,15 @@
 
       systems.hosts.huckleberry.specialArgs = {
           host-name = "huckleberry";
-          cattpuccin.flavor = "mocha";
       };
 
       systems.hosts.pineapple.specialArgs = {
           host-name = "pineapple";
-          cattpuccin.flavor = "mocha";
 
       };
 
       systems.hosts.apricot.specialArgs = {
           host-name = "apricot";
-          cattpuccin.flavor = "mocha";
       };
 
     };
