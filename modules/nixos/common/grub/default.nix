@@ -46,7 +46,8 @@ in {
         grub = {
           enable = true;
           device = cfg.device;
-	        efiSupport = cfg.windowsSupport;
+	        efiSupport = true;
+
 	        useOSProber = cfg.windowsSupport;
 
           catppuccin = {
