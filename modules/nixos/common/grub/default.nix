@@ -46,13 +46,9 @@ in {
         grub = {
           enable = true;
           device = cfg.device;
-	        efiSupport = cfg.windowsSupport;
-	        useOSProber = cfg.windowsSupport;
+	        efiSupport = true;
 
-          catppuccin = {
-            enable = true;
-            flavor = specialArgs.cattpuccin.flavor;
-          };
+	        useOSProber = cfg.windowsSupport;
         };
       };
   };

@@ -25,6 +25,7 @@ in
 
     config = mkIf cfg.enable {
          home.file.".config/vesktop/themes/mocha.theme.css".source = ./themes/mocha.theme.css;
+         home.file.".config/vesktop/themes/rose-pine.theme.css".source = ./themes/rose-pine.theme.css;
 
         home.packages = with pkgs; [
             vesktop

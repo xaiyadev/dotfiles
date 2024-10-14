@@ -19,6 +19,7 @@
     config,
     ...
 }: {
+
      home.packages = with pkgs; [
        obsidian
        jetbrains.webstorm
