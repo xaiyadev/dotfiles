@@ -41,9 +41,9 @@
         vesktop.enable = true;
         vscode.enable = true;
 
-        minecraft = {
+        lunar-client = {
             enable = true;
-            lunar-client = true;
+
           };
       };
 
