@@ -28,6 +28,8 @@
     };
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+   
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
 
     agenix.url = "github:ryantm/agenix";
 

@@ -34,7 +34,8 @@
   environment.systemPackages = with pkgs; [
     vim
     # TODO: wait for devenv install fix
-    premid # TODO: add module
+    
+    inputs.zen-browser.packages."${system}".default
   ];
 
   virtualisation.docker.enable = true;
