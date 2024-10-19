@@ -40,7 +40,10 @@
 
         minecraft = {
           enable = true;
-          lunar-client = true;
+          package = pkgs.lunar-client;
+
+          /* TODO: change later! */
+          resourcepacks = ./resourcepacks;
         };
       };
 

@@ -16,7 +16,7 @@
 }:
 with lib;
 let
-    cfg = config.${namespace}.programs.lunar-client;
+    cfg = config.${namespace}.programs.minecraft;
 
 
 
@@ -40,9 +40,9 @@ in
         /** Important:
           * renderClouds needs to be a string!
          */
-        type = with lib.types; attrsOf (nullOr (oneOf [ bool int str ]));
+        type = with types; attrsOf (nullOr (oneOf [ bool int str ]));
 
-        example = lib.literalExpression ''
+        example = literalExpression ''
           autoJump = false;
           guiScale = 2;
           maxFps = 120;
@@ -58,39 +58,46 @@ in
      };
 
      resourcepacks = mkOption {
+       type = types.nullOr types.path;
+       example = literalExpression ''./resourcepacks'';
 
-     };
-
-     lunar-client.enable = mkEnableOption ''If the Lunar Client should be activated'';
-
-     lunar-client.package = mkOption {
-       type = types.package;
-       default = pkgs.lunar-client;
-       description = ''The lunar-client package that should be used'';
-     };
-
-     lunar-client.launcher.settings = {
-       type = with lib.types; attrsOf (nullOr (oneOf [ bool int str ])); /* TODO: needs in depth settings option */
-       example = lib.literalExpression ''
-         langueage = "en_US";
-         afterLaunchAction = "HIDE";
-       /*discordRichPresence = {
-           enabled = true;
-           hideWhenIdle = false;
-         };*/
+       description = ''
+        The folder where all your resourcepacks are located
        '';
-
-       description = ''the launcher.json in .lunarclient'';
      };
 
-      lunar-client.launcher.profiles = { }; /* Has: profile name; has jsons for: settings/game/PROFILENAME/; */
+     mods = mkOption {
+       type = types.nullOr types.path;
+       example = literalExpression ''./mods'';
 
 
+       /* TODO: if big modpack: use url */
+       description = ''
+        The folder where all your mods are located
+       '';
+     };
+
+     shaderpacks = {
+       type = types.nullOr types.path;
+       example = literalExpression ''./shaders'';
+
+       description = ''
+        The folder where all your shaders are located
+       '';
+     };
 
     };
 
     config = mkIf cfg.enable {
-        home.packages = with pkgs; [ lunar-client ];
+        home.packages = with pkgs; [ cfg.package ];
+
+        home.file.".minecraft/resourcepacks" = {
+          source = config.lib.file.mkOutOfStoreSymlink cfg.resourcepacks;
+        };
+
+
+
+
 
 
     };
