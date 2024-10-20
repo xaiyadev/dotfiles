@@ -38,12 +38,15 @@
         vesktop.enable = true;
         vscode.enable = true;
 
-        minecraft = {
-          enable = true;
-          package = pkgs.lunar-client;
+        games = {
+          minecraft = {
+            enable = true;
+            package = pkgs.lunar-client;
 
-          /* TODO: change later! */
-          resourcepacks = ./resourcepacks;
+            resourcepacks.install = true;
+            shaderpacks.install = true;
+            mods.install = true;
+          };
         };
       };
 
