@@ -26,8 +26,10 @@
 
   environment.systemPackages = with pkgs; [
     vim
-    premid # TODO: add module
     jq
+    git
+
+    inputs.zen-browser.packages."${system}".default
   ];
 
   fonts.packages = with pkgs; [

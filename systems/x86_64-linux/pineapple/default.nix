@@ -34,6 +34,9 @@
   environment.systemPackages = with pkgs; [
     vim
     # TODO: wait for devenv install fix
+
+    jq
+    git
     
     inputs.zen-browser.packages."${system}".default
   ];
