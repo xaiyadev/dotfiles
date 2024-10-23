@@ -33,8 +33,7 @@
 
     agenix.url = "github:ryantm/agenix";
 
-    catppuccin.url = "github:catppuccin/nix";
-
+    nur.url = "github:nix-community/NUR";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     # overlay channels
@@ -44,8 +43,10 @@
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
       src = ./.; # needs to be the root of the flake file
+
       channels-config = {
         allowUnfree = true;
+
       };
 
       # configure snowfall settings!
@@ -59,10 +60,6 @@
         };
       };
 
-
-      unstable = "github:nixos/nixpkgs/nixos-unstable";
-
-
       /* Add External Overlays */
       overlays = [ inputs.nixpkgs-wayland.overlay ];
 
@@ -70,13 +67,17 @@
 	      lix-module.nixosModules.default
         agenix.nixosModules.default
 
-        catppuccin.nixosModules.catppuccin
         aagl.nixosModules.default
+
+        # This adds a nur configuration option.
+        # Use `config.nur` for packages like this:
+        # ({ config, ... }: {
+        #   environment.systemPackages = [ config.nur.repos.mic92.hello-nur ];
+        # })
+        nur.nixosModules.nur
       ];
 
-      homes.modules = with inputs; [
-        catppuccin.homeManagerModules.catppuccin
-      ];
+      homes.modules = with inputs; [ ];
 
       systems.hosts.huckleberry.specialArgs = {
           host-name = "huckleberry";

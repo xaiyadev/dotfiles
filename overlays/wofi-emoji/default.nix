@@ -1,6 +1,7 @@
 { channels, ...  }:
 
 final: prev: {
+    # Will maybe be replaced in: https://github.com/BreakingTV/nur-packages, unclear because this is a temporary solution
     # use my forked version until https://github.com/Zeioth/wofi-emoji/pull/17 is merged
     wofi-emoji =
     let

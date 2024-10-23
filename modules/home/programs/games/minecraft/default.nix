@@ -23,6 +23,7 @@ let
     mods = ./mods;
 in
 {
+    # TODO: will be replaced in: https://github.com/BreakingTV/nur-packages
     options.${namespace}.programs.games.minecraft = {
       enable = mkEnableOption "install minecraft and configure it";
       package = mkOption {

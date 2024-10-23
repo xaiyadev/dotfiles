@@ -42,21 +42,6 @@
         "type": "github"
       }
     },
-    "catppuccin": {
-      "locked": {
-        "lastModified": 1728407414,
-        "narHash": "sha256-B8LaxUP93eh+it8RW1pGq4SsU2kj7f0ipzFuhBvpON8=",
-        "owner": "catppuccin",
-        "repo": "nix",
-        "rev": "96cf8b4a05fb23a53c027621b1147b5cf9e5439f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "nix",
-        "type": "github"
-      }
-    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -506,15 +491,30 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1729696174,
+        "narHash": "sha256-3eW+rOlHyL5umNzwDH5TmsewBWI0y7zoo2t1jjtBUtk=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "210fc3297340f3b1151780a73c4e91ce67d44db1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "aagl": "aagl",
         "agenix": "agenix",
-        "catppuccin": "catppuccin",
         "home-manager": "home-manager_2",
         "lix-module": "lix-module",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-wayland": "nixpkgs-wayland",
+        "nur": "nur",
         "snowfall-lib": "snowfall-lib",
         "spicetify-nix": "spicetify-nix",
         "zen-browser": "zen-browser"
