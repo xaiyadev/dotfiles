@@ -36,6 +36,8 @@
     catppuccin.url = "github:catppuccin/nix";
 
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+
+    # overlay channels
   };
 
   outputs = inputs:
@@ -56,6 +58,10 @@
           title = "Breakings Awesome Dotfiles";
         };
       };
+
+
+      unstable = "github:nixos/nixpkgs/nixos-unstable";
+
 
       /* Add External Overlays */
       overlays = [ inputs.nixpkgs-wayland.overlay ];

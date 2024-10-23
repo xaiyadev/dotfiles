@@ -27,6 +27,7 @@
   environment.systemPackages = with pkgs; [
     vim
     premid # TODO: add module
+    jq
   ];
 
   fonts.packages = with pkgs; [
