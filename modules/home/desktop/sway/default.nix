@@ -31,11 +31,14 @@ in
       /* Sway configuration */
       wayland.windowManager.sway = {
         enable = true;
+        package = null;
         checkConfig = false;
 
         config = {
           menu = "${pkgs.wofi}/bin/wofi --allow-images --show drun";
-          bars = [ ];
+          bars = [ { command = "${pkgs.waybar}/bin/waybar"; } ];
+          modifier = "Mod4";
+          terminal = "kitty";
 
           output = {
             "*" = {
@@ -61,22 +64,25 @@ in
 
           };
 
-          input = {
-            "*" = {
-              xkb_layout = "de";
-              accel_profile = "flat";
-              pointer_accel = "-0.6";
-            };
-
-            /* Laptop Touchpad */
-            "2:14:ETPS/2_Elantech_Touchpad" = {
-              pointer_accel = "0";
-              natural_scroll = "enabled";
-            };
-          };
-
-          modifier = "Mod4";
-          terminal = "kitty";
+          defaultWorkspace = "1";
+          workspaceOutputAssign = [
+            {
+              output = "HDMI-A-1";
+              workspace = "1";
+            }
+            {
+              output = "DP-3";
+              workspace = "2";
+            }
+            {
+              output = "DP-1";
+              workspace = "2";
+            }
+            {
+              output = "eDP-1";
+              workspace = "3";
+            }
+          ];
 
           window = {
             border = 4;
@@ -97,13 +103,28 @@ in
               text = "#e0def4";
               indicator = "#ebbcba";
             };
-            
+
             unfocused = {
               background = "#9ccfd8";
               border = "#6e6a86";
               childBorder = "#6e6a86";
               text = "#e0def4";
               indicator = "#6e6a86";
+            };
+          };
+
+
+          input = {
+            "*" = {
+              xkb_layout = "de";
+              accel_profile = "flat";
+              pointer_accel = "-0.6";
+            };
+
+            /* Laptop Touchpad */
+            "2:14:ETPS/2_Elantech_Touchpad" = {
+              pointer_accel = "0";
+              natural_scroll = "enabled";
             };
           };
 
@@ -114,8 +135,32 @@ in
               "${modifier}+Escape" = "exec ${pkgs.wlogout}/bin/wlogout";
           };
 
+          startup = [
+            { command = ''exec spotify''; }
+            { command = ''sleep 5 && sway '[class="Spotify"]' move container to workspace 4 ''; }
+
+            { command = ''exec vesktop''; }
+            { command = ''sleep 5 && sway '[class="vesktop"]' move container to workspace 5''; }
+          ];
+
         };
-	      extraConfig = ''exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK '';
+
+	      extraConfig = ''
+          # Activate dbus for starting programs faster
+          exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+          # Set the names of the workspaces -> already managed in Waybar but for workspace managment in sway needed
+          set $ws1 1
+          set $ws2 2
+          set $ws3 3
+          set $ws4 4
+          set $ws5 5
+          set $ws6 6
+          set $ws7 7
+          set $ws8 8
+          set $ws9 9
+          set $ws0 0
+	      '';
       };
 
       ${namespace} = {
