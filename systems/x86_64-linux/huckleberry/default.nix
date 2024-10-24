@@ -47,7 +47,10 @@
 
   ${namespace} = {
     desktop.sway.enable = true;
-    #desktop.gnome.enable = true;
+    /*desktop.gnome = {
+        gtk.enable = true;
+        dconf.enable = true;
+    }*/
 
     common = {
       locale.enable = true;
@@ -55,12 +58,12 @@
 
       grub = {
         enable = true;
-        windowsSupport = true;
+        windows.enable = true;
       };
 
       nix = {
         enable = true;
-        use-lix = true;
+        lix.enable = true;
       };
 
       ssh.enable = true;

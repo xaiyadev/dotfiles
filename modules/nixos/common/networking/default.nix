@@ -22,20 +22,7 @@ in
     options.${namespace}.common.networking = {
         enable = mkEnableOption "Setup Locale settings; time/keyboard etc.";
 
-        enableWIFI = mkOption {
-          type = types.bool;
-          default = false;
-          example = true;
-          description = "If wifi should be enabled with these settings";
-        };
-
-        enableVPN = mkOption {
-          type = types.bool;
-          default = false;
-          example = true;
-          description = "If the local VPN from the 'frit.box' should be activated";
-        };
-
+        vpn.enable = mkEnableOption ''If the local VPN from the 'frit.box' should be activated'';
     };
 
     config = mkIf cfg.enable {
@@ -63,7 +50,7 @@ in
             firewall = {
               enable = true;
               allowedUDPPorts = [ 51820 ];
-              checkReversePath = mkIf cfg.enableVPN "loose";
+              checkReversePath = mkIf cfg.vpn.enable "loose";
             };
 
             networkmanager = {
@@ -189,7 +176,7 @@ in
               };
             };
 
-            wg-quick.interfaces = mkIf cfg.enableVPN {
+            wg-quick.interfaces = mkIf cfg.vpn.enable {
               wg0 = {
                 address = [ "192.168.1.201/24" ];
                 listenPort = 51820;

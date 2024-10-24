@@ -22,19 +22,7 @@ in
     options.${namespace}.desktop.config.gnome = {
         enable = mkEnableOption "setup gnome and dconf settings!";
 
-        gtk = mkOption {
-          type = types.bool;
-          default = true;
-          example = false;
-          description = "If gtk should be enabled and used";
-        };
-
-        dconf = mkOption {
-          type = types.bool;
-          default = true;
-          example = false;
-          description = "If dconf should be enabled and used";
-        };
+        gtk.enable = mkEnableOption ''If gtk should be enabled and used'';
 
         favorite-apps = mkOption {
             type = types.listOf types.str;
@@ -57,7 +45,7 @@ in
     config = mkIf cfg.enable {
          home.file.".config/wallpapers/rainbow-cat.png".source = ./wallpapers/${cfg.wallpaper};
 
-          gtk = mkIf cfg.gtk {
+          gtk = mkIf cfg.gtk.enable {
             enable = true;
             theme = {
                   name = "rose-pine-gtk";
@@ -76,7 +64,7 @@ in
 
           dconf = {
               enable = true;
-              settings."org/gnome/desktop/background".picture-ui = mkIf cfg.dconf ".config/wallpapers/${cfg.wallpaper}";
+              settings."org/gnome/desktop/background".picture-ui = ".config/wallpapers/${cfg.wallpaper}";
 
               settings."org/gnome/shell/extensions/user-theme".name = "rose-pine-gtk";
 
@@ -91,7 +79,7 @@ in
                   show-battery-percentage = true;
               };
 
-              settings."org/gnome/shell" = mkIf cfg.dconf {
+              settings."org/gnome/shell" = {
                   favorite-apps = cfg.favorite-apps;
 
                   enabled-extensions = [
@@ -106,7 +94,7 @@ in
 
               /* --- Extension Settings --- */
 
-              settings."org/gnome/shell/extensions/dash-to-dock" = mkIf cfg.dconf {
+              settings."org/gnome/shell/extensions/dash-to-dock" = {
                   apply-custom-theme = false;
                   background-color = "rgb(38,38,38)";
                   background-opacity = 0.4;
@@ -138,7 +126,7 @@ in
               };
 
 
-              settings."org/gnome/shell/extensions/sp-tray" = mkIf cfg.dconf {
+              settings."org/gnome/shell/extensions/sp-tray" = {
                   display-format = "{artist} » {track}";
                   display-mode = 1;
                   hidden-when-paused = false;

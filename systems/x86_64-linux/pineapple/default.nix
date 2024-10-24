@@ -47,7 +47,10 @@
 
   ${namespace} = {
     desktop.sway.enable = true;
-    #desktop.gnome.enable = true;
+    /*desktop.gnome = {
+        gtk.enable = true;
+        dconf.enable = true;
+    }*/
 
     common = {
       locale.enable = true;
@@ -57,7 +60,7 @@
 
       nix = {
         enable = true;
-        use-lix = true;
+        lix.enable = true;
       };
 
       ssh.enable = true;
@@ -65,8 +68,7 @@
 
       networking = {
         enable = true;
-        enableWIFI = true;
-        enableVPN = true;
+        vpn.enable = true;
       };
     };
 

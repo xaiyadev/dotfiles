@@ -40,11 +40,6 @@
         spotify.enable = true;
         vesktop.enable = true;
         vscode.enable = true;
-
-        lunar-client = {
-            enable = true;
-
-          };
       };
 
       tools = {

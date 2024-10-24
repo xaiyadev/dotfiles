@@ -21,13 +21,7 @@ in {
 
    options.${namespace}.common.grub = {
      enable = mkEnableOption "Activate Grub Boot Loader!";
-
-     windowsSupport = mkOption {
-       type = types.bool;
-       default = false;
-       example = true;
-       description = "If ntfs File systems and boots should be supported";
-     };
+     windows.enable = mkEnableOption ''If ntfs File systems and boots should be supported'';
 
      device = mkOption {
        type = types.str;
@@ -38,7 +32,7 @@ in {
    };
 
     config = mkIf cfg.enable {
-        boot.supportedFilesystems = if cfg.windowsSupport then [ "ntfs" ] else [ ];
+        boot.supportedFilesystems = if cfg.windows.enable then [ "ntfs" ] else [ ];
         boot.loader = {
         efi.canTouchEfiVariables = true;
 
@@ -48,7 +42,7 @@ in {
           device = cfg.device;
 	        efiSupport = true;
 
-	        useOSProber = cfg.windowsSupport;
+	        useOSProber = cfg.windows.enable;
         };
       };
   };

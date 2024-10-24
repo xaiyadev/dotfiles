@@ -21,11 +21,7 @@ in
 {
     options.${namespace}.services.nginx = {
         enable = mkEnableOption "Setup NGINX server. For the other services to work you need this enabled!";
-        enable-acme = mkOption {
-          type = types.bool;
-          default = true;
-          description = "Enable ACME for certificate management.";
-        };
+        acme.enable = mkEnableOption ''Enable ACME for certificate management.'';
 
     };
 
@@ -45,7 +41,7 @@ in
         };
 
         # Create cert for nginx
-        security.acme = mkIf cfg.enable-acme {
+        security.acme = mkIf cfg.acme.enable {
             acceptTerms = true;
             defaults.email = "danil80sch@gmail.com";
             certs."semiko.dev" = {

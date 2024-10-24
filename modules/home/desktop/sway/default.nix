@@ -167,10 +167,8 @@ in
         tools.kitty.enable = true;
 
         desktop.config = {
-          gnome = {
-            enable = true;
-            dconf = false;
-          };
+          # Takes config files from gnome
+          gnome.enable = true;
 
           sway.tools = {
             waybar.enable = true;

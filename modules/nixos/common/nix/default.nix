@@ -21,11 +21,7 @@ in
 {
     options.${namespace}.common.nix = {
         enable = mkEnableOption "Default nix settings setup and configured";
-        use-lix = mkOption {
-          type = types.bool;
-          default = false;
-          description = "Use Lix instead of Nix";
-        };
+        lix.enable = mkEnableOption ''Use the LIX package instead of the NIX package'';
 
     };
 
@@ -33,7 +29,7 @@ in
       # Install nix langauges server
       environment.systemPackages = with pkgs; [ nil ];
       nix = {
-        package = mkIf cfg.use-lix pkgs.lix; # Enable LIX
+        package = mkIf cfg.lix.enable pkgs.lix; # Enable LIX
         settings = {
           substituters = [ "https://cache.nixos.org/" "https://ezkea.cachix.org" ];
           trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];

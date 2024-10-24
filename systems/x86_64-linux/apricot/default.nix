@@ -46,7 +46,7 @@
 
       nix = {
         enable = true;
-        use-lix = true;
+        lix.enable = true;
       };
 
       ssh.enable = true;
@@ -56,7 +56,10 @@
 
     # TODO: add services for server
     services = {
-      nginx.enable = true;
+      nginx = {
+        enable = true;
+        acme.enable = true;
+      };
 
       homepage.enable = true;
 
