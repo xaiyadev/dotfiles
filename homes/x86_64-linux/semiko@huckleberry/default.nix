@@ -23,9 +23,14 @@
      home.packages = with pkgs; [
        obsidian
        jetbrains.webstorm
+       zed-editor
+
 
        /* --- Games --- */
-       steam
+       # steam TODO: cant be installed on home-manager; needs to be system-wide
+
+       inputs.agenix.packages.${system}.default
+
      ];
 
     # TODO: infinite loop when using ${namespace} (?)

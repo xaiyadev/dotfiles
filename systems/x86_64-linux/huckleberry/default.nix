@@ -27,7 +27,9 @@
   environment.systemPackages = with pkgs; [
     vim
     jq
+
     git
+    #devenv
 
     inputs.zen-browser.packages."${system}".default
 

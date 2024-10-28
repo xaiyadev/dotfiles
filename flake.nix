@@ -34,7 +34,7 @@
     agenix.url = "github:ryantm/agenix";
 
     nur.url = "github:nix-community/NUR";
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # overlay channels
   };

@@ -40,6 +40,17 @@
         spotify.enable = true;
         vesktop.enable = true;
         vscode.enable = true;
+
+        games = {
+          minecraft = {
+            enable = true;
+            package = pkgs.lunar-client;
+
+            resourcepacks.install = true;
+            shaderpacks.install = true;
+            mods.install = true;
+          };
+        };
       };
 
       tools = {

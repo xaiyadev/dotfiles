@@ -33,12 +33,20 @@
 
   environment.systemPackages = with pkgs; [
     vim
-    # TODO: wait for devenv install fix
-
     jq
+
     git
-    
+    #devenv
+
     inputs.zen-browser.packages."${system}".default
+
+    xivlauncher # Final Fantasy 14; TODO: will be replaced in: https://github.com/BreakingTV/nur-packages
+  ];
+
+  fonts.packages = with pkgs; [
+    font-awesome
+    material-design-icons
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   virtualisation.docker.enable = true;
