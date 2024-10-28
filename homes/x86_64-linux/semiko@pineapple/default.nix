@@ -55,6 +55,7 @@
 
       tools = {
         git.enable = true;
+        neovim.enable = true;
       };
     };
 

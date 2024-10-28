@@ -2,15 +2,7 @@
   description = "Breakings Awesome Dotfiles";
 
   inputs = {
-    snowfall-lib = {
-        url = "github:snowfallorg/lib";
-        inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    /*Software flakes */
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
@@ -22,17 +14,29 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
+
+
+
+    /* System-important flakes */
+    snowfall-lib = {
+        url = "github:snowfallorg/lib";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-   
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
-
     agenix.url = "github:ryantm/agenix";
 
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nur.url = "github:nix-community/NUR";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
@@ -63,6 +67,7 @@
       /* Add External Overlays */
       overlays = [ inputs.nixpkgs-wayland.overlay ];
 
+      /* Add External Software/Modules */
       systems.modules.nixos = with inputs; [
 	      lix-module.nixosModules.default
         agenix.nixosModules.default

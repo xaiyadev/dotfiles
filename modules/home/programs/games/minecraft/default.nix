@@ -36,7 +36,7 @@ in
 
       resourcepacks.install = mkEnableOption "If the resourcepacks should be installed";
       shaderpacks.install = mkEnableOption "If the shaderpacks should be installed";
-      mods.install = mkEnableOption "If the mods should be installed";
+      mods.install = mkEnableOption "If the mods should be installed; fabric and forge mods allowed";
     };
 
     config = mkIf cfg.enable {
