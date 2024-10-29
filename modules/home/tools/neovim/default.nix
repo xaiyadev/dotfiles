@@ -53,8 +53,6 @@ in
               clangd.enable = true; # C/C++
               csharp_ls.enable = true; # C#
               yamlls.enable = true; # YAML
-
-              nixd.enable = true; # NIX
             };
           };
 
