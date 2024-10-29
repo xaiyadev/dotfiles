@@ -24,6 +24,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-minecraft. = {
+	url = "github:Infinidoge/nix-minecraft";
+	inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     /* System-important flakes */
     snowfall-lib = {
         url = "github:snowfallorg/lib";
@@ -79,7 +84,10 @@
       };
 
       /* Add External Overlays */
-      overlays = [ inputs.nixpkgs-wayland.overlay ];
+      overlays = with inputs; [
+        nixpkgs-wayland.overlay
+        nix-minecraft.overlay
+      ];
 
       /* Add External Software/Modules */
       systems.modules.nixos = with inputs; [
@@ -87,6 +95,8 @@
         agenix.nixosModules.default
 
         aagl.nixosModules.default
+
+        nix-minecraft.nixosModules.minecraft-servers
 
         # This adds a nur configuration option.
         # Use `config.nur` for packages like this:

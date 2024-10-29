@@ -66,6 +66,11 @@
       firefly.enable = true;
       vaultwarden.enable = true;
       youtrack.enable = true;
+
+      minecraft = {
+        enable = true;
+        survival.enable = true;
+      };
     };
   };
 
