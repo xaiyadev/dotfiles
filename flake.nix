@@ -14,9 +14,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-
+    zen-browser = {
+      url = "github:MarceColl/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     /* System-important flakes */
     snowfall-lib = {
@@ -30,13 +36,21 @@
     };
 
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agenix.url = "github:ryantm/agenix";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    nixpkgs-wayland = {
+      url = "github:nix-community/nixpkgs-wayland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    /* Packge sets */
     nur.url = "github:nix-community/NUR";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
@@ -69,7 +83,7 @@
 
       /* Add External Software/Modules */
       systems.modules.nixos = with inputs; [
-	      lix-module.nixosModules.default
+	lix-module.nixosModules.default
         agenix.nixosModules.default
 
         aagl.nixosModules.default
@@ -82,7 +96,7 @@
         nur.nixosModules.nur
       ];
 
-      homes.modules = with inputs; [ ];
+      homes.modules = with inputs; [ nixvim.homeManagerModules.nixvim ];
 
       systems.hosts.huckleberry.specialArgs = {
           host-name = "huckleberry";

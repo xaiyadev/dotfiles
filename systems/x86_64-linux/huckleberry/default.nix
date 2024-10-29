@@ -28,7 +28,7 @@
     jq
 
     git
-    #devenv
+    devenv
 
     inputs.zen-browser.packages."${system}".default
 

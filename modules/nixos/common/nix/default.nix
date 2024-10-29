@@ -26,8 +26,6 @@ in
     };
 
     config = mkIf cfg.enable {
-      # Install nix langauges server
-      environment.systemPackages = with pkgs; [ nil ];
       nix = {
         package = mkIf cfg.lix.enable pkgs.lix; # Enable LIX
         settings = {

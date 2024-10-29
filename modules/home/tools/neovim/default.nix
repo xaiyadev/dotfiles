@@ -24,15 +24,45 @@ in
     };
 
     config = mkIf cfg.enable {
-      programs.neovim = {
+      programs.nixvim = {
         enable = true;
         defaultEditor = true;
         vimAlias = true;
         viAlias = true;
 
-        plugins = with pkgs; [
-          vimPlugins.rose-pine
-          ];
+        colorschemes.rose-pine.enable = true;
+        plugins = {
+          /* Auto-complition */
+          lsp = {
+            enable = true;
+            servers = {
+              # ts-ls.enable = true; # TS/JS
+              ts_ls.enable = true; # TS/JS
+              cssls.enable = true; # CSS
+              tailwindcss.enable = true; # TailwindCSS
+              html.enable = true; # HTML
+              astro.enable = true; # AstroJS
+              phpactor.enable = true; # PHP
+              svelte.enable = false; # Svelte
+              vuels.enable = false; # Vue
+              pyright.enable = true; # Python
+              marksman.enable = true; # Markdown
+              nil_ls.enable = true; # Nix
+              dockerls.enable = true; # Docker
+              bashls.enable = true; # Bash
+              clangd.enable = true; # C/C++
+              csharp_ls.enable = true; # C#
+              yamlls.enable = true; # YAML
+
+              nixd.enable = true; # NIX
+            };
+          };
+
+          coq-nvim = {
+            enable = true;
+            installArtifacts = true;
+          };
         };
+      };
     };
 }
