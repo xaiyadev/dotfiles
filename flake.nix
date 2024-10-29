@@ -24,7 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-minecraft. = {
+    nix-minecraft = {
 	url = "github:Infinidoge/nix-minecraft";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
