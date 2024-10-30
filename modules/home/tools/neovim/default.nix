@@ -24,7 +24,7 @@ in
     };
 
     config = mkIf cfg.enable {
-      
+	      
       programs.nixvim = {
         enable = true;
         defaultEditor = true;
@@ -65,10 +65,10 @@ in
 
 	    settings = {
 	      sources = [
-		{ name = "nvim_lsp"; }		  
+		{ name = "nvim_lsp"; }	
 	      ];
 	      
-	      mapping = {
+	      mappings = {
 		"<C-Space>" = "cmp.mapping.complete()";
 		"<C-d>" = "cmp.mapping.scroll_docs(-4)";
 		"<C-e>" = "cmp.mapping.close()";
@@ -79,7 +79,29 @@ in
 	      };
 	    };
 	  };
-        };
-      };
-    };
+
+	  gitblame.enable = true;
+          
+	  project-nvim = {
+	    enable = true;
+	  };
+
+	  telescope = {
+	    enable = true;
+	  };
+	  
+	  nvim-tree = {
+	    enable = true;
+	    
+	    autoClose = true;
+	    openOnSetup = true;
+	  };
+
+	  which-key = {
+	    enable = true;
+	  };
+
+	  };
+	};
+     };
 }
