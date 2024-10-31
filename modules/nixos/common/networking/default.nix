@@ -147,9 +147,9 @@ in
                   };
 
                   # Mobile Hotspot
-                  Pomegranate = {
+                  Strawberry = {
                     connection = {
-                      id = "🍓 Stawberry";
+                      id = "Stawberry";
                       interface-name = "wlp3s0";
                       type = "wifi";
                       uuid = "1f08f24d-56fc-46e2-bdca-39f553b6410d";
@@ -164,7 +164,7 @@ in
                     proxy = { };
                     wifi = {
                       mode = "infrastructure";
-                      ssid = "🍓 Strawberry";
+                      ssid = "Strawberry";
                     };
                     wifi-security = {
                       auth-alg = "open";
