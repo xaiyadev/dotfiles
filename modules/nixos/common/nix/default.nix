@@ -29,8 +29,8 @@ in
       nix = {
         package = mkIf cfg.lix.enable pkgs.lix; # Enable LIX
         settings = {
-          substituters = [ "https://cache.nixos.org/" "https://ezkea.cachix.org" ];
-          trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
+          substituters = [ "https://cache.nixos.org/" "https://ezkea.cachix.org" "https://devenv.cachix.org" ];
+          trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=" ];
 
           experimental-features = [ "nix-command" "flakes" ];
           builders-use-substitutes = true;
