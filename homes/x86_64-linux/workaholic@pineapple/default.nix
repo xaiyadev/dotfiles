@@ -40,7 +40,8 @@
           enable = true;
           email = "d.schumin@blmedia.de";
         };
-	neovim.enable = true;
+
+	      neovim.enable = true;
       };
     };
 

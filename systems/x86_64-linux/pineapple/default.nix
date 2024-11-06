@@ -37,9 +37,6 @@
     git
     devenv
 
-    flatpak
-    gnome.gnome-software
-
     inputs.zen-browser.packages."${system}".default
 
     xivlauncher # Final Fantasy 14; TODO: will be replaced in: https://github.com/BreakingTV/nur-packages

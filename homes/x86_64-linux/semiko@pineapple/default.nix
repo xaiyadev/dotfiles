@@ -55,7 +55,10 @@
 
       tools = {
         git.enable = true;
-        neovim.enable = true;
+        neovim = {
+          enable = true;
+          discord.rpc.enable = true;
+        };
       };
     };
 
