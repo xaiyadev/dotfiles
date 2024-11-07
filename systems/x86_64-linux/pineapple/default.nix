@@ -53,11 +53,7 @@
   users.users.workaholic.extraGroups = [ "docker" "audio" ];
 
   ${namespace} = {
-    desktop.sway.enable = true;
-    /*desktop.gnome = {
-        gtk.enable = true;
-        dconf.enable = true;
-    }*/
+    desktop.sddm.enable = true;
 
     common = {
       locale.enable = true;

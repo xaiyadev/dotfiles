@@ -28,11 +28,19 @@ in
       /*home.file.".config/wallpapers/something-beautiful-in-nature.jpg".source = ./wallpapers/something-beautiful-in-nature.jpg;*/
       home.file.".config/wallpapers/girls.jpeg".source = ./wallpapers/girls.jpeg;
 
+      home.packages = with pkgs; [
+        wl-clipboard # copy and paste in wayland
+        # Screenshot utilitis
+        grim
+        slurp
+      ];
+
       /* Sway configuration */
       wayland.windowManager.sway = {
         enable = true;
-        package = null;
+        package = pkgs.sway;
         checkConfig = false;
+        extraOptions = [ "--unsupported-gpu" ];
 
         config = {
           menu = "${pkgs.wofi}/bin/wofi --allow-images --show drun";
@@ -167,9 +175,6 @@ in
         tools.kitty.enable = true;
 
         desktop.config = {
-          # Takes config files from gnome
-          gnome.enable = true;
-
           sway.tools = {
             waybar.enable = true;
             wofi.enable = true;

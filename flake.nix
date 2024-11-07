@@ -109,7 +109,7 @@
       homes.modules = with inputs; [ nixvim.homeManagerModules.nixvim ];
 
       systems.hosts.huckleberry.specialArgs = {
-          host-name = "blueberry";
+          host-name = "huckleberry";
       };
 
       systems.hosts.pineapple.specialArgs = {
