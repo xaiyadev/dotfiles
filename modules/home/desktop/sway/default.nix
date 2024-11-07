@@ -30,10 +30,6 @@ in
 
       home.packages = with pkgs; [
         wl-clipboard # copy and paste in wayland
-
-        wl-copy # copy tool for wayland
-        wl-paste # paste tool for wayland
-        
         # Screenshot utilitis
         grim
         slurp
