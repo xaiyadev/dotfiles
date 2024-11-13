@@ -35,7 +35,10 @@
 
     # TODO: infinite loop when using ${namespace} (?)
     semiko = {
-      desktop.config.sway.enable = true;
+      desktop.config.sway = {
+        enable = true;
+        devices.huckleberry = true;
+      };
 
       programs = {
         spotify.enable = true;

@@ -22,6 +22,7 @@ in
 {
     options.${namespace}.desktop.config.sway = {
         enable = mkEnableOption "Setup sway settings!";
+        devices.huckleberry = mkEnableOption "If the work device is huckleberry";
     };
 
     config = mkIf cfg.enable {
@@ -64,7 +65,7 @@ in
 
             "HDMI-A-1" = {
               pos = "1920 0";
-              mode = "1920x1080@119.982Hz";
+              mode = mkIf cfg.devices.huckleberry "1920x1080@119.982Hz";
               };
 
             "DP-3" = {
