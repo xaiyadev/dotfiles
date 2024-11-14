@@ -65,6 +65,7 @@
         enable = true;
         lix.enable = true;
       };
+      yubikey.enable = true;
 
       ssh.enable = true;
       zsh.enable = true;
