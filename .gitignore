@@ -5,6 +5,3 @@ result-*
 
 ### Jetbrains IDE
 .idea/
-
-### secret files, etc.
-SECRET.txt

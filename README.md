@@ -64,4 +64,4 @@ All environment files are be managed via [agenix](https://github.com/ryantm/agen
 
 ---
 ## Credits
-- (Jo)[https://github.com/Jokiller230] Introduced me to NixOS and helped me out on the starting stages of the Nix Language!
+- [Jo](https://github.com/Jokiller230) Introduced me to NixOS and helped me out on the starting stages of the Nix Language!
