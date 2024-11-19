@@ -23,11 +23,24 @@ with lib.${namespace};
   ${namespace} = {
     system = {
       boot = enabled;
-      networking = enabled;
 
       fonts = enabled;
       locale = enabled;
     };
+
+    hardware = {
+      audio = enabled;
+
+      networking = {
+        enable = true;
+
+        wifi = {
+          ensureProfiles = enabled;
+          #vpn = enabled;
+        };
+      };
+    };
+
   };
 
   home-manager.backupFileExtension = "backup";

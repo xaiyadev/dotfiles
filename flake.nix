@@ -2,17 +2,10 @@
   inputs = {
     /* unstable packages pulled from github */
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
     
     /* Snowfall framework */
-    snwofall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    snwofall-lib = { url = "github:snowfallorg/lib"; inputs.nixpkgs.follows = "nixpkgs"; };
   };
 
   outputs = inputs: inputs.snwofall-lib.mkFlake {
