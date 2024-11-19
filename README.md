@@ -69,11 +69,14 @@ There is described how you can do that with the "yubico-pam" method.
 This Method uses the challenge-response configuration for authorization
 
 You can simply with a yubikey attached do these things:
-1. Create a shell with the utilities to modify the configuration ``nix-shell -p yubico-pam -p yubikey-manager``
-2. Reconfigure the 2nd touch of a yubikey. **THIS WILL REMOVE THE 2ND VALUE OF THE YUBIKEY** ``ykman otp chalresp --touch --generate 2``
-3. Add the configuration file to your user ``ykpamcfg -2 -v``
-   - This should be done with every user that wants to use this key.
-   - The file is then stored in ``/home/xayah/.yubico/challange-000000000``
+1. Create a shell with the utilities to modify the configuration
+   -  ``nix-shell -p yubico-pam -p yubikey-manager``
+3. Reconfigure the 2nd touch of a yubikey. **THIS WILL REMOVE THE 2ND VALUE OF THE YUBIKEY**
+   -  ``ykman otp chalresp --touch --generate 2``
+5. Add the configuration file to your user
+   -  ``ykpamcfg -2 -v``
+     -  This should be done with every user that wants to use this key.
+     -  the file is then stored in ``/home/xayah/.yubico/challange-000000000``
 
 > [!Important]
 > If you install a complete new system, it could be that you need to still do the 3rd step even if the yubikey is already configured
