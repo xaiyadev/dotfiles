@@ -3,6 +3,7 @@ My completly new and rewritten NixOS! [Nix Flakes](https://nixos.wiki/wiki/Flake
 
 This configuration uses the [snowflake lib](https://github.com/snowfallorg/lib) for the file structure and flake usage
 
+# Overview
 ## Structure
 This Configuration is based on the snowflake lib folder structure, so its easy replicable
 
@@ -55,12 +56,29 @@ All environment files are be managed via [agenix](https://github.com/ryantm/agen
 >
 > Simply remove all .age files and execute `nix run github:ryantm/agenix -- --rekey`
 
-## Features and Functions
-- [ ] https://github.com/BreakingTV/dotfiles/issues/9 A deployment tool for keeping my system and my packages up to date, even without working on the configuration files
-- [ ] https://github.com/BreakingTV/dotfiles/issues/10 A DevOPS tool for keeping the code clean and checking if all the systems can be build
+# Install Instructions
+Some modules need manual changes before they can be used, otherwise they cant work.
 
-## TODOs 
-- [ ] https://github.com/BreakingTV/dotfiles/issues/11 Refactoring the Code from v3 to v4
+## ``modules/nixos/hardware/yubikey``
+> [!Note]
+> If you already have a generated key you should add it in the configuration instead of creating a new one
+
+if you want to add your yubikey as a secure way to login and use sudo, you should look at the [Yubikey Nixos Wiki](https://nixos.wiki/wiki/Yubikey#yubico-pam)
+
+There is described how you can do that with the "yubico-pam" method.
+This Method uses the challenge-response configuration for authorization
+
+You can simply with a yubikey attached do these things:
+1. Create a shell with the utilities to modify the configuration ``nix-shell -p yubico-pam -p yubikey-manager``
+2. Reconfigure the 2nd touch of a yubikey. **THIS WILL REMOVE THE 2ND VALUE OF THE YUBIKEY** ``ykman otp chalresp --touch --generate 2``
+3. Add the configuration file to your user ``ykpamcfg -2 -v``
+   - This should be done with every user that wants to use this key.
+   - The file is then stored in ``/home/xayah/.yubico/challange-000000000``
+
+> [!Important]
+> If you install a complete new system, it could be that you need to still do the 3rd step even if the yubikey is already configured
+
+After that simply add this file into your configuration **encrypted** and link it to the module!
 
 ---
 ## Credits
