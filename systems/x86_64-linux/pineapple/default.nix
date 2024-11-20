@@ -21,6 +21,8 @@ with lib.${namespace};
   networking.hostName = "pineapple";
 
   ${namespace} = {
+    desktop.gdm = enabled;
+
     system = {
       boot = enabled;
 
