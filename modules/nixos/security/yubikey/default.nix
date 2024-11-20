@@ -16,10 +16,10 @@
 with lib;
 with lib.${namespace};
 let
-  cfg = config.${namespace}.hardware.yubikey;
+  cfg = config.${namespace}.security.yubikey;
 in {
 
-  options.${namespace}.hardware.yubikey = with types; {
+  options.${namespace}.security.yubikey = with types; {
     enable = mkBoolOpt false "Whether or not to enable the yubikey configuration and support";
     package = mkOpt (listOf package) [] "A list of udev packages that should be extra installed";
   };
@@ -29,11 +29,10 @@ in {
    */
   config = mkIf cfg.enable {
 
-    security.pam.yubico = {
-      enable = true;
-
-      mode = "challenge-response";
-      id = [ "30683330" ];
+    /* Enable Passkey support */
+    security.pam.services = { # TODO: add u2f_keys as a home.file
+      login.u2fAuth = true;
+      sudo.u2fAuth = true;
     };
 
     # Enable Smartcard mode
@@ -47,7 +46,6 @@ in {
 
     # TODO: add udev event checks
 
-    # TODO: add link to `/home/xayah/.yubico/` for challange response
-
+    # TODO: add SSH key support
   };
 }

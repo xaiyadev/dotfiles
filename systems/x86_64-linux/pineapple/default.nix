@@ -41,6 +41,10 @@ with lib.${namespace};
       };
     };
 
+    security = {
+      gpg = enabled;
+      yubikey = enabled;
+    };
   };
 
   home-manager.backupFileExtension = "backup";

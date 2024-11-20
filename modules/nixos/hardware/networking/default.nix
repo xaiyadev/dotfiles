@@ -59,23 +59,23 @@ in {
               mkWifiProfile "Strawberry" "1f08f24d-56fc-46e2-bdca-39f553b6410d" "$STRAWBERRY";
           };
         };
+      };
 
-        /* VPNs */
-        wg-quick.interfaces = mkIf cfg.vpn.enable {
-          wg0 = {
-            address = [ "192.168.1.201/24" ];
-            listenPort = 51820;
-            privateKeyFile = ./file.age; # TODO: Add age passwords
-            autostart = false;
+      /* VPNs */
+      wg-quick.interfaces = mkIf cfg.wifi.vpn.enable {
+        wg0 = {
+          address = [ "192.168.1.201/24" ];
+          listenPort = 51820;
+          privateKeyFile = ./file.age; # TODO: Add age passwords
+          autostart = false;
 
-            peers = [{
-              publicKey = "Twgc0wLcy9CgMdIgMsHEW1BZcTHpGql/aQDrJFYZaiY=";
-              allowedIPs = [ "192.168.1.0/24" "0.0.0.0/0" ];
-              endpoint = "fl01m63nwx4c3xvz.myfritz.net:59408";
-              presharedKeyFile = ./file-paired.age; # TODO: Add age passwords
-              persistentKeepalive = 25;
-            }];
-          };
+          peers = [{
+            publicKey = "Twgc0wLcy9CgMdIgMsHEW1BZcTHpGql/aQDrJFYZaiY=";
+            allowedIPs = [ "192.168.1.0/24" "0.0.0.0/0" ];
+            endpoint = "fl01m63nwx4c3xvz.myfritz.net:59408";
+            presharedKeyFile = ./file-paired.age; # TODO: Add age passwords
+            persistentKeepalive = 25;
+          }];
         };
       };
     };
