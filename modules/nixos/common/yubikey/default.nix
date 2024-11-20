@@ -27,11 +27,9 @@ in
     config = mkIf cfg.enable {
       environment.systemPackages = with pkgs; [ yubioath-flutter ];
 
-      security.pam.yubico = {
-        enable = true;
-        debug = false;
-        mode = "challenge-response";
-        id = [ "30683330" ];
+      security.pam.services = {
+        login.u2fAuth = true;
+        sudo.u2fAuth = true;
       };
 
       services.pcscd.enable = true;
