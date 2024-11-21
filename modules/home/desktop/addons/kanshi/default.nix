@@ -23,6 +23,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-
+    services.kanshi = {
+      enable = true;
+    };
   };
 }
