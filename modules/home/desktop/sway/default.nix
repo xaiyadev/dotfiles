@@ -22,10 +22,19 @@ in {
   # This configuration will only be enabled when the nixOS modules is enabled
   # This helps with visibility and keeps them in one
   config = mkIf osConfig.${namespace}.desktop.sway.enable {
+    home.file.".config/wallpapers/" = { source = ./wallpapers; recursive = true; };
 
     /* Install all nesecerry addons */
     ${namespace}.desktop.addons = {
-      kanshi.enable = true;
+      kanshi = enabled;
+
+      waybar = enabled;
+      wofi = enabled;
+      swaylock = enabled;
+      wlogout = enabled;
+
+      gtk = enabled;
+      keyring = enabled;
     };
 
     wayland.windowManager.sway = {
@@ -41,6 +50,7 @@ in {
         terminal = "kitty";
 
         # Outputs managed by kanshi
+        output = { "*" = { bg = "~/.config/wallpapers/girls.jpeg"; }; };
 
         # Windows
         defaultWorkspace = "1";
