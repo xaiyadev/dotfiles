@@ -50,10 +50,10 @@ in {
         terminal = "kitty";
 
         # Outputs managed by kanshi
+        defaultWorkspace = "1";
         output = { "*" = { bg = "~/.config/wallpapers/girls.jpeg"; }; };
 
         # Windows
-        defaultWorkspace = "1";
         window = { border = 4; titlebar = false; };
         gaps = { inner = 15; };
 
