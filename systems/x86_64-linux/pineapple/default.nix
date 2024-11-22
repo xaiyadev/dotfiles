@@ -21,6 +21,7 @@ with lib.${namespace};
   networking.hostName = "pineapple";
 
   ${namespace} = {
+    nix = { enable = true; lix = enabled; };
     desktop.sway = enabled;
 
     system = {
@@ -35,11 +36,7 @@ with lib.${namespace};
 
       networking = {
         enable = true;
-
-        wifi = {
-          ensureProfiles = enabled;
-          #vpn = enabled;
-        };
+        wifi = {  ensureProfiles = enabled; }; # TODO: VPN enabled
       };
     };
 

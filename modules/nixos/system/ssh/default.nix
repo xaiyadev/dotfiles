@@ -29,7 +29,7 @@ in {
       ports = [ 22 ];
 
       settings = {
-        PasswordAuthentication = false; # TODO: setup ssh
+        PasswordAuthentication = false;
         PermitRootLogin = if format == "install-iso" then "yes" else "no";
         usePAM = true;
       };
