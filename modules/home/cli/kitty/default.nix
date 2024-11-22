@@ -17,16 +17,14 @@
 with lib;
 with lib.${namespace};
 let
-    cfg = config.${namespace}.desktop.addons.keyring;
+    cfg = config.${namespace}.desktop.tools.ssh;
 in
 {
-  options.${namespace}.desktop.addons.keyring = with types; {
-      enable = mkBoolOpt false "Whether or not to enable the gnome keyring software";
+  options.${namespace}.desktop.tools.ssh = with types; {
+      enable = mkBoolOpt false "Whether or not to enable the Kitty terminal";
   };
 
   config = mkIf cfg.enable {
-    services.gnome-keyring = enabled;
 
-    home.packages = with pkgs; [ seahorse ]; # GUI keyring managing passwords
   };
 }
