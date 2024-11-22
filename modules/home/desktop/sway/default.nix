@@ -88,7 +88,7 @@ in {
 
         keybindings = mkOptionDefault {
           "${modifier}+e" = "exec ${pkgs.wofi-emoji}/bin/wofi-emoji";
-          "${modifier}+l" = "exec ${pkgs.swaylock-effects}/bin/swaylock"; # TODO: change to systemctl command
+          "${modifier}+l" = "exec ${pkgs.swaylock-effects}/bin/swaylock";
           "${modifier}+Escape" = "exec ${pkgs.wlogout}/bin/wlogout";
         };
 

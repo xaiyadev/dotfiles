@@ -31,35 +31,35 @@ in
         layout = [
           {
             label = "shutdown";
-            action = "systemctl poweroff";
+            action = "${pkgs.systemd}/bin/systemctl poweroff";
             text = "Shutdown";
             keybind = "s";
           }
 
           {
             label = "reboot";
-            action = "systemctl reboot";
+            action = "${pkgs.systemd}/bin/systemctl reboot";
             text = "Reboot";
             keybind = "r";
           }
 
           {
             label = "logout";
-            action = "loginctl kill-session $XDG_SESSION_ID"; # TODO: use the nix pkgs for that
+            action = "${pkgs.systemd}/bin/loginctl kill-session $XDG_SESSION_ID";
             text = "Logout";
             keybind = "e";
           }
 
           {
             label = "hibernate";
-            action = ""; # TODO: manage sessions before using hibernate
+            action = "${pkgs.systemd}/bin/systemctl suspend";
             text = "Hibernate";
             keybind = "h";
           }
 
           {
             label = "lock";
-            action = ""; # TODO: configure swaylock correctly before adding it here
+            action = "${pkgs.swaylock-effects}/bin/swaylock";
             text = "Lock";
             keybind = "l";
           }

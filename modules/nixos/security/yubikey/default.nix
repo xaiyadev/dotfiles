@@ -30,7 +30,7 @@ in {
   config = mkIf cfg.enable {
 
     /* Enable Passkey support */
-    security.pam.services = { # TODO: add u2f_keys as a home.file
+    security.pam.services = { # TODO: add u2f_keys as a home.file (after system installation)
       login.u2fAuth = true;
       sudo.u2fAuth = true;
     };
