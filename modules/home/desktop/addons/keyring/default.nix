@@ -25,8 +25,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.gnome-keyring = {
+    services.gnome-keyring = enabled;
 
-    };
+    home.packages = with pkgs; [ gnome.seahorse ]; # GUI keyring managing software
   };
 }
