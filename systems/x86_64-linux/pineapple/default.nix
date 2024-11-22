@@ -38,6 +38,8 @@ with lib.${namespace};
         enable = true;
         wifi = {  ensureProfiles = enabled; }; # TODO: VPN enabled
       };
+
+      bluetooth = enabled;
     };
 
     security = {

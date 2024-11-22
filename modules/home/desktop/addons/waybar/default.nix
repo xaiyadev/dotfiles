@@ -24,13 +24,16 @@ in
         enable = mkBoolOpt false "Wehter or not to enable waybar and its configuration";
 
         /* If you would like, you could disable some of the modules you could do that! */
-        modules.workspaces.enable = mkBoolOpt true "Whether or not the workspaces module should be activated";
-        modules.window.enable = mkBoolOpt true "Whether or not the window module should be activated";
-        modules.pulseaudio.enable = mkBoolOpt true "Whether or not to enable the pulseaudio module";
-        modules.network.enable = mkBoolOpt true "Whether or not to enable the network module";
-        modules.disk.enable = mkBoolOpt true "Whether or not to enable the disk module";
-        modules.battery.enable = mkBoolOpt true "Whether or not to enable the battery module";
-        modules.clock.enable = mkBoolOpt true "Whether or not to enable the clock module";
+        modules = {
+          workspaces.enable = mkBoolOpt true "Whether or not the workspaces module should be activated";
+          window.enable = mkBoolOpt true "Whether or not the window module should be activated";
+          pulseaudio.enable = mkBoolOpt true "Whether or not to enable the pulseaudio module";
+          network.enable = mkBoolOpt true "Whether or not to enable the network module";
+          disk.enable = mkBoolOpt true "Whether or not to enable the disk module";
+          battery.enable = mkBoolOpt true "Whether or not to enable the battery module";
+          clock.enable = mkBoolOpt true "Whether or not to enable the clock module";
+          bluetooth.enable = mkBoolOpt true "Whether or not to enable the bluetooth module";
+        };
 
     };
 
@@ -53,7 +56,7 @@ in
 
             /* Enable modules in the right positions */
             modules-left = [ "sway/workspaces" "sway/window" ];
-            modules-right = [  "pulseaudio" "network" "disk" "battery" "clock" ];
+            modules-right = [  "pulseaudio" "bluetooth" "network" "disk" "battery" "clock" ];
 
             /* Show the sway workspaces in your waybar */
             "sway/workspaces" = mkIf cfg.modules.workspaces.enable {
@@ -86,14 +89,20 @@ in
               max-length = 30;
             };
 
-            /* Show the current time (change formating here...) */
-            "clock" = mkIf cfg.modules.clock.enable {
-              interval = 60;
+            /*
+             * Show the current connected Bluetooth devices
+             * Enable: sylveon.hardware.bluetooth
+             */
+            "bluetooth" = mkIf cfg.modules.bluetooth.enable {
+              format = " {status}";
+              format-disabled = ""; # Disables the module if bluetooth is not available
 
-              timezone = "Europe/Berlin";
-              locale = "de_DE.UTF-8";
-              format = " {:%H:%M}";
+              format-connected = " {device_alias}";
+              format-connected-battery = " {device_alias} {device_battery_percantage}%"; # Needs bluetooth expirmental
+              on-click = "exec ${pkgs.blueman}/bin/blueman";
             };
+
+
 
             /* Show the current audio device with icons and change the volume by scrolling */
             "pulseaudio" = mkIf cfg.modules.pulseaudio.enable {
@@ -126,6 +135,16 @@ in
               interval = 10;
               format = "󰆼 {percentage_free}% free";
               path = "/";
+            };
+
+
+            /* Show the current time (change formating here...) */
+            "clock" = mkIf cfg.modules.clock.enable {
+              interval = 60;
+
+              timezone = "Europe/Berlin";
+              locale = "de_DE.UTF-8";
+              format = " {:%H:%M}";
             };
 
           };
