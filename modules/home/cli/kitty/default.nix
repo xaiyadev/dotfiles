@@ -17,10 +17,10 @@
 with lib;
 with lib.${namespace};
 let
-    cfg = config.${namespace}.desktop.tools.kitty;
+    cfg = config.${namespace}.cli.kitty;
 in
 {
-  options.${namespace}.desktop.tools.kitty = with types; {
+  options.${namespace}.cli.kitty = with types; {
       enable = mkBoolOpt false "Whether or not to enable the Kitty terminal";
   };
 

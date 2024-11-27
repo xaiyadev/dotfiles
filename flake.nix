@@ -3,6 +3,9 @@
     /* unstable packages pulled from github */
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
+
+    /* Software flakes */
+    nixvim = { url = "github:nix-community/nixvim"; inputs.nixpkgs.follows = "nixpkgs"; };
     
     /* Snowfall framework */
     snwofall-lib = { url = "github:snowfallorg/lib"; inputs.nixpkgs.follows = "nixpkgs"; };
@@ -28,6 +31,9 @@
 
       # Add modules to all NixOS systems
       systems.modules.nixos = with inputs; [ ];
+
+      # add modules to all Home-manager instances
+      homes.modules = with inputs; [ nixvim.homeManagerModules.nixvim ];
 
     };
 }
