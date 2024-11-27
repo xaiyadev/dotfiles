@@ -17,14 +17,30 @@
 with lib;
 with lib.${namespace};
 let
-    cfg = config.${namespace}.desktop.tools.ssh;
+    cfg = config.${namespace}.desktop.tools.kitty;
 in
 {
-  options.${namespace}.desktop.tools.ssh = with types; {
+  options.${namespace}.desktop.tools.kitty = with types; {
       enable = mkBoolOpt false "Whether or not to enable the Kitty terminal";
   };
 
   config = mkIf cfg.enable {
+    programs.kitty = {
+      enable = true;
+      shellIntegration.enableZshIntegration = true;
+
+      themeFile = "rose-pine";
+      font = {
+        name = "Jetbrains Mono";
+        package = pkgs.jetbrains-mono;
+        size = 12;
+      };
+
+      settings = {
+        enable_audio_bell = false;
+        background_opacity = 0.9;
+      };
+    };
 
   };
 }

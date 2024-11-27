@@ -21,6 +21,7 @@ with lib.sylveon;
   sylveon = { # if using namespace here, you will get an error
     cli = {
       zsh = enabled;
+      kitty = enabled;
     };
 
   };

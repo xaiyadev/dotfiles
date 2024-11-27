@@ -1,4 +1,4 @@
-# Xayah's Configuration (v4)
+# Xaiya's Configuration (v4)
 My completly new and rewritten NixOS! [Nix Flakes](https://nixos.wiki/wiki/Flakes) are required
 
 This configuration uses the [snowflake lib](https://github.com/snowfallorg/lib) for the file structure and flake usage
@@ -27,7 +27,7 @@ It is important to differentiate between home manager modules and nixos modules-
 This configuration has different users and systems that could change from time to time.
 
 ### Users
-- Xayah
+- Xaiya
   - My account! I do the most part on that; Development; Streaming; School; etc.
 - Workaholic (Name will probably be changed)
   - This account is used for all Work related stuff. I like to differentiate between work and private life so this is a perfect way to do it
@@ -76,7 +76,7 @@ You can simply with a yubikey attached do these things:
 5. Add the configuration file to your user
    -  ``ykpamcfg -2 -v``
      -  This should be done with every user that wants to use this key.
-     -  the file is then stored in ``/home/xayah/.yubico/challange-000000000``
+     -  the file is then stored in ``/home/xaiya/.yubico/challange-000000000``
 
 > [!Important]
 > If you install a complete new system, it could be that you need to still do the 3rd step even if the yubikey is already configured

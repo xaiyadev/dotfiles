@@ -48,7 +48,7 @@ in
           max-jobs = "auto";
 
           # Users allowed to use the nix command
-          trusted-users = [ "xayah" ];
+          trusted-users = [ "xaiya" ];
         };
 
         # Garbage collection configuration.

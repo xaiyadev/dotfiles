@@ -19,8 +19,8 @@
         namespace = "sylveon"; # 🏳️‍⚧️
 
         meta = {
-          name = "xayah-flake";
-          title = "Xayah's Flake";
+          name = "xaiya-flake";
+          title = "Xaiya's Flake";
         };
       };
 
