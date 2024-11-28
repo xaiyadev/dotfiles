@@ -6,6 +6,9 @@
 
     /* Software flakes */
     nixvim = { url = "github:nix-community/nixvim"; inputs.nixpkgs.follows = "nixpkgs"; };
+    spicetify-nix = { url = "github:Gerg-L/spicetify-nix"; inputs.nixpkgs.follows = "nixpkgs"; };
+    nixcord = { url = "github:kaylorben/nixcord"; inputs.nixpkgs.follows = "nixpkgs"; };
+    zen-browser = { url = "github:MarceColl/zen-browser-flake"; inputs.nixpkgs.follows = "nixpkgs"; }; # The Zen-browser flake has no module, only packages
     
     /* Snowfall framework */
     snwofall-lib = { url = "github:snowfallorg/lib"; inputs.nixpkgs.follows = "nixpkgs"; };
@@ -32,8 +35,13 @@
       # Add modules to all NixOS systems
       systems.modules.nixos = with inputs; [ ];
 
-      # add modules to all Home-manager instances
-      homes.modules = with inputs; [ nixvim.homeManagerModules.nixvim ];
+      # add modules to all home-manager instances
+      homes.modules = with inputs; [
+        spicetify-nix.homeManagerModules.default
+        nixcord.homeManagerModules.nixcord
+
+        nixvim.homeManagerModules.nixvim
+      ];
 
     };
 }

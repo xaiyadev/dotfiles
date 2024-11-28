@@ -24,6 +24,14 @@ with lib.sylveon;
       zsh = enabled;
     };
 
+    apps = {
+      spotify = enabled;
+      discord = enabled;
+
+      #zen = enabled;
+      chromium = enabled;
+    };
+
     tools = {
       direnv = enabled;
       git = enabled;
