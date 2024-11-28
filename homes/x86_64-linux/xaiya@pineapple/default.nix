@@ -20,8 +20,14 @@ with lib.sylveon;
 
   sylveon = { # if using namespace here, you will get an error
     cli = {
-      zsh = enabled;
       kitty = enabled;
+      zsh = enabled;
+    };
+
+    tools = {
+      direnv = enabled;
+      git = enabled;
+      ssh = enabled;
     };
 
   };
