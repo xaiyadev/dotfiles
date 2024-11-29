@@ -10,6 +10,7 @@
   virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
   systems, # An attribute map of your defined hosts.
 
+  osConfig,
   config,
   specialArgs,
   ...
@@ -17,10 +18,10 @@
 with lib;
 with lib.${namespace};
 let
-    cfg = config.${namespace}.apps.discord;
+    cfg = config.${namespace}.apps.social.discord;
 in
 {
-  options.${namespace}.apps.discord = with types; {
+  options.${namespace}.apps.social.discord = with types; {
       enable = mkBoolOpt false "Wheter or not to install vesktop declerative";
   };
 
@@ -91,5 +92,13 @@ in
         };
       };
     };
+
+
+    # Add Vesktop to the automatic startup
+    wayland.windowManager.sway.config.startup = mkIf osConfig.${namespace}.desktop.sway.enable [
+      # Startup Vesktop and wait for it to startup, then move it to workspace 4
+      { command = ''exec vekstop''; }
+      { command = ''sleep 5 && sway '[class="vesktop"]' move container to workspace 4 ''; }
+    ];
   };
 }

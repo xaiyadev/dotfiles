@@ -25,11 +25,20 @@ with lib.sylveon;
     };
 
     apps = {
-      spotify = enabled;
-      discord = enabled;
+      music.spotify = enabled;
+      browser.chromium = enabled;
+      #browser.zen = enabled;
 
-      #zen = enabled;
-      chromium = enabled;
+      social = {
+        discord = enabled;
+        teams = enabled; # This instance will be used for my school account
+      };
+
+      development = {
+        webstorm = enabled; # deprecated when completly switched to neovim
+      };
+
+      files.obsidian = enabled;
     };
 
     tools = {

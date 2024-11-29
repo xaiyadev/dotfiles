@@ -17,10 +17,10 @@
 with lib;
 with lib.${namespace};
 let
-    cfg = config.${namespace}.apps.chromium;
+    cfg = config.${namespace}.apps.browser.chromium;
 in
 {
-  options.${namespace}.apps.chromium = with types; {
+  options.${namespace}.apps.browser.chromium = with types; {
       enable = mkBoolOpt false "Wheter or not to enable the chromium browser";
       # TODO: add extra extensions option
   };

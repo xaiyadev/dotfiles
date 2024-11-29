@@ -17,10 +17,10 @@
 with lib;
 with lib.${namespace};
 let
-    cfg = config.${namespace}.apps.zen;
+    cfg = config.${namespace}.apps.browser.zen;
 in
 {
-  options.${namespace}.apps.zen = with types; {
+  options.${namespace}.apps.browser.zen = with types; {
       enable = mkBoolOpt false "Whether or not to enable the Zen Browser and configurate it";
   };
 

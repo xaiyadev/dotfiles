@@ -9,8 +9,8 @@
   virtual,
   host,
 
-  config,
   osConfig,
+  config,
   ...
 }:
 with lib;
@@ -91,14 +91,6 @@ in {
           "${modifier}+l" = "exec ${pkgs.swaylock-effects}/bin/swaylock";
           "${modifier}+Escape" = "exec ${pkgs.wlogout}/bin/wlogout";
         };
-
-        startup = [
-          { command = ''exec spotify''; }
-          { command = ''sleep 5 && sway '[class="Spotify"]' move container to workspace 4 ''; }
-
-          { command = ''exec vesktop''; }
-          { command = ''sleep 5 && sway '[class="vesktop"]' move container to workspace 5''; }
-        ];
 
         # Maybe need extra config to name workspaces?
       };

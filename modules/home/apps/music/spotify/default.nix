@@ -10,6 +10,7 @@
   virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
   systems, # An attribute map of your defined hosts.
 
+  osConfig,
   config,
   specialArgs,
   ...
@@ -17,11 +18,11 @@
 with lib;
 with lib.${namespace};
 let
-    cfg = config.${namespace}.apps.spotify;
+    cfg = config.${namespace}.apps.music.spotify;
     spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
 in
 {
-  options.${namespace}.apps.spotify = with types; {
+  options.${namespace}.apps.music.spotify = with types; {
       enable = mkBoolOpt false "Whether or not to enable the spotify application";
   };
 
@@ -39,5 +40,12 @@ in
         betterGenres
       ];
     };
+
+    # Add Spotify to the automatic startup
+    wayland.windowManager.sway.config.startup = mkIf osConfig.${namespace}.desktop.sway.enable [
+      # Startup Spotify and wait for it to startup, then move it to workspace 4
+      { command = ''exec spotify''; }
+      { command = ''sleep 5 && sway '[class="Spotify"]' move container to workspace 4 ''; }
+    ];
   };
 }
