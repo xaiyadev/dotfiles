@@ -32,7 +32,7 @@ with lib.sylveon;
 
       social = {
         discord = enabled;
-        teams = enabled; # This instance will be used for my school account
+        teams = enabled; # This instance is used for work
       };
 
       development = {
@@ -44,7 +44,10 @@ with lib.sylveon;
 
     tools = {
       direnv = enabled;
-      git = enabled;
+      git = {
+        enable = true;
+        user.email = "d.schumin@blmedia.de"; # Deadname :/
+      };
       ssh = enabled;
     };
 
