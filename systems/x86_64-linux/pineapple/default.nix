@@ -46,7 +46,15 @@ with lib.${namespace};
       gpg = enabled;
       yubikey = enabled;
     };
+
+    services.docker = enabled;
   };
+
+  # User configuration/groups
+
+  ## The Docker configuration needs to be here, because every's user extra Group can only be changed in Nix itself...
+  users.users.xaiya.extraGroups = [ "docker" ];
+  users.users.workaholic.extraGroups = [ "docker" ];
 
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";

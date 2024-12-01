@@ -36,8 +36,22 @@ with lib.${namespace};
 
     };
 
+    services = {
+      docker = enabled;
+      nginx = enabled;
+
+      homepage = enabled;
+      vaultwarden = enabled;
+      firefly = enabled;
+    };
+
     security.gpg = enabled;
   };
+
+  # User configuration
+
+  ## The Docker configuration needs to be here, because every's user extra Group can only be changed in Nix itself...
+  users.users.semiko.extraGroups = [ "docker" ];
 
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";
