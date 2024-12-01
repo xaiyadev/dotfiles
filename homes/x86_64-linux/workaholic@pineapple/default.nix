@@ -27,7 +27,9 @@ with lib.sylveon;
 
     apps = {
       music.spotify = enabled;
+
       browser.chromium = enabled;
+
       #browser.zen = enabled;
 
       social = {
@@ -52,5 +54,8 @@ with lib.sylveon;
     };
 
   };
+
+  programs.chromium.extensions = [ { id = "kmcfomidfpdkfieipokbalgegidffkal"; } ]; # Add the enpass browser extension
+
   home.stateVersion = "24.05";
 }

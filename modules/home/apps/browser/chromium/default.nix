@@ -22,7 +22,6 @@ in
 {
   options.${namespace}.apps.browser.chromium = with types; {
       enable = mkBoolOpt false "Wheter or not to enable the chromium browser";
-      # TODO: add extra extensions option
   };
 
   /**
@@ -41,6 +40,8 @@ in
         { id = "nngceckbapebfimnlniiiahkandclblb"; } # Bitwarden
         { id = "oldceeleldhonbafppcapldpdifcinji"; } # Language Tool
         { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
+
+        { id = "noimedcjdohhokijigpfcbjcfcaaahej"; } # Chromium rose pine theme
       ];
 
       # Use German and Englisch as the default language in chromium

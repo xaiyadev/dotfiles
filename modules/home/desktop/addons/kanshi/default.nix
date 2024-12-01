@@ -22,18 +22,14 @@ in {
     enable = mkBoolOpt false "Whether or not to enable Kanshi as a monitor manager";
   };
 
-  # TODO: needs testing and readjusting
   config = mkIf cfg.enable {
     services.kanshi = {
       enable = true;
 
       settings = [
-
         {
-
           profile = {
             name = "Docked Office";
-
             outputs = [
               {
                 criteria = "eDP-1";
@@ -41,14 +37,12 @@ in {
                 position = "0 227";
                 mode = "1920x1080@60.049Hz";
               }
-
               {
                 criteria = "Philips Consumer Electronics Company PHL 272B4Q AU11526001821"; # Criteria as name, because its monitor and not slot specific
 
                 position = "1920 0";
                 mode = "2560x1440@59.951Hz";
               }
-
               {
                 criteria = "Philips Consumer Electronics Company PHL 272B4Q AU11531001040";
 
@@ -57,31 +51,26 @@ in {
               }
             ];
           };
-
         }
 
         {
 
           profile = {
-            name = "Tower Huckleberry"; # Will be changed when Huckleberry is deprecated
+            name = "Docked Home";
 
             outputs = [
               {
-                criteria = "HDMI-A-1"; # TODO: change to device name when at Huckleberry station
-
+                criteria = "AOC 2460G4 0x0000A8E2";
                 position = "1920 0";
-                mode = "192.1080@119.982Hz"; # Configuring my only 120Hz Screen :(
+                mode = "192.1080@119.982Hz";
               }
 
               {
-                criteria = "DP-3";
-
+                criteria = "Acer Technologies RT240Y T75EE0042411"; # Second Screen
                 position = "0 0";
-                # TODO: mode when at Huckleberry Station
               }
             ];
           };
-
         }
       ];
     };

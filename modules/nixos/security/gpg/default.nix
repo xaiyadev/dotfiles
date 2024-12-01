@@ -24,6 +24,7 @@ in {
   };
 
    /* Configure Yubikey and with that use gpg keys */
+   # TODO: change SSH keys to GPG keys // create GPG key
   config = mkIf cfg.enable {
 
   };

@@ -44,8 +44,6 @@ in
               sha256 = "1l99ayc9j9ns450blf4rs8511lygc2xvbhkg1xp791abcn8krn26";
             };
           }
-
-          # TODO: OhMyZSH necessary?
         ];
       };
 
