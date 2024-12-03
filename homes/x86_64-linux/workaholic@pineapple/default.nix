@@ -38,7 +38,9 @@ with lib.sylveon;
       };
 
       development = {
-        webstorm = enabled; # deprecated when completly switched to neovim
+        jetbrains = {
+          phpstorm = enabled; # deprecated when completly switched to neovim
+        };
       };
 
       files.obsidian = enabled;
