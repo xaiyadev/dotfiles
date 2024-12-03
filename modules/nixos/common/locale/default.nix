@@ -27,13 +27,13 @@ in
 
     config = mkIf cfg.enable {
 
-      /* install nerdfonts and icons */
+      /* install nerd-fonts and icons */
       fonts.packages = with pkgs; [
         jetbrains-mono
 
         font-awesome
         material-design-icons
-        (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+        nerd-fonts.jetbrains-mono
       ];
 
 

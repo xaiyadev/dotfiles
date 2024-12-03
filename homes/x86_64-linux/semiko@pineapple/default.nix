@@ -21,7 +21,10 @@
 }: {
      home.packages = with pkgs; [
        obsidian
+       
        jetbrains.webstorm
+       jetbrains.idea-ultimate
+
        zed-editor
        teams-for-linux
 

@@ -85,16 +85,14 @@
 
       /* Add External Overlays */
       overlays = with inputs; [
-        nixpkgs-wayland.overlay
+#        nixpkgs-wayland.overlay The nixpkgs-wayland has currently a bug, removal needed
         nix-minecraft.overlay
       ];
 
       /* Add External Software/Modules */
       systems.modules.nixos = with inputs; [
-	lix-module.nixosModules.default
+	      lix-module.nixosModules.default
         agenix.nixosModules.default
-
-        aagl.nixosModules.default
 
         nix-minecraft.nixosModules.minecraft-servers
 

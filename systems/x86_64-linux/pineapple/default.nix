@@ -45,7 +45,7 @@
   fonts.packages = with pkgs; [
     font-awesome
     material-design-icons
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
   ];
 
   virtualisation.docker.enable = true;
@@ -80,9 +80,6 @@
       steam.enable = true;
     };
   };
-
-  programs.anime-game-launcher.enable = true;
-  programs.sleepy-launcher.enable = true;
 
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";
