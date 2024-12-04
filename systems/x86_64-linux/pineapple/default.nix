@@ -19,6 +19,7 @@ with lib.${namespace};
 {
   imports = [ ./hardware.nix ];
   networking.hostName = "pineapple";
+  age.rekey.hostPubkey = ./pineapple-pubkey.pub; # TODO: add value
 
   ${namespace} = {
     nix = { enable = true; lix = enabled; };
@@ -42,7 +43,10 @@ with lib.${namespace};
       bluetooth = enabled;
     };
 
-    security.yubikey = enabled;
+    security = {
+      yubikey = enabled;
+      agenix = enabled;
+    };
     services.docker = enabled;
   };
 

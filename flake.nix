@@ -16,13 +16,16 @@
     zen-browser = { url = "github:MarceColl/zen-browser-flake"; inputs.nixpkgs.follows = "nixpkgs"; }; # The Zen-browser flake has no module, only packages
 
     /* Security flakes */
+    agenix = { url = "github:ryantm/agenix"; inputs.nixpkgs.follows = "nixpkgs"; };
+    agenix-rekey = { url = "github:oddlama/agenix-rekey"; inputs.nixpkgs.follows = "nixpkgs"; };
+
     # TODO: agenix encryption when completly using this system; Yubikey for encryption
     
     /* Snowfall framework */
     snwofall-lib = { url = "github:snowfallorg/lib"; inputs.nixpkgs.follows = "nixpkgs"; };
   };
 
-  outputs = inputs: inputs.snwofall-lib.mkFlake {
+  outputs = inputs: (inputs.snwofall-lib.mkFlake {
       inherit inputs;
       channels-config.allowUnfree = true;
       src = ./.;
@@ -44,7 +47,11 @@
       overlays = with inputs; [ nixpkgs-wayland.overlay ];
 
       # Add modules to all NixOS systems
-      systems.modules.nixos = with inputs; [ ];
+      systems.modules.nixos = with inputs; [
+        # installing agenix modules
+        agenix.nixosModules.default
+        agenix-rekey.nixosModules.default
+      ];
 
       # add modules to all home-manager instances
       homes.modules = with inputs; [
@@ -54,5 +61,13 @@
         nixvim.homeManagerModules.nixvim
       ];
 
+    })
+
+    // {
+      # Configuring agenix-rekey itself
+      agenix-rekey = inputs.agenix-rekey.configure {
+        userFlake = inputs.self;
+        nixosConfigurations = inputs.self.nixosConfigurations;
+      };
     };
 }

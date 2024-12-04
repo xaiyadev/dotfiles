@@ -19,6 +19,7 @@ with lib.${namespace};
 {
   imports = [ ./hardware.nix ];
   networking.hostName = "apricot";
+  age.rekey.hostPubkey = ./apricot-pubkey.pub;
 
   ${namespace} = {
     nix = { enable = true; lix = enabled; };
@@ -33,8 +34,9 @@ with lib.${namespace};
 
     hardware = {
       networking.enable = true;
-
     };
+
+    security.agenix = enabled;
 
     services = {
       docker = enabled;
