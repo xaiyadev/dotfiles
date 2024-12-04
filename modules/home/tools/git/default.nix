@@ -32,13 +32,13 @@ in
        programs.git = {
          enable = true;
          package = pkgs.gitFull;
-         userName = "Danil Schumin";
+         userName = "Xaiya Schumin";
          userEmail = cfg.email;
 
          extraConfig = {
              commit.gpgsign = true;
              gpg.format = "ssh";
-             user.signingkey = "~/.ssh/id_rsa.pub";
+             user.signingkey = "~/.ssh/yubikey_xaiya";
          };
        };
     };
