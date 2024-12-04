@@ -42,11 +42,7 @@ with lib.${namespace};
       bluetooth = enabled;
     };
 
-    security = {
-      gpg = enabled;
-      yubikey = enabled;
-    };
-
+    security.yubikey = enabled;
     services.docker = enabled;
   };
 

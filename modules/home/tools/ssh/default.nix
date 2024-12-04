@@ -26,7 +26,9 @@ in
 
   config = mkIf cfg.enable {
     programs.ssh = {
-      extraConfig = '' HostKeyAlgorithms +ssh-rsa ''; # Use RSA encryption
+      addKeysToAgent = "confirm";
+
+      # Could need some fine tuning with ssh-add after first install
     };
   };
 }

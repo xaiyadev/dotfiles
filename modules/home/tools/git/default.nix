@@ -24,10 +24,10 @@ in
       enable = mkBoolOpt false "Whether or not to enable git for your system";
       extraPackages = mkOpt (listOf package) [ ] "What extra packages should be installed. Can be GUI apps for git or other stuff";
 
-      ssh-key = mkOpt str "~/.ssh/id_rsa.pub" "Where the ssh key for authentication is located"; # Will be removed, after all authentication happens through the yubikey
+      ssh-key = mkOpt str "~/.ssh/id_ed25519_sk" "Where the ssh key for authentication is located"; # id_ed25519_sk is my yubikey
       user = {
-        name = mkOpt str "Danil Schumin" "Which name you want to use when using git"; # Sadly using dead name here :(
-        email = mkOpt str "d.schumin@proton.me" "What email git should use"; # Again, first letter is from my dead name ://
+        name = mkOpt str "Xaiya Schumin" "Which name you want to use when using git";
+        email = mkOpt str "d.schumin@proton.me" "What email git should use";
       };
   };
 
@@ -42,7 +42,7 @@ in
 
       extraConfig = {
         commit.gpgsign = true;
-        gpg.format = "ssh"; # Change after keys are in yubkikey
+        gpg.format = "ssh";
         user.signingkey = cfg.ssh-key;
       };
     };

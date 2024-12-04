@@ -44,8 +44,6 @@ with lib.${namespace};
       vaultwarden = enabled;
       firefly = enabled;
     };
-
-    security.gpg = enabled;
   };
 
   # User configuration
