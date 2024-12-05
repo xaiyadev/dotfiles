@@ -22,10 +22,13 @@ in {
   options.${namespace}.hardware.networking = with types; {
     enable = mkBoolOpt false "Wheter or not to install all network settings";
     wifi.ensureProfiles.enable = mkBoolOpt false "Whether or not to ensure if profiles exists";
-    wifi.vpn.enable = mkBoolOpt false "Whether or not to enable my home based vpn";
+    vpn.enable = mkBoolOpt false "Whether or not to enable my home based vpn";
   };
 
   config = mkIf cfg.enable {
+    # Enable all age-passwords
+    #age.secrets.networking-profiles.rekeyFile = ./networking-profiles.env.age; TODO: Enable passwords after age is configured
+
     networking = {
       resolvconf = {
         enable = true;
@@ -44,7 +47,7 @@ in {
 
         /* Wifi Profiles */
         ensureProfiles = mkIf cfg.wifi.ensureProfiles.enable {
-          # environmentFiles -> TODO: Add age passwords
+          # environmentFiles = [ config.age.secrets.networking-profiles.path ];
           profiles = {
             BLmedia =
               mkWifiProfile "BLmedia" "840919d9-2b91-41a3-b208-a35e63fff999" "$BLMEDIA";
@@ -62,18 +65,18 @@ in {
       };
 
       /* VPNs */
-      wg-quick.interfaces = mkIf cfg.wifi.vpn.enable {
+      wg-quick.interfaces = mkIf cfg.vpn.enable {
         wg0 = {
           address = [ "192.168.1.201/24" ];
           listenPort = 51820;
-          privateKeyFile = ./file.age; # TODO: Add age passwords
+          #privateKeyFile = config.age.secrets.networking-vpn-privateKey.path;
           autostart = false;
 
           peers = [{
             publicKey = "Twgc0wLcy9CgMdIgMsHEW1BZcTHpGql/aQDrJFYZaiY=";
             allowedIPs = [ "192.168.1.0/24" "0.0.0.0/0" ];
             endpoint = "fl01m63nwx4c3xvz.myfritz.net:59408";
-            presharedKeyFile = ./file-paired.age; # TODO: Add age passwords
+            # presharedKeyFile = config.age.secrets.networking-vpn-preSharedKey.path
             persistentKeepalive = 25;
           }];
         };

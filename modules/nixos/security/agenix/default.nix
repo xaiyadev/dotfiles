@@ -28,6 +28,7 @@ in {
    * The age.rekey.hostPubkey is located in the hosts default file
    * All secret files can be found in the hosts folder ${hostname}/secrets/
    *
+   * TODO: Agenix needs to be configured AFTER installation
    */
   config = mkIf cfg.enable {
     age.rekey = {

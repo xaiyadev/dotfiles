@@ -19,7 +19,7 @@ with lib.${namespace};
 {
   imports = [ ./hardware.nix ];
   networking.hostName = "pineapple";
-  age.rekey.hostPubkey = ./pineapple-pubkey.pub; # TODO: add value
+  age.rekey.hostPubkey = ./pineapple-pubkey.pub;
 
   ${namespace} = {
     nix = { enable = true; lix = enabled; };
@@ -37,7 +37,8 @@ with lib.${namespace};
 
       networking = {
         enable = true;
-        wifi = {  ensureProfiles = enabled; }; # TODO: VPN enabled
+        wifi.ensureProfiles = enabled;
+        #vpn = enabled; TODO: enabled when age configured
       };
 
       bluetooth = enabled;

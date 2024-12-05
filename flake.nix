@@ -18,14 +18,12 @@
     /* Security flakes */
     agenix = { url = "github:ryantm/agenix"; inputs.nixpkgs.follows = "nixpkgs"; };
     agenix-rekey = { url = "github:oddlama/agenix-rekey"; inputs.nixpkgs.follows = "nixpkgs"; };
-
-    # TODO: agenix encryption when completly using this system; Yubikey for encryption
     
     /* Snowfall framework */
     snwofall-lib = { url = "github:snowfallorg/lib"; inputs.nixpkgs.follows = "nixpkgs"; };
   };
 
-  outputs = inputs: (inputs.snwofall-lib.mkFlake {
+  outputs = { self, ...}@inputs: (inputs.snwofall-lib.mkFlake {
       inherit inputs;
       channels-config.allowUnfree = true;
       src = ./.;
@@ -44,7 +42,13 @@
       /* System configuration */
 
       # Add overlays to configuration
-      overlays = with inputs; [ nixpkgs-wayland.overlay ];
+      overlays = with inputs; [ 
+        # Improved wayland packages
+        nixpkgs-wayland.overlay 
+
+        # Overwrite age modules with age-nix modules
+        agenix-rekey.overlays.default
+      ];
 
       # Add modules to all NixOS systems
       systems.modules.nixos = with inputs; [
@@ -66,7 +70,7 @@
     // {
       # Configuring agenix-rekey itself
       agenix-rekey = inputs.agenix-rekey.configure {
-        userFlake = inputs.self;
+        userFlake = self;
         nixosConfigurations = inputs.self.nixosConfigurations;
       };
     };
