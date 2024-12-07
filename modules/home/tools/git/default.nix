@@ -26,6 +26,12 @@ in
             default = "d.schumin@proton.me";
             example = "d.schumin@blmedia.de";
         };
+
+        key = mkOption {
+          type = types.str;
+          default = "~/.ssh/yubikey_xaiya"; # Yubikey
+          example = "~/.ssh/id_rsa"; # Hucklebery SSH key
+        };
     };
 
     config = mkIf cfg.enable {
@@ -38,7 +44,7 @@ in
          extraConfig = {
              commit.gpgsign = true;
              gpg.format = "ssh";
-             user.signingkey = "~/.ssh/yubikey_xaiya";
+             user.signingkey = cfg.key;
          };
        };
     };

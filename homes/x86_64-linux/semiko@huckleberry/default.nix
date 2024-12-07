@@ -58,7 +58,10 @@
       };
 
       tools = {
-        git.enable = true;
+        git = {
+          enable = true;
+          key = "~/.ssh/id_rsa";
+        };
         neovim = {
           enable = true;
           discord.rpc.enable = true;

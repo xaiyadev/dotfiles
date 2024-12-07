@@ -85,7 +85,7 @@
 
       /* Add External Overlays */
       overlays = with inputs; [
-#        nixpkgs-wayland.overlay The nixpkgs-wayland has currently a bug, removal needed
+#       nixpkgs-wayland.overlay
         nix-minecraft.overlay
       ];
 
@@ -101,7 +101,7 @@
         # ({ config, ... }: {
         #   environment.systemPackages = [ config.nur.repos.mic92.hello-nur ];
         # })
-        nur.nixosModules.nur
+        nur.modules.nixos.default
       ];
 
       homes.modules = with inputs; [ nixvim.homeManagerModules.nixvim ];

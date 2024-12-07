@@ -38,7 +38,7 @@
   fonts.packages = with pkgs; [
     font-awesome
     material-design-icons
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
   ];
 
   virtualisation.docker.enable = true;
@@ -73,11 +73,6 @@
     	steam.enable = true;
     };
   };
-
-  # Needs to be installen globally...
-  # TODO: understand how aagl wants you to use flakes with home-manager
-  programs.anime-game-launcher.enable = true;
-  programs.sleepy-launcher.enable = true;
 
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";
