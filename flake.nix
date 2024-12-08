@@ -60,6 +60,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # overlay channels
+    neptune = {
+      url = "github:BreakingTV/neptune/feat/nix-package";
+    };
   };
 
   outputs = inputs:
@@ -87,6 +90,7 @@
       overlays = with inputs; [
 #       nixpkgs-wayland.overlay
         nix-minecraft.overlay
+        neptune.overlays.default
       ];
 
       /* Add External Software/Modules */

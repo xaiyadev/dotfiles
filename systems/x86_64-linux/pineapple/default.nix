@@ -40,6 +40,8 @@
     inputs.zen-browser.packages."${system}".default
 
     xivlauncher # Final Fantasy 14; TODO: will be replaced in: https://github.com/BreakingTV/nur-packages
+    
+    neptune # Temporary solution until switch to v4
   ];
 
   fonts.packages = with pkgs; [

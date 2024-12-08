@@ -146,8 +146,8 @@ in
           };
 
           startup = [
-            { command = ''exec spotify''; }
-            { command = ''sleep 5 && sway '[class="Spotify"]' move container to workspace 4 ''; }
+            #{ command = ''exec spotify''; }
+            #{ command = ''sleep 5 && sway '[class="Spotify"]' move container to workspace 4 ''; }
 
             { command = ''exec vesktop''; }
             { command = ''sleep 5 && sway '[class="vesktop"]' move container to workspace 5''; }

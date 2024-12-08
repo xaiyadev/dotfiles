@@ -39,7 +39,7 @@
       desktop.config.sway.enable = true;
 
       programs = {
-        spotify.enable = true;
+        #spotify.enable = true; replaced with: TIDAL
         vesktop.enable = true;
         vscode.enable = true;
 
