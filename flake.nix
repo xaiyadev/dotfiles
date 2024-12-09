@@ -61,7 +61,7 @@
 
     # overlay channels
     neptune = {
-      url = "github:BreakingTV/neptune/feat/nix-package";
+      url = "github:uwu/neptune";
     };
   };
 
