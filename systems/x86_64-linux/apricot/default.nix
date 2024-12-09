@@ -21,20 +21,20 @@ with lib.${namespace};
   networking.hostName = "apricot";
   age.rekey.hostPubkey = ./apricot-pubkey.pub;
 
+
   ${namespace} = {
     nix = { enable = true; lix = enabled; };
     # no desktop environment needed, its a server ¯\_(ツ)_/¯
 
     system = {
       boot = enabled;
+      ssh = enabled;
 
       fonts = enabled;
       locale = enabled;
     };
 
-    hardware = {
-      networking.enable = true;
-    };
+    hardware.networking = enabled;
 
     security.agenix = enabled;
 

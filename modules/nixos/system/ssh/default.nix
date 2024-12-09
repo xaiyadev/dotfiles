@@ -24,14 +24,15 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.openssh = {
+   programs.ssh.startAgent = true;
+   services.openssh = {
       enable = true;
       ports = [ 22 ];
 
       settings = {
-        PasswordAuthentication = false;
+        PasswordAuthentication = true; # Needs to be removed after proper ssh keys made
         PermitRootLogin = if format == "install-iso" then "yes" else "no";
-        usePAM = true;
+        UsePAM = true;
       };
     };
   };
