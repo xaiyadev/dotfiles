@@ -29,7 +29,7 @@ in
 
         key = mkOption {
           type = types.str;
-          default = "~/.ssh/yubikey_xaiya"; # Yubikey
+          default = "~/.ssh/id_ed25519_sk"; # Yubikey
           example = "~/.ssh/id_rsa"; # Hucklebery SSH key
         };
     };

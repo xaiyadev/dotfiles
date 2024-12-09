@@ -61,7 +61,7 @@
 
     # overlay channels
     neptune = {
-      url = "github:uwu/neptune";
+      url = "github:xaiyadev/neptune/bugfix/nix-packages";
     };
   };
 
