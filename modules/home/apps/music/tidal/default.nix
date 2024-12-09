@@ -18,38 +18,20 @@
 with lib;
 with lib.${namespace};
 let
-    cfg = config.${namespace}.apps.music.spotify;
-    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+    cfg = config.${namespace}.apps.music.tidal;
 in
 {
-  options.${namespace}.apps.music.spotify = with types; {
-      enable = mkBoolOpt false "Whether or not to enable the spotify application";
+  options.${namespace}.apps.music.tidal = with types; {
+      enable = mkBoolOpt false "Wheter or not to enable the TIDAL application with neptune injection";
   };
-  
 
-  /* 
-    Deprecated: I am no longer using Spotify, so this will not be updated
-  */
   config = mkIf cfg.enable {
-    programs.spicetify = {
-      enable = true;
-
-      # Enable rose-pine Theming
-      theme = spicePkgs.themes.ziro;
-      colorScheme = "rose-pine";
-
-      # Install all the extensions I use
-      enabledExtensions = with spicePkgs.extensions; [
-        showQueueDuration
-        betterGenres
-      ];
-    };
-
+    home.packages = [ pkgs.neptune ];
     # Add Spotify to the automatic startup
     wayland.windowManager.sway.config.startup = mkIf osConfig.${namespace}.desktop.sway.enable [
       # Startup Spotify and wait for it to startup, then move it to workspace 4
-      { command = ''exec spotify''; }
-      { command = ''sleep 5 && sway '[class="Spotify"]' move container to workspace 4 ''; }
+      { command = ''exec tidal-hifi''; }
+      { command = ''sleep 5 && sway '[class="tidal-hifi"]' move container to workspace 4 ''; }
     ];
   };
 }
