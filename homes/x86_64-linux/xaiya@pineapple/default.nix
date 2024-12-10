@@ -21,7 +21,6 @@ with lib.sylveon;
   sylveon = { # if using namespace here, you will get an error
     cli = {
       kitty = enabled;
-      zsh = enabled;
       neovim = enabled;
     };
 
@@ -51,7 +50,6 @@ with lib.sylveon;
     tools = {
       direnv = enabled;
       git = enabled;
-      ssh = enabled;
     };
 
   };

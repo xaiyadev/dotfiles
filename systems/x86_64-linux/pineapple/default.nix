@@ -19,7 +19,7 @@ with lib.${namespace};
 {
   imports = [ ./hardware.nix ];
   networking.hostName = "pineapple";
-  age.rekey.hostPubkey = ./pineapple-pubkey.pub;
+  age.rekey.hostPubkey = ./pineapple.pub;
 
   ${namespace} = {
     nix = { enable = true; lix = enabled; };

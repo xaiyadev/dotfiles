@@ -26,6 +26,9 @@ in
 
     config = mkIf cfg.enable {
 
+      # Load the cloudflare environment files
+
+
       services.nginx = {
           enable = true;
           recommendedGzipSettings = true;
