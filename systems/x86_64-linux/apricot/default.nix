@@ -18,9 +18,10 @@ with lib;
 with lib.${namespace};
 {
   imports = [ ./hardware.nix ];
+
+  /* System specific configurations */
   networking.hostName = "apricot";
   age.rekey.hostPubkey = ./apricot-pubkey.pub;
-
 
   ${namespace} = {
     nix = { enable = true; lix = enabled; };
@@ -29,6 +30,7 @@ with lib.${namespace};
     system = {
       boot = enabled;
       ssh = enabled;
+      zsh = enabled;
 
       fonts = enabled;
       locale = enabled;
@@ -47,11 +49,6 @@ with lib.${namespace};
       firefly = enabled;
     };
   };
-
-  # User configuration
-
-  ## The Docker configuration needs to be here, because every's user extra Group can only be changed in Nix itself...
-  users.users.semiko.extraGroups = [ "docker" ];
 
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";

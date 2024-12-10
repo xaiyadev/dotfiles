@@ -519,26 +519,6 @@
         "type": "github"
       }
     },
-    "neptune": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1733676118,
-        "narHash": "sha256-DhaaBO1MpiDsqNsuKROdL+vJqaPW7XlH8gXBSaZ6xiI=",
-        "owner": "uwu",
-        "repo": "neptune",
-        "rev": "aac89035a39876a79486268ae50fcddeafc173d2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "uwu",
-        "repo": "neptune",
-        "type": "github"
-      }
-    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -835,7 +815,6 @@
         "agenix": "agenix",
         "agenix-rekey": "agenix-rekey",
         "home-manager": "home-manager_2",
-        "neptune": "neptune",
         "nixcord": "nixcord",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-wayland": "nixpkgs-wayland",

@@ -10,6 +10,7 @@
   virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
   systems, # An attribute map of your defined hosts.
 
+  osConfig,
   config,
   specialArgs,
   ...
@@ -20,14 +21,13 @@ let
     cfg = config.${namespace}.tools.ssh;
 in
 {
-  options.${namespace}.tools.ssh = with types; {
-      enable = mkBoolOpt false "Whether or not to enable extra ssh settings for your user";
-  };
 
-  config = mkIf cfg.enable {
+  /* Extra configuration for users after ssh is enabled */
+  config = mkIf osConfig.${namespace}.system.ssh.enable {
     programs.ssh = {
       addKeysToAgent = "confirm";
 
+      extraConfig = "HostkeyAlgorithms ssh-rsa";
       # Could need some fine tuning with ssh-add after first install
     };
   };

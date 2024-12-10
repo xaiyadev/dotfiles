@@ -18,6 +18,9 @@ with lib;
 with lib.sylveon;
 {
 
+  /* User specific configurations */
+  programs.chromium.extensions = [ { id = "kmcfomidfpdkfieipokbalgegidffkal"; } ]; # Add the enpass browser extension
+
   sylveon = { # if using namespace here, you will get an error
     cli = {
       kitty = enabled;
@@ -58,7 +61,6 @@ with lib.sylveon;
 
   };
 
-  programs.chromium.extensions = [ { id = "kmcfomidfpdkfieipokbalgegidffkal"; } ]; # Add the enpass browser extension
 
   home.stateVersion = "24.05";
 }

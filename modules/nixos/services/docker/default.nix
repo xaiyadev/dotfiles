@@ -28,6 +28,13 @@ in
 
     config = mkIf cfg.enable {
       virtualisation.oci-containers.backend = "docker";
-      virtualisation.docker.enable = true;
+      virtualisation.docker = {
+        enable  = true;
+
+        rootless = {
+          enable = true;
+          setSocketVariable = true;
+        };
+      };
     };
 }

@@ -10,6 +10,7 @@
   virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
   systems, # An attribute map of your defined hosts.
 
+  osConfig,
   config,
   specialArgs,
   ...
@@ -17,14 +18,17 @@
 with lib;
 with lib.${namespace};
 let
-    cfg = config.${namespace}.cli.zsh;
+    rose-pine-toml = (builtins.fromTOML 
+      (builtins.readFile (builtins.fetchurl { 
+        url = ''https://raw.githubusercontent.com/rose-pine/starship/refs/heads/main/rose-pine.toml''; sha256 = "13ywv52sdw7aryx8xskxvgwbj4dnbw40qnff4c9csklsm3d7c9dg"; 
+      }))
+    );
 in
 {
-    options.${namespace}.cli.zsh = {
-        enable = mkBoolOpt false "Whether or not to enable the Kitty terminal";
-    };
 
-    config = mkIf cfg.enable {
+    /* The original module is started in nixos, this part is only for configuring the shell */
+    config = mkIf osConfig.${namespace}.system.zsh.enable {
+      
       programs.zsh = {
         enable = true;
         enableCompletion = true;
@@ -33,6 +37,7 @@ in
         autosuggestion = enabled;
 
         plugins = [
+          # Nix Shell support
           {
             name = "zsh-nix-shell";
             file = "nix-shell.plugin.zsh";
@@ -49,13 +54,23 @@ in
 
       programs.starship = {
         enable = true;
-        settings = {
+        settings = mkMerge [
+        {
           character = {
             success_symbol = "[➜](bold green)";
             error_symbol = "[✗](bold red) ";
-            vicmd_symbol = "[](bold blue) ";
+            vimcmd_symbol = "[](bold blue) ";
           };
-        };
+
+          directory = {
+            truncation_symbol = mkForce ".../";
+          };
+
+          time.disabled = mkForce true;
+        }
+        # Load submodule from rose-pine-toml
+        rose-pine-toml
+        ];
       };
 
     };
