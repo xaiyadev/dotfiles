@@ -27,10 +27,15 @@ in
             example = "d.schumin@blmedia.de";
         };
 
+        name = mkOption {
+            type = types.str;
+            default = "Xaiya Schumin";
+        };
+
         key = mkOption {
           type = types.str;
           default = "~/.ssh/id_ed25519_sk"; # Yubikey
-          example = "~/.ssh/id_rsa"; # Hucklebery SSH key
+          example = "~/.ssh/id_rsa"; # Hucklebery SSH key // Bitbucket signature
         };
     };
 
@@ -38,7 +43,7 @@ in
        programs.git = {
          enable = true;
          package = pkgs.gitFull;
-         userName = "Xaiya Schumin";
+         userName = "Danil Schumin";
          userEmail = cfg.email;
 
          extraConfig = {

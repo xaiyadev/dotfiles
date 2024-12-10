@@ -37,7 +37,11 @@
       tools = {
         git = {
           enable = true;
+          
           email = "d.schumin@blmedia.de";
+          name = "Danil Schumin";
+
+          key = "~/.ssh/id_rsa";
         };
 
 	      neovim.enable = true;
