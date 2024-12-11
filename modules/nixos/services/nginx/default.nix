@@ -25,8 +25,8 @@ in
     };
 
     config = mkIf cfg.enable {
-
       # Load the cloudflare environment files
+      age.secrets.cloudflare.rekeyFile = ./cloudflare.env.age;
 
 
       services.nginx = {
@@ -41,12 +41,12 @@ in
       security.acme = {
           acceptTerms = true;
           defaults.email = "d.schumin@proton.me";
-          certs."semiko.dev" = {
-              domain = "*.semiko.dev";
+          certs."xaiya.dev" = {
+              domain = "*.xaiya.dev";
               dnsProvider = "cloudflare";
 
               group = "nginx";
-              #environmentFile = config.age.secrets.cloudflare.path; TODO: secrets managment needed
+              environmentFile = config.age.secrets.cloudflare.path;
           };
       };
     };

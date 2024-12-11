@@ -49,9 +49,9 @@ in
 
       networking.firewall.allowedTCPPorts = [ 8384 22000 ];
       networking.firewall.allowedUDPPorts = [ 22000 21027 ];
-      services.nginx.virtualHosts."files.semiko.dev" = {
+      services.nginx.virtualHosts."files.xaiya.dev" = {
         forceSSL = true;
-        useACMEHost = "semiko.dev";
+        useACMEHost = "xaiya.dev";
         locations."/".proxyPass = "http://[::1]:8384";
         extraConfig = "proxy_ssl_server_name on;";
       };

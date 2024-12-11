@@ -17,6 +17,7 @@ with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.security.agenix;
+  user-directory = snowfall.fs.get-file "systems" + "/${system}/${config.networking.hostName}";
 in {
 
   options.${namespace}.security.agenix = with types; {
@@ -32,12 +33,12 @@ in {
    */
   config = mkIf cfg.enable {
     age.rekey = {
-      #hostPubkey = "";
+      hostPubkey = builtins.readFile (user-directory + "/key.pub");
       masterIdentities = cfg.masterIdentities;
 
       # Secrets are located in the local repository
       storageMode = "local";
-      localStorageDir = ./. + "/systems/${system}/${config.networking.hostName}/secrets/";
+      #localStorageDir = ./. /* <- flake root */ + "/secrets/rekeyed/host1"; /* separate folder for each host */
     };
   };
 }

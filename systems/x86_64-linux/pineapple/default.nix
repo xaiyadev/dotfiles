@@ -19,7 +19,6 @@ with lib.${namespace};
 {
   imports = [ ./hardware.nix ];
   networking.hostName = "pineapple";
-  age.rekey.hostPubkey = ./pineapple.pub;
 
   ${namespace} = {
     nix = { enable = true; lix = enabled; };
@@ -27,6 +26,8 @@ with lib.${namespace};
 
     system = {
       boot = enabled;
+      zsh = enabled;
+      ssh = enabled;
 
       fonts = enabled;
       locale = enabled;

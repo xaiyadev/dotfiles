@@ -62,9 +62,9 @@ in
       };
 
       networking.firewall.allowedTCPPorts = [ 8023 ];
-      services.nginx.virtualHosts."cash.semiko.dev" = {
+      services.nginx.virtualHosts."cash.xaiya.dev" = {
           forceSSL = true;
-          useACMEHost = "semiko.dev";
+          useACMEHost = "xaiya.dev";
           locations."/".proxyPass = "http://[::1]:8023";
           extraConfig = "proxy_ssl_server_name on;";
       };

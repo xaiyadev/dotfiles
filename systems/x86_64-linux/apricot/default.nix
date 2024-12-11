@@ -21,7 +21,6 @@ with lib.${namespace};
 
   /* System specific configurations */
   networking.hostName = "apricot";
-  age.rekey.hostPubkey = ./apricot.pub;
 
   ${namespace} = {
     nix = { enable = true; lix = enabled; };

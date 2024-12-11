@@ -92,7 +92,7 @@ in
               "Services" = [
                 {
                   "Firefly 3" = {
-                    href = ''https://cash.semiko.dev'';
+                    href = ''https://cash.xaiya.dev'';
                     icon = ''firefly'';
                     description = ''Finance managment software'';
                   };
@@ -100,7 +100,7 @@ in
 
                 {
                   "Vaultwarden" = {
-                    href = ''https://vault.semiko.dev'';
+                    href = ''https://vault.xaiya.dev'';
                     icon = ''vaultwarden'';
                     description = ''Password Manager Service'';
                   };
@@ -128,11 +128,11 @@ in
       };
 
       networking.firewall.allowedTCPPorts = [ 3000 ];
-      services.nginx.virtualHosts."semiko.dev" = {
+      services.nginx.virtualHosts."xaiya.dev" = {
           forceSSL = true;
-          useACMEHost = "semiko.dev";
+          useACMEHost = "xaiya.dev";
 
-          serverAliases = [ "www.semiko.dev" ];
+          serverAliases = [ "www.xaiya.dev" ];
           locations."/".proxyPass = "http://[::1]:3000";
           extraConfig = "proxy_ssl_server_name on;";
       };

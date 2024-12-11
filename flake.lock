@@ -526,15 +526,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1733676118,
-        "narHash": "sha256-DhaaBO1MpiDsqNsuKROdL+vJqaPW7XlH8gXBSaZ6xiI=",
-        "owner": "uwu",
+        "lastModified": 1733742982,
+        "narHash": "sha256-ep3MsNbfHEcXGsfUubxarc9NFl0fxE5YQt78FRawC3Q=",
+        "owner": "xaiyadev",
         "repo": "neptune",
-        "rev": "aac89035a39876a79486268ae50fcddeafc173d2",
+        "rev": "3a70282e15af69b0ebffddb476e97add77e96529",
         "type": "github"
       },
       "original": {
-        "owner": "uwu",
+        "owner": "xaiyadev",
+        "ref": "bugfix/nix-packages",
         "repo": "neptune",
         "type": "github"
       }

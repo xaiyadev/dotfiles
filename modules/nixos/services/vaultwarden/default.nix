@@ -44,9 +44,9 @@ in
       };
 
       networking.firewall.allowedTCPPorts = [ 9445 ];
-      services.nginx.virtualHosts."vault.semiko.dev" = {
+      services.nginx.virtualHosts."vault.xaiya.dev" = {
         forceSSL = true;
-        useACMEHost = "semiko.dev";
+        useACMEHost = "xaiya.dev";
         locations."/".proxyPass = "http://[::1]:9445";
         extraConfig = "proxy_ssl_server_name on;";
       };
