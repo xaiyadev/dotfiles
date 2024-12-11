@@ -34,12 +34,6 @@ in {
         enable = true;
         # Fix IPv6 DNS request load times
         dnsSingleRequest = true;
-
-        # Use the right DNS Server instead of the one of the local server (why fritzbox...)
-        extraConfig = ''
-          nameserver 1.1.1.1
-          nameserver 8.8.8.8
-        '';
       };
 
       networkmanager = {
