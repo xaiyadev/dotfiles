@@ -26,7 +26,7 @@ in
 
     config = mkIf cfg.enable {
       # Load the cloudflare environment files
-      age.secrets.cloudflare.rekeyFile = ./cloudflare.env.age;
+      #age.secrets.cloudflare.rekeyFile = ./cloudflare.env.age;
 
 
       services.nginx = {
@@ -46,7 +46,7 @@ in
               dnsProvider = "cloudflare";
 
               group = "nginx";
-              environmentFile = config.age.secrets.cloudflare.path;
+              #environmentFile = config.age.secrets.cloudflare.path;
           };
       };
     };

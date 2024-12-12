@@ -38,7 +38,7 @@ in {
 
       # Secrets are located in the local repository
       storageMode = "local";
-      #localStorageDir = ./. /* <- flake root */ + "/secrets/rekeyed/host1"; /* separate folder for each host */
+      localStorageDir = user-directory + "/secrets/";
     };
   };
 }

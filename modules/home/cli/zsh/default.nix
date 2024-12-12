@@ -54,23 +54,46 @@ in
 
       programs.starship = {
         enable = true;
-        settings = mkMerge [
+        settings = mkMerge [ 
+        # Load rose-pine palette
+        { palette = rose-pine-toml.palette; }
+        { palettes.rose-pine = rose-pine-toml.palettes.rose-pine; }
+
+        
+        (attrsets.genAttrs [ "git_status" "fill" ] (attr: rose-pine-toml.attr))
+        
         {
+          # Load Characters
           character = {
-            success_symbol = "[➜](bold green)";
-            error_symbol = "[✗](bold red) ";
-            vimcmd_symbol = "[](bold blue) ";
+            success_symbol = "[➜](pine)";
+            error_symbol = "[✗](love) ";
           };
 
           directory = {
             truncation_symbol = mkForce ".../";
+            
+            # Load rose-pine format and style
+            format  = rose-pine-toml.directory.format;
+            style = rose-pine-toml.directory.style;
+
+            substitutions = rose-pine-toml.directory.substitutions;
+          };
+
+
+          # Git Theming
+          git_branch = {
+            format = rose-pine-toml.git_branch.format;
+            style = rose-pine-toml.git_branch.style;
+          };
+
+          username = {
+            style_root = "bg:overlay fg:love";
+            style_user = rose-pine-toml.username.username.style_user;
           };
 
           time.disabled = mkForce true;
         }
-        # Load submodule from rose-pine-toml
-        rose-pine-toml
-        ];
+       ];
       };
 
     };

@@ -30,5 +30,8 @@ in
       enableZshIntegration = true;
       nix-direnv = enabled;
     };
+
+    # Enable starship configuration for direnv
+    programs.starship.settings.direnv.disabled = false;
   };
 }

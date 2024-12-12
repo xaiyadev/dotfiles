@@ -32,8 +32,18 @@ rec {
    *  ```
    *
    */
-
   disabled = {
     enable = false;
   };
+  
+  /*
+   *  Quickly enable an option
+   *  ```nix
+   *  boot.loader.grub = disabled;
+   *  ```
+   *
+   */
+  copyModuleOption = 
+    module: attr:
+    { inherit module attr; };
 }
