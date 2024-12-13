@@ -17,7 +17,7 @@ with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.security.agenix;
-  user-directory = snowfall.fs.get-file "systems" + "/${system}/${config.networking.hostName}";
+  user-directory = "${inputs.self}/systems/${system}/${config.networking.hostName}";
 in {
 
   options.${namespace}.security.agenix = with types; {
