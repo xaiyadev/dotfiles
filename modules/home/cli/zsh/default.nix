@@ -77,7 +77,7 @@ in
             ssh_only = false;
             ssh_symbol = "";
 
-            format = "[@ $hostname :]($style)";
+            format = "[@ $hostname]($style)";
             style = "bg:overlay fg:pine";
           };
 
@@ -100,9 +100,31 @@ in
             style = "fg:gold";
           };
 
+          # nix-shells
+          nix_shell = {
+            impure_msg = "󰼩 ";
+            pure_msg = "󱩰 ";
+
+            format = "[](fg:overlay)[$state( \($name\))]($style)[](fg:overlay) ";
+            style = "bg:overlay fg:foam";
+          };
+
+          # Show the current OS the shell is runing on 
+          os = {
+            disabled = false;
+            format = "[ $symbol]($style)";
+
+          };
+
+          jobs = {
+            symbol = " 󰀿 ";
+            format = "[$symbol$number]($style)";
+            style = "fg:rose";
+          };
+
           # Overriding attributes from rose-pine modules
           git_branch.symbol = mkForce ""; # use an updated git_branch icon 
-          directory.format = mkForce "[ $path ]($style)[ ](fg:overlay)";
+          directory.format = mkForce "[ : $path ]($style)[ ](fg:overlay)";
 
           username = {
             format = mkForce "[ ](fg:overlay)[  $user ]($style)";

@@ -15,6 +15,16 @@
     ...
 }:
 
-mkShell {
-    packages = with pkgs; [ agenix-rekey ];
+mkShell { 
+    packages = with pkgs; [ 
+    # Add zsh if it does not exist yet
+    zsh
+
+    # Add agenix-rekey tool
+    agenix-rekey 
+    ];
+
+
+    # Launch Zsh in this shell
+    shellHook = ''${pkgs.zsh}/bin/zsh'';
 }
