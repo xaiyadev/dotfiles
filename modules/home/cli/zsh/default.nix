@@ -55,13 +55,16 @@ in
       programs.starship = {
         enable = true;
         settings = mkMerge [ 
+
         # Load rose-pine palette
         { palette = rose-pine-toml.palette; }
         { palettes.rose-pine = rose-pine-toml.palettes.rose-pine; }
 
-        
-        (attrsets.genAttrs [ "git_status" "fill" ] (attr: rose-pine-toml.attr))
-        
+        # Load all atributes that I need from rose-pine
+        (attrsets.genAttrs [ "git_status" "directory" "git_branch" "username" "fill" ] 
+          (attr: attrsets.attrByPath [ attr ] null rose-pine-toml ))
+       
+        # Load my own modules/changed things from rose-pine
         {
           # Load Characters
           character = {
@@ -69,30 +72,44 @@ in
             error_symbol = "[✗](love) ";
           };
 
-          directory = {
-            truncation_symbol = mkForce ".../";
+          # Hostname/SSH names
+          hostname = {
+            ssh_only = false;
+            ssh_symbol = "";
+
+            format = "[@ $hostname :]($style)";
+            style = "bg:overlay fg:pine";
+          };
+
+          direnv = {
+            disabled = false;
+
+            symbol = "󱂸 ";
+            allowed_msg = "󰄬";
+            not_allowed_msg = "";
             
-            # Load rose-pine format and style
-            format  = rose-pine-toml.directory.format;
-            style = rose-pine-toml.directory.style;
+            format = "[](fg:overlay)[$symbol $allowed]($style)[](fg:overlay) ";
+            style = "bg:overlay fg:gold";
 
-            substitutions = rose-pine-toml.directory.substitutions;
           };
 
+          cmd_duration = {
+            disabled = false;
 
-          # Git Theming
-          git_branch = {
-            format = rose-pine-toml.git_branch.format;
-            style = rose-pine-toml.git_branch.style;
+            format = "took [$duration]($style)";
+            style = "fg:gold";
           };
+
+          # Overriding attributes from rose-pine modules
+          git_branch.symbol = mkForce ""; # use an updated git_branch icon 
+          directory.format = mkForce "[ $path ]($style)[ ](fg:overlay)";
 
           username = {
-            style_root = "bg:overlay fg:love";
-            style_user = rose-pine-toml.username.username.style_user;
+            format = mkForce "[ ](fg:overlay)[  $user ]($style)";
+            style_root = mkForce "bg:overlay fg:love"; # Change root colors to be red
           };
-
-          time.disabled = mkForce true;
         }
+
        ];
       };
 

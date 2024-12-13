@@ -35,6 +35,16 @@ rec {
   disabled = {
     enable = false;
   };
+
+  # Access the (potentially nested) attribute in `set`
+  # using a dot-delimited path `strPath`.
+  # Evaluate to `null` when the attribute does not exist.
+  #
+  # `strPath`: A dot-delimited string
+  # `set`: The attribute set to be accessed
+  attrByStrPath = strPath:
+    lib.attrsets.attrByPath
+      (lib.strings.splitString "." strPath);
   
   /*
    *  Quickly enable an option

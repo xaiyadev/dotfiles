@@ -22,6 +22,8 @@ in
 {
     options.${namespace}.services.docker = with types; {
         enable = mkBoolOpt false "Enable the docker service and configure the docker user";
+
+        users = mkOpt (listOf str) [ ] "What users should have access to docker";
     };
 
     config = mkIf cfg.enable {
