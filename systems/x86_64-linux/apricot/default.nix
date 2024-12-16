@@ -43,7 +43,6 @@ with lib.${namespace};
       docker = enabled;
       nginx = enabled;
 
-      #homepage = enabled;
       vaultwarden = enabled;
       #firefly = enabled;
     };

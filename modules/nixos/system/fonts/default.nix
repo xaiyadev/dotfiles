@@ -32,7 +32,7 @@ in {
       /* icons and other utilities */
       font-awesome
       material-design-icons
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      pkgs.nerd-fonts.jetbrains-mono
     ]
     ++ cfg.fonts;
 

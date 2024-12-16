@@ -50,5 +50,21 @@ in
               environmentFile = config.age.secrets.cloudflare.path;
           };
       };
+
+      /*
+      * Adding temporary filter before adding a main start page
+      * This will also be a small "linktree", my socials in one place
+      */
+      services.nginx.virtualHosts."xaiya.dev" = {
+        forceSSL = true;
+        useACMEHost = "xaiya.dev";
+        locations."/".return = ''301 https://catpedia.wiki/Category:Cat''; # Return to a cool catpedia page
+
+        /* Return to social media platforms */
+        locations."/bsky".return = "301 https://bsky.app/profile/xaiya.dev";
+        locations."/git".return = "301 https://github.com/xaiyadev";
+
+        extraConfig = "proxy_ssl_server_name on;";
+      };
     };
 }
