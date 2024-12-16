@@ -43,9 +43,9 @@ with lib.${namespace};
       docker = enabled;
       nginx = enabled;
 
-      homepage = enabled;
+      #homepage = enabled;
       vaultwarden = enabled;
-      firefly = enabled;
+      #firefly = enabled;
     };
   };
 

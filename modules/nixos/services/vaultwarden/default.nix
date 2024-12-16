@@ -25,25 +25,25 @@ in
     };
 
     config = mkIf cfg.enable {
-
+      networking.firewall.enable = mkForce true;
+      age.secrets.vaultwarden.rekeyFile = "${inputs.self}/secrets/vaultwarden.env.age";
+      
       virtualisation.oci-containers.containers.vaultwarden = {
-            image = "vaultwarden/server";
+            image = "vaultwarden/server:latest";
             autoStart = true;
-            hostname = "apricot";
 
             volumes = [
-              "/mnt/raid/services/vaultwarden/data:/data:rw" "
-              /mnt/raid/services/vaultwarden/web-vault:/web-vault:rw"
+              "/mnt/raid/services/vaultwarden/data:/data:rw"
+              "/mnt/raid/services/vaultwarden/web-vault:/web-vault:rw"
             ];
 
             ports = [ "9445:80" ]; # Web UI port
 
             environmentFiles = [
-                # config.age.secrets.vaultwarden.path TODO: configure age secrets
+              config.age.secrets.vaultwarden.path
             ];
       };
 
-      networking.firewall.allowedTCPPorts = [ 9445 ];
       services.nginx.virtualHosts."vault.xaiya.dev" = {
         forceSSL = true;
         useACMEHost = "xaiya.dev";

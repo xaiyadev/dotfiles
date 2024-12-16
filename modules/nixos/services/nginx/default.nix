@@ -38,6 +38,7 @@ in
       };
 
       # Create cert for nginx
+      networking.firewall.allowedTCPPorts = [ 80 443 ];
       security.acme = {
           acceptTerms = true;
           defaults.email = "d.schumin@proton.me";
