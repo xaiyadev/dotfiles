@@ -17,7 +17,8 @@ with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.security.agenix;
-  user-directory = "${inputs.self}/systems/${system}/${config.networking.hostName}";
+
+  getSystemDirectory = "${inputs.self}/systems/${system}/${config.networking.hostName}";
 in {
 
   options.${namespace}.security.agenix = with types; {
@@ -28,17 +29,15 @@ in {
   /* The default Agenix configuration, with the new age-rekey module
    * The age.rekey.hostPubkey is located in the hosts default file
    * All secret files can be found in the hosts folder ${hostname}/secrets/
-   *
-   * TODO: Agenix needs to be configured AFTER installation
    */
   config = mkIf cfg.enable {
     age.rekey = {
-      hostPubkey = builtins.readFile (user-directory + "/key.pub");
+      hostPubkey = builtins.readFile (getSystemDirectory + "/key.pub");
       masterIdentities = cfg.masterIdentities;
 
       # Secrets are located in the local repository
       storageMode = "local";
-      localStorageDir = user-directory + "/secrets/";
+      localStorageDir = getSystemDirectory + "/secrets/";
     };
   };
 }

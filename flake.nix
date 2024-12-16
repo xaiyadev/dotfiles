@@ -75,7 +75,7 @@
     // {
       # Configuring agenix-rekey itself
       agenix-rekey = inputs.agenix-rekey.configure {
-        userFlake = self;
+        userFlake = inputs.self;
         nixosConfigurations = inputs.self.nixosConfigurations;
       };
     };
