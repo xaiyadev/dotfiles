@@ -41,6 +41,7 @@ with lib.${namespace};
 
     services = {
       docker = enabled;
+      postgres = enabled;
       nginx = enabled;
 
       vaultwarden = enabled;

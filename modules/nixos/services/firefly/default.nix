@@ -25,79 +25,53 @@ in
 
     config = mkIf cfg.enable {
       age.secrets = {
-        firefly.rekeyFile = "${inputs.self}/secrets/firefly.env.age";
-        firefly-db.rekeyFile = "${inputs.self}/secrets/firefly.db.env.age";
-      };
+        firefly-app-key = {
+          rekeyFile = "${inputs.self}/secrets/firefly.app-key.age";
 
-
-      containers.firefly = {
-        autoStart = true;
-        privateNetwork = true;
-        hostAdress = "192.168.100.1";
-        localAdress = "192.168.1.126";
-
-        config = {}: {
-            services.firefly-iii = {
-                enable = true;
-                dataDir = "/mnt/raid/services/firefly/data/";
-                virtualHost = "https://xaiya.dev/";
-
-                settings = {
-                    APP_ENV = "production";
-                    APP_KEY_FILE = config.age.secrets.firefly-api.path;
-                    TRUSTED_PROXIES="**";
-
-                    SITE_OWNER="d.schumin@proton.me";
-                    TZ="Europe/Berlin";
-
-                    /* Database configuraiton */
-                    DB_CONNECTION = "pgsql";
-
-                    # Use new layout
-                    FIREFLY_III_LAYOUT="v2";
-                };
-
-            };
-        };
-
-      };
-
-      virtualisation.oci-containers = {
-        containers = {
-          firefly-app = {
-            image = "fireflyiii/core";
-            autoStart = true;
-            dependsOn = [ "firefly-db" ];
-            extraOptions = [ "--network=firefly" ];
-
-            volumes = [ "/mnt/raid/services/firefly/upload:/var/www/html/storage/upload:rw" ];
-
-            ports = [ "8023:8080" ]; # WEB-UI
-
-            environmentFiles = [
-                config.age.secrets.firefly.path
-            ];
-          };
-
-          firefly-db = {
-            image = "mysql";
-            autoStart = true;
-            extraOptions = [ "--network=firefly" ];
-
-            volumes = [ "/mnt/raid/services/firefly/database:/var/lib/mysql:rw" ];
-
-            environmentFiles = [
-                config.age.secrets.firefly-db.path
-            ];
-
-          };
+          # Set read permissions for firefly
+          owner = "root";
+          group = config.services.firefly-iii.group;
+          mode = "0440";
         };
       };
 
-      services.nginx.virtualHosts."cash.xaiya.dev" = {
+      services.postgresql = {
+        ensureDatabases = [ config.services.firefly-iii.user ];
+      };
+
+
+      services.firefly-iii = {
+        enable = true;
+        enableNginx = true;
+        virtualHost = "cash.xaiya.dev";
+
+        settings = {
+            APP_ENV = "production";
+            APP_KEY_FILE = config.age.secrets.firefly-app-key.path;
+            TRUSTED_PROXIES="**";
+
+            SITE_OWNER="d.schumin@proton.me";
+            TZ="Europe/Berlin";
+
+            /*
+             * Database configuraiton
+             * Postgres needs to be installed!
+            */
+            DB_CONNECTION = "pgsql";
+            DB_HOST = "localhost";
+            DB_PORT = config.services.postgresql.settings.port;
+
+            DB_DATABASE = config.services.firefly-iii.user;
+            DB_SOCKET = "/run/postgresql";
+
+            # Use new layout
+            FIREFLY_III_LAYOUT="v2";
+        };
+      };
+
+      services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost} = {
           forceSSL = true;
           useACMEHost = "xaiya.dev";
-          root = "${config.services.firefly-iii.package}";
       };
     };
 }
