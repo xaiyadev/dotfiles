@@ -44,7 +44,7 @@ with lib.${namespace};
       nginx = enabled;
 
       vaultwarden = enabled;
-      #firefly = enabled;
+      firefly = enabled;
     };
   };
 

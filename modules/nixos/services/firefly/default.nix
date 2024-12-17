@@ -21,18 +21,52 @@ in
 {
     options.${namespace}.services.firefly = {
         enable = mkEnableOption "Whether or not to enable the firefly services for cash managment";
-
     };
 
     config = mkIf cfg.enable {
-      # Load keys
+      age.secrets = {
+        firefly.rekeyFile = "${inputs.self}/secrets/firefly.env.age";
+        firefly-db.rekeyFile = "${inputs.self}/secrets/firefly.db.env.age";
+      };
+
+
+      containers.firefly = {
+        autoStart = true;
+        privateNetwork = true;
+        hostAdress = "192.168.100.1";
+        localAdress = "192.168.1.126";
+
+        config = {}: {
+            services.firefly-iii = {
+                enable = true;
+                dataDir = "/mnt/raid/services/firefly/data/";
+                virtualHost = "https://xaiya.dev/";
+
+                settings = {
+                    APP_ENV = "production";
+                    APP_KEY_FILE = config.age.secrets.firefly-api.path;
+                    TRUSTED_PROXIES="**";
+
+                    SITE_OWNER="d.schumin@proton.me";
+                    TZ="Europe/Berlin";
+
+                    /* Database configuraiton */
+                    DB_CONNECTION = "pgsql";
+
+                    # Use new layout
+                    FIREFLY_III_LAYOUT="v2";
+                };
+
+            };
+        };
+
+      };
 
       virtualisation.oci-containers = {
         containers = {
           firefly-app = {
             image = "fireflyiii/core";
             autoStart = true;
-            hostname = "app";
             dependsOn = [ "firefly-db" ];
             extraOptions = [ "--network=firefly" ];
 
@@ -41,32 +75,29 @@ in
             ports = [ "8023:8080" ]; # WEB-UI
 
             environmentFiles = [
-                # config.age.secrets.firefly.path TODO add secret files
+                config.age.secrets.firefly.path
             ];
           };
 
           firefly-db = {
             image = "mysql";
             autoStart = true;
-            hostname = "db";
             extraOptions = [ "--network=firefly" ];
 
             volumes = [ "/mnt/raid/services/firefly/database:/var/lib/mysql:rw" ];
 
             environmentFiles = [
-                # config.age.secrets.firefly.path TODO: add secret files
+                config.age.secrets.firefly-db.path
             ];
 
           };
         };
       };
 
-      networking.firewall.allowedTCPPorts = [ 8023 ];
       services.nginx.virtualHosts."cash.xaiya.dev" = {
           forceSSL = true;
           useACMEHost = "xaiya.dev";
-          locations."/".proxyPass = "http://[::1]:8023";
-          extraConfig = "proxy_ssl_server_name on;";
+          root = "${config.services.firefly-iii.package}";
       };
     };
 }
