@@ -25,6 +25,19 @@ in
     };
 
     config = mkIf cfg.enable {
-      services.postgresql = enabled;
+      services.postgresql = {
+        enable = true;
+
+        # Allow access to databases for users with the same username
+        authentication = pkgs.lib.mkOverride 10 ''
+          #type database DBuser origin-address
+          local sameuser  all     peer
+          host  sameuser  all     ::1/128 reject
+        '';
+
+        # MkForce because something other wants to use 'localhost'
+        settings.listen_addresses = mkForce "*";
+
+      };
     };
 }

@@ -37,6 +37,10 @@ in
 
       services.postgresql = {
         ensureDatabases = [ config.services.firefly-iii.user ];
+        ensureUsers = [{
+            name = config.services.firefly-iii.user;
+            ensureDBOwnership = true;
+        }];
       };
 
 
@@ -46,7 +50,7 @@ in
         virtualHost = "cash.xaiya.dev";
 
         settings = {
-            APP_ENV = "production";
+            APP_ENV = "local";
             APP_KEY_FILE = config.age.secrets.firefly-app-key.path;
             TRUSTED_PROXIES="**";
 
@@ -58,17 +62,17 @@ in
              * Postgres needs to be installed!
             */
             DB_CONNECTION = "pgsql";
-            DB_HOST = "localhost";
-            DB_PORT = config.services.postgresql.settings.port;
 
-            DB_DATABASE = config.services.firefly-iii.user;
+            DB_USERNAME = config.services.firefly-iii.user;
             DB_SOCKET = "/run/postgresql";
+            DB_DATABASE = config.services.firefly-iii.user;
 
-            # Use new layout
+            # New layout still buggy :(
             FIREFLY_III_LAYOUT="v2";
         };
       };
 
+      # Manually create maintance script because of hard recreatinudo
       services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost} = {
           forceSSL = true;
           useACMEHost = "xaiya.dev";
