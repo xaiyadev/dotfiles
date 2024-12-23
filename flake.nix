@@ -15,7 +15,7 @@
     nixcord = { url = "github:kaylorben/nixcord"; inputs.nixpkgs.follows = "nixpkgs"; };
     zen-browser = { url = "github:MarceColl/zen-browser-flake"; inputs.nixpkgs.follows = "nixpkgs"; }; # The Zen-browser flake has no module, only packages
     # Neptune is right now bugged; waiting for my PR
-    neptune = { url = "github:xaiyadev/neptune/bugfix/nix-packages"; inputs.nixpkgs.follows = "nixpkgs"; };
+    neptune = { url = "github:uwu/neptune"; inputs.nixpkgs.follows = "nixpkgs"; };
 
     /* Security flakes */
     agenix = { url = "github:ryantm/agenix"; inputs.nixpkgs.follows = "nixpkgs"; };

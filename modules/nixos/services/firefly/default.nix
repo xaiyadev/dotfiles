@@ -46,7 +46,9 @@ in
 
       services.firefly-iii = {
         enable = true;
-        enableNginx = true;
+        package = pkgs.firefly-iii;
+
+        group = "nginx";
         virtualHost = "cash.xaiya.dev";
 
         settings = {
@@ -68,14 +70,37 @@ in
             DB_DATABASE = config.services.firefly-iii.user;
 
             # New layout still buggy :(
-            FIREFLY_III_LAYOUT="v2";
+            FIREFLY_III_LAYOUT="v1";
         };
       };
 
       # Manually create maintance script because of hard recreatinudo
       services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost} = {
-          forceSSL = true;
-          useACMEHost = "xaiya.dev";
+        forceSSL = true;
+        useACMEHost = "xaiya.dev";
+        root = "${config.services.firefly-iii.package}/public";
+
+        locations = {
+          # Find and load the index.php
+          "/" = {
+            tryFiles = "$uri $uri/ /index.php?$query_string";
+            index = "index.php";
+            extraConfig = ''
+              sendfile off;
+            '';
+          };
+
+          # PHP files load correctly
+          "~ \.php$" = {
+            extraConfig = ''
+              include ${config.services.nginx.package}/conf/fastcgi_params ;
+              fastcgi_param SCRIPT_FILENAME $request_filename;
+              fastcgi_param modHeadersAvailable true; #Avoid sending the security headers twice
+              fastcgi_pass unix:${config.services.phpfpm.pools.firefly-iii.socket};
+            '';
+          };
+
+        };
       };
     };
 }
