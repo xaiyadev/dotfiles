@@ -46,6 +46,7 @@ with lib.${namespace};
 
       vaultwarden = enabled;
       firefly = enabled;
+      soft-serve = enabled;
     };
   };
 
