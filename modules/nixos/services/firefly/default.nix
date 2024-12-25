@@ -28,7 +28,7 @@ in
         firefly-app-key = {
           rekeyFile = "${inputs.self}/secrets/firefly.app-key.age";
 
-          # Set read permissions for firefly
+          # Set read permissions
           owner = "root";
           group = config.services.firefly-iii.group;
           mode = "0440";

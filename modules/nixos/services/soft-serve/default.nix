@@ -23,7 +23,9 @@ in
     options.${namespace}.services.soft-serve = with types; {
         enable = mkBoolOpt false "enable a minimalistic git server that is managed in the CLI";
     };
-
+    /*
+    * This module does not work right now, switching to gitlab for now
+    */
     config = mkIf cfg.enable {
       environment.systemPackages = [ pkgs.soft-serve ]; # Add the soft terminal utility
 
