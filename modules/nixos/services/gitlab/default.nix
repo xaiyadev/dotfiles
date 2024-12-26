@@ -17,68 +17,94 @@
 with lib;
 with lib.${namespace};
 let
-    cfg = config.${namespace}.services.postgres;
+    cfg = config.${namespace}.services.gitlab;
 in
 {
-    options.${namespace}.services.postgres = with types; {
+    options.${namespace}.services.gitlab = with types; {
         enable = mkBoolOpt false "Selfhosted git Server (mostly for syncing settings)";
     };
 
     config = mkIf cfg.enable {
       age.secrets = {
+
         gitlab-pwd = {
           rekeyFile = "${inputs.self}/secrets/gitlab.pwd.age";
+          generator.script = "passphrase"; # TODO: create script that creates the password and adds it to bitwarden
 
-          # Set read permissions
-          owner = "root";
           group = config.services.gitlab.group;
           mode = "0440";
         };
 
         gitlab-secret = {
           rekeyFile = "${inputs.self}/secrets/gitlab.secret.age";
+          generator.script = "alnum";
 
-          # Set read permissions for firefly
-          owner = "root";
           group = config.services.gitlab.group;
           mode = "0440";
+
         };
 
         gitlab-otp = {
           rekeyFile = "${inputs.self}/secrets/gitlab.otp.age";
+          generator.script = "alnum";
 
-          # Set read permissions for firefly
-          owner = "root";
+          group = config.services.gitlab.group;
+          mode = "0440";
+        };
+
+
+        gitlab-db-secret = {
+          rekeyFile = "${inputs.self}/secrets/gitlab.db-secret.age";
+          generator.script = "alnum";
+
+
           group = config.services.gitlab.group;
           mode = "0440";
         };
 
         gitlab-jws = {
           rekeyFile = "${inputs.self}/secrets/gitlab.jws.age";
+          generator.script = "jws";
 
-          # Set read permissions for firefly
-          owner = "root";
           group = config.services.gitlab.group;
           mode = "0440";
         };
       };
 
+      # Generate database
+      services.postgresql = {
+        ensureDatabases = [ config.services.gitlab.user ];
+        ensureUsers = [{
+            name = config.services.gitlab.user;
+            ensureDBOwnership = true;
+        }];
+      };
+
       services.gitlab = {
         enable = true;
+        https = true;
 
         initialRootPasswordFile = config.age.secrets.gitlab-pwd.path;
 
-        databaseHost = "/run/postgresql";
-        databaseName = config.service.gitlab.user;
-        databaseUser = config.services.gitlab.user;
+        databaseName = config.services.gitlab.user;
+        databaseUsername = config.services.gitlab.user;
+
 
         secrets = {
-          secretFile = config.age.secrets.gitlab-secrets.path;
+          secretFile = config.age.secrets.gitlab-secret.path;
           otpFile = config.age.secrets.gitlab-otp.path;
+          dbFile = config.age.secrets.gitlab-db-secret.path;
           jwsFile = config.age.secrets.gitlab-jws.path;
 
         };
 
+      };
+
+      # Setup backup configuration
+      systemd.services.gitlab-backup.environment.BACKUP = "dump";
+
+      services.nginx.virtualHosts."git.xaiya.dev" = {
+        locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
       };
     };
 }

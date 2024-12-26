@@ -39,5 +39,9 @@ in {
       storageMode = "local";
       localStorageDir = getSystemDirectory + "/secrets/";
     };
+
+    age.generators = {
+      jws = { pkgs, ... }: "${pkgs.openssl}/bin/openssl genrsa";
+    };
   };
 }

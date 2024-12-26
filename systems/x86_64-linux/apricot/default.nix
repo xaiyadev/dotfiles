@@ -46,6 +46,8 @@ with lib.${namespace};
 
       vaultwarden = enabled;
       firefly = enabled;
+      gitlab = enabled;
+
       # soft-serve = enabled;
     };
   };
