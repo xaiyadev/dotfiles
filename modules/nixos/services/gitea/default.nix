@@ -37,7 +37,7 @@ in
 
       services.gitea = {
         enable = true;
-        appName = "gitea: Xaiya's Sync Server";
+        appName = "Xaiya's Sync Server";
 
         database = {
           createDatabase = false;
@@ -60,14 +60,17 @@ in
             PROTOCOL = "http";
           };
 
-          "service" = {
-            DISABLE_REGISTRATION = true; # Needs to be disabled when creating a new server
-          };
+          "service".DISABLE_REGISTRATION = true; # Needs to be disabled when creating a new server
 
           "cron.sync_external_users" = {
             RUN_AT_START = true;
             SCHEDULE = "@every 24h";
             UPDATE_EXISTING = true;
+          };
+
+          "repository.upload" = {
+            FILE_MAX_SIZE = 150;
+            MAX_FILES = 99999;
           };
         };
       };
@@ -75,8 +78,8 @@ in
       services.nginx.virtualHosts.${config.services.gitea.settings."server".DOMAIN} = {
         forceSSL = true;
         useACMEHost = "xaiya.dev";
-
         locations."/".proxyPass = "http://[::1]:4931";
+        extraConfig = '' client_max_body_size 150M; '';
       };
 
     };
