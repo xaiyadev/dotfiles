@@ -33,7 +33,13 @@ in
   config = mkIf cfg.enable {
     home.packages = [ pkgs.obsidian ];
 
-    # TODO: Add a git server for syncronization of obsidian files
-    # TODO: After that the vault will be created here
+    # Clone needs git with the credentials running
+    home.activation."obsidian-clone-vault" = ''
+      mkdir -p /srv/obsidian
+
+      if [ ! -d /srv/obsidian ] ; then
+          git clone https://git.xaiya.dev/Obsidian.git /srv/obsidian
+      fi
+     '';
   };
 }
