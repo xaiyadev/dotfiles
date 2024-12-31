@@ -45,6 +45,8 @@ This configuration has different users and systems that could change from time t
   - Laptop. This is mostly used for programming, school and work.
 - Apricot
   - Server. This System is simply my Server, important day-to-day services like vault warden and firefly are hosted on here
+- Huckleberry
+  - Tower. Gaming, Programing, Drawing (maybe). All you can think about!
 
 ## Security
 There are 2 places where the secrets are saved:
