@@ -20,8 +20,9 @@ This Configuration is based on the snowflake lib folder structure, so its easy r
 It is important to differentiate between home manager modules and nixos modules-
 - Home Manager modules are for packages that are highly configurable  and user specific. All packages and modules that is software, like an IDE or a social platform should all be installed with home manager
 - NixOS should contain all system relevant changes. Networking, locale and many other things should be managed via NixOS.
+
 > [!WARNING]
-> sometimes packages don't exist for home-manager, in that case software packages sadly need to be installed via the NixOS module
+> Some Home-Manager Modules will only be activated if you activate the corresponding NixOS configuration
 
 ## Users and Systems
 This configuration has different users and systems that could change from time to time.
@@ -46,27 +47,22 @@ This configuration has different users and systems that could change from time t
   - Server. This System is simply my Server, important day-to-day services like vault warden and firefly are hosted on here
 
 ## Security
-All environment files are be managed via [agenix](https://github.com/ryantm/agenix)
+There are 2 places where the secrets are saved:
+- secrets/
+  - These are encrypted by my yubikey, if you ever rekey something from a new device these will be used
+
+- systems/../../secrets/
+  - These are encrypted by the system itself, there are only keys that are used from the system!
 
 > [!Note]
-> If you would like to build this system yourself you simply can re-key the files and use your own content.
->
-> Simply remove all .age files and execute `nix run github:ryantm/agenix -- --rekey`
+> If you want to create a new Encryption, please do as follows:
+> - Add it to the code (age.secrets)
+> - go into a nix-shell (already created when building the system)
+>   - edit the encryption (or generate it if it's a script)
+>   - rekey that encryption (that way it will end up in the systems/../../secrets/ directory)
 
 # Install Instructions
 Some modules need manual changes before they can be used, otherwise they cant work.
-
-## ``modules/nixos/hardware/yubikey``
-> [!Note]
-> If you already have a generated key you should add it in the configuration instead of creating a new one
-
-if you want to add your yubikey as a secure way to login and use sudo, you should look at the [Yubikey Nixos Wiki](https://nixos.wiki/wiki/Yubikey#pam_u2f)
-
-There is described how you can do that with the "pam_u2f" method.
-
-This method of encryption implements "U2F" (Universal Second Factor) protocol for encrypting your login.
-
-If you want to add your own key, you should remove the ``~/.config/Yubico/u2f_keys`` file and then add your 
 
 ---
 ## Credits

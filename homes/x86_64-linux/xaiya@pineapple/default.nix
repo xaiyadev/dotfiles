@@ -18,7 +18,7 @@ with lib;
 with lib.sylveon;
 {
 
-  sylveon = { # if using namespace here, you will get an error
+  sylveon = {
     cli = {
       kitty = enabled;
       neovim = enabled;
@@ -37,10 +37,10 @@ with lib.sylveon;
 
       development = {
         jetbrains = {
-            enable = true; # Enabling syncronization with my git server
+          enable = true; # Enabling syncronization with my git server
 
-            webstorm = enabled; # deprecated when completly switched to neovim
-            intellij = enabled; # Java development, will probably stay with this idea
+          webstorm = enabled; # deprecated when completly switched to neovim
+          intellij = enabled; # Java development, will probably stay with this idea
         };
       };
 

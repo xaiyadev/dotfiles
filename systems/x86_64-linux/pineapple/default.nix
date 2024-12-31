@@ -49,6 +49,7 @@ with lib.${namespace};
       yubikey = enabled;
       agenix = enabled;
     };
+
     services.docker = enabled;
   };
 

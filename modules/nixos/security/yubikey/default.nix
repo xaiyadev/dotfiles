@@ -24,9 +24,6 @@ in {
     package = mkOpt (listOf package) [] "A list of udev packages that should be extra installed";
   };
 
-  /*  Before Yubikey can complety work on the system, you need to manually configure some things.
-   *  Look at the installation instructions in the README
-   */
   config = mkIf cfg.enable {
 
     /* Enable Passkey support */
