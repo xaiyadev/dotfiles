@@ -53,11 +53,20 @@ with lib.${namespace};
     services.docker = enabled;
   };
 
-  # User configuration/groups
+  # Users configuration
+  users.users = {
+    xaiya = {
+      extraGroups = [ "docker" ];
+      useDefaultShell = true;
+      initialPassword = "password"; # Very secure, indeed
+    };
 
-  ## The Docker configuration needs to be here, because every's user extra Group can only be changed in Nix itself...
-  users.users.xaiya.extraGroups = [ "docker" ];
-  users.users.workaholic.extraGroups = [ "docker" ];
+    workaholic = {
+      extraGroups = [ "docker" ];
+      useDefaultShell = true;
+      initialPassword = "password";
+    };
+  };
 
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";

@@ -32,14 +32,5 @@ in
    */
   config = mkIf cfg.enable {
     home.packages = [ pkgs.obsidian ];
-
-    # Clone needs git with the credentials running
-    home.activation."obsidian-clone-vault" = ''
-      mkdir -p /srv/obsidian
-
-      if [ ! -d /srv/obsidian ] ; then
-          git clone https://git.xaiya.dev/Obsidian.git /srv/obsidian
-      fi
-     '';
   };
 }

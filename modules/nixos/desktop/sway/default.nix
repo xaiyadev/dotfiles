@@ -44,9 +44,9 @@ in {
   # This part only configures the GDM desktop Manager and the session
   # For configuration and addons please visit modules/home/desktop
   config = mkIf cfg.enable {
-    services.xserver.displayManager.gdm = {
+    services.displayManager.sddm = {
         enable = true;
-        wayland = true;
+        wayland = enabled;
     };
 
     programs.sway = {
