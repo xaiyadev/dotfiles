@@ -51,15 +51,9 @@ with lib.${namespace};
     };
   };
 
-  # Users configurations
 
-  users.users = {
-    semiko = {
-      extraGroups = [ "docker" ];
-      useDefaultShell = true;
-      initialPassword = "password"; # Very secure, indeed
-    };
-  };
+  users.users.semiko  = mkUserConfiguration "password" [ ];
+
 
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";

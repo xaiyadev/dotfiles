@@ -54,19 +54,8 @@ with lib.${namespace};
   };
 
   # Users configuration
-  users.users = {
-    xaiya = {
-      extraGroups = [ "docker" ];
-      useDefaultShell = true;
-      initialPassword = "password"; # Very secure, indeed
-    };
-
-    workaholic = {
-      extraGroups = [ "docker" ];
-      useDefaultShell = true;
-      initialPassword = "password";
-    };
-  };
+  users.users.xaiya = mkUserConfiguration "password" [ ];
+  users.users.workaholic  = mkUserConfiguration "password" [ ];
 
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";
