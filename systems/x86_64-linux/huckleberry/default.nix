@@ -35,7 +35,9 @@ with lib.${namespace};
 
     hardware = {
       audio = enabled;
-      networking.enable = true;
+      networking = enabled;
+
+      nvidia = enabled;
     };
 
     security = {
@@ -44,8 +46,6 @@ with lib.${namespace};
 
     services.docker = enabled;
   };
-
-  # User configuration/groups
 
   ## The Docker configuration needs to be here, because every's user extra Group can only be changed in Nix itself...
   users.users.xaiya.extraGroups = [ "docker" ];

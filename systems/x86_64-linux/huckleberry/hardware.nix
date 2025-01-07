@@ -1,49 +1,6 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  /* --- Manual Added code --- */
-
-  /* Install and configure NVIDIA drivers */
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware = {
-    graphics = {
-      enable = true;
-
-      extraPackages = with pkgs; [ vulkan-validation-layers ];
-    };
-
-    nvidia = {
-        package = config.boot.kernelPackages.nvidiaPackages.beta;
-
-        modesetting.enable = true;
-        powerManagement.enable = true;
-
-        nvidiaPersistenced = true;
-
-        open = true;
-        nvidiaSettings = true;
-      };
-  };
-
-  /* Adding NTFS filesystem */
-  fileSystems."/mnt/win10" =
-    {
-      device = "/dev/disk/by-uuid/60BCF29FBCF26EC2";
-      fsType = "ntfs-3g";
-      options = [ "rw" "uid=1000" "gid=100" "user" "exec" "umask=000" ]; # important: change uid and gid to the right numbers :D
-    };
-
-  fileSystems."/mnt/games" =
-    {
-      device = "/dev/disk/by-uuid/F4462E50462E13C0";
-      fsType = "ntfs-3g";
-      options = [ "rw" "uid=1000" "gid=100" "user" "exec" "umask=000" ]; # important: change uid and gid to the right numbers :D
-    };
-
-
-
-  /* --- Auto generated code --- */
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
