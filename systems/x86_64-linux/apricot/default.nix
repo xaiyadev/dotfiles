@@ -51,6 +51,10 @@ with lib.${namespace};
     };
   };
 
+
+  users.users.semiko  = mkUserConfiguration "password" [ ];
+
+
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";
 }

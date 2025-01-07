@@ -39,6 +39,7 @@ in {
 
     wayland.windowManager.sway = {
       enable = true;
+      package = null;
       checkConfig = false;
 
       config = {
@@ -47,11 +48,11 @@ in {
         bars = [ { command = "${pkgs.waybar}/bin/waybar"; }];
 
         modifier = modifier;
-        terminal = "kitty";
+        terminal = "${config.programs.kitty.package}/bin/kitty";
 
         # Outputs managed by kanshi
         defaultWorkspace = "1";
-        output = { "*" = { bg = "~/.config/wallpapers/girls.jpeg"; }; };
+        output = { "*" = { bg = "~/.config/wallpapers/girls.jpeg fill"; }; };
 
         # Windows
         window = { border = 4; titlebar = false; };

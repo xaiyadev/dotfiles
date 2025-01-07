@@ -19,6 +19,7 @@ with lib.sylveon;
 {
 
   sylveon = {
+
     cli = {
       kitty = enabled;
       neovim = enabled;
