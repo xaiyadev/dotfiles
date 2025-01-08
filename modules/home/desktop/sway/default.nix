@@ -42,6 +42,12 @@ in {
       package = null;
       checkConfig = false;
 
+      # Adds a systemd target, for tools like kanshi to work
+      systemd = {
+        enable = true;
+        xdgAutostart = true;
+      };
+
       config = {
         # Default Configurations
         menu = "${pkgs.wofi}/bin/wofi --allow-images --show drun";

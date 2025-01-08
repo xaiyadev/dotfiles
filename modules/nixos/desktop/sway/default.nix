@@ -17,23 +17,6 @@ with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.desktop.sway;
-
-  # Deprecated after huckleberry removal
-  sessionPackage = pkgs.writeTextFile {
-      name = "sway.desktop";
-      destination = "/share/wayland-sessions/sway.desktop";
-
-      text = ''
-        [Desktop Entry]
-        Name=Sway
-        Comment=Startup sway
-        Exec=${pkgs.sway}/bin/sway --unsupported-gpu
-        Type=Application
-      '';
-
-      checkPhase = ''${pkgs.buildPackages.desktop-file-utils}/bin/desktop-file-validate "$target"'';
-      derivationArgs = { passthru.providedSessions = [ "sway" ]; };
-  };
 in {
 
   options.${namespace}.desktop.sway = with types; {
@@ -51,6 +34,7 @@ in {
 
     programs.sway = {
       enable = true;
+
       wrapperFeatures.gtk = true;
 
       extraPackages = with pkgs; [
@@ -74,10 +58,5 @@ in {
         export XDG_CURRENT_DESKTOP=sway
       '';
     };
-
-    # Create own Session, because
-    services.displayManager.sessionPackages = [ sessionPackage ] ++ cfg.session.sessionPackage;
-    services.displayManager.defaultSession = "sway";
-
   };
 }

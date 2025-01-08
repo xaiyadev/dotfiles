@@ -44,7 +44,6 @@ in {
         enable = true;
 
         wifi = mkIf cfg.wifi.enable {
-          backend = "iwd";
           powersave = true;
           scanRandMacAddress = true;
         };
