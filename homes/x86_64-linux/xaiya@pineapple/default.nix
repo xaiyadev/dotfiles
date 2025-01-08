@@ -45,6 +45,12 @@ with lib.sylveon;
         };
       };
 
+      games = {
+        FFXIV = enabled;
+        minecraft = enabled;
+        steam = enabled;
+      };
+
 
       security.yubikey = enabled;
       files.obsidian = enabled;
