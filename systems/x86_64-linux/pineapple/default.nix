@@ -83,6 +83,8 @@
     };
   };
 
+  services.tailscale.enable = true;
+
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";
 }
