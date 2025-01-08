@@ -38,8 +38,7 @@ with lib.${namespace};
 
       networking = {
         enable = true;
-        wifi.ensureProfiles = enabled;
-        #vpn = enabled; TODO: enabled when age configured
+        wifi = enabled;
       };
 
       bluetooth = enabled;

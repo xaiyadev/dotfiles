@@ -19,7 +19,11 @@ rec {
         uuid = "${uuid}";
       };
 
-      ipv4.method = "auto";
+      ipv4 = {
+        ignore-auto-dns = true;
+        method = "auto";
+      };
+
       ipv6.method = "auto";
 
       wifi = {
@@ -59,7 +63,11 @@ rec {
           uuid = "${uuid}";
         };
 
-        ipv4.method = "auto";
+        ipv4 = {
+          ignore-auto-dns = true;
+          method = "auto";
+        };
+
         ipv6.method = "auto";
 
         wifi = {

@@ -31,6 +31,7 @@ in
       };
   };
 
+<<<<<<< Updated upstream
   config = mkIf cfg.enable {
     home.packages = cfg.extraPackages;
 
@@ -45,6 +46,30 @@ in
         gpg.format = "ssh";
         user.signingkey = cfg.ssh-key;
       };
+=======
+        key = mkOption {
+          type = types.str;
+          default = "~/.ssh/id_ed25519_sk"; # Yubikey
+          example = "~/.ssh/id_rsa"; # Hucklebery SSH key // Bitbucket signature
+        };
+    };
+
+    config = mkIf cfg.enable {
+       programs.git = {
+         enable = true;
+         package = pkgs.gitFull;
+         userName = "Danil Schumin";
+         userEmail = cfg.email;
+
+         extraConfig = {
+             commit.gpgsign = true;
+             gpg.format = "ssh";
+             user.signingkey = cfg.key;
+
+             http.postBuffer = 1048576000;
+         };
+       };
+>>>>>>> Stashed changes
     };
   };
 }
