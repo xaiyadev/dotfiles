@@ -29,7 +29,6 @@ with lib.sylveon;
       music.tidal = enabled;
 
       browser.chromium = enabled;
-
       #browser.zen = enabled;
 
       social = {
@@ -38,11 +37,13 @@ with lib.sylveon;
       };
 
       development = {
-        jetbrains = {
-          phpstorm = enabled;
-        };
+        jetbrains.phpstorm = enabled;
       };
 
+      security = {
+        enpass = enabled;
+        yubikey = enabled;
+      };
       files.obsidian = enabled;
     };
 

@@ -45,6 +45,8 @@ with lib.sylveon;
         };
       };
 
+
+      security.yubikey = enabled;
       files.obsidian = enabled;
     };
 

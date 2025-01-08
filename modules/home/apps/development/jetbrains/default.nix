@@ -21,9 +21,6 @@ let
 in
 {
   options.${namespace}.apps.development.jetbrains = with types; {
-    # The global enable just enables the compatiblity with the apricot git server (when done :/)
-    enable = mkBoolOpt false "Wheter or not to enable some of the packages + enable sync with the git server";
-
     phpstorm = {
       enable = mkBoolOpt false "Whether or not to enable the PHPStorm IDE, for PHP and backend development";
       package = mkOpt package pkgs.jetbrains.phpstorm "The PHPStorm package";
@@ -40,7 +37,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = {
 
     home.packages = [
         (mkIf cfg.phpstorm.enable cfg.phpstorm.package)
@@ -49,7 +46,5 @@ in
     ];
 
     # This could go obselete if I completly switch to neovim
-    # TODO: Add a git server for synchronization, and then use Jetbrains old git sync tool
-    # TODO: Enable plugin and add configuration here
   };
 }
