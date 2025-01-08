@@ -16,7 +16,7 @@
 with lib;
 with lib.${namespace};
 let
-  cfg = config.${namespace}.system.fonts;
+  cfg = config.${namespace}.hardware.nvidia;
 in {
 
   options.${namespace}.hardware.nvidia = with types; {
