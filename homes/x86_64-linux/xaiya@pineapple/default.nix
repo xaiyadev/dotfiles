@@ -38,8 +38,6 @@ with lib.sylveon;
 
       development = {
         jetbrains = {
-          enable = true; # Enabling syncronization with my git server
-
           webstorm = enabled; # deprecated when completly switched to neovim
           intellij = enabled; # Java development, will probably stay with this idea
         };
