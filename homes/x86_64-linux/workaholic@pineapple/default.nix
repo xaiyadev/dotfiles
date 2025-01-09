@@ -52,6 +52,7 @@ with lib.sylveon;
       git = {
         enable = true;
         user.email = "d.schumin@blmedia.de"; # Deadname :/
+	ssh-key = "~/.ssh/id_rsa";
       };
     };
 
