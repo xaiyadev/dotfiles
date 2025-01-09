@@ -57,22 +57,29 @@ in {
         terminal = "${config.programs.kitty.package}/bin/kitty";
 
         # Outputs managed by kanshi
-        defaultWorkspace = "workspace number 1";
+        defaultWorkspace = "1";
         workspaceOutputAssign = [
+        
         { 
           output = [ "Philips Consumer Electronics Company PHL 272B4Q AU11526001821" "eDP-1" ]; 
-          workspace = "workspace number 1"; 
+          workspace = "1"; 
+        }
+
+        { 
+          output = "Philips Consumer Electronics Company PHL 272B4Q AU11531001040";
+          workspace = "2"; 
         }
         
-        { output = "eDP-1"; workspace = "workspace number 3"; }
-        { output = "eDP-1"; workspace = "workspace number 4"; }
-        { output = "eDP-1"; workspace = "workspace number 5"; }
+        { output = "eDP-1"; workspace = "3"; }
+        { output = "eDP-1"; workspace = "4"; }
+        { output = "eDP-1"; workspace = "5"; }
+        
         ];
         output = { "*" = { bg = "~/.config/wallpapers/girls.jpeg fill"; }; };
 
         # Windows
-        window = { border = 4; titlebar = false; };
-        gaps = { inner = 15; };
+        window = { border = 3; titlebar = false; };
+        gaps = { inner = 10; };
 
         colors = { # Rose Pine color theme
           focused = {

@@ -26,7 +26,8 @@ in {
     services.kanshi = {
       enable = true;
 
-      settings = [
+      settings = 
+      [
         {
           profile = {
             name = "docked_office";
@@ -34,7 +35,7 @@ in {
               {
                 criteria = "eDP-1";
 
-                position = "0,227";
+                position = "0,182";
                 mode = "1920x1080@60.049Hz";
               }
               
@@ -53,26 +54,8 @@ in {
             ];
           };
         }
-
-        {
-          profile = {
-            name = "docked_home";
-
-            outputs = [
-              {
-                criteria = "AOC 2460G4 0x0000A8E2";
-                position = "1920,0";
-                mode = "192.1080@119.982Hz";
-              }
-              {
-                criteria = "Acer Technologies RT240Y T75EE0042411"; # Second Screen
-                position = "0,0";
-                mode = "1920x1080";
-              }
-            ];
-          };
-        }
       ];
+
     };
   };
 }
