@@ -57,7 +57,17 @@ in {
         terminal = "${config.programs.kitty.package}/bin/kitty";
 
         # Outputs managed by kanshi
-        defaultWorkspace = "1";
+        defaultWorkspace = "workspace number 1";
+        workspaceOutputAssign = [
+        { 
+          output = [ "Philips Consumer Electronics Company PHL 272B4Q AU11526001821" "eDP-1" ]; 
+          workspace = "workspace number 1"; 
+        }
+        
+        { output = "eDP-1"; workspace = "workspace number 3"; }
+        { output = "eDP-1"; workspace = "workspace number 4"; }
+        { output = "eDP-1"; workspace = "workspace number 5"; }
+        ];
         output = { "*" = { bg = "~/.config/wallpapers/girls.jpeg fill"; }; };
 
         # Windows
