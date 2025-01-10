@@ -27,6 +27,7 @@ in
     config = mkIf cfg.enable {
       programs.wlogout = {
         enable = true;
+        package = pkgs.wleave;
 
         layout = [
           {
@@ -48,13 +49,6 @@ in
             action = "${pkgs.systemd}/bin/loginctl kill-session $XDG_SESSION_ID";
             text = "Logout";
             keybind = "e";
-          }
-
-          {
-            label = "hibernate";
-            action = "${pkgs.systemd}/bin/systemctl suspend";
-            text = "Hibernate";
-            keybind = "h";
           }
 
           {
