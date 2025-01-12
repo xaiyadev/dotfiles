@@ -18,6 +18,9 @@ with lib;
 with lib.sylveon;
 {
 
+  # Add Yubikey u2f_keys
+  home.file."~/.config/Yubico/u2f_keys".text = "xaiya:yJOnhShdxyJpMTbqxhsln9Ce/6IBbbQSSOIxwJK0n9ywBI1Q/jm78gTQCbFvRkGtDIT3y54yPzqQZyz49QZcXw==,xlPjmXzsATgnGr371oxpYqXVtIWUKF2xLum3CfVVldJ2cEnPRAjK1kD3MOvo0egkC/8mxBW2si2edHfuHAJGcw==,es256,+presence";
+
   sylveon = {
 
     cli = {

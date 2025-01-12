@@ -53,8 +53,11 @@ with lib.${namespace};
   };
 
   # Users configuration
-  users.users.xaiya = mkUserConfiguration "password" [ ];
-  users.users.workaholic  = mkUserConfiguration "password" [ ];
+  age.secrets.xaiya-pwd.rekeyFile = "${inputs.self}/secrets/xaiya.pwd.age";
+  age.secrets.workaholic-pwd.rekeyFile = "${inputs.self}/secrets/workaholic.pwd.age";
+
+  users.users.xaiya = mkUserConfiguration config.age.secrets.xaiya-pwd.path [ ];
+  users.users.workaholic  = mkUserConfiguration config.age.secrets.workaholic-pwd.path [ ];
 
   home-manager.backupFileExtension = "backup";
   system.stateVersion = "24.11";

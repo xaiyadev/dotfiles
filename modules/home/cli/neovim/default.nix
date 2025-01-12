@@ -76,7 +76,7 @@ in
           enable = true;
           inlayHints = true;
 
-          servers = { # TODO: add langauge servers to devenv
+          servers = {
             ts_ls = enabled; # TS/JS
             cssls = enabled; # CSS
             html = enabled; # HTML

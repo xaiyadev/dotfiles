@@ -6,6 +6,6 @@ with lib;
     {
       extraGroups = extraGroups;
       useDefaultShell = true;
-      initialPassword = password; # TODO: Change to hashed password
+      hashedPasswordFile = password;
     };
 }
