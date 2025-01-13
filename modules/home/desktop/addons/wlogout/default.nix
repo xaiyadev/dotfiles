@@ -70,7 +70,6 @@ in
           }
         ];
 
-        # TODO: add CSS configurations for that
         style = strings.concatStrings [
           # Default CSS
           (builtins.readFile ./style/index.css)
@@ -82,7 +81,7 @@ in
           #reboot { background-image: url("${./icons/reboot_light.png}") }
           #shutdown { background-image: url("${./icons/shutdown_light.png}") }
           #switch_windows { background-image: url("${./icons/windows.png}") }
-          #switch_gnome { background-image: url("${./icons/gnome.png}") } /* TODO: Find good alternative Icon */
+          #switch_gnome { background-image: url("${./icons/gnome.png}") }
           ''
 
          ];

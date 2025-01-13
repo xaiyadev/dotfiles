@@ -25,7 +25,6 @@ in
         package = mkOpt package pkgs.swaylock-effects "What swaylock package to use";
     };
 
-    /* TODO: Fix Swaylock not unlocking after some time */
     config = mkIf cfg.enable {
       programs.swaylock = {
         enable = true;
