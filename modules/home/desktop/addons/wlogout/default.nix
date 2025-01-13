@@ -27,7 +27,6 @@ in
     config = mkIf cfg.enable {
       programs.wlogout = {
         enable = true;
-        package = pkgs.wleave;
 
         layout = [
           {
@@ -57,9 +56,36 @@ in
             text = "Lock";
             keybind = "l";
           }
+
+          {
+            label = "switch_gnome";
+            action = "echo 'blub'";
+            text = "Switch to Gnome";
+          }
+
+          {
+            label = "switch_windows";
+            action = "echo 'blub'";
+            text = "Switch to Windows";
+          }
         ];
 
         # TODO: add CSS configurations for that
+        style = strings.concatStrings [
+          # Default CSS
+          (builtins.readFile ./style/index.css)
+
+          # Import Icons
+          ''
+          #lock { background-image: url("${./icons/lock_light.png}") }
+          #logout { background-image: url("${./icons/logout_light.png}") }
+          #reboot { background-image: url("${./icons/reboot_light.png}") }
+          #shutdown { background-image: url("${./icons/shutdown_light.png}") }
+          #switch_windows { background-image: url("${./icons/windows.png}") }
+          #switch_gnome { background-image: url("${./icons/gnome.png}") } /* TODO: Find good alternative Icon */
+          ''
+
+         ];
       };
     };
 }
