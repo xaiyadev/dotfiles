@@ -20,6 +20,7 @@ with lib.${namespace};
   imports = [ ./hardware.nix ];
   networking.hostName = "pineapple";
 
+
   ${namespace} = {
     nix = { enable = true; lix = enabled; };
     desktop.sway = enabled;
@@ -42,6 +43,7 @@ with lib.${namespace};
       };
 
       bluetooth = enabled;
+      graphics = enabled; # Settings for Gaming and other Graphical Stuff
     };
 
     security = {

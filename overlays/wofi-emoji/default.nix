@@ -11,7 +11,7 @@ final: prev: {
     let
       emojiJSON = prev.fetchurl {
         url = "https://raw.githubusercontent.com/muan/emojilib/refs/heads/main/dist/emoji-en-US.json";
-        hash = "sha256-IoU9ZPCqvSPX4DmfC+r5MiglhFc41XMRrbJRL9ZNrvs="; # Hash could change when emojilib gets update
+        hash = "sha256-HDeA/0WOaiNMTalC54U5uhTFZErEe3SOaDEstU8I32E="; # Hash could change when emojilib gets update
       };
     in prev.wofi-emoji.overrideAttrs (old: {
       src = prev.fetchFromGitHub {

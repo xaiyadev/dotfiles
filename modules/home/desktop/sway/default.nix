@@ -61,7 +61,7 @@ in {
         workspaceOutputAssign = [
         
         { 
-          output = [ "Philips Consumer Electronics Company PHL 272B4Q AU11526001821" "eDP-1" ]; 
+          output = [ "Philips Consumer Electronics Company PHL 272B4Q AU11526001821" "eDP-2" ];
           workspace = "1"; 
         }
 
@@ -70,9 +70,9 @@ in {
           workspace = "2"; 
         }
         
-        { output = "eDP-1"; workspace = "3"; }
-        { output = "eDP-1"; workspace = "4"; }
-        { output = "eDP-1"; workspace = "5"; }
+        { output = "eDP-2"; workspace = "3"; }
+        { output = "eDP-2"; workspace = "4"; }
+        { output = "eDP-2"; workspace = "5"; }
         
         ];
         output = { "*" = { bg = "~/.config/wallpapers/girls.jpeg fill"; }; };
@@ -107,7 +107,7 @@ in {
             pointer_accel = "-0.6";
           };
 
-          "2:14:ETPS/2_Elantech_Touchpad" = { pointer_accel = "0"; natural_scroll = "enabled"; };
+          "2362:628:PIXA3854:00_093A:0274_Touchpad" = { pointer_accel = "0"; natural_scroll = "disabled"; };
         };
 
         keybindings = mkOptionDefault {
