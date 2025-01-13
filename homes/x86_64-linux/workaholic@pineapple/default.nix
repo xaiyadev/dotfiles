@@ -36,7 +36,6 @@ with lib.sylveon;
       #browser.zen = enabled;
 
       social = {
-        discord = enabled;
         teams = enabled; # This instance is used for work
       };
 
@@ -48,6 +47,7 @@ with lib.sylveon;
         enpass = enabled;
         yubikey = enabled;
       };
+
       files.obsidian = enabled;
     };
 

@@ -75,6 +75,7 @@ in {
         { output = "eDP-2"; workspace = "5"; }
         
         ];
+
         output = { "*" = { bg = "~/.config/wallpapers/girls.jpeg fill"; }; };
 
         # Windows
@@ -107,7 +108,7 @@ in {
             pointer_accel = "-0.6";
           };
 
-          "2362:628:PIXA3854:00_093A:0274_Touchpad" = { pointer_accel = "0"; natural_scroll = "disabled"; };
+          "2362:628:PIXA3854:00_093A:0274_Touchpad" = { pointer_accel = "0.2"; natural_scroll = "disabled"; };
         };
 
         keybindings = mkOptionDefault {
@@ -115,8 +116,6 @@ in {
           "${modifier}+shift+Escape" = "exec ${pkgs.swaylock-effects}/bin/swaylock";
           "${modifier}+Escape" = "exec ${pkgs.wlogout}/bin/wlogout";
         };
-
-        # Maybe need extra config to name workspaces?
       };
     };
   };

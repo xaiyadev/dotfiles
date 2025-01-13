@@ -24,7 +24,6 @@ in {
     session.sessionPackage = mkOpt (listOf package) [ ] "The session package that should be injected into GDM";
   };
 
-  # This part only configures the GDM desktop Manager and the session
   # For configuration and addons please visit modules/home/desktop
   config = mkIf cfg.enable {
     services.displayManager.sddm = {
