@@ -22,10 +22,6 @@ in
 {
   options.${namespace}.apps.games.steam = with types; { enable = mkBoolOpt false "Whether or not enable the Steam Client"; };
 
-  /**
-   * Game Manager, Launcher and Store!
-   * TODO: Add a script to autmaticly install a list of games (array with game IDs)
-   */
   config = mkIf cfg.enable {
     home.packages = [
       pkgs.steam
@@ -33,6 +29,8 @@ in
       # Steam Terminal utilities
       pkgs.steam-tui
       pkgs.steamcmd # SteamCMD needs to configure login before you can use steam-tui
+
+      pkgs.protontricks
     ];
   };
 }

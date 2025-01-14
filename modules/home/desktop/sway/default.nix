@@ -105,7 +105,7 @@ in {
           "*" = {
             xkb_layout = "de";
             accel_profile = "flat";
-            pointer_accel = "-0.6";
+            pointer_accel = "-0.75";
           };
 
           "2362:628:PIXA3854:00_093A:0274_Touchpad" = { pointer_accel = "0.2"; natural_scroll = "enabled"; };
