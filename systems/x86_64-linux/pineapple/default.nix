@@ -20,10 +20,12 @@ with lib.${namespace};
   imports = [ ./hardware.nix ];
   networking.hostName = "pineapple";
 
-
   ${namespace} = {
     nix = { enable = true; lix = enabled; };
-    desktop.sway = enabled;
+    desktop = {
+      sway = enabled;
+      gnome = enabled;
+    };
 
     system = {
       boot = enabled;

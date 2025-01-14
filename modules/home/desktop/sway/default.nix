@@ -22,7 +22,6 @@ in {
   # This configuration will only be enabled when the nixOS modules is enabled
   # This helps with visibility and keeps them in one
   config = mkIf osConfig.${namespace}.desktop.sway.enable {
-    home.file.".config/wallpapers/" = { source = ./wallpapers; recursive = true; };
 
     /* Install all nesecerry addons */
     ${namespace}.desktop.addons = {
@@ -76,7 +75,7 @@ in {
         
         ];
 
-        output = { "*" = { bg = "~/.config/wallpapers/girls.jpeg fill"; }; };
+        output = { "*" = { bg = builtins.toString ./wallpapers/girls.jpeg + " fill"; }; };
 
         # Windows
         window = { border = 3; titlebar = false; };
@@ -105,7 +104,7 @@ in {
           "*" = {
             xkb_layout = "de";
             accel_profile = "flat";
-            pointer_accel = "-0.75";
+            pointer_accel = "-0.7";
           };
 
           "2362:628:PIXA3854:00_093A:0274_Touchpad" = { pointer_accel = "0.2"; natural_scroll = "enabled"; };

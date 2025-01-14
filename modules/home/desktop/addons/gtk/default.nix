@@ -24,7 +24,7 @@ in
         enable = mkBoolOpt false "Whether or not to enable the gtk configuration";
 
         theme = {
-          name = mkOpt str "rose-pine-gtk" "What name the theme uses";
+          name = mkOpt str "rose-pine" "What name the theme uses";
           package = mkOpt package pkgs.rose-pine-gtk-theme "What package the theme uses";
         };
     };
@@ -37,11 +37,6 @@ in
           name = cfg.theme.name;
           package = cfg.theme.package;
         };
-      };
-
-      dconf = {
-        enable = true;
-        settings."org/gnome/desktop/interface".color-scheme = "prefer-dark"; # This seems like it only works for gnome, but this setting is completly for GTK 4
       };
     };
 }
