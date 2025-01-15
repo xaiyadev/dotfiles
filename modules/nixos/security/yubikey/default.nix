@@ -44,9 +44,5 @@ in {
 
     # Install packages for udev
     services.udev.packages = [ pkgs.yubikey-personalization ] ++ cfg.package;
-
-    # TODO: add udev event checks (will be done after installing this system)
-    # v5: Sway + Gnome
-    # v4: Gnome
   };
 }

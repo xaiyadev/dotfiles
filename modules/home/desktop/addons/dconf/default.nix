@@ -72,6 +72,13 @@ in
           picture-uri = cfg.gnome.wallpaper;
           picture-uri-dark = cfg.gnome.wallpaper;
         };
+
+        settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+          binding = "<Super>e";
+          command = "${pkgs.smile}/bin/smile";
+          name = "Smile Emoji Selector";
+        };
+
       })
 
       (mkIf cfg.gnome.extensions.configure

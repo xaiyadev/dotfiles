@@ -22,10 +22,15 @@ in {
   # This helps with visibility and keeps them in one
   config = mkIf osConfig.${namespace}.desktop.gnome.enable {
 
+    home.packages = [
+      pkgs.smile # Emoji Picker
+    ];
+
     /* Install all nesecerry addons */
     ${namespace}.desktop.addons = {
       keyring = enabled;
-      kanshi = enabled;
+
+      wofi = enabled;
 
       gtk = enabled;
       dconf = {
