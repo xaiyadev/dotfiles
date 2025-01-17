@@ -53,7 +53,10 @@ with lib.${namespace};
       agenix = enabled;
     };
 
-    services.docker = enabled;
+    services = {
+      docker = enabled;
+      waydroid = enabled;
+    };
   };
 
   # Users configuration
