@@ -55,8 +55,9 @@ with lib.sylveon;
       direnv = enabled;
       git = {
         enable = true;
-        user.email = "d.schumin@blmedia.de"; # Deadname :/
-	ssh-key = "~/.ssh/id_rsa";
+        user.name = "Danil Schumin";
+        user.email = "d.schumin@blmedia.de"; #
+	      ssh-key = "~/.ssh/id_rsa";
       };
     };
 
