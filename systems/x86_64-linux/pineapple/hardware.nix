@@ -6,6 +6,11 @@
   # Firmware settings for Framework
   services.fwupd.enable = true;  
 
+  # Enabling my Xbox Controller
+  hardware.xpadneo.enable = true;
+  boot.extraModulePackages = [ config.boot.kernelPackages.xpadneo ];
+
+  # Default Configuration
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
@@ -13,7 +18,6 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/12e09d2e-8d87-4463-9d7f-055b1d0e897c";
