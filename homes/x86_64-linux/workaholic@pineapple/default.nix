@@ -29,8 +29,8 @@ with lib.sylveon;
     };
 
     apps = {
-      #music.spotify = enabled; Deprecated!
-      music.tidal = enabled;
+      music.spotify = enabled; 
+      #music.tidal = enabled;
 
       browser.chromium = enabled;
       #browser.zen = enabled;
