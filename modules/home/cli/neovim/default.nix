@@ -36,11 +36,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Software needed for nixvim plugins
     home.packages = [ pkgs.ripgrep ];
 
     programs.nixvim = {
       enable = true;
+      package = pkgs.neovim-unwrapped;
 
       # Configuration for defaulting neovim as the new editor
       defaultEditor = true;
@@ -72,6 +72,8 @@ in
       plugins = {
 
         # Language Server
+
+        direnv = enabled;
         lsp = mkIf cfg.plugins.lsp.enable {
           enable = true;
           inlayHints = true;
@@ -82,23 +84,39 @@ in
             html = enabled; # HTML
             phpactor = enabled; # PHP
 
-            nil_ls = enabled; # Nix
             dockerls = enabled; # Docker
             bashls = enabled; # Bash
+
+            nixd = { # Nix
+              enable = true;
+              settings = 
+              let
+                flake = ''(builtins.getFlake "${inputs.self}")'';
+              in
+              {
+                nixpkgs.expr = "import ${flake}.inputs.nixpkgs { }";
+                options.nixvim.expr = "${flake}.packages.${system}.nvim.options";
+              };
+            };
           };
         };
-
+        
+        
         # Auto Complete
-        cmp = mkIf cfg.plugins.cmp.enable {
+
+        # COQ-NVIM currenty is bugged on nix, :(
+        /*
+        coq-nvim = {
           enable = true;
-          autoEnableSources = true; # Implements the sources into the plugin list automaticly
+          installArtifacts = true;
+        };
+        */ 
+
+       cmp = mkIf cfg.plugins.cmp.enable {
+          enable = true;
+          settings.sources = [ { name = "nvim_lsp"; } { name = "treesitter"; } ];
 
           settings = {
-            sources = [
-                { name = "nvim_lsp"; } # CMP integration for language server
-                { name = "treesitter"; } # Treesitter integration for cmp
-            ];
-
             mapping = { # Configurate Keybindings to navigate the autocompletion options
               "<C-Space>" = "cmp.mapping.complete()";
               "<C-d>" = "cmp.mapping.scroll_docs(-4)";
@@ -110,7 +128,6 @@ in
             };
           };
         };
-
 
         # Discord Rich Presence
         neocord = mkIf cfg.plugins.discord.enable {
@@ -156,7 +173,29 @@ in
         };
 
         gitblame = mkIf cfg.plugins.gitblame.enable enabled;
-        treesitter = mkIf cfg.plugins.treesitter.enable enabled;
+        treesitter = mkIf cfg.plugins.treesitter.enable {
+          enable = true;
+          grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+            bash
+            json
+            lua
+            make
+            markdown
+            nix
+            regex
+            toml
+            vim
+            vimdoc
+            xml
+            yaml
+          ];
+
+          settings = {
+            highlight.enable = true;
+            indent.enable = true;
+          };
+
+        };
 
         auto-save = mkIf cfg.plugins.auto-save.enable enabled;
         auto-session = mkIf cfg.plugins.auto-session.enable enabled;
