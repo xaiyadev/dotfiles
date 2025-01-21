@@ -36,31 +36,35 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.ripgrep ];
-
+    home.packages = [ pkgs.ripgrep pkgs.nixd ];
     programs.nixvim = {
       enable = true;
       package = pkgs.neovim-unwrapped;
-
+      
       # Configuration for defaulting neovim as the new editor
       defaultEditor = true;
       vimAlias = true;
       viAlias = true;
 
       # Specific configuration option for the Editor
-      globals = {
-        number = true;
-        expandtab = true;
-        shiftwidth = 4;
-        tabstop = 4;
+      globalOpts = {
+          number = true;
+          expandtab = true;
+          shiftwidth = 4;
+          tabstop = 4;
+          smartindent = true;
+
+
+          clipboard = "unnamedplus"; # Use system clipboard
+          
+          termguicolors = true;
+          incsearch = true;
       };
 
       files = {
         # You can add any any anguage here, just add "ftplugin/LANG.lua"
         "ftplugin/nix.lua" = {
           opts = {
-            number = true;
-            expandtab = true;
             shiftwidth = 2;
             tabstop = 2;
       	  };
@@ -71,13 +75,13 @@ in
 
       plugins = {
 
-        # Language Server
-
         direnv = enabled;
+
+        # Language Server
         lsp = mkIf cfg.plugins.lsp.enable {
           enable = true;
           inlayHints = true;
-
+          
           servers = {
             ts_ls = enabled; # TS/JS
             cssls = enabled; # CSS
@@ -86,10 +90,11 @@ in
 
             dockerls = enabled; # Docker
             bashls = enabled; # Bash
-
+            
             nixd = { # Nix
               enable = true;
-              settings = 
+
+              extraOptions = 
               let
                 flake = ''(builtins.getFlake "${inputs.self}")'';
               in
@@ -98,37 +103,20 @@ in
                 options.nixvim.expr = "${flake}.packages.${system}.nvim.options";
               };
             };
+
           };
         };
         
         
         # Auto Complete
 
-        # COQ-NVIM currenty is bugged on nix, :(
-        /*
         coq-nvim = {
           enable = true;
           installArtifacts = true;
+
+          settings.auto_start = true;
         };
-        */ 
-
-       cmp = mkIf cfg.plugins.cmp.enable {
-          enable = true;
-          settings.sources = [ { name = "nvim_lsp"; } { name = "treesitter"; } ];
-
-          settings = {
-            mapping = { # Configurate Keybindings to navigate the autocompletion options
-              "<C-Space>" = "cmp.mapping.complete()";
-              "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-              "<C-e>" = "cmp.mapping.close()";
-              "<C-f>" = "cmp.mapping.scroll_docs(4)";
-              "<CR>" = "cmp.mapping.confirm({ select = true })";
-              "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' })";
-              "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })";
-            };
-          };
-        };
-
+        
         # Discord Rich Presence
         neocord = mkIf cfg.plugins.discord.enable {
           enable = true;
@@ -173,26 +161,15 @@ in
         };
 
         gitblame = mkIf cfg.plugins.gitblame.enable enabled;
+
         treesitter = mkIf cfg.plugins.treesitter.enable {
           enable = true;
-          grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-            bash
-            json
-            lua
-            make
-            markdown
-            nix
-            regex
-            toml
-            vim
-            vimdoc
-            xml
-            yaml
-          ];
-
+          
           settings = {
+            auto_install = true;
+
+            folding = true;
             highlight.enable = true;
-            indent.enable = true;
           };
 
         };
