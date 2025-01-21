@@ -29,7 +29,6 @@
       inherit inputs;
       channels-config.allowUnfree = true;
       src = ./.;
-
       
       /* Snowfall internal settings */
       snowfall = {

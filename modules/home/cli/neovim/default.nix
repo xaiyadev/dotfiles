@@ -36,7 +36,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.ripgrep pkgs.nixd ];
+    home.packages = [ pkgs.ripgrep ];
     programs.nixvim = {
       enable = true;
       package = pkgs.neovim-unwrapped;
@@ -109,7 +109,7 @@ in
         
         
         # Auto Complete
-
+        
         coq-nvim = {
           enable = true;
           installArtifacts = true;
@@ -133,29 +133,24 @@ in
           };
 
           keymaps = {
-            "<C-F>f" = {
+            "<C-P>f" = {
               action = "find_files";
               options.desc = "Search for files in telescope";
             };
 
-            "<C-F>" = {
+            "<C-P>" = {
               action = "live_grep";
               options.desc = "Search through the all files for specific words";
             };
 
-            "<C-F>p" = {
+            "<C-P>p" = {
               action = "file_browser";
               options.desc = "Search through the root direcotry";
             };
 
-            "<C-F>u" = {
+            "<C-P>u" = {
               action = "undo";
               options.desc = "The changes you have done in that file, listed";
-            };
-
-            "<C-G>" = {
-              action = "git_status";
-              options.desc = "Get the Status changes of files";
             };
           };
         };
@@ -178,7 +173,7 @@ in
         auto-session = mkIf cfg.plugins.auto-session.enable enabled;
 
         web-devicons = enabled; # Required by other plugins that use icons
-
+        
       };
 
 

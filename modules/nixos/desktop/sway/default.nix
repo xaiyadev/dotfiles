@@ -30,7 +30,6 @@ in {
         enable = true;
         wayland = enabled;
     };
-
     programs.sway = {
       enable = true;
 
