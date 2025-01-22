@@ -128,7 +128,13 @@ in
           enable = true;
 
           extensions = {
-            file-browser.enable = true;
+            file-browser = {
+              enable = true;
+              settings = {
+                depth = 1;
+              };
+            };
+
             undo.enable = true;
           };
 
@@ -159,7 +165,7 @@ in
 
         treesitter = mkIf cfg.plugins.treesitter.enable {
           enable = true;
-          
+            
           settings = {
             auto_install = true;
 
@@ -180,3 +186,4 @@ in
     };
   };
 }
+

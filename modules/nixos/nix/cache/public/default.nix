@@ -27,12 +27,15 @@ in {
     nix.settings = {
       substituters = [
         "https://cache.nixos.org/" # Default nixos cache
-        "https://devenv.cachix.org" # Cache for development tools
+        "https://devenv.cachix.org/" # Cache for development tools
       ];
 
       trusted-public-keys = [
         "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=" # Cache for development tools
       ];
+
+      # This is a temporary solution
+      trusted-users = [ "root" "workaholic" "xaiya" ];
     };
   };
 }
