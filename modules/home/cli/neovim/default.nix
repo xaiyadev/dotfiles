@@ -127,15 +127,28 @@ in
         telescope = mkIf cfg.plugins.telescope.enable {
           enable = true;
 
+          settings = {
+            defaults = {
+              sorting_strategy = "ascending";
+              layout_config = {
+                prompt_position = "top";
+                preview_width = 0.70;
+                width = 0.87;
+                height = 0.80;
+              };
+            };
+          };
+
           extensions = {
             file-browser = {
               enable = true;
               settings = {
-                depth = 1;
+                respect_gitignore = true;
               };
             };
-
-            undo.enable = true;
+            
+            live-grep-args.enable = true;
+            ui-select.enable = true;
           };
 
           keymaps = {
