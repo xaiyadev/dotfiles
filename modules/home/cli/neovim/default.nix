@@ -132,23 +132,26 @@ in
               sorting_strategy = "ascending";
               layout_config = {
                 prompt_position = "top";
-                preview_width = 0.70;
-                width = 0.87;
-                height = 0.80;
+                preview_width = 0.5;
+                width = 0.40;
+                height = 0.40;
               };
+            };
+
+            pickers = {
+              find_files.previewer = false;
+              live_grep.theme = "dropdown";
             };
           };
 
           extensions = {
             file-browser = {
               enable = true;
-              settings = {
-                respect_gitignore = true;
-              };
+              settings.respect_gitignore = true;
             };
             
-            live-grep-args.enable = true;
-            ui-select.enable = true;
+            live-grep-args = enabled;
+            ui-select = enabled;
           };
 
           keymaps = {
@@ -160,16 +163,6 @@ in
             "<C-P>" = {
               action = "live_grep";
               options.desc = "Search through the all files for specific words";
-            };
-
-            "<C-P>p" = {
-              action = "file_browser";
-              options.desc = "Search through the root direcotry";
-            };
-
-            "<C-P>u" = {
-              action = "undo";
-              options.desc = "The changes you have done in that file, listed";
             };
           };
         };
