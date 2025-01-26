@@ -174,6 +174,30 @@ in
           };
         };
 
+        bufferline = {
+          enable = true;
+          settings = {
+            options = {
+              diagnostics = "nvim_lsp";
+              diagnostics_indicator.__raw = ''
+                function(count, level, diagnostics_dict, context)
+                  local s = ""
+                    for e, n in pairs(diagnostics_dict) do
+                      local sym = e == "error" and " "
+                        or (e == "warning" and " " or "" )
+                  
+                    if(sym ~= "") then
+                      s = s .. " " .. n .. sym
+                    end
+                  end
+                  return s
+                end
+              '';
+
+            };
+          };
+        };
+
         gitblame = mkIf cfg.plugins.gitblame.enable enabled;
 
         treesitter = mkIf cfg.plugins.treesitter.enable {
