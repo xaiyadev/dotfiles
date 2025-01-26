@@ -194,6 +194,13 @@ in
                 end
               '';
 
+              show_close_icons = false;
+              show_buffer_close_icons = false;
+
+              middle_mouse_command = "bdelete! %d";
+              right_mouse_command = null; # TODO: null does not work, why?
+
+              numbers = "ordinal";
             };
           };
         };
