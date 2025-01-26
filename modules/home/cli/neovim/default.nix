@@ -23,16 +23,6 @@ in
   options.${namespace}.cli.neovim = with types; {
       enable = mkBoolOpt false "Whether or not to enable the neovim editor";
 
-      plugins = { # All plugins are activated on default
-        lsp.enable = mkBoolOpt true "Whether or not to enable the language server plugin";
-        cmp.enable = mkBoolOpt true "Whether or not to enable the auto complition plugin";
-        discord.enable = mkBoolOpt true "Whether or not to enable the integration for discord rich presence";
-        telescope.enable = mkBoolOpt true "Whether or not to enable the Search engine";
-        gitblame.enable = mkBoolOpt true "Wheter or not to enable the git blame plugin";
-        treesitter.enable = mkBoolOpt true "Wheter or not to enable auto completion helper or something like that";
-        auto-save.enable = mkBoolOpt true "Wheter or not to enable auto saving files";
-        auto-session.enable = mkBoolOpt true "Wheter or not to enable automating session with files";
-      };
   };
 
   config = mkIf cfg.enable {
@@ -74,11 +64,8 @@ in
       colorschemes.rose-pine.enable = true;
 
       plugins = {
-
-        direnv = enabled;
-
         # Language Server
-        lsp = mkIf cfg.plugins.lsp.enable {
+        lsp = {
           enable = true;
           inlayHints = true;
           
@@ -107,9 +94,7 @@ in
           };
         };
         
-        
         # Auto Complete
-        
         coq-nvim = {
           enable = true;
           installArtifacts = true;
@@ -118,13 +103,13 @@ in
         };
         
         # Discord Rich Presence
-        neocord = mkIf cfg.plugins.discord.enable {
+        neocord =  {
           enable = true;
           settings.global_timer = true;
         };
 
         # Search Engine
-        telescope = mkIf cfg.plugins.telescope.enable {
+        telescope = {
           enable = true;
 
           settings = {
@@ -198,9 +183,7 @@ in
           };
         };
 
-        gitblame = mkIf cfg.plugins.gitblame.enable enabled;
-
-        treesitter = mkIf cfg.plugins.treesitter.enable {
+        treesitter = {
           enable = true;
             
           settings = {
@@ -209,17 +192,17 @@ in
             folding = true;
             highlight.enable = true;
           };
-
         };
 
-        auto-save = mkIf cfg.plugins.auto-save.enable enabled;
-        auto-session = mkIf cfg.plugins.auto-session.enable enabled;
+        auto-save = enabled;
+        auto-session = enabled;
 
-        web-devicons = enabled; # Required by other plugins that use icons
+        gitblame = enabled;
+
+        direnv = enabled;
         
+        web-devicons = enabled; # Required by other plugins that use icons
       };
-
-
     };
   };
 }
