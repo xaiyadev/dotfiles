@@ -296,7 +296,28 @@ in
           enable = true;
           enableTelescope = true;
         };
-        
+
+        markview = {
+          enable = true;
+
+          settings = {
+            hybrid_modes = [ "i" ];
+            hodes = [ "n" "i" "no" "c" ];
+          };
+        };
+
+        obsidian = {
+          enable = true;
+          
+          settings = {
+            workspaces = [
+              {
+                name = "default";
+                path = "/srv/Obsidian";
+              }
+            ];
+          };
+        };
 
         auto-save = enabled;
         auto-session = enabled;
