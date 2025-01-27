@@ -319,6 +319,23 @@ in
           };
         };
 
+        snacks = { # QoL Plugins
+          enable = true;
+
+          settings = {
+            animate = enabled;
+            bigfile = enabled;
+            
+            notifier = enabled;
+            notify = enabled;
+
+            quickfile = enabled;
+            rename = enabled;
+            terminal = enabled;
+            words = enabled;
+          };
+        };
+
         auto-save = enabled;
         auto-session = enabled;
 
