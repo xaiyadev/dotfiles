@@ -61,6 +61,13 @@ in
       	};
       };
 
+      keymaps = [
+        {
+          action = ''<cmd>NvimTreeToggle<cr>'';
+          key = "<C-n>";
+        }
+      ];
+
       colorschemes.rose-pine.enable = true;
 
       plugins = {
@@ -322,6 +329,15 @@ in
         toggleterm = {
           enable = true;
           settings.size = 10;
+        };
+
+        nvim-tree = {
+          enable = true;
+          actions.openFile.quitOnOpen = true;
+
+          diagnostics = enabled;
+          modified = enabled;
+          renderer.indentMarkers = enabled;
         };
 
         snacks = { # QoL Plugins
