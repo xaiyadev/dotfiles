@@ -176,7 +176,7 @@ in
               show_buffer_close_icons = false;
 
               middle_mouse_command = "bdelete! %d";
-              right_mouse_command = null; # TODO: null does not work, why?
+              rbrightnessctlight_mouse_command = null; # TODO: null does not work, why?
 
               numbers = "ordinal";
             };
@@ -194,6 +194,110 @@ in
           };
         };
 
+        alpha = {
+          enable = true;
+          theme = null;
+
+          layout = [
+            {
+              type = "padding";
+              val = 2;
+            }
+
+            {
+              opts = {
+                hl = "Type";
+                position = "center";
+              };
+
+              type = "text";
+
+              val = [
+                "∵*.•´¸.•*´✶´♡"
+                "° ☆ °˛*˛☆_Π______*˚☆*"
+                "˚ ˛★˛•˚*/______/ ~⧹。˚˚"
+                "˚ ˛•˛•˚｜ 田田 ｜門｜ ˚*"
+                "🌷╬╬🌷╬╬🌷╬╬🌷╬╬🌷"
+
+              ];
+            }
+
+            {
+              type = "padding";
+              val = 2;
+            }
+
+            {
+              type = "group";
+              val = [
+                {
+                  on_press.__raw = "function() vim.cmd[[ene]] end";
+                  opts.position = "center";
+
+                  type = "button";
+                  val = "  New file";
+                }
+
+                {
+                  on_press.__raw = "function() vim.cmd[[Telescope find_files]] end";
+                  opts.position = "center";
+
+                  type = "button";
+                  val = "  Find file";
+                }
+
+                {
+                  type = "padding";
+                  val = 1;
+                }
+
+                {
+                  on_press.__raw = "function() vim.cmd[[Telescope projects]] end";
+                  opts.position = "center";
+
+                  type = "button";
+                  val = "  Projects";
+                }
+
+                {
+                  on_press.__raw = "function() vim.cmd[[qa]] end";
+                  opts.position = "center";
+
+                  type = "button";
+                  val = "  Quit";
+                }
+              ];
+            }
+
+            {
+              type = "padding";
+              val = 1;
+            }
+
+            {
+              type = "text";
+              val.__raw = ''
+              function()
+                  local v = vim.version()
+                  local vString = string.format("v%d.%d.%d", v.major, v.minor, v.patch)
+
+
+                  return 'Neovim ' .. vString
+              end
+              '';
+              opts = { hl = "Comment"; position = "center"; };
+
+            }
+ 
+          ];
+        };
+
+        project-nvim = {
+          enable = true;
+          enableTelescope = true;
+        };
+        
+
         auto-save = enabled;
         auto-session = enabled;
 
@@ -202,6 +306,7 @@ in
         direnv = enabled;
         
         web-devicons = enabled; # Required by other plugins that use icons
+        lz-n = enabled; # Lazy loading
       };
     };
   };
