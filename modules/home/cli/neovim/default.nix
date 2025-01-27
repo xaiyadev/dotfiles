@@ -319,9 +319,13 @@ in
           };
         };
 
+        toggleterm = {
+          enable = true;
+          settings.size = 10;
+        };
+
         snacks = { # QoL Plugins
           enable = true;
-
           settings = {
             animate = enabled;
             bigfile = enabled;
@@ -331,7 +335,6 @@ in
 
             quickfile = enabled;
             rename = enabled;
-            terminal = enabled;
             words = enabled;
           };
         };
