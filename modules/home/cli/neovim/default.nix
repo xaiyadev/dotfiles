@@ -163,22 +163,6 @@ in
           enable = true;
           settings = {
             options = {
-              diagnostics = "nvim_lsp";
-              diagnostics_indicator.__raw = ''
-                function(count, level, diagnostics_dict, context)
-                  local s = ""
-                    for e, n in pairs(diagnostics_dict) do
-                      local sym = e == "error" and " "
-                        or (e == "warning" and " " or "" )
-                  
-                    if(sym ~= "") then
-                      s = s .. " " .. n .. sym
-                    end
-                  end
-                  return s
-                end
-              '';
-
               show_close_icons = false;
               show_buffer_close_icons = false;
 
@@ -360,7 +344,13 @@ in
           settings.scope.enabled = false;
         };
 
-
+        lualine = {
+          enable = true;
+          
+          settings = {
+            winbar.lualine_c = [ "navic" ];
+          };
+        };
         
         fidget = enabled;
         colorizer = enabled;
