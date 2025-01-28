@@ -360,11 +360,15 @@ in
           settings.scope.enabled = false;
         };
 
-        auto-save = enabled;
-        auto-session = enabled;
 
+        
+        fidget = enabled;
+        colorizer = enabled;
+        todo-comments = enabled;
         gitblame = enabled;
 
+        auto-save = enabled;
+        auto-session = enabled;
         direnv = enabled;
         
         web-devicons = enabled; # Required by other plugins that use icons
