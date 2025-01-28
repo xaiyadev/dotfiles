@@ -75,7 +75,7 @@ in {
         
         ];
 
-        output = { "*" = { bg = builtins.toString ./wallpapers/girls.jpeg + " fill"; }; };
+        output = { "*" = { bg = builtins.toString ./wallpapers/street-girl-lookingout.jpg + " fill"; }; };
 
         # Windows
         window = { border = 3; titlebar = false; };

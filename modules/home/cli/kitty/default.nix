@@ -38,7 +38,10 @@ in
 
       settings = {
         enable_audio_bell = false;
+        
+        dynamic_background_opacity = true;
         background_opacity = 0.9;
+        background_blur = 1;
       };
     };
 
