@@ -365,6 +365,9 @@ in
         auto-session = enabled;
         direnv = enabled;
         
+        undotree = enabled;
+
+
         web-devicons = enabled; # Required by other plugins that use icons
         lz-n = enabled; # Lazy loading
       };
