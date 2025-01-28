@@ -355,6 +355,11 @@ in
           };
         };
 
+        indent-blankline = {
+          enable = true;
+          settings.scope.enabled = false;
+        };
+
         auto-save = enabled;
         auto-session = enabled;
 
