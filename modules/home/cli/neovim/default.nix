@@ -110,9 +110,13 @@ in
         };
         
         # Discord Rich Presence
-        neocord =  {
+        neocord = {
           enable = true;
-          settings.global_timer = true;
+          settings = {
+            global_timer = true;
+            blacklist = [ "blmedia" "shopware" ]; # Work related stuff should not be shown!
+            logo = "https://raw.githubusercontent.com/IogaMaster/neovim/refs/heads/main/.github/assets/nixvim-dark.webp";
+          };
         };
 
         # Search Engine
