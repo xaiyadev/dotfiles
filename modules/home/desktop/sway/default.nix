@@ -48,8 +48,6 @@ in {
       };
 
       config = {
-        # Default Configurations
-        menu = "${pkgs.wofi}/bin/wofi --allow-images --show drun";
         bars = [ { command = "${pkgs.waybar}/bin/waybar"; }];
 
         modifier = modifier;

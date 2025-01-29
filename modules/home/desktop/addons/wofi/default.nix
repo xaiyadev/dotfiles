@@ -35,5 +35,9 @@ in
         /* source: https://github.com/cement-drinker/wofi-rose-pine */
         style = builtins.readFile ./style/index.css;
       };
+
+        # Add menu configuration for sway
+        wayland.windowManager.sway.config.menu = 
+          "${pkgs.wofi}/bin/wofi --allow-images --hide-scroll --show drun";
     };
 }
