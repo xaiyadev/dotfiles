@@ -49,7 +49,7 @@ in {
 
       config = {
         # Default Configurations
-        menu = "${pkgs.wofi}/bin/wofi --allow-images --show drun";
+        menu = "${pkgs.wofi}/bin/wofi --allow-images --hide-scroll --show drun";
         bars = [ { command = "${pkgs.waybar}/bin/waybar"; }];
 
         modifier = modifier;
