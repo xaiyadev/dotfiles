@@ -76,8 +76,8 @@ in {
         output = { "*" = { bg = builtins.toString ./wallpapers/street-girl-lookingout.jpg + " fill"; }; };
 
         # Windows
-        window = { border = 3; titlebar = false; };
-        gaps = { inner = 10; };
+        window = { border = 2; titlebar = false; };
+        gaps = { inner = 5; };
 
         colors = { # Rose Pine color theme
           focused = {
