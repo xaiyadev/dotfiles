@@ -50,7 +50,7 @@ in {
             "webstorm.desktop"
             "chromium-browser.desktop"
             "vesktop.desktop"
-            "tidal-hifi.desktop"
+            "spotify.desktop"
           ];
         };
       };

@@ -30,7 +30,6 @@ with lib.sylveon;
 
     apps = {
       music.spotify = enabled; 
-      #music.tidal = enabled;
 
       browser.chromium = enabled;
       #browser.zen = enabled;

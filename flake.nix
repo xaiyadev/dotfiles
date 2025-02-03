@@ -14,8 +14,6 @@
     spicetify-nix = { url = "github:Gerg-L/spicetify-nix"; inputs.nixpkgs.follows = "nixpkgs"; };
     nixcord = { url = "github:kaylorben/nixcord"; inputs.nixpkgs.follows = "nixpkgs"; };
     zen-browser = { url = "github:MarceColl/zen-browser-flake"; inputs.nixpkgs.follows = "nixpkgs"; }; # The Zen-browser flake has no module, only packages
-    # Neptune is right now bugged; waiting for my PR
-    neptune = { url = "github:uwu/neptune"; inputs.nixpkgs.follows = "nixpkgs"; };
 
     /* Security flakes */
     agenix = { url = "github:ryantm/agenix"; inputs.nixpkgs.follows = "nixpkgs"; };
@@ -50,8 +48,6 @@
         # Overwrite age modules with age-nix modules
         agenix-rekey.overlays.default
 
-        # Software overlays
-        neptune.overlays.default
       ];
 
       # Add modules to all NixOS systems
