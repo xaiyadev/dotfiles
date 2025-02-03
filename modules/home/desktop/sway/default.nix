@@ -105,7 +105,14 @@ in {
             pointer_accel = "-0.7";
           };
 
-          "2362:628:PIXA3854:00_093A:0274_Touchpad" = { pointer_accel = "0.2"; natural_scroll = "enabled"; };
+          "236:628:PIXA3854:00_093A:0274_Touchpad" = { 
+            pointer_accel = "0.2";
+            natural_scroll = "enabled"; 
+
+            dwt = "enabled";
+            tap = "enabled";
+            middle_emulation = "enabled";
+          };
         };
 
         keybindings = mkOptionDefault {
