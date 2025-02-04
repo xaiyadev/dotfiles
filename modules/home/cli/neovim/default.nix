@@ -103,11 +103,30 @@ in
         
         # Auto Complete
         coq-nvim = {
-          enable = true;
+          enable = false; # Bugged with the newest 2025 version
           installArtifacts = true;
 
           settings.auto_start = true;
         };
+
+        cmp = {
+          enable = true;
+          settings.sources = [ { name = "nvim_lsp"; } { name = "treesitter"; } ];
+
+          settings = {
+            mapping = { # Configurate Keybindings to navigate the autocompletion options
+              "<C-Space>" = "cmp.mapping.complete()";
+              "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+              "<C-e>" = "cmp.mapping.close()";
+              "<C-f>" = "cmp.mapping.scroll_docs(4)";
+              "<CR>" = "cmp.mapping.confirm({ select = true })";
+              "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' })";
+              "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })";
+            };
+          };
+        };
+
+
         
         # Discord Rich Presence
         neocord = {
