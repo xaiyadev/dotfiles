@@ -51,29 +51,25 @@ in {
         bars = [ { command = "${pkgs.waybar}/bin/waybar"; }];
 
         modifier = modifier;
-        terminal = "${config.programs.kitty.package}/bin/kitty";
+        terminal = "${pkgs.kitty}/bin/kitty";
 
         # Outputs managed by kanshi
         defaultWorkspace = "1";
         workspaceOutputAssign = [
-        
-        { 
-          output = [ "Philips Consumer Electronics Company PHL 272B4Q AU11526001821" "eDP-2" ];
-          workspace = "1"; 
-        }
+          { 
+            output = [ "Philips Consumer Electronics Company PHL 272B4Q AU11526001821" "eDP-2" ];
+            workspace = "1"; 
+          }
 
-        { 
-          output = "Philips Consumer Electronics Company PHL 272B4Q AU11531001040";
-          workspace = "2"; 
-        }
-        
-        { output = "eDP-2"; workspace = "3"; }
-        { output = "eDP-2"; workspace = "4"; }
-        { output = "eDP-2"; workspace = "5"; }
-        
+          { 
+            output = "Philips Consumer Electronics Company PHL 272B4Q AU11531001040";
+            workspace = "2"; 
+          }
+          
+          { output = "eDP-2"; workspace = "3"; }
+          { output = "eDP-2"; workspace = "4"; }
+          { output = "eDP-2"; workspace = "5"; }
         ];
-
-        output = { "*" = { bg = builtins.toString ./wallpapers/street-girl-lookingout.jpg + " fill"; }; };
 
         # Windows
         window = { border = 2; titlebar = false; };
@@ -121,6 +117,12 @@ in {
           "${modifier}+Escape" = "exec ${pkgs.wlogout}/bin/wlogout";
         };
       };
+
+      # Extra stuff that cant be handled with sway (whyy??)
+      extraConfig = ''
+        exec ${pkgs.swaybg}/bin/swaybg -o "*" -i ${./wallpapers/street-girl-lookingout.jpg} -m fill
+      '';
+
     };
   };
 }
