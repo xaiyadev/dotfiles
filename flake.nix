@@ -4,6 +4,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+
+
     home-manager = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
 
     /* Overlays and software tweaks */
@@ -56,6 +60,8 @@
         agenix.nixosModules.default
         agenix-rekey.nixosModules.default
       ];
+
+      systems.hosts.pineapple.modules = [ inputs.nixos-hardware.nixosModules.framework-16-7040-amd ];
 
       # add modules to all home-manager instances
       homes.modules = with inputs; [

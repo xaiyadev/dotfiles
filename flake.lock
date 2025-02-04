@@ -561,6 +561,22 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1738638143,
+        "narHash": "sha256-ZYMe4c4OCtIUBn5hx15PEGr0+B1cNEpl2dsaLxwY2W0=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "9bdd53f5908453e4d03f395eb1615c3e9a351f70",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1735554305,
@@ -746,6 +762,7 @@
         "agenix-rekey": "agenix-rekey",
         "home-manager": "home-manager_2",
         "nixcord": "nixcord",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nixvim": "nixvim",
