@@ -22,19 +22,6 @@ in
 {
     options.${namespace}.desktop.addons.waybar = {
         enable = mkBoolOpt false "Wehter or not to enable waybar and its configuration";
-
-        /* If you would like, you could disable some of the modules you could do that! */
-        modules = {
-          workspaces.enable = mkBoolOpt true "Whether or not the workspaces module should be activated";
-          window.enable = mkBoolOpt true "Whether or not the window module should be activated";
-          pulseaudio.enable = mkBoolOpt true "Whether or not to enable the pulseaudio module";
-          network.enable = mkBoolOpt true "Whether or not to enable the network module";
-          disk.enable = mkBoolOpt true "Whether or not to enable the disk module";
-          battery.enable = mkBoolOpt true "Whether or not to enable the battery module";
-          clock.enable = mkBoolOpt true "Whether or not to enable the clock module";
-          bluetooth.enable = mkBoolOpt true "Whether or not to enable the bluetooth module";
-        };
-
     };
 
     config = mkIf cfg.enable {
@@ -55,57 +42,52 @@ in
             height = 26;
 
             /* Enable modules in the right positions */
+
+            # left: workspaces; window
+            # middle: clock;date (?media player)
+            # right: ((wifi/ethernet; VPN;) bluetooth) (battery; sound; brightness;) swaync; menu:(lock;shutdown;reboot;logout)
+
             modules-left = [ "sway/workspaces" "sway/window" ];
             modules-right = [  "pulseaudio" "bluetooth" "network" "disk" "battery" "clock" ];
 
             /* Show the sway workspaces in your waybar */
-            "sway/workspaces" = mkIf cfg.modules.workspaces.enable {
+            "sway/workspaces" = {
               disable-scroll = true;
               all-outputs = true;
               disable-click = true;
 
-              format = "{name} {icon}";
-
-              format-icons = {
-                "1" = "🔥";
-                "2" = "✨";
-                "3" = "🎉";
-                "4" = "🎸";
-                "5" = "🧋";
-                "6" = "🐈‍⬛";
-                "7" = "🎯";
-                "8" = "🎇";
-                "9" = "〽️";
-                "10" = "✴️";
-              };
+              format = "{name}";
             };
 
             /* Show the Active Window without icons */
-            "sway/window" = mkIf cfg.modules.window.enable {
+            "sway/window" = {
               all-outputs = true;
-              icons = false;
+
+              icon = true;
+              icon-size = 18;
 
               format = "| {title}";
-              max-length = 30;
+              max-length = 36;
             };
 
             /*
              * Show the current connected Bluetooth devices
              * Enable: sylveon.hardware.bluetooth
              */
-            "bluetooth" = mkIf cfg.modules.bluetooth.enable {
+            "bluetooth" = {
               format = " {status}";
               format-disabled = ""; # Disables the module if bluetooth is not available
+              format-on = ""; # I get it, you are on!
 
               format-connected = " {device_alias}";
               format-connected-battery = " {device_alias} {device_battery_percantage}%"; # Needs bluetooth expirmental
-              on-click = "exec ${pkgs.blueman}/bin/blueman";
+              on-click = "exec ${pkgs.blueman}/bin/blueman-manager";
             };
 
 
 
             /* Show the current audio device with icons and change the volume by scrolling */
-            "pulseaudio" = mkIf cfg.modules.pulseaudio.enable {
+            "pulseaudio" = {
               format = "{icon} {volume}%";
               format-bluetooth = "󰂰 {icon} {volume}%";
               format-source-muted = " ";
@@ -113,16 +95,21 @@ in
             };
 
             /* Show the current network type; If the connection is LAN, show bandwith status with IP adress */
-            "network" = mkIf cfg.modules.network.enable {
+            "network" = {
               interval = 3;
-              format-wifi = "{icon} {essid} {signalStrength}%";
-              format-disconnected = "{icon} ";
-              format-ethernet = "󰌗 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
-              format-icons = [ " " ];
+              format-wifi = "{icon}";
+              format-disconnected = "󰖪 ";
+              format-ethernet = "󰌗 ";
+
+              tooltip-format-wifi = "{essid} {signalStrength}%";
+              tooltip-format-ethernet = "{ipaddr}";
+
+              format-icons = [ "󰤟 " "󰤢 " "󰤥 " "󰤨 " ];
+
             };
 
             /* The Battery status will be shown */
-            "battery" = mkIf cfg.modules.battery.enable {
+            "battery" = {
               interval = 10;
               tooltip = false;
 
@@ -131,7 +118,7 @@ in
             };
 
             /* Disk usage and percentage Free is shwon here */
-            "disk" = mkIf cfg.modules.disk.enable {
+            "disk" = {
               interval = 10;
               format = "󰆼 {percentage_free}% free";
               path = "/";
@@ -139,7 +126,7 @@ in
 
 
             /* Show the current time (change formating here...) */
-            "clock" = mkIf cfg.modules.clock.enable {
+            "clock" = {
               interval = 60;
 
               timezone = "Europe/Berlin";
