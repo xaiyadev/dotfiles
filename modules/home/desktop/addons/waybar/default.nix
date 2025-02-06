@@ -49,7 +49,7 @@ in
 
             modules-left = [ "sway/workspaces" "sway/window" ];
             modules-center = [ "clock" ];
-            modules-right = [  "pulseaudio" "network" "bluetooth" "battery" ];
+            modules-right = [  "pulseaudio" "network" "bluetooth" "battery" "custom/wlogout" ];
 
             /* Show the sway workspaces in your waybar */
             "sway/workspaces" = {
@@ -89,7 +89,7 @@ in
 
             /* Show the current audio device with icons and change the volume by scrolling */
             "pulseaudio" = {
-              format = "{icon} {volume}%";
+              format = "{icon} {volume}% |";
               format-muted = " ";
               on-click = "pavucontrol";
 
@@ -132,18 +132,23 @@ in
 
               tooltip-format = "Watt usage: {power} \nCapacity: {capacity}% /time remain: {time} \nBattery cycles: {cycles}";
 
-              format = "{icon}";
-              format-plugged = "{icon}";
+              format = "{icon} |";
+              format-plugged = "{icon} |";
 
-              format-warning = ""; # change color to orange
-              format-critical = ""; # change color to red
-              format-full = "󰁹󰋑";
+              #format-warning = ""; # change color to orange
+              #format-critical = ""; # change color to red
+              format-full = "󰁹󰋑 |";
 
 
               format-icons = { 
                 discharging = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" ];
                 charging = [ "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊"  ];
               };
+            };
+
+            "custom/wlogout" = {
+              format = " ";
+              on-click = "${pkgs.wlogout}/bin/wlogout";
             };
 
 
