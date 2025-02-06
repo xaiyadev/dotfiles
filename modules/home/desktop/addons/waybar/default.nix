@@ -49,7 +49,7 @@ in
 
             modules-left = [ "sway/workspaces" "sway/window" ];
             modules-center = [ "clock" ];
-            modules-right = [  "pulseaudio" "bluetooth" "network" "battery" ];
+            modules-right = [  "pulseaudio" "network" "bluetooth" "battery" ];
 
             /* Show the sway workspaces in your waybar */
             "sway/workspaces" = {
@@ -78,7 +78,7 @@ in
             "bluetooth" = {
               format = " {status}";
               format-disabled = ""; # Disables the module if bluetooth is not available
-              format-on = ""; # I get it, you are on!
+              format-on = "";
 
               format-connected = " {device_alias}";
               format-connected-battery = " {device_alias} {device_battery_percantage}%"; # Needs bluetooth expirmental
@@ -90,9 +90,17 @@ in
             /* Show the current audio device with icons and change the volume by scrolling */
             "pulseaudio" = {
               format = "{icon} {volume}%";
-              format-bluetooth = "󰂰 {icon} {volume}%";
-              format-source-muted = "";
-              format-icons = [ "" ];
+              format-muted = " ";
+              on-click = "pavucontrol";
+
+              states.muted = 0;
+              
+              tooltip-format = "Device: {desc}";
+
+              format-icons = {
+                default = [ " " " " " " ];
+                muted = " ";
+              };
             };
 
             /* Show the current network type; If the connection is LAN, show bandwith status with IP adress */
@@ -129,7 +137,7 @@ in
 
               format-warning = ""; # change color to orange
               format-critical = ""; # change color to red
-              format-full = "󰁹󰋑 ";
+              format-full = "󰁹󰋑";
 
 
               format-icons = { 
