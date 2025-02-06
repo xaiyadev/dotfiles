@@ -31,6 +31,7 @@ in {
       wofi = enabled;
       swaylock = enabled;
       wlogout = enabled;
+      swaync = enabled;
 
       gtk = enabled;
       keyring = enabled;

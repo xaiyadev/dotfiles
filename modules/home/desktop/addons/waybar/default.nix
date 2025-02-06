@@ -48,7 +48,7 @@ in
             # right: ((wifi/ethernet; VPN;) bluetooth) (battery; sound; brightness;) swaync; menu:(lock;shutdown;reboot;logout)
 
             modules-left = [ "sway/workspaces" "sway/window" ];
-            modules-center = [ "clock" ];
+            modules-center = [ "custom/notification" "clock" ];
             modules-right = [  "pulseaudio" "network" "bluetooth" "battery" "custom/wlogout" ];
 
             /* Show the sway workspaces in your waybar */
@@ -141,7 +141,7 @@ in
 
 
               format-icons = { 
-                discharging = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" ];
+                discharging = [ " " "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" " " ];
                 charging = [ "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊"  ];
               };
             };
@@ -159,6 +159,29 @@ in
               timezone = "Europe/Berlin";
               locale = "de_DE.UTF-8";
               format = " {:%H:%M}";
+            };
+
+            "custom/notification" = {
+              tooltip = false;
+             
+             format = "{icon}";
+              format-icons = {
+                notification = "<span foreground='red'><sup></sup></span> |";
+                none = " |";
+                dnd-notification = "<span foreground='red'><sup></sup></span> |";
+                dnd-none = " |";
+                inhibited-notification = "<span foreground='red'><sup></sup></span> |";
+                inhibited-none = " |";
+                dnd-inhibited-notification = "<span foreground='red'><sup></sup></span> |";
+                dnd-inhibited-none = " |";
+              };
+
+              return-type = "json";
+              exec-if = "which swaync-client";
+              exec = "swaync-client -swb";
+              on-click = "swaync-client -t -sw";
+              on-click-right = "swaync-client -d -sw";
+              escape = true;
             };
 
           };
