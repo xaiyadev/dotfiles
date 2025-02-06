@@ -48,7 +48,8 @@ in
             # right: ((wifi/ethernet; VPN;) bluetooth) (battery; sound; brightness;) swaync; menu:(lock;shutdown;reboot;logout)
 
             modules-left = [ "sway/workspaces" "sway/window" ];
-            modules-right = [  "pulseaudio" "bluetooth" "network" "disk" "battery" "clock" ];
+            modules-center = [ "clock" ];
+            modules-right = [  "pulseaudio" "bluetooth" "network" "battery" ];
 
             /* Show the sway workspaces in your waybar */
             "sway/workspaces" = {
@@ -90,38 +91,51 @@ in
             "pulseaudio" = {
               format = "{icon} {volume}%";
               format-bluetooth = "󰂰 {icon} {volume}%";
-              format-source-muted = " ";
-              format-icons = [ " " ];
+              format-source-muted = "";
+              format-icons = [ "" ];
             };
 
             /* Show the current network type; If the connection is LAN, show bandwith status with IP adress */
             "network" = {
-              interval = 3;
+              interval = 10;
               format-wifi = "{icon}";
-              format-disconnected = "󰖪 ";
-              format-ethernet = "󰌗 ";
+              format-disconnected = "󰖪";
+              format-ethernet = "󰌗";
 
               tooltip-format-wifi = "{essid} {signalStrength}%";
               tooltip-format-ethernet = "{ipaddr}";
 
-              format-icons = [ "󰤟 " "󰤢 " "󰤥 " "󰤨 " ];
+              format-icons = [ "󰤟" "󰤢" "󰤥" "󰤨" ];
 
             };
 
             /* The Battery status will be shown */
             "battery" = {
-              interval = 10;
-              tooltip = false;
+              interval = 1;
+              full-at = 80; # Changed in BIOS for a better capacity
 
-              format = "{icon} {capacity}% {time}";
-              format-icons = [ " " " " " " " " " " ];
-            };
+              states = {
+                full = 100;
+                not-fully-full = 99;
+                warning = 40;
+                critical = 20;
 
-            /* Disk usage and percentage Free is shwon here */
-            "disk" = {
-              interval = 10;
-              format = "󰆼 {percentage_free}% free";
-              path = "/";
+              };
+
+              tooltip-format = "Watt usage: {power} \nCapacity: {capacity}% /time remain: {time} \nBattery cycles: {cycles}";
+
+              format = "{icon}";
+              format-plugged = "{icon}";
+
+              format-warning = ""; # change color to orange
+              format-critical = ""; # change color to red
+              format-full = "󰁹󰋑 ";
+
+
+              format-icons = { 
+                discharging = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" ];
+                charging = [ "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊"  ];
+              };
             };
 
 
