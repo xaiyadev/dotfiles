@@ -62,6 +62,9 @@ with lib.${namespace};
     };
   };
 
+  # Temporary install
+  environment.systemPackages = [ pkgs.${namespace}.lampray ];
+
   # Users configuration
   age.secrets.xaiya-pwd.rekeyFile = "${inputs.self}/secrets/xaiya.pwd.age";
   age.secrets.workaholic-pwd.rekeyFile = "${inputs.self}/secrets/workaholic.pwd.age";
