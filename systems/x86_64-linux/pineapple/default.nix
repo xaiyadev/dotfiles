@@ -28,7 +28,10 @@ with lib.${namespace};
     };
 
     system = {
-      boot = enabled;
+      boot = {
+        enable = true;
+        windows = enabled;
+      };
       zsh = enabled;
       ssh = enabled;
 
