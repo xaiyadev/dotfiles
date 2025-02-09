@@ -26,6 +26,12 @@ in
 
     config = mkIf cfg.enable {
 
+      age.secrets.wakapi = {
+        rekeyFile = "${inputs.self}/secrets/wakapi.salt.age";
+        owner = "wakapi";
+        group = "wakapi";
+      };
+
       services.postgresql = {
         ensureDatabases = [ config.services.wakapi.settings.db.user ];
 
@@ -36,27 +42,26 @@ in
       };
 
       services.wakapi = {
-        enable = false; # TODO: make PR, typo posgres -> postgres
-
-        database = {
-          dialect = "postgres";
-          createLocally = false;
-        };
+        enable = true;
+        passwordSaltFile = config.age.secrets.wakapi.path;
+        database.createLocally = true;
         
         settings = {
+          server.public_url = "https://wakapi.xaiya.dev";
+          
           db = {
-            socket = "/run/postgresql";
             dialect = "postgres";
+            host = "/run/postgresql";
+            port = 5432; # Even tho I use a socket this needs to be set
             user = "wakapi";
             name = "wakapi";
           };
-        };
-      };
 
-      virtualisation.oci-containers.containers.wakapi = {
-        image = "ghr.io/meuty/wakapi:latest";
-          autoStart = true;
-          ports = [ "3000:3000" ];
+          security = {
+            allow_signup = true;
+            disable_frontpage = true;
+          };
+        };
       };
 
       services.nginx.virtualHosts."wakapi.xaiya.dev" = {
