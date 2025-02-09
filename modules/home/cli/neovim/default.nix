@@ -374,6 +374,8 @@ in
             winbar.lualine_c = [ "navic" ];
           };
         };
+
+        wakatime = enabled;
         
         fidget = enabled;
         colorizer = enabled;
