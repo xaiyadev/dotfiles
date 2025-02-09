@@ -48,6 +48,8 @@ with lib.${namespace};
       firefly = enabled;
       gitea = enabled;
       # soft-serve = enabled;
+
+      wakapi = enabled;
     };
   };
 
