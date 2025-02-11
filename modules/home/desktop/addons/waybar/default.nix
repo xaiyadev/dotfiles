@@ -134,15 +134,16 @@ in
 
               format = "{icon} |";
               format-plugged = "{icon} |";
+              format-not-fully-full = "{icon} |";
 
               #format-warning = ""; # change color to orange
               #format-critical = ""; # change color to red
-              format-full = "󰁹󰋑 |";
+              format-full = "󱟢 |";
 
 
               format-icons = { 
-                discharging = [ " " "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" " " ];
-                charging = [ "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊"  ];
+                discharging = [ " " "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰁹" ];
+                charging = [ "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰁹" ];
               };
             };
 
