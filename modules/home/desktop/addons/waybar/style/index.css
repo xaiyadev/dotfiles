@@ -2,19 +2,10 @@
 * {
     font-family: "JetBrainsMono Nerd Font", "Roboto Mono", "Font Awesome 6 Free Solid", "Font Awesome 6 Brands", sans-serif;
     color: @text;
-
-    padding: 0;
-    margin: 0;
-}
-
-window#waybar {
-    background: rgba(33, 32, 46, 0.4); /* Like the color as a background ;3 */
-
-    border-radius: 10px;
-    border: 1px @highlightHigh solid;
 }
 
 .modules-left,
+.modules-center,
 .modules-right {
     margin: 5px 5px;
     padding: 0 3px;

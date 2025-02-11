@@ -38,7 +38,7 @@ in
             layer = "top";
             position = "top";
 
-            margin = "3";
+            margin = "5px";
             height = 26;
 
             /* Enable modules in the right positions */
