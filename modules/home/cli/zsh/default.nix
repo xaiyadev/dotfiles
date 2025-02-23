@@ -20,7 +20,7 @@ with lib.${namespace};
 let
     rose-pine-toml = (builtins.fromTOML 
       (builtins.readFile (builtins.fetchurl { 
-        url = ''https://raw.githubusercontent.com/rose-pine/starship/refs/heads/main/rose-pine.toml''; sha256 = "13ywv52sdw7aryx8xskxvgwbj4dnbw40qnff4c9csklsm3d7c9dg"; 
+        url = ''https://raw.githubusercontent.com/rose-pine/starship/refs/heads/main/rose-pine.toml''; sha256 = "1gz1g8rg79w6g3fm6zgwh8jspxlx2c1lz8pkjlw14nlzq1z33hds"; 
       }))
     );
 in
