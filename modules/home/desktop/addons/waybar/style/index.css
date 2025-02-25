@@ -4,6 +4,17 @@
     color: @text;
 }
 
+window {
+  background-color: rgba(25, 23, 36, 0.60); /* Base color from rose-pine */
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+window#waybar.empty {
+  background-color: rgba(25, 23, 36, 0.30);
+  transition: 0.5s;
+}
+
 .modules-left,
 .modules-center,
 .modules-right {
@@ -26,6 +37,6 @@
 }
 
 #workspaces button.focused {
-    box-shadow: inset 0 -1px @love;
+    box-shadow: inset 0 -1px @pine;
 }
 

@@ -58,16 +58,17 @@ in
               disable-click = true;
 
               format = "{name}";
+              format-window-separator = " | ";
             };
 
             /* Show the Active Window without icons */
             "sway/window" = {
               all-outputs = true;
 
-              icon = true;
+              icon = false;
               icon-size = 18;
 
-              format = "| {title}";
+              format = "{title}";
               max-length = 36;
             };
 
@@ -76,12 +77,12 @@ in
              * Enable: sylveon.hardware.bluetooth
              */
             "bluetooth" = {
-              format = " {status}";
-              format-disabled = ""; # Disables the module if bluetooth is not available
-              format-on = "";
+              format = " {status} |";
+              format-disabled = "󰂲 |"; # Disables the module if bluetooth is not available
+              format-on = " |";
 
-              format-connected = " {device_alias}";
-              format-connected-battery = " {device_alias} {device_battery_percantage}%"; # Needs bluetooth expirmental
+              format-connected = " {device_alias} |";
+              format-connected-battery = " {device_alias} {device_battery_percantage}% |"; # Needs bluetooth expirmental
               on-click = "exec ${pkgs.blueman}/bin/blueman-manager";
             };
 
@@ -90,7 +91,7 @@ in
             /* Show the current audio device with icons and change the volume by scrolling */
             "pulseaudio" = {
               format = "{icon} {volume}% |";
-              format-muted = " ";
+              format-muted = "  |";
               on-click = "pavucontrol";
 
               states.muted = 0;
@@ -98,7 +99,7 @@ in
               tooltip-format = "Device: {desc}";
 
               format-icons = {
-                default = [ " " " " " " ];
+                default = [ " " " " ];
                 muted = " ";
               };
             };
@@ -120,7 +121,7 @@ in
             /* The Battery status will be shown */
             "battery" = {
               interval = 1;
-              full-at = 80; # Changed in BIOS for a better capacity
+              full-at = 80; # Changed in BIOS for better capacity
 
               states = {
                 full = 100;
@@ -132,9 +133,9 @@ in
 
               tooltip-format = "Watt usage: {power} \nCapacity: {capacity}% /time remain: {time} \nBattery cycles: {cycles}";
 
-              format = "{icon} |";
-              format-plugged = "{icon} |";
-              format-not-fully-full = "{icon} |";
+              format = "{icon} {capacity}% |";
+              format-plugged = "{icon} {capacity}% |";
+              format-not-fully-full = "{icon} {capacity}% |";
 
               #format-warning = ""; # change color to orange
               #format-critical = ""; # change color to red
@@ -142,7 +143,7 @@ in
 
 
               format-icons = { 
-                discharging = [ " " "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰁹" ];
+                discharging = [ "󱟩" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰁹" ];
                 charging = [ "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰁹" ];
               };
             };
@@ -159,7 +160,7 @@ in
 
               timezone = "Europe/Berlin";
               locale = "de_DE.UTF-8";
-              format = " {:%H:%M}";
+              format = " {:%H:%M} ";
             };
 
             "custom/notification" = {
@@ -167,13 +168,13 @@ in
              
              format = "{icon}";
               format-icons = {
-                notification = "<span foreground='red'><sup></sup></span> |";
+                notification = " <span foreground='red'><sup></sup></span> |";
                 none = " |";
-                dnd-notification = "<span foreground='red'><sup></sup></span> |";
+                dnd-notification = " <span foreground='red'><sup></sup></span> |";
                 dnd-none = " |";
-                inhibited-notification = "<span foreground='red'><sup></sup></span> |";
+                inhibited-notification = " <span foreground='red'><sup></sup></span> |";
                 inhibited-none = " |";
-                dnd-inhibited-notification = "<span foreground='red'><sup></sup></span> |";
+                dnd-inhibited-notification = " <span foreground='red'><sup></sup></span> |";
                 dnd-inhibited-none = " |";
               };
 
