@@ -79,7 +79,7 @@ in
             "bluetooth" = {
               format = " {status} |";
               format-disabled = "󰂲 |"; # Disables the module if bluetooth is not available
-              format-on = " |";
+              format-on = " {num_connections} |";
 
               format-connected = " {device_alias} |";
               format-connected-battery = " {device_alias} {device_battery_percantage}% |"; # Needs bluetooth expirmental
@@ -107,14 +107,14 @@ in
             /* Show the current network type; If the connection is LAN, show bandwith status with IP adress */
             "network" = {
               interval = 10;
-              format-wifi = "{icon}";
-              format-disconnected = "󰖪";
-              format-ethernet = "󰌗";
+              format-wifi = "{icon} {essid} |";
+              format-disconnected = "󰖪 |";
+              format-ethernet = "󰌗  󰁅{bandwidthDownBits} |";
 
               tooltip-format-wifi = "{essid} {signalStrength}%";
               tooltip-format-ethernet = "{ipaddr}";
 
-              format-icons = [ "󰤟" "󰤢" "󰤥" "󰤨" ];
+              format-icons = [ "󰤟 " "󰤢 " "󰤥 " "󰤨 " ];
 
             };
 
