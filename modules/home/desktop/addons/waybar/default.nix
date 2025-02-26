@@ -39,7 +39,7 @@ in
             position = "top";
 
             margin = "5px";
-            height = 26;
+            height = 40;
 
             /* Enable modules in the right positions */
 
