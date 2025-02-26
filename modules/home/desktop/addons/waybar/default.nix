@@ -106,13 +106,14 @@ in
 
             /* Show the current network type; If the connection is LAN, show bandwith status with IP adress */
             "network" = {
-              interval = 10;
-              format-wifi = "{icon} {essid} |";
-              format-disconnected = "󰖪 |";
-              format-ethernet = "󰌗  󰁅{bandwidthDownBits} |";
+              interval = 3;
+              max-length = 25;
 
-              tooltip-format-wifi = "{essid} {signalStrength}%";
-              tooltip-format-ethernet = "{ipaddr}";
+              format-wifi = "{icon} {essid} {signalStrength}% |";
+              format-disconnected = " 󰖪  |";
+              format-ethernet = "󰌗   {bandwidthDownBits} |";
+
+              tooltip-format = "Interface: {ifname}\nIP-Adress: {ipaddr}\nDownload/Upload Speed:  {bandwidthDownBits}  {bandwidthUpBits}";
 
               format-icons = [ "󰤟 " "󰤢 " "󰤥 " "󰤨 " ];
 

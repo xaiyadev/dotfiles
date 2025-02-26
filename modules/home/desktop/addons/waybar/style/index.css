@@ -11,7 +11,7 @@ window {
 }
 
 window#waybar.empty {
-  background-color: rgba(25, 23, 36, 0.30);
+  background-color: rgba(25, 23, 36, 0.20);
   transition: 0.5s;
 }
 
