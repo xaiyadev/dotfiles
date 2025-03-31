@@ -1,6 +1,11 @@
+{ lib, inputs, ... }:
+let
+  sylveonLib = lib.makeExtensible ( final: {
+    namespace = "sylveon";
+  });
+
+in
 {
-
-  import = [ ./config.nix ];
-
+  flake.lib = sylveonLib;
 
 }

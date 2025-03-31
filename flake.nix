@@ -7,6 +7,12 @@
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+   easy-hosts = {
+     type = "github";
+     owner = "tgirlcloud";
+     repo = "easy-hosts";
+   };
   };
 
 }
