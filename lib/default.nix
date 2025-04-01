@@ -1,4 +1,4 @@
-{ lib, inputs, ... }:
+{ lib, ... }:
 let
   sylveonLib = lib.makeExtensible ( final: {
     namespace = "sylveon";

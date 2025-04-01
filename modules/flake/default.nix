@@ -1,11 +1,11 @@
-{ inputs, lib, self, ... }:
-{
+{inputs, ...}: {
 
   imports = [
-    ../../systems
-    ../../lib
+    "${inputs.self.outPath}/systems"
+    #../../lib
   ];
 
-  config = { debug = true; };
-
+  config = {
+    debug = true;
+  };
 }

@@ -1,26 +1,22 @@
-{ inputs, self, ... }: {
+{ inputs, ... }: {
  imports = [ inputs.easy-hosts.flakeModule ];
 
  config.easy-hosts = {
   autoConstruct = true;
-  path = self + /systems;
+  path = inputs.self.outPath + /systems;
 
   perClass = class: {
     modules = [
-      "${self}/modules/${class}" # Import modules for each class
-      "${self}/modules/home" # # Import home configuration modules
+      "../modules/" # Import modules for each class
+      "../modules/home" # # Import home configuration modules
 
-      "${self}/home" # Import users
+      "../home" # Import users
     ];
   };
 
   hosts = {
     pineapple = { # Maybe change name
-      
     };
-
-
   };
  };
-
 }

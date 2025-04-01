@@ -1,18 +1,31 @@
 {
-  description = "Description for the project";
+  description = "Xaiya's Configuration";
 
   outputs =
     inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } { imports = [ ./modules/flake ]; };
   
   inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixpkgs";
+      ref = "nixpkgs-unstable";
+    };
 
-   easy-hosts = {
-     type = "github";
-     owner = "tgirlcloud";
-     repo = "easy-hosts";
-   };
+    # bring all the mess together with flake-parts
+    flake-parts = {
+      type = "github";
+      owner = "hercules-ci";
+      repo = "flake-parts";
+
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    easy-hosts = {
+      type = "github";
+      owner = "tgirlcloud";
+      repo = "easy-hosts";
+    };
   };
 
 }
