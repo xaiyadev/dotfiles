@@ -1,22 +1,19 @@
-{ inputs, ... }: {
+{ inputs, self, ... }: {
  imports = [ inputs.easy-hosts.flakeModule ];
 
  config.easy-hosts = {
-  autoConstruct = true;
-  path = inputs.self.outPath + /systems;
-
   perClass = class: {
     modules = [
-      "../modules/" # Import modules for each class
-      "../modules/home" # # Import home configuration modules
+      "${self}/modules/${class}/default.nix" # Import modules for each class
+      "${self}/modules/home/default.nix" # # Import home configuration modules
 
-      "../home" # Import users
+      "${self}/home/default.nix" # Import users
     ];
   };
 
   hosts = {
-    pineapple = { # Maybe change name
-    };
+    # Framework laptop
+    pineapple = { };
   };
  };
 }
