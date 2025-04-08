@@ -1,8 +1,6 @@
 { inputs, ... }:
 {
-  # An array of what systems are used in this flake
-  # TODO: automate?
-  systems = [ "x86_64-linux" ];
+  systems = import inputs.systems;
 
   perSystem =
     { system, ... }:
@@ -14,6 +12,7 @@
         config = {
           allowUnfree = true;
         };
+        overlays = [ ];
       };
     };
 }

@@ -26,6 +26,13 @@
       owner = "tgirlcloud";
       repo = "easy-hosts";
     };
+
+    # Nix systems list
+    systems = {
+      type = "github";
+      owner = "nix-systems";
+      repo = "default";
+    };
   };
 
 }

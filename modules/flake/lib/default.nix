@@ -1,10 +1,11 @@
 { lib, inputs, ... }:
 let
-  sylveonLib = inputs.nixpkgs.lib.fixedPoints.makeExtensible ( final: {
+  sylveonLib = lib.fixedPoints.makeExtensible ( final: {
     modules = import ./modules.nix { inherit lib; };
 
     inherit (final.modules) mkOpt;
   });
 
+  finalLib = lib.extend (final: prev: sylveonLib);
 in
-{ flake.lib = sylveonLib; }
+{ flake.lib = finalLib; }
