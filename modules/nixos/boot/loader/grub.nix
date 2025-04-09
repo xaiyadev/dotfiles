@@ -3,7 +3,7 @@ let
   inherit (lib.types) str;
   inherit (lib.modules) mkOpt mkIf;
 
-  cfg = config.sylveon.system.boot.loader;
+  cfg = config.sylveon.boot.loader;
 in
 {
 
