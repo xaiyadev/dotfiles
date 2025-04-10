@@ -1,9 +1,11 @@
-{ lib, config, ...}:
+{ lib, config, self, ...}:
 let
   inherit (lib.types) str;
-  inherit (lib.modules) mkOpt mkIf;
+  inherit (lib.modules) mkIf;
 
-  cfg = config.sylveon.boot.loader;
+  inherit (self.lib.modules) mkOpt;
+
+  cfg = config.sylveon.boot;
 in
 {
 

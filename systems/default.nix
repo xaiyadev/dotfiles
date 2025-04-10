@@ -3,7 +3,9 @@
 
  config.easy-hosts = {
   perClass = class: {
-    modules = [ ];
+    modules = [
+      "${self}/modules/${class}"
+    ];
   };
 
   hosts = {

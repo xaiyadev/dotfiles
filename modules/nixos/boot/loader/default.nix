@@ -1,6 +1,6 @@
-{ lib, ... }:
+{ lib, self, ... }:
 let
-  inherit (lib.modules) mkOpt;
+  inherit (self.lib.modules) mkOpt;
   inherit (lib.types) enum;
 in
 {

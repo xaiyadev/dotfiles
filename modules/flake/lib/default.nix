@@ -1,9 +1,9 @@
-{ lib, inputs, ... }:
+{ lib, ... }:
 let
   sylveonLib = lib.fixedPoints.makeExtensible ( final: {
-    modules = import ./modules.nix { inherit lib; };
+      modules = import ./modules.nix { inherit lib; };
 
-    inherit (final.modules) mkOpt;
+      inherit (final.sylveon.modules) mkOpt;
   });
 
   finalLib = lib.extend (final: prev: sylveonLib);
