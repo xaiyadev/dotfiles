@@ -16,6 +16,7 @@ in
   config = mkIf (cfg.loader == "grub") {
     boot.loader.grub = {
       inherit (cfg.grub) device;
+
       enable = true;
 
       efiSupport = true;

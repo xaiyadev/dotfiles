@@ -1,10 +1,15 @@
 { lib, config, self, ... }:
 let
-  inherit (lib.types) bool;
+  inherit (lib.types)
+  bool
+  str
+  nullOr
+  ;
   inherit (lib.modules) mkIf;
+  inherit (lib.lists) concatLists optionals;
+
 
   inherit (self.lib.modules) mkOpt;
-
   cfg = config.sylveon.boot;
 in
 {
@@ -13,15 +18,16 @@ in
   ];
 
   options.sylveon.boot = {
-    defaultConfiguration = mkOpt bool false "If the default configuration should be done";
+    loadRecommendedConfiguration = mkOpt bool false "If the default configuration should be done";
   };
 
-  config = mkIf cfg.defaultConfiguration {
+  config = mkIf cfg.loadRecommendedConfiguration {
     boot = {
-      loader = {
-        # allow installation to modify EFI variables
-        efi.canTouchEfiVariables = true;
-      };
+      # Add NTFS as filesystem
+      supportedFilesystems = [ "ntfs" ];
+
+      # allow installation to modify EFI variables
+      loader.efi.canTouchEfiVariables = true;
     };
   };
 }

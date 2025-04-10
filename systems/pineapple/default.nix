@@ -1,9 +1,11 @@
 {
   imports = [ ./hardware.nix ];
+
   sylveon = {
     boot = {
-      defaultConfiguration = true;
+      loadRecommendedConfiguration = true;
       loader = "grub";
     };
   };
+
 }
