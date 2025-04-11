@@ -1,12 +1,7 @@
 { lib, config, self, ... }:
 let
-  inherit (lib.types)
-  bool
-  str
-  nullOr
-  ;
+  inherit (lib.types) bool;
   inherit (lib.modules) mkIf;
-  inherit (lib.lists) concatLists optionals;
 
 
   inherit (self.lib.modules) mkOpt;

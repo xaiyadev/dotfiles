@@ -4,7 +4,6 @@ let
   inherit (lib.modules) mkIf;
 
   inherit (self.lib.modules) mkOpt;
-
   cfg = config.sylveon.boot;
 in
 {

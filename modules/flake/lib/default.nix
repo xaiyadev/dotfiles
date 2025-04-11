@@ -3,9 +3,8 @@ let
   sylveonLib = lib.fixedPoints.makeExtensible ( final: {
       modules = import ./modules.nix { inherit lib; };
 
-      inherit (final.sylveon.modules) mkOpt;
+      inherit (final.modules) mkOpt;
   });
 
-  finalLib = lib.extend (final: prev: sylveonLib);
 in
-{ flake.lib = finalLib; }
+{ flake.lib = sylveonLib; }
