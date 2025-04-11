@@ -2,7 +2,23 @@
 <div align="center"> Xaiya's Configuration, now automated! </div>
 
 ---
+## Writing Modules
+Some Important things!
+- Structuring
+- Calling the Library
+- etc.
+
+### Library
+[How do I call the library?](https://github.com/xaiyadev/dotfiles/blob/v5/modules/flake/lib/default.nix#L11)
+
+As explained in the module:
+- self.lib for my new cool library
+- lib for nixos default library
+
+That's it! How did I take so long for this...
+
+---
 
 This documentation will be extended while v5 is getting programmed
 
-Nothing here yet 😿 
+That's it 😿 
