@@ -19,6 +19,12 @@ That's it! How did I take so long for this...
 
 ---
 
+## Credits
+
+- Some modules and ideas are from [isabelroses dotfiles](https://github.com/isabelroses/dotfiles)
+
+---
+
 This documentation will be extended while v5 is getting programmed
 
 That's it 😿 

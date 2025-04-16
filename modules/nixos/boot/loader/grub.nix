@@ -4,11 +4,11 @@ let
   inherit (lib.modules) mkIf;
 
   inherit (self.lib.modules) mkOpt;
-  cfg = config.sylveon.boot;
+  cfg = config.sylveon.system.boot;
 in
 {
 
-  options.sylveon.boot.grub = {
+  options.sylveon.system.boot.grub = {
     device = mkOpt str "nodev" "The device that the bootloader should be installed on.";
   };
 

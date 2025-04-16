@@ -8,6 +8,6 @@ in
     ./grub.nix
   ];
 
-  options.sylveon.boot.loader =
+  options.sylveon.system.boot.loader =
     mkOpt (enum [ "grub" "none" ]) "none" "What bootloader the device should use.";
 }
