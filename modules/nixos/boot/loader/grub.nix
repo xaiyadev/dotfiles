@@ -21,7 +21,6 @@ in
       efiSupport = true;
       useOSProber = true;
 
-      theme = null; # TODO: add astronaut theme
     };
   };
 }

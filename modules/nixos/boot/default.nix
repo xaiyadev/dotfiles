@@ -1,7 +1,7 @@
 { lib, config, self, pkgs,... }:
 let
   inherit (lib.types) raw bool;
-  inherit (lib.modules) mkOverride mkDefault;
+  inherit (lib.modules) mkOverride mkDefault mkForce;
 
   inherit (self.lib.modules) mkOpt;
   cfg = config.sylveon.system.boot;
@@ -30,7 +30,7 @@ in
       supportedFilesystems = [ "ntfs" ];
 
       loader = {
-        timeout = mkDefault 2;
+        timeout = mkForce 5;
 
         # allow installation to modify EFI variables
         efi.canTouchEfiVariables = true;
@@ -56,6 +56,9 @@ in
 
         kernelModules = [ ];
       };
+
+      # TODO: Should I move this?
+      kernelModules = [ "acpi_call" ];
 
       kernelParams = [
         # Fix Color accuracy in Power saving modes
