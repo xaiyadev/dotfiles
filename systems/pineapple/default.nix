@@ -6,6 +6,9 @@
 
     system = {
       boot.loader = "grub";
+      graphical = {
+        displayManager = "sddm";
+      };
     };
   };
 
