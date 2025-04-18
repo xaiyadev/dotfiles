@@ -2,6 +2,7 @@
   imports = [ ./hardware.nix ];
 
   sylveon = {
+    users = [ "xaiya" ];
     profiles = [ "laptop" ];
 
     system = {
@@ -13,4 +14,5 @@
     };
   };
 
+  system.stateVersion = "25.05";
 }
