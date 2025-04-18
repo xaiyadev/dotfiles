@@ -8,6 +8,7 @@
       boot.loader = "grub";
       graphical = {
         displayManager = "sddm";
+        windowManagers = [ "gnome" ];
       };
     };
   };

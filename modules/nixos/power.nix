@@ -8,7 +8,7 @@ let
 in
 {
 
-  config = mkIf builtins.elem "laptop" profiles {
+  config = mkIf (builtins.elem "laptop" profiles) {
     # power management (very good)
     services = {
       auto-cpufreq = {

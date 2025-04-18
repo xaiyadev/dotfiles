@@ -8,8 +8,8 @@ let
 
 in
 {
-# How do I call lib?
-# self.lib - calling my new cool library
-# lib - call nixos default library
-flake.lib = sylveonLib;
+  # How do I call lib?
+  # self.lib - calling my new cool library
+  # lib - call nixos default library
+  flake.lib = sylveonLib;
 }
