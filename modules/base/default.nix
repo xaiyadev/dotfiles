@@ -1,6 +1,6 @@
 {
   imports = [
     ./profiles.nix
-    ./users.nix
+    ./themes.nix
   ];
 }

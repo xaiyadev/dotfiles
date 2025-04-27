@@ -4,11 +4,6 @@
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-
-  # Use power-profiles-deamon instead of tlp
-  services.tlp.enable = false;
-  services.power-profiles-daemon.enable = true;
-
   # Prevent wakeup if lid is closed
   services.udev.extraRules = ''
    SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0012", ATTR{power/wakeup}="disabled", ATTR{driver/1-1.1.1.4/power/wakeup}="disabled"

@@ -33,6 +33,20 @@
       owner = "nix-systems";
       repo = "default";
     };
+
+    stylix = {
+      type = "github";
+      owner = "danth";
+      repo = "stylix";
+    };
+
+    tinted-theming-schemes = {
+      type = "github";
+      owner = "tinted-theming";
+      repo = "schemes";
+      flake = false;
+    };
+
   };
 
 }

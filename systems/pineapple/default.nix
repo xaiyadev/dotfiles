@@ -4,6 +4,7 @@
   sylveon = {
     users = [ "xaiya" ];
     profiles = [ "laptop" ];
+    theme.name = "rose-pine";
 
     system = {
       boot.loader = "grub";
