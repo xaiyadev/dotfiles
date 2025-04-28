@@ -1,6 +1,7 @@
 {
   imports = [
-    ./styling
+    ./stylix.nix
+    ./dconf.nix
+    ./home.nix
   ];
-
 }

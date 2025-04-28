@@ -12,6 +12,14 @@
       ref = "nixpkgs-unstable";
     };
 
+    home-manager = {
+      type = "github";
+      owner = "nix-community";
+      repo = "home-manager";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # bring all the mess together with flake-parts
     flake-parts = {
       type = "github";

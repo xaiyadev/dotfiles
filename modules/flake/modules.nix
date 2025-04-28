@@ -16,11 +16,23 @@ let
 
 in
 {
-  flake.nixosModules = {
-    sylveon = mkModule {
-      class = "nixos";
-      modules = [ "${self}/modules/nixos/default.nix" ];
+  flake = {
+    nixosModules = {
+      sylveon = mkModule {
+        class = "nixos";
+        modules = [
+          "${self}/modules/nixos/default.nix"
+          "${self}/modules/base/default.nix"
+
+        ];
+      };
+    };
+
+    homeManagerModules  = {
+      sylveon = mkModule {
+        class = "homeManager";
+        modules = [ "${self}/modules/home/default.nix" ];
+      };
     };
   };
-
 }
