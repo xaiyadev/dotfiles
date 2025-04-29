@@ -10,6 +10,13 @@ in
       useGlobalPkgs = true;
 
       users = genAttrs config.sylveon.users (name: ./${name});
+
+      extraSpecialArgs = {
+        inherit
+          self
+          ;
+      };
+
       sharedModules = [ "${self}/modules/home/default.nix" ];
     };
   };
