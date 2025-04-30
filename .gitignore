@@ -5,3 +5,5 @@ result-*
 
 ### Jetbrains IDE
 .idea/
+
+*.qcow2

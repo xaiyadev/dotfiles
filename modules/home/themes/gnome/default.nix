@@ -11,8 +11,8 @@ in
   ];
 
   config = mkIf (builtins.elem "gnome" windowManager) {
+
     dconf = {
-      enable = true;
 
       # TODO: Software that generalizes that?
       settings."org/gnome/desktop/peripherals/mouse" = {
@@ -24,6 +24,7 @@ in
         clock-format = "24h";
         show-battery-percentage = true;
       };
+
     };
   };
 

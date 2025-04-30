@@ -1,7 +1,9 @@
 {
   imports = [
-     ./gnome
-
     ./stylix.nix
+
+    ./cursor.nix
+
+    ./gnome
   ];
 }

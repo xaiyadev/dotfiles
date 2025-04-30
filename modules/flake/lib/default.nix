@@ -1,9 +1,11 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
   sylveonLib = lib.fixedPoints.makeExtensible ( final: {
       modules = import ./modules.nix { inherit lib; };
+      validation = import ./validation.nix { inherit lib config; };
 
       inherit (final.modules) mkOpt;
+      inherit (final.validation) isGraphical;
   });
 
 in
