@@ -1,4 +1,4 @@
-{ osConfig, self, pkgs, ...}:
+{ osConfig, self, ...}:
 let
   inherit (self.lib.validation) isGraphical;
 

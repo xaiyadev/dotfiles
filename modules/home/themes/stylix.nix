@@ -1,8 +1,8 @@
 {osConfig, lib, self, ... }:
 let
-  inherit (self.lib.validation) isGraphical;
   inherit (lib) mkIf;
 
+  inherit (self.lib.validation) isGraphical;
   theme = osConfig.sylveon.theme;
 in
 {
