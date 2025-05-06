@@ -1,9 +1,12 @@
 { pkgs, ... }: {
   imports = [ ./hardware.nix ];
 
+  networking.hostName = "pineapple"; # TODO !
+
   sylveon = {
     users = [ "xaiya" ];
     profiles = [ "laptop" ];
+
     theme = {
       name = "rose-pine";
 
@@ -17,7 +20,7 @@
       boot.loader = "grub";
       graphical = {
         displayManager = "sddm";
-        windowManagers = [ "gnome" ];
+        windowManagers = [ "gnome" "sway" ];
       };
     };
   };
