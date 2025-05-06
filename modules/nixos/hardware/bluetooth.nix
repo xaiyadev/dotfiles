@@ -10,7 +10,7 @@ in
   options.sylveon.hardware.bluetooth.enable =
     mkOpt bool false "Whether or not bluetooth should be enabled or not";
 
-  config = mkIf cfg.hardware.bluetooth.enable {
+  config = mkIf cfg.enable {
     hardware.bluetooth = {
       enable = true;
       package = pkgs.bluez;
