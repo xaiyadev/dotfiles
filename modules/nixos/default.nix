@@ -6,6 +6,7 @@
     ./boot # Boot configuration and loader
     ./graphical
     ./hardware
+    ./nix
 
     ./users.nix # load and create users
     ./extraPackages.nix

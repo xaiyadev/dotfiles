@@ -5,6 +5,12 @@
     inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } { imports = [ ./modules/flake ]; };
 
   inputs = {
+    # Forked and better version of nix :>
+    lix = {
+      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs = {
       type = "github";
       owner = "NixOS";

@@ -2,7 +2,6 @@
 let
   inherit (lib.lists) any;
 
-  # takes one of your
   isGraphical =
     # Ask for a config, because of home-manager and the two ways of calling the config
     config:

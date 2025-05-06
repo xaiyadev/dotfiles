@@ -22,6 +22,8 @@ That's it! How did I take so long for this...
 ## Credits
 
 - Some modules and ideas are from [isabelroses dotfiles](https://github.com/isabelroses/dotfiles)
+  - A lot of things that had to do with maths to do were taken from her
+  - I extended many modules from mine with configurations from her
 
 ---
 
