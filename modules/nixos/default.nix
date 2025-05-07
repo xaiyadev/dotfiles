@@ -7,9 +7,9 @@
     ./graphical
     ./hardware
     ./nix
+    ./environment
 
     ./users.nix # load and create users
     ./extraPackages.nix
-    ./locale.nix
   ];
 }
