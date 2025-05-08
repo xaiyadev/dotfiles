@@ -61,6 +61,20 @@
       flake = false;
     };
 
+    nixcord = {
+      type = "github";
+      owner = "kaylorben";
+      repo = "nixcord";
+   };
+
+    ulauncher = {
+      type = "github";
+      owner = "Ulauncher";
+      repo = "Ulauncher";
+      ref = "v6";
+    };
+
+
   };
 
 }

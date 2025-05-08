@@ -1,4 +1,4 @@
-{ lib, config, self, ... }:
+{ lib, config, self, inputs', inputs, ... }:
 let
   inherit (lib.attrsets) genAttrs;
 in
@@ -14,6 +14,8 @@ in
       extraSpecialArgs = {
         inherit
           self
+          inputs
+          inputs'
           ;
       };
 

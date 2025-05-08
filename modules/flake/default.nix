@@ -1,5 +1,6 @@
-{
+{ inputs, ... }: {
   imports = [
+
     ../../systems
 
     ./modules.nix # Inject modules into flake
@@ -12,6 +13,7 @@
   config = {
     # Activate debug tools for flakes
     debug = true;
+
   };
 
 }

@@ -9,7 +9,6 @@ in
   config = mkIf (builtins.elem "sway" windowManagers) {
     programs.sway = {
       enable = true;
-      package = pkgs.swayfx;
       wrapperFeatures.gtk = true;
 
       extraSessionCommands = ''
