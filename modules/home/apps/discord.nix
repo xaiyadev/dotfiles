@@ -20,7 +20,6 @@ in
       discord.enable = mkForce false;
 
       config = {
-
         transparent = true;
 
         # Activate and Configure Plugins
