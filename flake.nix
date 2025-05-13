@@ -26,6 +26,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    agenix = {
+      type = "github";
+      owner = "ryantm";
+      repo = "agenix";
+    };
+
     # bring all the mess together with flake-parts
     flake-parts = {
       type = "github";
@@ -65,7 +71,7 @@
       type = "github";
       owner = "kaylorben";
       repo = "nixcord";
-   };
+    };
 
     ulauncher = {
       type = "github";

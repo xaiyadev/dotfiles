@@ -63,19 +63,6 @@ in
           whoReacted.enable = true;
           youtubeAdblock.enable = true;
 
-          lastFMRichPresence = {
-            enable = true;
-            username = "xaiyadev";
-            apiKey = ""; # TODO: age encrypt // https://www.last.fm/api/accounts
-            shareUsername = false;
-            shareSong = true;
-            useListeningStatus = true;
-            statusName = "Music"; # TODO: https://github.com/KaylorBen/nixcord/issues/101
-            nameFormat = "artist-first";
-            missingArt = "placeholder";
-            showLastFmLogo = false;
-          };
-
           /* Vesktop exclusive */
           webKeybinds.enable = true;
           webScreenShareFixes.enable = true;
