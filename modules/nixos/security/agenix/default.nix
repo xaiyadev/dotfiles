@@ -16,13 +16,20 @@ in {
    * All secret files can be found in the hosts folder ${hostname}/secrets/
    */
   config = {
-    age.rekey = {
-      hostPubkey = builtins.readFile (getSystemDirectory + "/key.pub");
-      masterIdentities = cfg.masterIdentities;
+    age = {
+      rekey = {
+        hostPubkey = builtins.readFile (getSystemDirectory + "/key.pub");
+        masterIdentities = cfg.masterIdentities;
 
-      # Secrets are located in the local repository
-      storageMode = "local";
-      localStorageDir = getSystemDirectory + "/secrets/";
+        # Secrets are located in the local repository
+        storageMode = "local";
+        localStorageDir = getSystemDirectory + "/secrets";
+      };
+
+      generators = {
+        # Generate a random string that is encrypted as sha256 after that
+        ranSha256 = { ... }: "echo tr -dc A-Za-z0-9 </dev/urandom | head -c 13 | sha256sum | cut -d ' ' -f1";
+      };
     };
   };
 }

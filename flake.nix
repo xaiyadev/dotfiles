@@ -26,11 +26,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Make passwords go puff
     agenix = {
       type = "github";
       owner = "ryantm";
       repo = "agenix";
     };
+
+    # Make password go puff (with the help of keys)
+    agenix-rekey = {
+      type = "github";
+      owner = "oddlama";
+      repo = "agenix-rekey";
+    };
+
 
     # bring all the mess together with flake-parts
     flake-parts = {

@@ -4,7 +4,7 @@
   networking.hostName = "pineapple"; # TODO !
 
   sylveon = {
-    users = [ "xaiya" ];
+    users = [ "xaiya" "blmedia" ];
     profiles = [ "laptop" ];
 
     theme = {

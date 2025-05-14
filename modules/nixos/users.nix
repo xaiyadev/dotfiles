@@ -2,7 +2,7 @@
 let
   inherit (lib.types) listOf str;
   inherit (lib.attrsets) genAttrs;
-  inherit (lib.modules) mkDefault;
+  inherit (lib) forEach;
 
   inherit (self.lib.modules) mkOpt;
 in
@@ -11,6 +11,12 @@ in
     mkOpt (listOf str) [ "xaiya" ] "A list of users that should be installed";
 
   config = {
+    # Generate random passwords for users
+    age.secrets =
+      genAttrs
+        (forEach config.sylveon.users (name: "${name}-passwd"))
+        (name: { rekeyFile = "${self}/secrets/${name}.age"; generator.script = "ranSha256"; });
+
     # Create users from list
     users.users =
       genAttrs config.sylveon.users (
@@ -19,11 +25,10 @@ in
           zsh = config.home-manager.users.${name}.sylveon.cli.zsh;
         in
         {
-          initialPassword = mkDefault "BITTEAENDERN"; # funny # TODO: change to hashedPassword
+          hashedPasswordFile = config.age.secrets."${name}-password".path;
           isNormalUser = true;
           shell =
             if zsh.enable then zsh.package else pkgs.bash; # TODO: Change this if there are more shells
-
 
           extraGroups = [
             "wheel"

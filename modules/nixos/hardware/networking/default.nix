@@ -10,6 +10,7 @@ in
     ./networkManager.nix
     ./tailscale.nix
     ./resolvconf.nix
+    ./openssh.nix
   ];
 
 

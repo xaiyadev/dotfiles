@@ -2,8 +2,9 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager # TODO: Temporary
     inputs.stylix.nixosModules.stylix
-    inputs.agenix.nixosModules.default
 
+    inputs.agenix.nixosModules.default
+    inputs.agenix-rekey.nixosModules.default
 
 
     ./boot # Boot configuration and loader
