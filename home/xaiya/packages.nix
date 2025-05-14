@@ -13,6 +13,6 @@
     pkgs.whatsapp-for-linux
 
     pkgs.teams-for-linux # Teams; Need that for school and work
-    pkgs.cicsoPacketTracer8 # Cisco software that I need for school
+    pkgs.ciscoPacketTracer8 # Cisco software that I need for school
   ];
 }

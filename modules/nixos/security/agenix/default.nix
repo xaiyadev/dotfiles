@@ -30,6 +30,8 @@ in {
         # Generate a random string that is encrypted as sha256 after that
         ranSha256 = { ... }: "echo tr -dc A-Za-z0-9 </dev/urandom | head -c 13 | sha256sum | cut -d ' ' -f1";
       };
+
+      identityPaths = [ "/etc/ssh/ssh_host_rsa_key" "/etc/ssh/ssh_host_ed25519_key" ];
     };
   };
 }

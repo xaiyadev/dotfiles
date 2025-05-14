@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, self, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager # TODO: Temporary
     inputs.stylix.nixosModules.stylix
@@ -17,4 +17,5 @@
     ./users.nix # load and create users
     ./extraPackages.nix
   ];
+
 }

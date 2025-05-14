@@ -25,7 +25,8 @@ in
           zsh = config.home-manager.users.${name}.sylveon.cli.zsh;
         in
         {
-          hashedPasswordFile = config.age.secrets."${name}-password".path;
+          initialPassword = "BITTEAENDERN";
+          # hashedPasswordFile = config.age.secrets."${name}-passwd".path;
           isNormalUser = true;
           shell =
             if zsh.enable then zsh.package else pkgs.bash; # TODO: Change this if there are more shells
