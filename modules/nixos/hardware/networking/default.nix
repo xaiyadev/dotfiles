@@ -9,12 +9,11 @@ in
   imports = [
     ./networkManager.nix
     ./tailscale.nix
-    ./resolvconf.nix
-    ./openssh.nix
+    ./ssh.nix
   ];
 
 
-  options.sylveon.hardware.networking = {
+  options.sylveon.system.networking = {
     hasWifi =
       mkOpt bool true "Whether or not the device has wifi";
 

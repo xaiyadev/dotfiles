@@ -2,6 +2,7 @@
 { pkgs, ... }:
 {
   home.packages = [
+    pkgs.neovim
     pkgs.jetbrains.phpstorm # Programming IDE for web
     pkgs.obsidian # Notes taking app TODO: move to own module
 

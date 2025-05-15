@@ -2,7 +2,7 @@
 let
   inherit (lib) mkIf;
 
-  cfg = config.sylveon.hardware.networking;
+  cfg = config.sylveon.system.networking;
 in
 {
 

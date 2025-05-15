@@ -2,7 +2,7 @@
 let
   inherit (lib) mkIf;
 
-  cfg = config.sylveon.networking;
+  cfg = config.sylveon.system.networking;
 in
 {
   config = mkIf cfg.tailscale.enable {
