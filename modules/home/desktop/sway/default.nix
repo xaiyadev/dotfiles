@@ -30,9 +30,7 @@ in
         terminal = "${pkgs.kitty}/bin/kitty";
 
         keybindings = mkOptionDefault {
-          "${modifier}+e" = "exec ${pkgs.wofi-emoji}/bin/wofi-emoji";
           "${modifier}+shift+Escape" = "exec ${pkgs.swaylock-effects}/bin/swaylock";
-          "${modifier}+Escape" = "exec ${pkgs.wlogout}/bin/wlogout";
         };
       };
     };

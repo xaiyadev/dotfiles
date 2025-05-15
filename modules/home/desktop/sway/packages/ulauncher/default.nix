@@ -8,8 +8,9 @@ let
 in
 {
   config = mkIf (builtins.elem "sway" windowManagers) {
-    # TODO: configure ulauncher
-    # home.file.".config/ulauncher" = { source = ./config; recursive = true; };
+
+    # TODO: configure ulauncher/rose-pine
+    home.file.".config/ulauncher" = { source = ./config; recursive = true; };
 
     home.packages = [ ulauncher6 ];
 
