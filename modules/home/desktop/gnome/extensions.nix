@@ -7,7 +7,7 @@ let
   inherit (self.lib.modules) mkOpt;
 
 
-  windowManager = osConfig.sylveon.system.graphical.windowManagers;
+  windowManagers = osConfig.sylveon.system.graphical.windowManagers;
   cfg = config.sylveon.gnome;
 in
 {
@@ -25,7 +25,7 @@ in
       ]
       "A list of users that should be installed";
 
-  config = mkIf (builtins.elem "gnome" windowManager) {
+  config = mkIf (builtins.elem "gnome" windowManagers) {
     home.packages = cfg.extensions;
 
     dconf = {

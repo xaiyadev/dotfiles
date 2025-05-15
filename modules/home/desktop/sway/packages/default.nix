@@ -2,5 +2,6 @@
   imports = [
     ./waybar
     ./ulauncher
+    ./kanshi
   ];
 }

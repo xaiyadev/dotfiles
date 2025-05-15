@@ -1,13 +1,19 @@
-{ pkgs, ... }: {
+{ pkgs, osConfig, lib, ... }:
+let
+  inherit (lib) mkIf;
+
+  windowManagers = osConfig.sylveon.system.graphical.windowManagers;
+in
+{
 
   # replace default bar with waybar
-  wayland.windowManager.sway.config.bars = [ { command = "${pkgs.waybar}/bin/waybar"; }];
+  wayland.windowManager.sway.config.bars = mkIf (builtins.elem "sway" windowManagers) [ { command = "${pkgs.waybar}/bin/waybar"; }];
 
   # only add colors and fonts from stylix
   stylix.targets.waybar.addCss = false;
 
   programs.waybar = {
-    enable = true;
+    enable = builtins.elem "sway" windowManagers;
 
     settings = {
       mainBar = {
