@@ -1,4 +1,4 @@
-{ osConfig, lib, pkgs, ... }:
+{ osConfig, lib, pkgs, config, ... }:
 let
   inherit (lib.modules) mkIf mkOptionDefault;
 
@@ -30,7 +30,8 @@ in
         terminal = "${pkgs.kitty}/bin/kitty";
 
         keybindings = mkOptionDefault {
-          "${modifier}+shift+Escape" = "exec ${pkgs.swaylock-effects}/bin/swaylock";
+          "${modifier}+shift+Escape" = "exec ${config.programs.swaylock.package}/bin/swaylock";
+          "${modifier}+Escape" = "exec ${config.programs.wlogout.package}/bin/wlogout";
         };
       };
     };

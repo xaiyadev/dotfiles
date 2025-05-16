@@ -10,7 +10,7 @@ in
     stylix = {
       enable = true;
 
-      image = "${self}/assets/wallpaper/mitaka.png";
+      image = "${self}/assets/wallpaper/Mizuki_34_trained_art.png";
       base16Scheme = theme.base16;
       polarity = "dark";
     };

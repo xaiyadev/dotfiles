@@ -1,7 +1,7 @@
 {
   imports = [
     ./waybar
-    ./ulauncher
+    ./wlogout
     ./kanshi
 
     ./swaylock.nix
