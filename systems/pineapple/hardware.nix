@@ -1,15 +1,4 @@
-{ config, lib, modulesPath, ... }:
-
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix") ];
-
-  # Prevent wakeup if lid is closed
-  services.udev.extraRules = ''
-   SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0012", ATTR{power/wakeup}="disabled", ATTR{driver/1-1.1.1.4/power/wakeup}="disabled"
-   SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0014", ATTR{power/wakeup}="disabled", ATTR{driver/1-1.1.1.4/power/wakeup}="disabled"
-  '';
-
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/876574d0-dec1-4237-a231-d78a7677539a";
       fsType = "ext4";
@@ -24,6 +13,4 @@
   swapDevices =
     [ { device = "/dev/disk/by-uuid/5efadec9-c5a4-4dfa-92bd-086dfccf6430"; }
     ];
-
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

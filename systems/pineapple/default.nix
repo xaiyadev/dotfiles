@@ -7,6 +7,8 @@
     users = [ "xaiya" "blmedia" ];
     profiles = [ "laptop" ];
 
+    hardware.cpu = "amd";
+
     theme = {
       name = "rose-pine";
 

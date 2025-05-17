@@ -13,10 +13,12 @@ in
     mkOpt bool true "Whether or not yubikey support should be enabled";
 
   config = mkIf cfg.enable {
+    age.secrets."yubikey-pam_u2f".rekeyFile = "${self}/secrets/yubikey-pam_u2f.age"; # Loading authFile for pam_u2f
+
     # Enables support for login and authentication with the yubikey
     security.pam.u2f = {
       enable = true;
-      # settings.authFile = TODO: add one file location for all users
+      settings.authFile = config.age.secrets."yubikey-pam_u2f".path;
     };
 
 
@@ -27,14 +29,14 @@ in
       udev.packages = [ pkgs.yubikey-personalization ];
     };
 
-     # use gnupg agent as main agent
+     # use gpg agent instead of the ssh agent
      programs = {
        ssh.startAgent = false;
 
        gnupg.agent = {
          enable = true;
          enableSSHSupport = true;
-         # enableBrowserSocket = true; TODO: do that?
+         enableBrowserSocket = true;
        };
     };
 
@@ -43,5 +45,18 @@ in
       pkgs.yubikey-manager # cli
       pkgs.yubioath-flutter # gui
     ];
+
+
+    # Lock screen if yubikey is removed
+    # TODO: add support for sway
+    services.udev.extraRules = ''
+      ACTION=="remove",\
+       ENV{ID_BUS}=="usb",\
+       ENV{ID_MODEL_ID}=="0407",\
+       ENV{ID_VENDOR_ID}=="1050",\
+       ENV{ID_VENDOR}=="Yubico",\
+       RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
+    '';
+
   };
 }

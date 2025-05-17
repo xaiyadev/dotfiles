@@ -1,6 +1,7 @@
 {
   imports = [
     ./networking
+    ./cpu
 
     ./audio.nix
     ./power.nix

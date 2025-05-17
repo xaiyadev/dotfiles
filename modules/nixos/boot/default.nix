@@ -57,7 +57,6 @@ in
         kernelModules = [ ];
       };
 
-      # TODO: Should I move this?
       kernelModules = [ "acpi_call" ];
 
       kernelParams = [
