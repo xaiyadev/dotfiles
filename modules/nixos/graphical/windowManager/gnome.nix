@@ -15,7 +15,10 @@ in
   };
 
   config = mkIf (builtins.elem "gnome" windowManagers) {
-    services.xserver.desktopManager.gnome.enable = true;
+    services.xserver = {
+        enable = true;
+        desktopManager.gnome.enable = true;
+    };
 
     environment.gnome.excludePackages = [
       pkgs.atomix # Puzzle Games

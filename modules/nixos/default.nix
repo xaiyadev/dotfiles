@@ -3,6 +3,7 @@
     inputs.home-manager.nixosModules.home-manager # TODO: Temporary
     inputs.stylix.nixosModules.stylix
 
+    inputs.nixos-hardware.nixosModules.framework-16-7040-amd
     inputs.agenix.nixosModules.default
     inputs.agenix-rekey.nixosModules.default
 

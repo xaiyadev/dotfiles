@@ -11,12 +11,6 @@ in
     boot = {
       kernelModules = [
         "kvm-amd"
-        "amd-pstate"
-      ];
-
-      kernelParams = [
-        # Fix Color accuracy in Power saving modes
-        "amdgpu.abmlevel=0"
       ];
     };
   };

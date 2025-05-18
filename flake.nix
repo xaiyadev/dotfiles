@@ -15,9 +15,11 @@
       type = "github";
       owner = "NixOS";
       repo = "nixpkgs";
-      ref = "nixpkgs-unstable";
+      ref = "nixos-unstable";
     };
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+   
     home-manager = {
       type = "github";
       owner = "nix-community";

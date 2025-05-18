@@ -6,9 +6,9 @@
     userEmail = "d.schumin@proton.me";
 
     extraConfig = {
+      push.autoSetupRemote = true;
+
       commit.gpgsign = true;
-      gpg.format = "ssh";
-      user.signingkey = "~/.ssh/id_ed25519_sk";
     };
   };
 }

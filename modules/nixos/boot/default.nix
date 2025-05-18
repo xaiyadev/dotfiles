@@ -53,16 +53,7 @@ in
           "thunderbolt"
           "usbhid"
         ];
-
-        kernelModules = [ ];
       };
-
-      kernelModules = [ "acpi_call" ];
-
-      kernelParams = [
-        # Fix Color accuracy in Power saving modes
-        "amdgpu.abmlevel=0"
-      ];
     };
   };
 }

@@ -2,6 +2,7 @@
   imports = [
     ./networking
     ./cpu
+    ./gpu
 
     ./audio.nix
     ./power.nix

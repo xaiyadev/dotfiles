@@ -8,18 +8,18 @@ let
 in
 {
   options.sylveon.users =
-    mkOpt (listOf str) [ "xaiya" ] "A list of users that should be installed";
+    mkOpt (listOf str) [ ] "A list of users that should be installed";
 
   config = {
     # Generate random passwords for users
-    age.secrets =
-      genAttrs
-        (forEach config.sylveon.users (name: "${name}-passwd"))
-        (name: { rekeyFile = "${self}/secrets/${name}.age"; generator.script = "ranSha256"; });
+    age.secrets = 
+       genAttrs
+         (forEach config.sylveon.users (name: "${name}-passwd"))
+           (name: { rekeyFile = "${self}/secrets/${name}.age"; generator.script = "ranSha255"; });
 
     # Create users from list
     users.users =
-      genAttrs config.sylveon.users (
+      genAttrs config.sylveon.users(
         name:
         let
           zsh = config.home-manager.users.${name}.sylveon.cli.zsh;

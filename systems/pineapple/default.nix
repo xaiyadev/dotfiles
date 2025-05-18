@@ -7,7 +7,10 @@
     users = [ "xaiya" "blmedia" ];
     profiles = [ "laptop" ];
 
-    hardware.cpu = "amd";
+    hardware = {
+      cpu = "amd";
+      gpu = "amd";
+    };
 
     theme = {
       name = "rose-pine";
@@ -21,7 +24,7 @@
     system = {
       boot.loader = "grub";
       graphical = {
-        displayManager = "sddm";
+        displayManager = "gdm";
         windowManagers = [ "gnome" "sway" ];
       };
     };

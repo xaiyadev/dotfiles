@@ -39,5 +39,8 @@ in
       ];
 
     };
+
+    # allow for the system to boot without waiting for the network interfaces are online
+    systemd.network.wait-online.enable = false;
   };
 }

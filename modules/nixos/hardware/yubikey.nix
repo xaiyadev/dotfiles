@@ -13,14 +13,18 @@ in
     mkOpt bool true "Whether or not yubikey support should be enabled";
 
   config = mkIf cfg.enable {
-    age.secrets."yubikey-pam_u2f".rekeyFile = "${self}/secrets/yubikey-pam_u2f.age"; # Loading authFile for pam_u2f
 
     # Enables support for login and authentication with the yubikey
-    security.pam.u2f = {
-      enable = true;
-      settings.authFile = config.age.secrets."yubikey-pam_u2f".path;
-    };
+    security.pam = {
+      u2f = {
+        enable = true;
+        settings.cue = true;
+      };
 
+      services = {
+        swaylock.text = "auth include login";
+      };
+    };
 
     hardware.gpgSmartcards.enable = true;
 

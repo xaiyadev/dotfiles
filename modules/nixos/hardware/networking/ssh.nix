@@ -23,7 +23,15 @@
 
   # Load ssh keys
   age.secrets = {
-    "ssh-gh".rekeyFile = "${self}/secrets/ssh-gh.age"; # Loading github ssh key
-    "ssh-bb".rekeyFile = "${self}/secrets/ssh-bb.age"; # Loading bitbucket ssh key
+    "ssh-gh" = {
+      rekeyFile = "${self}/secrets/ssh-gh.age"; # Loading github ssh key
+      mode = "644";
+      group = "users";
+    };
+    "ssh-bb" = {
+      rekeyFile = "${self}/secrets/ssh-bb.age"; # Loading github ssh key
+      mode = "644";
+      group = "users";
+    };
   };
 }
