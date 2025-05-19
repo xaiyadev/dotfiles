@@ -8,7 +8,7 @@
     extraConfig = {
       push.autoSetupRemote = true;
 
-      #commit.gpgsign = true; TODO: temp
+      commit.gpgsign = true;
     };
   };
 }

@@ -15,7 +15,7 @@
       type = "github";
       owner = "NixOS";
       repo = "nixpkgs";
-      ref = "nixos-unstable";
+      ref = "nixpkgs-unstable";
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -69,6 +69,8 @@
       type = "github";
       owner = "danth";
       repo = "stylix";
+
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     tinted-theming-schemes = {
