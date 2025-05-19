@@ -16,8 +16,6 @@
         hostname = "bitbucket.org";
         identityFile = osConfig.age.secrets."ssh-bb".path;
       };
-
-      # "git.xaiya.dev" TODO
     };
   };
 }

@@ -12,17 +12,23 @@ in
 
   config = mkIf (builtins.elem "gnome" windowManager) {
 
-    dconf = {
+    dconf.settings = {
+      "org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
       # TODO: Software that generalizes that?
-      settings."org/gnome/desktop/peripherals/mouse" = {
+      "org/gnome/desktop/peripherals/mouse" = {
         accel-profile = "flat";
         speed = -0.7;
       };
 
-      settings."org/gnome/desktop/interface" = {
+      "org/gnome/desktop/interface" = {
         clock-format = "24h";
         show-battery-percentage = true;
+      };
+
+      "org/gnome/desktop/wm/preferences" = {
+        audible-bell = false;
+        button-layout = ":minimize,maximize,close";
       };
 
     };

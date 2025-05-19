@@ -10,8 +10,6 @@
         hostname = "github.com";
         identityFile = osConfig.age.secrets."ssh-gh".path;
       };
-
-      # "git.xaiya.dev" TODO
     };
   };
 }
