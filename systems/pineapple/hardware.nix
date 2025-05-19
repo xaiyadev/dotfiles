@@ -1,7 +1,9 @@
-{ modulesPath, ... }:
+{ modulesPath, inputs, ... }:
 {
   imports = # IS NEEDED, TODO: where to move?
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
+      inputs.nixos-hardware.nixosModules.framework-16-7040-amd
     ];
 
   fileSystems."/" =

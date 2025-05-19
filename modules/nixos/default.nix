@@ -1,13 +1,5 @@
 { inputs, self, ... }: {
   imports = [
-    inputs.home-manager.nixosModules.home-manager # TODO: Temporary
-    inputs.stylix.nixosModules.stylix
-
-    inputs.nixos-hardware.nixosModules.framework-16-7040-amd
-    inputs.agenix.nixosModules.default
-    inputs.agenix-rekey.nixosModules.default
-
-
     ./boot # Boot configuration and loader
     ./graphical
     ./hardware

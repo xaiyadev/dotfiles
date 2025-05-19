@@ -8,7 +8,7 @@ in
 {
   programs = mkMerge [
     (mkIf (isGraphical config) {
-      # gnome gtk configuration
+      # gnome configuration
       dconf.enable = true;
 
       # Gnome keyring manager

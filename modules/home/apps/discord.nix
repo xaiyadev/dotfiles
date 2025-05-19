@@ -1,4 +1,4 @@
-{ lib, self, config, ... }:
+{ inputs, lib, self, config, ... }:
 
 let
     inherit (lib) mkForce;
@@ -10,6 +10,8 @@ in
 {
   options.sylveon.apps.discord.enable =
     mkOpt bool false "Whether or not to enable discord (as vesktop)";
+
+  imports = [ inputs.nixcord.homeModules.nixcord ];
 
   config = {
     programs.nixcord = {
