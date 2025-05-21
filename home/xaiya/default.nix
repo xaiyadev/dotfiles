@@ -15,6 +15,7 @@
     cli = {
       zsh.enable = true;
       direnv.enable = true;
+      git.enable = true;
 
       kitty.enable = true;
     };

@@ -8,6 +8,7 @@ in
 
   imports = [
     ./extensions.nix
+    ./inputs.nix
   ];
 
   config = mkIf (builtins.elem "gnome" windowManager) {

@@ -8,5 +8,6 @@
     ./power.nix
     ./bluetooth.nix
     ./yubikey.nix
+    ./inputs.nix
   ];
 }
