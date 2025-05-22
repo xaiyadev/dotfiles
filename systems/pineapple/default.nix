@@ -10,6 +10,8 @@
     hardware = {
       cpu = "amd";
       gpu = "amd";
+
+      inputs.touchpad.accelSpeed = -0.2;
     };
 
     theme = {
