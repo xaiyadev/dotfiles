@@ -4,7 +4,7 @@
   home.packages = [
     pkgs.neovim
     pkgs.jetbrains.webstorm # Programming IDE for web
-    pkgs.obsidian # Notes taking app TODO: move to own module
+    pkgs.obsidian # Notes taking app
 
     pkgs.prismlauncher # Minecraft Launcher
     pkgs.steam # Steam, Games Launcher

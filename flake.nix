@@ -18,14 +18,17 @@
       ref = "nixpkgs-unstable";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixos-hardware";
+      ref = "master";
+    };
    
     home-manager = {
       type = "github";
       owner = "nix-community";
       repo = "home-manager";
-
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Make passwords go puff
@@ -33,6 +36,8 @@
       type = "github";
       owner = "ryantm";
       repo = "agenix";
+
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Make password go puff (with the help of keys)
@@ -40,6 +45,8 @@
       type = "github";
       owner = "oddlama";
       repo = "agenix-rekey";
+
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
 
@@ -84,6 +91,8 @@
       type = "github";
       owner = "kaylorben";
       repo = "nixcord";
+
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     ulauncher = {
@@ -91,9 +100,8 @@
       owner = "Ulauncher";
       repo = "Ulauncher";
       ref = "v6";
+
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-
   };
-
 }

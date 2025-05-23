@@ -7,7 +7,7 @@
     pkgs.enpass
 
     pkgs.jetbrains.phpstorm # Programming IDE for web
-    pkgs.obsidian # Notes taking app TODO: move to own module
+    pkgs.obsidian # Notes taking app
 
     pkgs.tidal-hifi # Music Streaming Service (injected) TODO: add to own module
 

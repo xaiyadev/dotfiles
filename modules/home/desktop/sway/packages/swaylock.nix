@@ -8,7 +8,6 @@ in
     enable = builtins.elem "sway" windowManagers;
     package = pkgs.swaylock-effects;
 
-    # TODO: check for passkey support
     settings = {
       /*
        * Swaylock Effects Settings

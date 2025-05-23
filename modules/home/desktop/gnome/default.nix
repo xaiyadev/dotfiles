@@ -16,7 +16,6 @@ in
     dconf.settings = {
       "org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
-      # TODO: Software that generalizes that?
       "org/gnome/desktop/peripherals/mouse" = {
         accel-profile = "flat";
         speed = -0.7;

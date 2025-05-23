@@ -7,8 +7,6 @@ let
 in
 {
   config = {
-    # TODO: configure ulauncher/rose-pine
-    home.file.".config/ulauncher" = mkIf (isGraphical osConfig) { source = ./config; recursive = true; };
     home.packages = mkIf (isGraphical osConfig) [ ulauncher6 ];
 
     # Startup daemon service for ulauncher

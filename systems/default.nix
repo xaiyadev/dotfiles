@@ -5,7 +5,6 @@
   perClass = class: {
     modules = [
       "${self}/modules/${class}"
-      "${self}/modules/base"
 
       "${self}/home"
     ];

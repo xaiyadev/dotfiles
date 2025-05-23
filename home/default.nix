@@ -8,10 +8,14 @@ in
 
   config = {
     home-manager = {
+      verbose = true;
       useUserPackages = true;
       useGlobalPkgs = true;
+      backupFileExtension = "bak";
 
-      users = genAttrs config.sylveon.users (name: ./${name});
+      users = genAttrs config.sylveon.users (name: {
+        imports = [ ./${name} ];
+      });
 
       extraSpecialArgs = {
         inherit

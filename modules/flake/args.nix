@@ -8,11 +8,7 @@
       _module.args.pkgs = import inputs.nixpkgs {
         inherit system;
 
-        config = {
-          allowUnfree = true;
-        };
-
-        overlays = [ ];
+        config.allowUnfree = true;
       };
     };
 }

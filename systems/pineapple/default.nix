@@ -1,10 +1,15 @@
-{ pkgs, ... }: {
-  imports = [ ./hardware.nix ];
+{ pkgs, inputs, ... }: {
+  imports = [
+    inputs.nixos-hardware.nixosModules.framework-16-7040-amd
+    ./fileSystem.nix
+  ];
 
-  networking.hostName = "pineapple"; # TODO !
+  networking.hostName = "pineapple";
 
   sylveon = {
     users = [ "xaiya" "blmedia" ];
+
+    device.name = "pineapple";
     profiles = [ "laptop" ];
 
     hardware = {

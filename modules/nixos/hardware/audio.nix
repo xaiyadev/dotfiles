@@ -13,9 +13,12 @@ in
       audio.enable = true;
       pulse.enable = true;
       jack.enable = true;
-      alsa.enable = true;
 
-      # TODO: add extra configuration
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+
 
     };
   };

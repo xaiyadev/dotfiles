@@ -3,7 +3,7 @@
 let
   inherit (lib) mkIf mkMerge;
 
-  inherit (self.lib.validation) isGraphical;
+  inherit (self.lib.validation) isGraphical anyHomeModuleActive;
 in
 {
   programs = mkMerge [
@@ -16,7 +16,7 @@ in
     })
 
     {
-      zsh.enable = true; # TODO: get the configuration of any home and enable this if true
+      zsh.enable = (anyHomeModuleActive config [ "sylveon" "cli" "zsh" "enable" ]);
     }
   ];
 }

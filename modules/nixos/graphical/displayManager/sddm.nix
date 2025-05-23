@@ -6,7 +6,6 @@ let
 in
 {
 
-  # TODO: Add your own theme
   config = mkIf (displayManager == "sddm") {
      services.displayManager.sddm = {
          enable = true;

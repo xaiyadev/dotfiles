@@ -1,5 +1,7 @@
-{ config, self, pkgs, ... }:
+{ config, self, lib, pkgs, ... }:
 let
+  inherit (lib) mkIf;
+
   inherit (self.lib.modules) mkPackageOpt;
   cfg = config.sylveon.cli.direnv;
 in
@@ -12,7 +14,7 @@ in
     programs.direnv = {
       inherit (cfg) enable package;
 
-      enableZshIntegration = true;
+      enableZshIntegration = mkIf config.sylveon.cli.zsh.enable true;
       nix-direnv.enable = true;
     };
 

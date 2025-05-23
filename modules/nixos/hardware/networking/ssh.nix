@@ -4,9 +4,8 @@
     enable = true;
     ports = [ 22 ];
 
-    # TODO: add rev/version tag as variable
     banner = ''
-      You have connected to ${config.networking.hostName} @ v5"
+      You have connected to ${config.networking.hostName} @ NixOS (v ${config.system.nixos.release})"
 
       This is part of the sylveon flake!
       Please go away if you have not permitted access >:

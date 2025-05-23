@@ -15,7 +15,7 @@ in
 {
   options.sylveon.theme = {
     name =
-      mkOpt (nullOr (enum [ "rose-pine" ])) null "The theme that should be loaded"; # TODO: per user?
+      mkOpt (nullOr (enum [ "rose-pine" ])) null "The theme that should be loaded";
 
     cursor = {
       name =
