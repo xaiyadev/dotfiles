@@ -1,5 +1,5 @@
 # Packages that are not configurable/are not configured will land here
-{ pkgs, ... }:
+{ pkgs, inputs', ... }:
 {
   home.packages = [
     pkgs.neovim
@@ -9,7 +9,7 @@
     pkgs.prismlauncher # Minecraft Launcher
     pkgs.steam # Steam, Games Launcher
 
-    pkgs.tidal-hifi # Music Streaming Service (injected) TODO: add to own module
+    inputs'.tidaLuna.packages.default # Music Streaming Service (injected)
 
     pkgs.whatsapp-for-linux
 

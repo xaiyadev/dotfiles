@@ -72,6 +72,14 @@
       repo = "default";
     };
 
+    # Injected TIDAL
+    tidaLuna = {
+      type = "github";
+      owner = "xaiyadev";
+      repo = "TidaLuna";
+      ref = "fix/nixosUnfree";
+    };
+
     stylix = {
       type = "github";
       owner = "danth";
