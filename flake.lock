@@ -1121,16 +1121,15 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1748357844,
-        "narHash": "sha256-QOXr8yRrEq0WtnoTKU3N9pMccbgsOWJodFX6L8hRG8Y=",
-        "owner": "xaiyadev",
+        "lastModified": 1748825805,
+        "narHash": "sha256-+iXLJ0pnxkPqcFfBToYZNdFaBAcIPBg6MPXT6gYzuWI=",
+        "owner": "Inrixia",
         "repo": "TidaLuna",
-        "rev": "647e5a0213996efcae8aa51535d94ec4853dd685",
+        "rev": "aafd2e88c272005180ca38deb01811640bb43334",
         "type": "github"
       },
       "original": {
-        "owner": "xaiyadev",
-        "ref": "fix/nixosUnfree",
+        "owner": "Inrixia",
         "repo": "TidaLuna",
         "type": "github"
       }
