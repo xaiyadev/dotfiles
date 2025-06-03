@@ -101,14 +101,5 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    ulauncher = {
-      type = "github";
-      owner = "Ulauncher";
-      repo = "Ulauncher";
-      ref = "v6";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 }

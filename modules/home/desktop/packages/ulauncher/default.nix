@@ -1,20 +1,19 @@
-{ inputs', lib, self, osConfig, ... }:
+{ pkgs, lib, self, osConfig, ... }:
 let
   inherit (lib) mkIf;
 
   inherit (self.lib.validation) isGraphical;
-  ulauncher6 = inputs'.ulauncher.packages.ulauncher6;
 in
 {
-  config = {
-    home.packages = mkIf (isGraphical osConfig) [ ulauncher6 ];
+  config = mkIf (isGraphical osConfig) {
+    home.packages = [ pkgs.ulauncher ];
 
     # Startup daemon service for ulauncher
-    wayland.windowManager.sway.extraConfig = ''exec ${ulauncher6}/bin/ulauncher --daemon'';
+    wayland.windowManager.sway.extraConfig = ''exec ${pkgs.ulauncher}/bin/ulauncher --hide-window'';
 
     # Add Ulauncher toggle as menu option
     wayland.windowManager.sway.config.menu =
-      "${ulauncher6}/bin/ulauncher-toggle";
+      "${pkgs.ulauncher}/bin/ulauncher-toggle";
 
   };
 
