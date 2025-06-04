@@ -94,6 +94,13 @@
       flake = false;
     };
 
+    rose-pine-ulauncher = {
+      type = "github";
+      owner = "Opposite34";
+      repo = "rose-pine-ulauncher";
+      flake = false;
+    };
+
     nixcord = {
       type = "github";
       owner = "kaylorben";
