@@ -7,7 +7,10 @@
   ];
 
   sylveon = {
-    apps.librewolf.enable = true;
+    apps = {
+      discord.enable = true;
+      librewolf.enable = true;
+    };
 
     cli = {
       zsh.enable = true;
