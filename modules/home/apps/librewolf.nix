@@ -2,6 +2,8 @@
 let
 
   inherit (self.lib.modules) mkPackageOpt;
+  inherit (lib) mkMerge genAttrs;
+
   cfg = config.sylveon.apps.librewolf;
 in
 {
@@ -11,7 +13,7 @@ in
 
   config = {
     programs.librewolf = {
-      inherit (cfg) enable;
+      inherit (cfg) enable package;
 
       # Install German and english languages
       languagePacks = [
@@ -19,15 +21,71 @@ in
         "de"
       ];
 
+      # Enable cookies for librewolf
       settings = {
-        "privacy.clearOnShutdown.history" = false; # Dont clear history after shutdown
-        "privacy.clearOnShutdown.cookies" = false; # Dont clear cookies after shutdown
-        "network.cookie.lifetimePolicy" = 0; # Dont remove cookies after a certain time
+        "privacy.clearOnShutdown.cookies" = false;
+        "network.cookie.lifetimePolicy" = 0;
+      };
+
+      policies = {
+        ExtensionSettings =
+          genAttrs [
+            "uBlock0@raymondhill.net"
+            "languagetool-webextension@languagetool.org"
+            "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" # styl-us
+            "sponsorBlocker@ajay.app"
+            "FirefoxColor@mozilla.com"
+            "firefox-enpass@enpass.io" # TODO: only blmedia?
+          ]
+          (ext: {
+            installation_mode = "force_installed";
+            private_browsing = true;
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/${ext}/latest.xpi";
+          });
+
+          DisplayBookmarksToolbar = "never";
       };
 
       profiles = {
         default = {
-          extensions.force = true;
+
+          # Extensions are managed via policies, not here!
+          extensions = {
+            force = true;
+            settings = {
+              # ColorTheme is managed by stylix
+
+              "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}".settings = {
+                dbInChromeStorage = true; # required for Stylus
+              };
+
+            };
+          };
+
+          search = {
+            force = true;
+            default = "google";
+
+            engines = {
+              MyNixOS = {
+                name = "MyNixOS";
+
+                urls = [{
+                  template = "https://mynixos.com/search";
+                  params = [{ name = "q"; value = "{searchTerms}"; }];
+                }];
+
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
+                definedAliases = [ "@nix" ];
+              };
+
+              ddg.metaData.hidden = true;
+              wikipedia.metaData.hidden = true;
+
+              google.metaData.alias = "@g";
+
+            };
+          };
         };
       };
     };
