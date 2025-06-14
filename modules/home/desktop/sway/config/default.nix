@@ -1,7 +1,7 @@
 {
   imports = [
     ./inputs.nix
-    ./windows.nix
+    ./applications.nix
     ./workspaces.nix
   ];
 }

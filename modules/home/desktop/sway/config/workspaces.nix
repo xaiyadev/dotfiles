@@ -22,8 +22,9 @@
       }
 
       # Laptop screen should own workspace 4 and 5 when its docked
-      { output = "eDP-2"; workspace = "3"; }
-      { output = "eDP-2"; workspace = "4"; }
+      # When at home/not using the laptop screen, these workspaces should be assigned to the secondary screen
+      { output = [ "eDP-2" "Acer Technologies RT240Y T75EE0042411" ]; workspace = "3"; }
+      { output = [ "eDP-2" "Acer Technologies RT240Y T75EE0042411" ]; workspace = "4"; }
     ];
   };
 }
