@@ -3,18 +3,27 @@
     defaultWorkspace = "1";
     workspaceOutputAssign = [
       {
-        output = [ "Philips Consumer Electronics Company PHL 272B4Q AU11526001821" "LG Electronics LG ULTRAFINE 203NTXR8L890" "eDP-2" ];
+        output = [
+          "Philips Consumer Electronics Company PHL 272B4Q AU11526001821" # Main screen office
+          "AOC 2460G4 0x0000A8E2" # Main screen home
+          "eDP-2" # Framework Laptop Screen
+        ];
+
         workspace = "1";
       }
 
       {
-        output = [ "Philips Consumer Electronics Company PHL 272B4Q AU11531001040" "LG Electronics LG ULTRAFINE 203NTFA8L891" ];
+        output = [
+          "Philips Consumer Electronics Company PHL 272B4Q AU11531001040" # Second screen office
+          "Acer Technologies RT240Y T75EE0042411" # Second Screen home
+        ];
+
         workspace = "2";
       }
 
+      # Laptop screen should own workspace 4 and 5 when its docked
       { output = "eDP-2"; workspace = "3"; }
       { output = "eDP-2"; workspace = "4"; }
-      { output = "eDP-2"; workspace = "5"; }
     ];
   };
 }

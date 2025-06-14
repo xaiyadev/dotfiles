@@ -4,12 +4,4 @@ let
 
   displayManager = config.sylveon.system.graphical.displayManager;
 in
-{
-
-  config = mkIf (displayManager == "gdm") {
-    services.xserver.displayManager.gdm = {
-      enable = true;
-    };
-  };
-
-}
+{ services.displayManager.gdm.enable = mkIf (displayManager == "gdm") true; }

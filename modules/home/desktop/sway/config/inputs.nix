@@ -21,7 +21,7 @@ in
 
       # Framework 16 touchpad
       "2362:628:PIXA3854:00_093A:0274_Touchpad" = {
-	pointer_accel = builtins.toString touchpad.accelSpeed;
+	      pointer_accel = builtins.toString touchpad.accelSpeed;
 
         natural_scroll = if touchpad.naturalScroll then "enabled" else "disabled";
         dwt = if touchpad.disableWhileTyping then "enabled" else "disabled";
