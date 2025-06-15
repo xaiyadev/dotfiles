@@ -998,27 +998,10 @@
         "nixcord": "nixcord",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
-        "rose-pine-ulauncher": "rose-pine-ulauncher",
         "stylix": "stylix",
         "systems": "systems_3",
         "tidaLuna": "tidaLuna",
         "tinted-theming-schemes": "tinted-theming-schemes"
-      }
-    },
-    "rose-pine-ulauncher": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1749737260,
-        "narHash": "sha256-dJcIZtD0plVoJK8e0rBZ0X6XF8n6HLnKyaFpRfDjfs0=",
-        "owner": "Opposite34",
-        "repo": "rose-pine-ulauncher",
-        "rev": "6565ce8eb62bfaf33ce208c7b4e76afbda94f92a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Opposite34",
-        "repo": "rose-pine-ulauncher",
-        "type": "github"
       }
     },
     "stylix": {

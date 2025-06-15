@@ -30,9 +30,7 @@ in
         terminal = "${pkgs.kitty}/bin/kitty";
 
         keybindings = mkOptionDefault {
-          "${modifier}+shift+Escape" = "exec ${config.programs.swaylock.package}/bin/swaylock"; # Lock screen
-          "${modifier}+Escape" = "exec ${config.programs.wlogout.package}/bin/wlogout"; # Logout menu
-
+          "${modifier}+Escape" = "exec ${config.programs.swaylock.package}/bin/swaylock"; # Lock screen
           "${modifier}+shift+s" = ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | ${pkgs.wl-clipboard}/bin/wl-copy''; # Take a screenshot
         };
 
