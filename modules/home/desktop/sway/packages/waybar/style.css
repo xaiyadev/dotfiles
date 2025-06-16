@@ -1,29 +1,58 @@
 /* colors can be found here: */
-/*https://github.com/edunfelt/base16-rose-pine-scheme/blob/main/rose-pine.yaml  */
+/* https://github.com/edunfelt/base16-rose-pine-scheme/blob/main/rose-pine.yaml  */
 
 * {
-    font-family: "JetBrainsMono Nerd Font", "Roboto Mono", "Font Awesome 6 Free Solid", "Font Awesome 6 Brands", sans-serif;
+    background-color: transparent;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
     color: @base04;
+
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+
+    border-radius: 0;
+    border: unset;
 }
 
 window {
-    background-color: rgba(25, 23, 36, 0.80); /* Base00 with transparency */
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+
+tooltip {
+    background-color: @base00;
     border-radius: 10px;
     transition: 0.5s;
 }
 
-window#waybar.empty {
-    transition: 0.5s;
-}
-
-.modules-left,
-.modules-right {
-    padding: 0 5px;
-}
-
 .module {
-    margin: 2px 5px;
+    background-color: @base00;
+    border-radius: 10px;
+
+    min-width: 20px;
+
+    padding: 5px 10px;
+    margin: 2px;
 }
+
+.module#network,
+.module#bluetooth {
+    margin: 2px 0;
+}
+
+.module#network {
+    border-bottom-right-radius: unset;
+    border-top-right-radius: unset;
+    padding: 10px 3px 10px 5px;
+}
+
+.module#bluetooth {
+    border-bottom-left-radius: unset;
+    border-top-left-radius: unset;
+    padding: 10px 5px 10px 3px;
+}
+
 
 /* Workspaces */
 #workspaces button {

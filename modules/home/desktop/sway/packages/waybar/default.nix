@@ -28,9 +28,9 @@ in
 
         /* Enable modules in the right positions */
 
-        modules-left = [ "sway/workspaces" "sway/window" ];
-        modules-center = [ "clock" ];
-        modules-right = [  "pulseaudio" "network" "bluetooth" "battery" "custom/swaync" ];
+        modules-left = [ "sway/workspaces" ];
+        modules-center = [ "custom/swaync" "sway/window" /* Music */ ];
+        modules-right = [  "pulseaudio" "network" "bluetooth" "battery" "clock" ];
 
         /* Show the sway workspaces in your waybar */
         "sway/workspaces" = {
@@ -39,7 +39,6 @@ in
           disable-click = true;
 
           format = "{name}";
-          format-window-separator = " | ";
         };
 
         /* Show the Active Window without icons */
@@ -54,12 +53,11 @@ in
         };
 
         "bluetooth" = {
-          format = " {status} |";
-          format-disabled = "󰂲 |";
-          format-on = " |";
+          format = " {status}";
+          format-disabled = "󰂲";
+          format-on = "";
 
-          format-connected = " {device_alias} |";
-          format-connected-battery = " {device_alias} 󰥈 {device_battery_percentage}% |";
+          format-connected = "{device_alias} ";
 
           tooltip-format = "Device:\nAddress: {device_address} / Type: {device_address_type}\nController:\nAddress: {controller_address} / Type: {controller_address_type}";
 
@@ -70,11 +68,11 @@ in
 
         /* Show the current audio device with icons and change the volume by scrolling */
         "pulseaudio" = {
-          format = "{icon} {volume}% |";
+          format = "{icon} {volume}%";
           on-click = "pavucontrol";
 
           states.muted = 0;
-          format-muted = " {volume}%|";
+          format-muted = "  {volume}%";
 
           tooltip-format = "Device: {desc}";
 
@@ -84,15 +82,15 @@ in
         /* Show the current network type; If the connection is LAN, show bandwith status with IP adress */
         "network" = {
           interval = 3;
-          max-length = 25;
+          max-length = 50;
 
-          format-wifi = "{icon}";
-          format-disconnected = " 󰖪 ";
-          format-ethernet = "󰌗   {bandwidthDownBits}";
+
+          format-wifi = "{essid} {icon}";
+          format-ethernet = "󰌗  {bandwidthDownBits}";
 
           tooltip-format = "\nNetwork (WIFI): {essid} 󰢾 {signalStrength}% \nInterface: {ifname}\nIP-Adress: {ipaddr}\nDownload/Upload Speed:  {bandwidthDownBits}  {bandwidthUpBits}";
 
-          format-icons = [ "󰤟 " "󰤢 " "󰤥 " "󰤨 " ];
+          format-icons = [ "󰤟" "󰤢" "󰤥" "󰤨" ];
 
         };
 
@@ -101,28 +99,14 @@ in
           interval = 1;
           full-at = 80; # Changed in BIOS for better capacity
 
-          states = {
-            full = 100;
-            not-fully-full = 99;
-            warning = 40;
-            critical = 20;
-
-          };
-
           tooltip-format = "Watt usage: {power} \nCapacity: {capacity}% /time remain: {time} \nBattery cycles: {cycles}";
 
-          format = "{icon} {capacity}% |";
-          format-plugged = "{icon} {capacity}% |";
-          format-not-fully-full = "{icon} {capacity}% |";
-
-          #format-warning = ""; # change color to orange
-          #format-critical = ""; # change color to red
-          format-full = "󱟢 |";
-
+          format = "{icon} {capacity}%";
 
           format-icons = {
             discharging = [ "󱟩" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰁹" ];
             charging = [ "󱟩" "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰁹" ];
+            default = "󰁹";
           };
         };
 
@@ -141,13 +125,13 @@ in
           format = "{icon}";
           format-icons = {
             notification = "<span foreground='red'><sup>󰂚 </sup></span>";
-            none = "󰂚 ";
+            none = "󰂚";
             dnd-notification = "<span foreground='red'><sup>󰂠 </sup></span>";
-            dnd-none = "󰂠 ";
+            dnd-none = "󰂠";
             inhibited-notification = "<span foreground='red'><sup>󰂚 </sup></span>";
-            inhibited-none = "󰂚 ";
+            inhibited-none = "󰂚";
             dnd-inhibited-notification = "<span foreground='red'><sup>󰂠 </sup></span>";
-            dnd-inhibited-none = "󰂠 ";
+            dnd-inhibited-none = "󰂠";
           };
 
           return-type = "json";
