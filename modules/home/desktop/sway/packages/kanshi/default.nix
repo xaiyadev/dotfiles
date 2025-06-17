@@ -4,8 +4,9 @@ let
 in {
 
   imports = [
-    ./docked_office.nix
     ./docked_home.nix
+    ./docked_office.nix
+    ./docked_second_office.nix
   ];
 
   services.kanshi.enable = builtins.elem "sway" windowManagers;
