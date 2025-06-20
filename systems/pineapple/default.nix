@@ -5,6 +5,7 @@
   ];
 
   networking.hostName = "pineapple";
+  services.playerctld.enable = true; # TODO
 
   sylveon = {
     users = [ "xaiya" "blmedia" ];
