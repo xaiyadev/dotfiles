@@ -13,7 +13,6 @@ in
   stylix.targets.waybar.addCss = false;
 
   home.packages = [ pkgs.playerctl ];
-
   programs.waybar = {
     enable = builtins.elem "sway" windowManagers;
 
@@ -31,7 +30,7 @@ in
 
         /* Enable modules in the right positions */
 
-        modules-left = [ "image#nix_trans" "sway/workspaces" "sway/window" ];
+        modules-left = [ "image#nix_trans" "sway/workspaces" ];
         modules-right = [ "mpris" "pulseaudio" "network" "bluetooth" "battery" "tray" "clock" ];
 
         "image#nix_trans" = {
@@ -44,18 +43,21 @@ in
           disable-scroll = true;
           all-outputs = true;
 
-          format = "{name}";
-        };
+          format = "{icon}";
 
-        /* Show the Active Window without icons */
-        "sway/window" = {
-          all-outputs = true;
-
-          icon = true;
-          icon-size = 18;
-
-          format = "{title}";
-          max-length = 36;
+          format-icons = {
+            "1" = " ";
+            "2" = " ";
+            "3" = " ";
+            "4" = "󰕘 ";
+            "5" = "󱝁 ";
+            "6" = " ";
+            "7" = " ";
+            "8" = " ";
+            "9" = "󱕅 ";
+            "10" = " ";
+            sort-by-number = true;
+          };
         };
 
         "bluetooth" = {
@@ -123,14 +125,18 @@ in
 
         "mpris" = {
           interval = 1;
-        	format = "{player_icon} <i>{title} - {artist} ({position}/{length})</i>";
-        	format-paused = "{status_icon} <i>{title} - {artist} ({position}/{length})</i>";
+          max-length = 80;
 
-        	player-icons.default = "";
-        	status-icons.paused = "";
+        	format = "{player_icon} <i>{position}/{length}</i>";
+          format-paused = "{status_icon} <i>{position}/{length}</i>";
 
-        	ignored-players = [ "firefox" ];
+        	player-icons = {
+        	  default = " ";
+        	  firefox = " "; # Librewolf is based on firefox
+        	  chromium = "󰤺 "; # TIDAL-HIFI is based on chromium, so will use that
+        	};
 
+        	status-icons.paused = " ";
         };
       };
     };

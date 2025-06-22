@@ -37,23 +37,29 @@ tooltip { background-color: @base00; }
 .module#network {
     border-bottom-right-radius: unset;
     border-top-right-radius: unset;
-    padding: 0 0 0 13px;
+    padding: 0 2px 0 13px;
 }
 
 .module#bluetooth {
     border-radius: unset;
-    padding: 0 8px;
+    padding: 0 6px;
 }
 
 .module#battery {
     border-bottom-left-radius: unset;
     border-top-left-radius: unset;
-    padding: 0 13px 0 0;
+    padding: 0 13px 0 4px;
 }
 
 
 /* Workspaces */
+#workspaces button:first-child {
+    padding: 0;
+}
+
 #workspaces button {
+    padding: 0 0 0 3px;
+    margin: 0 3px;
     transition: 0.5s;
 }
 
