@@ -6,6 +6,15 @@ let
 in
 {
 
+  imports = [
+    ./modules/sway.nix
+    ./modules/control_center.nix
+    ./modules/clock.nix
+    ./modules/battery.nix
+    ./modules/mpris.nix
+    ./modules/tray.nix
+  ];
+
   # replace default bar with waybar
   wayland.windowManager.sway.config.bars = mkIf (builtins.elem "sway" windowManagers) [ { command = "${pkgs.waybar}/bin/waybar"; }];
 
@@ -19,147 +28,30 @@ in
       mainBar = {
         layer = "top";
         position = "top";
-        height = 40;
+        fixed-center = true;
 
-        margin-top = 6;
-        margin-bottom = 3;
+        height = 35;
+        margin-top = 5;
         margin-left = 5;
         margin-right = 5;
 
+        margin-bottom = 3;
+
+
         /* Enable modules in the right positions */
 
-        modules-left = [ "sway/workspaces" "sway/window" ];
-        modules-center = [ "clock" ];
-        modules-right = [  "pulseaudio" "network" "bluetooth" "battery" "custom/swaync" ];
+        modules-left = [ "image#nix" "sway/workspaces" "sway/window" ];
+        modules-center = [ /* "custom/weather" */ "clock" ];
+        modules-right = [  "mpris" "pulseaudio" "network" "bluetooth"  "tray" "battery" ];
 
-        /* Show the sway workspaces in your waybar */
-        "sway/workspaces" = {
-          disable-scroll = true;
-          all-outputs = true;
-          disable-click = true;
-
-          format = "{name}";
-          format-window-separator = " | ";
+        "image#nix" = {
+          path = "${./lix.svg}";
+          size = 20;
         };
-
-        /* Show the Active Window without icons */
-        "sway/window" = {
-          all-outputs = true;
-
-          icon = false;
-          icon-size = 18;
-
-          format = "{title}";
-          max-length = 36;
-        };
-
-        "bluetooth" = {
-          format = " {status} |";
-          format-disabled = "󰂲 |";
-          format-on = " |";
-
-          format-connected = " {device_alias} |";
-          format-connected-battery = " {device_alias} 󰥈 {device_battery_percentage}% |";
-
-          tooltip-format = "Device:\nAddress: {device_address} / Type: {device_address_type}\nController:\nAddress: {controller_address} / Type: {controller_address_type}";
-
-          on-click = "exec ${pkgs.blueman}/bin/blueman-manager";
-        };
-
-
-
-        /* Show the current audio device with icons and change the volume by scrolling */
-        "pulseaudio" = {
-          format = "{icon} {volume}% |";
-          on-click = "pavucontrol";
-
-          states.muted = 0;
-          format-muted = " {volume}%|";
-
-          tooltip-format = "Device: {desc}";
-
-          format-icons = [ "" " " ];
-        };
-
-        /* Show the current network type; If the connection is LAN, show bandwith status with IP adress */
-        "network" = {
-          interval = 3;
-          max-length = 25;
-
-          format-wifi = "{icon}";
-          format-disconnected = " 󰖪 ";
-          format-ethernet = "󰌗   {bandwidthDownBits}";
-
-          tooltip-format = "\nNetwork (WIFI): {essid} 󰢾 {signalStrength}% \nInterface: {ifname}\nIP-Adress: {ipaddr}\nDownload/Upload Speed:  {bandwidthDownBits}  {bandwidthUpBits}";
-
-          format-icons = [ "󰤟 " "󰤢 " "󰤥 " "󰤨 " ];
-
-        };
-
-        /* The Battery status will be shown */
-        "battery" = {
-          interval = 1;
-          full-at = 80; # Changed in BIOS for better capacity
-
-          states = {
-            full = 100;
-            not-fully-full = 99;
-            warning = 40;
-            critical = 20;
-
-          };
-
-          tooltip-format = "Watt usage: {power} \nCapacity: {capacity}% /time remain: {time} \nBattery cycles: {cycles}";
-
-          format = "{icon} {capacity}% |";
-          format-plugged = "{icon} {capacity}% |";
-          format-not-fully-full = "{icon} {capacity}% |";
-
-          #format-warning = ""; # change color to orange
-          #format-critical = ""; # change color to red
-          format-full = "󱟢 |";
-
-
-          format-icons = {
-            discharging = [ "󱟩" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰁹" ];
-            charging = [ "󱟩" "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰁹" ];
-          };
-        };
-
-        /* Show the current time (change formating here...) */
-        "clock" = {
-          interval = 60;
-
-          timezone = "Europe/Berlin";
-          locale = "de_DE.UTF-8";
-          format = "{:%H:%M}";
-        };
-
-        "custom/swaync" = mkIf config.services.swaync.enable {
-          tooltip = false;
-
-          format = "{icon}";
-          format-icons = {
-            notification = "<span foreground='red'><sup>󰂚 </sup></span>";
-            none = "󰂚 ";
-            dnd-notification = "<span foreground='red'><sup>󰂠 </sup></span>";
-            dnd-none = "󰂠 ";
-            inhibited-notification = "<span foreground='red'><sup>󰂚 </sup></span>";
-            inhibited-none = "󰂚 ";
-            dnd-inhibited-notification = "<span foreground='red'><sup>󰂠 </sup></span>";
-            dnd-inhibited-none = "󰂠 ";
-          };
-
-          return-type = "json";
-          exec-if = "which swaync-client";
-          exec = "swaync-client -swb";
-          on-click = "swaync-client -t -sw";
-          on-click-right = "swaync-client -d -sw";
-          escape = true;
-        };
-
       };
     };
+
+
 
     style = builtins.readFile ./style.css;
 

@@ -1,37 +1,75 @@
 /* colors can be found here: */
-/*https://github.com/edunfelt/base16-rose-pine-scheme/blob/main/rose-pine.yaml  */
+/* https://github.com/edunfelt/base16-rose-pine-scheme/blob/main/rose-pine.yaml  */
 
 * {
-    font-family: "JetBrainsMono Nerd Font", "Roboto Mono", "Font Awesome 6 Free Solid", "Font Awesome 6 Brands", sans-serif;
+    background-color: transparent;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
     color: @base04;
+
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+
+    border-radius: unset;
+    border: unset;
 }
 
-window {
-    background-color: rgba(25, 23, 36, 0.80); /* Base00 with transparency */
-    border-radius: 10px;
-    transition: 0.5s;
-}
-
-window#waybar.empty {
-    transition: 0.5s;
-}
-
-.modules-left,
-.modules-right {
-    padding: 0 5px;
-}
+window { background-color: transparent; }
+tooltip { background-color: @base00; }
+#tray menu { background-color: @base00; }
 
 .module {
-    margin: 2px 5px;
+    background-color: @base00;
+    border-radius: 13px;
+
+    min-width: 20px;
+
+    padding: 0 13px;
+    margin: 0 3px;
+}
+
+.module#network,
+.module#pulseaudio,
+.module#bluetooth {
+    margin: 0;
+    padding: 0 6px;
+    border-radius: unset;
+}
+
+.module#pulseaudio {
+    border-radius: 13px 0 0 13px;
+    padding-left: 17px;
+}
+
+.module#bluetooth {
+    border-radius: 0 13px 13px 0;
+    padding-right: 17px;
 }
 
 /* Workspaces */
+#workspaces button:first-child {
+    padding: 0;
+}
+
 #workspaces button {
-    padding: 1px;
-    margin: 2px;
+    padding: 0 0 0 3px;
+    margin: 0 3px;
     transition: 0.5s;
 }
 
 #workspaces button.focused {
     box-shadow: inset 0 -2px @base0A;
+}
+
+#workspaces button.urgent {
+    box-shadow: inset 0 -2px @base08;
+}
+
+.module#battery.warning {
+    box-shadow: inset 0 -4px @base0E;
+}
+
+.module#battery.critical {
+
+    box-shadow: inset 0 -4px @base08;
 }
