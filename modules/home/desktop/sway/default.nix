@@ -39,6 +39,15 @@ in
       extraConfig = ''
         bindgesture swipe:right workspace prev
         bindgesture swipe:left workspace next
+
+        shadows enable
+        corner_radius 13
+
+        # Lower the opacity of specifc windows
+        for_window [app_id="^kitty$"] opacity 0.9
+        for_window [class="^tidal-hifi"] opacity 0.9
+
+        exec_always ${pkgs.kanshi}/bin/kanshi
       '';
     };
   };
