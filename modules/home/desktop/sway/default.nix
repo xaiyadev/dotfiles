@@ -32,6 +32,9 @@ in
         keybindings = mkOptionDefault {
           "${modifier}+Escape" = "exec ${config.programs.swaylock.package}/bin/swaylock"; # Lock screen
           "${modifier}+shift+s" = ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | ${pkgs.wl-clipboard}/bin/wl-copy''; # Take a screenshot
+
+          "${modifier}+e" = ''exec ${pkgs.nemo-with-extensions}/bin/nemo'';
+          "${modifier}+c" = ''exec ${pkgs.gnome-calculator}/bin/gnome-calculator'';
         };
 
       };

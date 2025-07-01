@@ -15,11 +15,19 @@
 
         { class = "Enpass"; }
         { app_id = "yubioath-flutter"; }
+
         { app_id = ".blueman-manager-wrapped"; }
         { app_id = "org.pulseaudio.pavucontrol"; }
+
+        { app_id = "org.gnome.Calculator"; }
+        { app_id = "org.gnome.Calendar"; }
         { app_id = "org.gnome.TextEditor"; }
-        { app_id = "org.prismlauncher.PrismLauncher"; }
+
         { app_id = "org.gnome.Nautilus"; }
+        { app_id = "nemo"; }
+
+
+        { app_id = "org.prismlauncher.PrismLauncher"; }
       ];
     };
 
@@ -30,7 +38,6 @@
     };
 
     startup = [
-      { command = "${pkgs.librewolf}/bin/librewolf"; }
       { command = "${pkgs.vesktop}/bin/vesktop"; }
       { command = "${pkgs.teams-for-linux}/bin/teams-for-linux"; }
     ];
