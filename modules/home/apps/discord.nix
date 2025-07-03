@@ -17,9 +17,7 @@ in
     programs.nixcord = {
       inherit (cfg) enable;
 
-      # Replace the discord package with vesktop
-      vesktop.enable = mkForce true;
-      discord.enable = mkForce false;
+      discord.enable = mkForce true;
 
       config = {
         transparent = true;
