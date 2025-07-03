@@ -1,8 +1,20 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, config, ... }: {
   imports = [
     inputs.nixos-hardware.nixosModules.framework-16-7040-amd
     ./fileSystem.nix
+
+    inputs.aagl.nixosModules.default
   ];
+
+  /* --- TEMPORARY --- */
+    nix.settings = inputs.aagl.nixConfig;
+    programs.sleepy-launcher.enable = true;
+    boot.extraModulePackages = [ config.boot.kernelPackages.xpadneo ];
+
+    programs.steam.enable = true;
+    environment.systemPackages = [ pkgs.gamescope ];
+
+  /* --- TEMPORARY --- */
 
   networking.hostName = "pineapple";
 
@@ -15,6 +27,8 @@
     hardware = {
       cpu = "amd";
       gpu = "amd";
+
+      bluetooth.enable = true;
 
       inputs.touchpad.accelSpeed = -0.2;
     };

@@ -2,27 +2,26 @@
   services.kanshi.settings = [
     {
       profile = {
-        name = "docked_office_second";
+        name = "docked_office_third";
         outputs = [
           {
             criteria = "eDP-2";
 
-            position = "4627,489";
+            position = "5922,0";
             mode = "2560x1600@165.000Hz";
           }
 
           {
-            criteria = "LG Electronics LG ULTRAFINE 203NTXR8L890";
+            criteria = "LG Electronics LG ULTRAFINE 404NTGY9M335";
 
-            position = "1666,651";
+            position = "2961,555";
             mode = "3840x2160@60.000Hz";
           }
 
           {
-            criteria = "LG Electronics LG ULTRAFINE 203NTFA8L891";
+            criteria = "LG Electronics LG ULTRAFINE 404NTYT9M282";
 
-            transform = "90";
-            position = "0,0";
+            position = "0,555";
             mode = "3840x2160@60.000Hz";
           }
         ];

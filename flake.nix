@@ -101,5 +101,11 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    aagl = {
+      type = "github";
+      owner = "ezKEa";
+      repo = "aagl-gtk-on-nix";
+    };
   };
 }
