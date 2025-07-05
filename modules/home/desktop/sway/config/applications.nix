@@ -34,11 +34,11 @@
     assigns = {
       "1" = [{ class = "^jetbrains"; }];
       "2" = [{ app_id = "librewolf"; }];
-      "4" = [ { class = "vesktop"; } { class = "teams-for-linux"; } ];
+      "4" = [ { class = "discord"; } { class = "teams-for-linux"; } ];
     };
 
     startup = [
-      { command = "${pkgs.vesktop}/bin/vesktop"; }
+      { command = "${pkgs.discord}/bin/discord"; }
       { command = "${pkgs.teams-for-linux}/bin/teams-for-linux"; }
     ];
 
