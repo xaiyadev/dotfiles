@@ -1,6 +1,6 @@
 { self, lib, ... }:
 let
-  inherit (lib.types) nullOr listOf enum;
+  inherit (lib.types) enum bool;
 
   inherit (self.lib.modules) mkOpt;
 in
@@ -11,7 +11,11 @@ in
   ];
 
   options.sylveon.system.graphical = {
-    displayManager = mkOpt (nullOr (enum [ "sddm" "gdm" ])) null "What displayManager should be used";
-    windowManagers = mkOpt (nullOr (listOf(enum [ "gnome" "sway" ]))) null "List of Window manager that should be installed";
+    displayManager = mkOpt (enum [ "sddm" "gdm" ]) null "What displayManager should be used";
+
+    windowManagers = {
+      gnome.enable = mkOpt bool false "Whether or not to enable the gnome window manager";
+      sway.enable = mkOpt bool false "Whether or not to enable the sway window manager";
+    };
   };
 }

@@ -7,8 +7,6 @@
     ./environment
     ./security
 
-    ./themes.nix
-    ./env.nix
     ./users.nix # load and create users
     ./extraPackages.nix
   ];

@@ -1,11 +1,11 @@
 { config, self, lib, ... }:
 let
   inherit (lib) mkIf;
-  inherit (self.lib.validation) isGraphical;
 
+  graphical = config.profiles.graphical;
 in
 {
-  config = mkIf (isGraphical config) {
+  config = mkIf graphical.enable {
     # Using pipewire as my sound backend
     services.pipewire = {
       enable = true;

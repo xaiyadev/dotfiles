@@ -6,9 +6,9 @@ let
 in
 {
 
-  config = mkIf (displayManager == "sddm") {
+  config = {
      services.displayManager.sddm = {
-         enable = true;
+         enable = displayManager == "sddm";
          package = pkgs.kdePackages.sddm; # this package adds functionality for themes
 
          wayland.enable = true;

@@ -1,6 +1,6 @@
 { lib, self, ... }:
 let
-  inherit (self.lib.modules) mkOpt;
+  inherit (self.lib.modules) mkOpt nullOr;
   inherit (lib.types) enum;
 in
 {
@@ -9,5 +9,5 @@ in
   ];
 
   options.sylveon.system.boot.loader =
-    mkOpt (enum [ "grub" "none" ]) "none" "What bootloader the device should use.";
+    mkOpt (nullOr (enum [ "grub" ])) null "What bootloader the device should use.";
 }

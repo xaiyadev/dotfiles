@@ -1,4 +1,4 @@
-{ lib, self, ... }:
+{ lib, self, config, ... }:
 let
   inherit (lib.modules) mkForce;
   inherit (lib.types) bool;
@@ -22,6 +22,8 @@ in
   };
 
   config = {
+
+    hostName = config.sylveon.device.name;
     # enable wireless database, it helps keeping wifi speedy
     hardware.wirelessRegulatoryDatabase = true;
 

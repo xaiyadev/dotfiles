@@ -2,11 +2,11 @@
 let
   inherit (lib.modules) mkIf;
 
-  windowManagers = config.sylveon.system.graphical.windowManagers;
+  cfg = config.sylveon.system.graphical.windowManagers.sway;
 in
 {
 
-  config = mkIf (builtins.elem "sway" windowManagers) {
+  config = mkIf (cfg.enable) {
     programs.sway = {
       enable = true;
       package = pkgs.swayfx;

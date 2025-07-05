@@ -6,7 +6,6 @@ let
       validation = import ./validation.nix { inherit lib config; };
 
       inherit (final.modules) mkOpt;
-      inherit (final.validation) isGraphical;
       inherit (final.users) hasGroup;
   });
 

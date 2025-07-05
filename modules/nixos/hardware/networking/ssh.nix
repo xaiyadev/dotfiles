@@ -5,10 +5,9 @@
     ports = [ 22 ];
 
     banner = ''
-      You have connected to ${config.networking.hostName} @ NixOS (v ${config.system.nixos.release})"
+      You have connected to ${config.sylveon.device.name} @ NixOS (v ${config.system.nixos.release})"
 
-      This is part of the sylveon flake!
-      Please go away if you have not permitted access >:
+      This is part of the sylveon flake network! :>
     '';
 
     settings = {

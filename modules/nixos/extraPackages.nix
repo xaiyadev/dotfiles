@@ -3,11 +3,12 @@
 let
   inherit (lib) mkIf mkMerge;
 
-  inherit (self.lib.validation) isGraphical anyHomeModuleActive;
+  inherit (self.lib.validation) anyHomeModuleActive;
+  graphical = config.sylveon.profiles.graphical;
 in
 {
   programs = mkMerge [
-    (mkIf (isGraphical config) {
+    (mkIf (graphical.enable) {
       # gnome configuration
       dconf.enable = true;
 

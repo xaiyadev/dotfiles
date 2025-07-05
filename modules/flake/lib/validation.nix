@@ -11,15 +11,6 @@ let
     attrByPath
     ;
 
-  isGraphical =
-    # Ask for a config, because of home-manager and the two ways of calling the config
-    config:
-    let
-      windowManagers = config.sylveon.system.graphical.windowManagers;
-      displayManager = config.sylveon.system.graphical.displayManager;
-    in
-     any (x: x != null) [ windowManagers displayManager ];
-
   # Search through every home-module configuration and check if this module is anywhere activated
   anyHomeModuleActive =
     config: modulePath:
@@ -31,4 +22,4 @@ let
       any (x: x) modulesList;
 
 in
-{ inherit isGraphical anyHomeModuleActive; }
+{ inherit anyHomeModuleActive; }

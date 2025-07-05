@@ -3,7 +3,6 @@ let
   inherit (lib) mkIf;
   inherit (lib.types) str enum bool float;
 
-  inherit (self.lib.validation) isGraphical;
   inherit (self.lib.modules) mkOpt;
 
   theme = config.sylveon.theme;
@@ -32,9 +31,8 @@ in
     };
   };
 
-  config = mkIf (isGraphical config) {
+  config = {
     services.xserver.xkb.layout = keyboard.layout;
     console.keyMap = keyboard.layout;
-
   };
 }

@@ -16,8 +16,6 @@
 
   /* --- TEMPORARY --- */
 
-  networking.hostName = "pineapple";
-
   sylveon = {
     users = [ "xaiya" "blmedia" ];
 
