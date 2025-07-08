@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs', ... }: {
   wayland.windowManager.sway.config = {
     window = { border = 3; titlebar = false; };
     gaps = { inner = 5; };
@@ -38,7 +38,7 @@
     };
 
     startup = [
-      { command = "${pkgs.discord}/bin/discord"; }
+      { command = "${inputs'.nixcord.packages.discord}/bin/discord"; }
       { command = "${pkgs.teams-for-linux}/bin/teams-for-linux"; }
     ];
 

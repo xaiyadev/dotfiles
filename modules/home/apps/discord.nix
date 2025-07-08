@@ -21,8 +21,6 @@ in
       vesktop.enable = false;
 
       config = {
-        transparent = true;
-
         # Activate and Configure Plugins
         plugins = {
           alwaysExpandRoles.enable = true;
@@ -63,10 +61,6 @@ in
           volumeBooster.enable = true;
           whoReacted.enable = true;
           youtubeAdblock.enable = true;
-
-          /* Vesktop exclusive */
-          webKeybinds.enable = true;
-          webScreenShareFixes.enable = true;
         };
       };
     };
