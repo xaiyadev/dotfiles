@@ -19,8 +19,6 @@ in
       enable = true;
 
       efiSupport = true;
-      useOSProber = true;
-
     };
   };
 }

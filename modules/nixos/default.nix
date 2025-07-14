@@ -7,6 +7,8 @@
     ./environment
     ./security
 
+    ./libvirt.nix
+
     ./themes.nix
     ./env.nix
     ./users.nix # load and create users

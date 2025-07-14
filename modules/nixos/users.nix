@@ -34,6 +34,8 @@ in
           extraGroups = [
             "wheel"
             "nix"
+
+            "libvirtd"
             "docker"
           ];
       });

@@ -24,6 +24,10 @@
     device.name = "pineapple";
     profiles = [ "laptop" ];
 
+    virtualization = {
+      libvirt.enable = true;
+    };
+
     hardware = {
       cpu = "amd";
       gpu = "amd";
