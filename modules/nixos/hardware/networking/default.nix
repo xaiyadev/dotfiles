@@ -4,6 +4,8 @@ let
   inherit (lib.types) bool;
 
   inherit (self.lib.modules) mkOpt;
+
+  prof = config.sylveon.profiles;
 in
 {
   imports = [
@@ -14,16 +16,20 @@ in
 
 
   options.sylveon.system.networking = {
-    hasWifi =
-      mkOpt bool true "Whether or not the device has wifi";
+    hasWifi = mkOpt
+      bool
+      prof.laptop.enable
+      "Whether or not the device has wifi";
 
-    tailscale.enable =
-      mkOpt bool true "Whether or not to enable tailscale VPN";
+    tailscale.enable = mkOpt
+      bool
+      true
+      "Whether or not to enable tailscale VPN";
   };
 
   config = {
-
     hostName = config.sylveon.device.name;
+
     # enable wireless database, it helps keeping wifi speedy
     hardware.wirelessRegulatoryDatabase = true;
 

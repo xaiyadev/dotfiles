@@ -4,11 +4,11 @@ let
 
 
   MHz = x: x * 1000;
-  profiles = config.sylveon.profiles;
+  prof = config.sylveon.profiles;
 in
 {
 
-  config = mkIf (builtins.elem "laptop" profiles) {
+  config = mkIf prof.laptop.enable {
     # power management (very good)
     services = {
       auto-cpufreq = {

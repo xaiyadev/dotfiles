@@ -1,6 +1,12 @@
 { lib, osConfig, ... }:
+
 let
-  windowManagers = osConfig.sylveon.system.graphical.windowManagers;
+  inherit (lib)
+    mkIf
+    concatStringsSep
+    ;
+
+  sway = osConfig.sylveon.system.graphical.sway;
 in {
 
   imports = [
@@ -10,5 +16,7 @@ in {
     ./docked_third_office.nix
   ];
 
-  services.kanshi.enable = builtins.elem "sway" windowManagers;
+  config = mkIf sway.enable {
+    services.kanshi.enable = sway.enable;
+  };
 }

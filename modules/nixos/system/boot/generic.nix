@@ -1,7 +1,12 @@
 { lib, config, self, pkgs,... }:
 let
   inherit (lib.types) raw bool;
-  inherit (lib.modules) mkOverride mkDefault mkForce;
+  inherit (lib)
+    mkOverride
+    mkDefault
+    mkForce
+    optionals
+    ;
 
   inherit (self.lib.modules) mkOpt;
   cfg = config.sylveon.system.boot;
@@ -26,9 +31,6 @@ in
       # this throws a warning if neither MAILADDR nor PROGRAM are set
       swraid.enable = mkDefault cfg.raidSupport;
 
-      # Add NTFS as filesystem
-      supportedFilesystems = [ "ntfs" ];
-
       loader = {
         timeout = mkForce 5;
 
@@ -45,13 +47,32 @@ in
         cleanOnBoot = mkDefault (!config.boot.tmp.useTmpfs);
       };
 
-      # Temporary configuration while booting the system (initial ramdisk)
+      kernelParams =
+        optionals cfg.profiles.laptop.enable [
+          # allow systemd to set and save the backlight state
+          "acpi_backlight=native"
+
+          # Fix Color accuracy in Power saving modes
+          "amdgpu.abmlevel=0"
+        ];
+
       initrd = {
-        availableKernelModules = [
+        verbose = false;
+        systemd.enable = true;
+
+        kernelModules = [
           "nvme"
           "xhci_pci"
-          "thunderbolt"
-          "usbhid"
+          "ahci"
+          "sd_mod"
+        ];
+
+        availableKernelModules = [
+          "usbhid" # supports USB keyboards, mice, gamepads, etc.
+          "sd_mod" # For STA and NVMe drives
+          "sr_mod" # boot from or access optical media
+          "uas" # Better performance for USB 3.0
+          "usb_storage" # Enables USB storage devices
         ];
       };
     };

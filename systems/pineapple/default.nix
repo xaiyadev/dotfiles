@@ -17,35 +17,20 @@
   /* --- TEMPORARY --- */
 
   sylveon = {
-    users = [ "xaiya" "blmedia" ];
-
-    device.name = "pineapple";
-    profiles = [ "laptop" ];
-
-    hardware = {
-      cpu = "amd";
-      gpu = "amd";
-
-      bluetooth.enable = true;
-
-      inputs.touchpad.accelSpeed = -0.2;
+    profiles = {
+      graphical.enable = true;
+      laptop.enable = true;
     };
 
-    theme = {
-      name = "rose-pine";
+    device = {
+      name = "pineapple";
 
-      cursor = {
-        name = "BreezeX-RosePineDawn-Linux";
-        package = pkgs.rose-pine-cursor;
-      };
+      cpu = "amd";
+      gpu = "amd";
     };
 
     system = {
-      boot.loader = "grub";
-      graphical = {
-        displayManager = "gdm";
-        windowManagers = [ "gnome" "sway" ];
-      };
+      users = [ "xaiya" "blmedia" ];
     };
   };
 

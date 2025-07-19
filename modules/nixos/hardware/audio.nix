@@ -2,10 +2,11 @@
 let
   inherit (lib) mkIf;
 
-  graphical = config.profiles.graphical;
+  prof = config.sylveon.profiles;
 in
 {
-  config = mkIf graphical.enable {
+  config = mkIf prof.graphical.enable {
+
     # Using pipewire as my sound backend
     services.pipewire = {
       enable = true;
@@ -18,8 +19,6 @@ in
         enable = true;
         support32Bit = true;
       };
-
-
     };
   };
 }

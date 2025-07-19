@@ -1,8 +1,11 @@
 { pkgs, osConfig, lib, config, ... }:
 let
-  inherit (lib) mkIf;
+  inherit (lib)
+    mkIf
+    concatStringsSep
+    ;
 
-  windowManagers = osConfig.sylveon.system.graphical.windowManagers;
+  sway = osConfig.sylveon.system.graphical.sway;
 in
 {
 
@@ -15,45 +18,45 @@ in
     ./modules/tray.nix
   ];
 
-  # replace default bar with waybar
-  wayland.windowManager.sway.config.bars = mkIf (builtins.elem "sway" windowManagers) [ { command = "${pkgs.waybar}/bin/waybar"; }];
+  config = mkIf sway.enable {
+    # replace default bar with waybar
+    wayland.windowManager.sway.config.bars = [ { command = "${pkgs.waybar}/bin/waybar"; }];
 
-  # only add colors and fonts from stylix
-  stylix.targets.waybar.addCss = false;
+    # only add colors and fonts from stylix
+    stylix.targets.waybar.addCss = false;
 
-  programs.waybar = {
-    enable = builtins.elem "sway" windowManagers;
+    programs.waybar = {
+      enable = true;
 
-    settings = {
-      mainBar = {
-        layer = "top";
-        position = "top";
-        fixed-center = true;
+      settings = {
+        mainBar = {
+          layer = "top";
+          position = "top";
+          fixed-center = true;
 
-        height = 35;
-        margin-top = 5;
-        margin-left = 5;
-        margin-right = 5;
+          height = 35;
+          margin-top = 5;
+          margin-left = 5;
+          margin-right = 5;
 
-        margin-bottom = 3;
+          margin-bottom = 3;
 
 
-        /* Enable modules in the right positions */
+          /* Enable modules in the right positions */
+          modules-left = [ "image#nix" "sway/workspaces" "sway/window" ];
+          modules-center = [ /* "custom/weather" */ "clock" ];
+          modules-right = [  "mpris" "pulseaudio" "network" "bluetooth"  "tray" "battery" ];
 
-        modules-left = [ "image#nix" "sway/workspaces" "sway/window" ];
-        modules-center = [ /* "custom/weather" */ "clock" ];
-        modules-right = [  "mpris" "pulseaudio" "network" "bluetooth"  "tray" "battery" ];
-
-        "image#nix" = {
-          path = "${./lix.svg}";
-          size = 20;
+          "image#nix" = {
+            path = "${./lix.svg}";
+            size = 20;
+          };
         };
       };
+
+      style = builtins.readFile ./style.css;
+
     };
-
-
-
-    style = builtins.readFile ./style.css;
-
   };
+
 }

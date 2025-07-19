@@ -1,24 +1,25 @@
 { inputs, lib, self, config, ... }:
 
 let
-    inherit (lib) mkForce;
+    inherit (lib)
+      mkIf
+      mkForce
+      ;
+
     inherit (lib.types) bool;
 
     inherit (self.lib.modules) mkOpt;
-    cfg = config.sylveon.apps.discord;
+    cfg = config.sylveon.programs.discord;
 in
 {
-  options.sylveon.apps.discord.enable =
+  options.sylveon.programs.discord.enable =
     mkOpt bool false "Whether or not to enable discord (as vesktop)";
 
   imports = [ inputs.nixcord.homeModules.nixcord ];
 
-  config = {
+  config = mkIf cfg.enable {
     programs.nixcord = {
-      inherit (cfg) enable;
-
-      discord.enable = true;
-      vesktop.enable = false;
+      enable = true;
 
       config = {
         transparent = true;
@@ -63,10 +64,6 @@ in
           volumeBooster.enable = true;
           whoReacted.enable = true;
           youtubeAdblock.enable = true;
-
-          /* Vesktop exclusive */
-          webKeybinds.enable = true;
-          webScreenShareFixes.enable = true;
         };
       };
     };

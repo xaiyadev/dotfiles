@@ -8,4 +8,4 @@ result-*
 .idea/
 
 # Disable vm outputs that are called when starting a vm in this directory
-*.qcow2
+*.qcow

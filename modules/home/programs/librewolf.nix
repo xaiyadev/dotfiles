@@ -1,19 +1,24 @@
 { config, lib, self, pkgs, ... }:
 let
 
-  inherit (self.lib.modules) mkPackageOpt;
-  inherit (lib) mkMerge genAttrs;
+  inherit (lib)
+    mkMerge
+    mkIf
+    genAttrs
+    ;
 
-  cfg = config.sylveon.apps.librewolf;
+  inherit (self.lib.modules) mkPackageOpt;
+
+  cfg = config.sylveon.programs.librewolf;
 in
 {
 
-  options.sylveon.apps.librewolf =
+  options.sylveon.programs.librewolf =
     mkPackageOpt pkgs.librewolf "Whether or not to enable chromium";
 
-  config = {
+  config = mkIf cfg.enable {
     programs.librewolf = {
-      inherit (cfg) enable package;
+      inherit (cfg) package;
 
       # Install German and english languages
       languagePacks = [

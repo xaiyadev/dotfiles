@@ -1,12 +1,16 @@
-{ pkgs, osConfig, ... }:
+{ pkgs, osConfig, lib, ... }:
 let
+  inherit (lib)
+    mkIf
+    concatStringsSep
+    ;
 
-  windowManagers = osConfig.sylveon.system.graphical.windowManagers;
+  sway = osConfig.sylveon.system.graphical.sway;
 in
 {
 
-  programs.rofi = {
-    enable = builtins.elem "sway" windowManagers;
+  programs.rofi = mkIf sway.enable {
+    enable = true;
     package = pkgs.rofi-wayland;
 
     # Only working when calling rofi from the terminal right now
@@ -17,14 +21,11 @@ in
     terminal = "${pkgs.kitty}/bin/kitty";
   };
 
-  home.packages = [ # TODO: configuration
-    pkgs.rofi-rbw-wayland
-  ];
-
-  wayland.windowManager.sway.config.menu =
-    ''${pkgs.rofi-wayland}/bin/rofi \
-      -modi power:"${pkgs.rofi-power-menu}/bin/rofi-power-menu --symbols-font 'Symbols Nerd Font Mono'" \
-      -combi-modi "drun,power,emoji" \
-      -show-icons \
-      -show combi'';
+  wayland.windowManager.sway.config.menu = concatStringsSep ''\'' [
+    ''${pkgs.rofi-wayland}/bin/rofi''
+    ''-modi power:"${pkgs.rofi-power-menu}/bin/rofi-power-menu --symbols-font "Symbols Nerd Font Mono"''
+    ''-combi-modi "drun,power,emoji"''
+    ''-show-icons''
+    ''-show combi''
+    ];
 }

@@ -8,7 +8,7 @@ let
   inherit (self.lib.validation) hasHomeModule;
 in
 {
-  options.sylveon.users =
+  options.sylveon.system.users =
     mkOpt (listOf str) [ ] "A list of users that should be installed";
 
   config = {

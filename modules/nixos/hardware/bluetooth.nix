@@ -5,10 +5,13 @@ let
 
   inherit (self.lib.modules) mkOpt;
   cfg = config.sylveon.hardware.bluetooth;
+  prof = config.sylveon.profiles;
 in
 {
-  options.sylveon.hardware.bluetooth.enable =
-    mkOpt bool false "Whether or not bluetooth should be enabled or not";
+  options.sylveon.hardware.bluetooth.enable = mkOpt
+    bool
+    prof.laptop.enable
+    "Whether or not bluetooth should be enabled or not";
 
   config = mkIf cfg.enable {
     hardware.bluetooth = {

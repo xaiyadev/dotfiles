@@ -1,11 +1,14 @@
 { pkgs, osConfig, config,  ... }:
 let
-  windowManagers = osConfig.sylveon.system.graphical.windowManagers;
+  inherit (lib) mkIf;
+
+  sway = osConfig.sylveon.system.graphical.sway;
 in
 {
 
-  services.swayidle = {
-    enable = builtins.elem "sway" windowManagers;
+  services.swayidle = mkIf sway.enable {
+    enable = true;
+
     timeouts =
       [
         { timeout = 300; command = "exec ${config.programs.swaylock.package}/bin/swaylock"; }

@@ -1,20 +1,18 @@
-{ osConfig,  ... }:
+{ osConfig, lib,  ... }:
 let
-  windowManagers = osConfig.sylveon.system.graphical.windowManagers;
+  inherit (lib) mkIf;
+
+  sway = osConfig.sylveon.system.graphical.sway;
 in
 {
 
-  services.swaync = {
-    enable = builtins.elem "sway" windowManagers;
+  # SwayNC is right now only used for the notification popup
+  services.swaync = mkIf sway.enable {
+    enable = true;
 
     settings = {
       positionX = "right";
       positionY = "top";
-
-      fit-to-screen = false;
-      control-center-height = 700;
-      control-center-margin-top = 5;
-      control-center-margin-right = 10;
     };
  };
 }

@@ -10,10 +10,10 @@ let
 
   inherit (self.lib.modules) mkOpt;
 
-  cfg = config.sylveon.theme;
+  cfg = config.sylveon.system.theme;
 in
 {
-  options.sylveon.theme = {
+  options.sylveon.system.theme = {
     name =
       mkOpt (nullOr (enum [ "rose-pine" ])) null "The theme that should be loaded";
 

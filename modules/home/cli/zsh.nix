@@ -15,14 +15,12 @@ in
   options.sylveon.cli.zsh =
     mkPackageOpt pkgs.zsh "Whether or not to use zsh as a terminal";
 
-  config = {
-    home.shell = {
-      enableShellIntegration = !cfg.enable;
-      enableZshIntegration = cfg.enable;
-    };
+  config = mkIf cfg.enable {
+    home.shell.enableZshIntegration = true;
 
     programs.zsh = {
-      inherit (cfg) enable package;
+      enable = true;
+      inherit (cfg) package;
 
       syntaxHighlighting.enable = true;
       autosuggestion.enable = true;
@@ -46,7 +44,7 @@ in
     };
 
     programs.starship = {
-      inherit (cfg) enable;
+      enable = true;
 
       settings =
         fromTOML (readFile (fetchurl {

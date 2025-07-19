@@ -10,7 +10,6 @@ in
       enable = true;
       openFirewall = true;
       useRoutingFeatures = "client"; # TODO: add server support
-
     };
   };
 }

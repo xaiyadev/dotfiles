@@ -1,9 +1,14 @@
-{ self, pkgs, ... }:
+{ self, lib, pkgs, osConfig, ... }:
+let
+  inherit (lib) mkIf;
+
+  prof = osConfig.sylveon.profiles;
+in
 {
 
-  config = {
+  config = mkIf prof.graphical.enable {
     home.pointerCursor = {
-      enable = osConfig.sylveon.profiles.graphical;
+      enable = true;
 
       name = "BreezeX-RosePineDawn-Linux";
       package = pkgs.rose-pine-cursor;

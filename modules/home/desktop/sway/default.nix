@@ -3,7 +3,7 @@ let
   inherit (lib.modules) mkIf mkOptionDefault;
 
   modifier = "Mod4";
-  windowManagers = osConfig.sylveon.system.graphical.windowManagers;
+  sway = osConfig.sylveon.system.graphical.sway;
 in
 {
   imports = [
@@ -11,7 +11,7 @@ in
     ./config # Load sway configurations
   ];
 
-  config = mkIf (builtins.elem "sway" windowManagers) {
+  config = mkIf sway.enable {
     wayland.windowManager.sway = {
       enable = true;
 
@@ -30,27 +30,37 @@ in
         terminal = "${pkgs.kitty}/bin/kitty";
 
         keybindings = mkOptionDefault {
-          "${modifier}+Escape" = "exec ${config.programs.swaylock.package}/bin/swaylock"; # Lock screen
-          "${modifier}+shift+s" = ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | ${pkgs.wl-clipboard}/bin/wl-copy''; # Take a screenshot
+          "${modifier}+Escape" =
+            "exec ${config.programs.swaylock.package}/bin/swaylock"; # Lock screen
 
-          "${modifier}+e" = ''exec ${pkgs.nemo-with-extensions}/bin/nemo'';
-          "${modifier}+c" = ''exec ${pkgs.gnome-calculator}/bin/gnome-calculator'';
+          "${modifier}+shift+s" =
+            ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | ${pkgs.wl-clipboard}/bin/wl-copy''; # Take a screenshot
+
+          "${modifier}+e" =
+            ''exec ${pkgs.nemo-with-extensions}/bin/nemo'';
+
+          "${modifier}+c" =
+            ''exec ${pkgs.gnome-calculator}/bin/gnome-calculator'';
         };
 
       };
 
-      extraConfig = ''
-        bindgesture swipe:right workspace prev
-        bindgesture swipe:left workspace next
 
-        shadows enable
-        corner_radius 13
+      extraConfig = concatStringsSep "\n" [
+        # Touchpad configuration
+        "bindgesture swipe:right workspace prev"
+        "bindgesture swipe:left workspace next"
+
+        # SwayFX spesific configuration
+        "shadows enable"
+        "corner_radius 13"
 
         # Lower the opacity of specifc windows
-        for_window [app_id="^kitty$"] opacity 0.9
-        for_window [class="^tidal-hifi"] opacity 0.9
+        ''for_window [app_id="^kitty$"] opacity 0.9''
+        ''for_window [class="^tidal-hifi"] opacity 0.9''
 
-        exec_always ${pkgs.kanshi}/bin/kanshi
+        # Always load kanshi after a sway-reload, that prevents from the monitors bugging out
+        "exec_always ${pkgs.kanshi}/bin/kanshi"
       '';
     };
   };

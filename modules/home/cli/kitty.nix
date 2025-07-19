@@ -1,19 +1,21 @@
 { config, self, pkgs, lib, ... }:
 let
   inherit (lib) mkIf;
-
   inherit (self.lib.modules) mkPackageOpt;
+
+  zsh = config.sylveon.zsh;
   cfg = config.sylveon.cli.kitty;
 in
 {
   options.sylveon.cli.kitty =
     mkPackageOpt pkgs.kitty "Whether or not to install and configure kitty";
 
-  config = {
+  config = mkIf cfg.enable {
     programs.kitty = {
-      inherit (cfg) enable package;
+      enable = true;
+      inherit (cfg) package;
 
-      shellIntegration.enableZshIntegration = mkIf config.sylveon.cli.zsh.enable true;
+      shellIntegration.enableZshIntegration = zsh.enable;
       settings.enable_audio_bell = false;
     };
   };

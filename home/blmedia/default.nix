@@ -7,8 +7,7 @@
   ];
 
   sylveon = {
-    apps = {
-      discord.enable = true;
+    programs = {
       librewolf.enable = true;
     };
 
@@ -20,6 +19,4 @@
       kitty.enable = true;
     };
   };
-
-  home.stateVersion = "25.05";
 }
