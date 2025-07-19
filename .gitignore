@@ -7,6 +7,9 @@ result-*
 # Ignore the configuration folder for Jetbrains IDEs
 .idea/
 
+# Development environment
+.direnv/
+
 # Disable vm outputs that are called when starting a vm in this directory
 *.qcow
 *.qcow2
