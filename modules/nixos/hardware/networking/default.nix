@@ -28,8 +28,6 @@ in
   };
 
   config = {
-    hostName = config.sylveon.device.name;
-
     # enable wireless database, it helps keeping wifi speedy
     hardware.wirelessRegulatoryDatabase = true;
 

@@ -8,7 +8,7 @@ let
   inherit (lib.types) bool;
   inherit (self.lib.modules) mkOpt;
 
-  cfg = config.sylveon.system.graphical.windowManagers.sway;
+  cfg = config.sylveon.system.graphical.sway;
   prof = config.sylveon.profiles;
 in
 {

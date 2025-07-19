@@ -6,6 +6,8 @@ let
 
   inherit (self.lib.modules) mkOpt;
   inherit (self.lib.validation) hasHomeModule;
+
+  users = config.sylveon.system.users;
 in
 {
   options.sylveon.system.users =
@@ -15,12 +17,12 @@ in
     # Generate random passwords for users
     age.secrets = 
        genAttrs
-         (forEach config.sylveon.users (name: "${name}-passwd"))
+         (forEach users (name: "${name}-passwd"))
            (name: { rekeyFile = "${self}/secrets/${name}.age"; generator.script = "ranSha255"; });
 
     # Create users from list
     users.users =
-      genAttrs config.sylveon.users(
+      genAttrs users (
         name:
         let
           zsh = config.home-manager.users.${name}.sylveon.cli.zsh;

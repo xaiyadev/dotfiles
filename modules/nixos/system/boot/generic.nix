@@ -9,13 +9,11 @@ let
     ;
 
   inherit (self.lib.modules) mkOpt;
+
   cfg = config.sylveon.system.boot;
+  prof = config.sylveon.profiles;
 in
 {
-  imports = [
-    ./loader # which bootloader is used
-  ];
-
   options.sylveon.system.boot = {
     kernel = mkOpt raw pkgs.linuxPackages_latest "The kernel for our system.";
     raidSupport = mkOpt bool false "If raid configuration should be supported.";
@@ -48,7 +46,7 @@ in
       };
 
       kernelParams =
-        optionals cfg.profiles.laptop.enable [
+        optionals prof.laptop.enable [
           # allow systemd to set and save the backlight state
           "acpi_backlight=native"
 

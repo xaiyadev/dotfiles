@@ -1,6 +1,9 @@
 { lib, config, self, ...}:
 let
-  inherit (lib) mkIf;
+  inherit (lib)
+    mkIf
+    mkMerge
+    ;
 
   inherit (lib.types) str enum;
 

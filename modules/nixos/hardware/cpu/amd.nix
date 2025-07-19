@@ -2,7 +2,7 @@
 let
   inherit (lib) mkIf;
 
-  cpu = config.sylveon.hardware.cpu;
+  cpu = config.sylveon.device.cpu;
 in
 {
   config = mkIf (cpu == "amd") {

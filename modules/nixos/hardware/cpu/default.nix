@@ -9,7 +9,7 @@ in
     ./amd.nix
   ];
 
-  options.sylveon.hardware.cpu =
+  options.sylveon.device.cpu =
      mkOpt (enum [ "amd" ]) null "What cpu your system uses";
 
 }

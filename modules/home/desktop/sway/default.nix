@@ -1,6 +1,10 @@
 { osConfig, lib, pkgs, config, ... }:
 let
-  inherit (lib.modules) mkIf mkOptionDefault;
+  inherit (lib)
+    mkIf
+    mkOptionDefault
+    concatStringsSep
+    ;
 
   modifier = "Mod4";
   sway = osConfig.sylveon.system.graphical.sway;
@@ -61,7 +65,7 @@ in
 
         # Always load kanshi after a sway-reload, that prevents from the monitors bugging out
         "exec_always ${pkgs.kanshi}/bin/kanshi"
-      '';
+      ];
     };
   };
 }

@@ -9,7 +9,7 @@ in
     ./amd.nix
   ];
 
-  options.sylveon.hardware.gpu =
+  options.sylveon.device.gpu =
      mkOpt (enum [ "amd" ]) null "What gpu your system uses";
 
   config = {

@@ -3,7 +3,7 @@ let
   inherit (lib) mkIf;
   inherit (self.lib.modules) mkPackageOpt;
 
-  zsh = config.sylveon.zsh;
+  zsh = config.sylveon.cli.zsh;
   cfg = config.sylveon.cli.kitty;
 in
 {

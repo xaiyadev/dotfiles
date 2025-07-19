@@ -2,7 +2,7 @@
 let
   inherit (lib) mkIf;
 
-  gpu = config.sylveon.hardware.gpu;
+  gpu = config.sylveon.device.gpu;
 in
 {
   config = mkIf (gpu == "amd") {

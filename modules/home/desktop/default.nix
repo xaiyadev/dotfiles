@@ -4,7 +4,6 @@
     ./cursor.nix
 
     # Window Manager configuration
-    ./gnome
     ./sway
   ];
 }

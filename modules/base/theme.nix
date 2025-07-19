@@ -15,7 +15,7 @@ in
 {
   options.sylveon.system.theme = {
     name =
-      mkOpt (nullOr (enum [ "rose-pine" ])) null "The theme that should be loaded";
+      mkOpt (nullOr (enum [ "rose-pine" ])) "rose-pine" "The theme that should be loaded";
 
     base16 =
       mkOpt path "${inputs.tinted-theming-schemes}/base16/${cfg.name}.yaml" "Path to base16 file for your theme";

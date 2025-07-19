@@ -1,5 +1,9 @@
-{ self, config, pkgs, ... }:
+{ self, config, lib, pkgs, ... }:
 let
+  inherit (lib)
+    mkIf
+    ;
+
   inherit (self.lib.modules) mkPackageOpt;
 
   inherit (builtins)

@@ -4,7 +4,7 @@ let
 
   inherit (self.lib.modules) mkOpt;
   cfg = config.sylveon.security.agenix;
-  getSystemDirectory = "${self}/systems/${config.sylveon.device.name}";
+  getSystemDirectory = "${self}/systems/${config.networking.hostName}";
 in {
 
   options.sylveon.security.agenix = {

@@ -4,6 +4,9 @@
     allowUnfree = true;
     allowBroken = false;
 
+    allowUnfreePredicate = _: true;
+    allowAliases = false;
+
     # Warn me if something has no maintainer anymore (sad >:)
     # Never mind, there are to many... for now!
     # showDerivationWarnings = [ "maintainerless" ];

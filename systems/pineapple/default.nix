@@ -6,6 +6,8 @@
     inputs.aagl.nixosModules.default
   ];
 
+  networking.hostName = "pineapple";
+
   /* --- TEMPORARY --- */
     nix.settings = inputs.aagl.nixConfig;
     programs.sleepy-launcher.enable = true;
@@ -23,8 +25,6 @@
     };
 
     device = {
-      name = "pineapple";
-
       cpu = "amd";
       gpu = "amd";
     };

@@ -2,7 +2,7 @@
 let
   inherit (self.lib.users) filterTrustedUsers;
 
-  trustedUsers = filterTrustedUsers config.sylveon.users config;
+  trustedUsers = filterTrustedUsers config.sylveon.system.users config;
 in
 {
   nix = {

@@ -10,10 +10,4 @@ in
     ./profiles.nix
     ./theme.nix
   ];
-
-  config = {
-    options.sylveon = {
-      name = mkOpt str null "The devices name";
-    };
-  };
 }

@@ -11,7 +11,7 @@
 
     inputs'.tidaLuna.packages.default # Music Streaming Service (injected)
 
-    pkgs.whatsapp-for-linux
+    pkgs.wasistlos # Whatsapp for linux
 
     pkgs.teams-for-linux # Teams; Need that for school and work
     #pkgs.ciscoPacketTracer8 # Cisco software that I need for school

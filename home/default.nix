@@ -13,7 +13,7 @@ in
       useGlobalPkgs = true;
       backupFileExtension = "bak";
 
-      users = genAttrs config.sylveon.users (name: {
+      users = genAttrs config.sylveon.system.users (name: {
         imports = [ ./${name} ];
       });
 
