@@ -9,7 +9,7 @@
   sylveon = {
     programs = {
       librewolf.enable = true;
-      discord.enable = true;
+      # discord.enable = true; TODO: https://github.com/KaylorBen/nixcord/issues/114
     };
 
     cli = {

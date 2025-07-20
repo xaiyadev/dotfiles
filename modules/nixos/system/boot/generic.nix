@@ -58,14 +58,12 @@ in
         verbose = false;
         systemd.enable = true;
 
-        kernelModules = [
+        availableKernelModules = [
           "nvme"
           "xhci_pci"
           "ahci"
-          "sd_mod"
-        ];
+          "thunderbolt"
 
-        availableKernelModules = [
           "usbhid" # supports USB keyboards, mice, gamepads, etc.
           "sd_mod" # For STA and NVMe drives
           "sr_mod" # boot from or access optical media

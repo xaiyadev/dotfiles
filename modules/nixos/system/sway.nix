@@ -20,21 +20,28 @@ in
     "Whether or not to enable the sway window manager";
 
   config = mkIf (cfg.enable) {
+    services.displayManager.sessionPackages = [ pkgs.swayfx ];
+
+    xdg.portal.wlr.enable = true;
+    # Sway cant load in in a virtual machine :( (at least fx)
     programs.sway = {
       enable = true;
       package = pkgs.swayfx;
       wrapperFeatures.gtk = true;
 
-      extraSessionCommands = concatStringsSep " " [
-        "# export QT_QPA_PLATFORM=wayland ~ Enpass can not be opened with this set TODO !"
+      extraSessionCommands = ''
+        # export QT_QPA_PLATFORM=wayland ~ Enpass can not be opened with this set TODO !
 
-        "export SDL_VIDEODRIVER=wayland"
-        "export MOZ_ENABLE_WAYLAND=1"
+        export SDL_VIDEODRIVER=wayland
+        export MOZ_ENABLE_WAYLAND=1
 
-        "export XDG_SESSION_TYPE=wayland"
-        "export XDG_SESSION_DESKTOP=sway"
-        "export XDG_CURRENT_DESKTOP=sway"
-      ];
+        export XDG_SESSION_TYPE=wayland
+        export XDG_SESSION_DESKTOP=sway
+        export XDG_CURRENT_DESKTOP=sway
+
+        export WLR_RENDERER_ALLOW_SOFTWARE=true # Enabled for testing sway in a virtual machine
+
+      '';
     };
   };
 

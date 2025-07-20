@@ -8,10 +8,9 @@ in
   config = mkIf (cpu == "amd") {
     hardware.cpu.amd.updateMicrocode = true;
 
-    boot = {
-      kernelModules = [
-        "kvm-amd"
-      ];
-    };
+    boot.kernelModules = [
+      "kvm-amd"
+      "amd-pstate"
+    ];
   };
 }

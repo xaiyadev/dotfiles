@@ -1,4 +1,4 @@
-{ lib, self, config, ...}:
+{ lib, self, pkgs, config, ...}:
 let
   inherit (lib) mkIf;
 
@@ -7,14 +7,15 @@ in
 {
   config = mkIf (gpu == "amd") {
     boot = {
-      kernelParams = [
-        # Fix Color accuracy in Power saving modes
-        "amdgpu.abmlevel=0"
-      ];
-
       kernelModules = [ "amdgpu" ];
       initrd.kernelModules = [ "amdgpu" ];
     };
+
+    # enables AMDVLK & OpenCL support
+    hardware.graphics.extraPackages = [
+      pkgs.rocmPackages.clr
+      pkgs.rocmPackages.clr.icd
+    ];
 
     services.xserver.videoDrivers = [ "amdgpu" ];
   };

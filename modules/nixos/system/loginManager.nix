@@ -9,6 +9,13 @@ let
   inherit (lib.types) enum nullOr;
   inherit (self.lib.modules) mkOpt;
 
+
+  sessionData = config.services.displayManager.sessionData.desktops;
+  sessionPath = concatStringsSep ":" [
+    "${sessionData}/share/xsessions"
+    "${sessionData}/share/wayland-sessions"
+  ];
+
   cfg = config.sylveon.system.loginManager;
   prof = config.sylveon.profiles;
 in
@@ -22,7 +29,6 @@ in
   config = {
     services.greetd = mkIf (cfg == "greetd") {
       enable = true;
-      restart = true;
       vt = 2;
 
       settings = {
@@ -32,10 +38,12 @@ in
             (getExe pkgs.greetd.tuigreet)
               "--time"
               "--asterisks"
-              "--cmd '${pkgs.swayfx}/bin/sway'" # TODO: temporary solution
+              "--sessions '${sessionPath}'" # TODO: temporary solution
           ];
         };
       };
     };
+
+    services.displayManager.gdm.enable = (cfg == "gdm");
   };
 }

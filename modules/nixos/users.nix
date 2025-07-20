@@ -28,7 +28,8 @@ in
           zsh = config.home-manager.users.${name}.sylveon.cli.zsh;
         in
         {
-          hashedPasswordFile = config.age.secrets."${name}-passwd".path;
+          # hashedPasswordFile = config.age.secrets."${name}-passwd".path;
+          initialPassword = "password";
           isNormalUser = true;
           shell =
             if zsh.enable then zsh.package else pkgs.bash;
@@ -37,6 +38,9 @@ in
             "wheel"
             "nix"
             "docker"
+
+            "video"
+            "audio"
           ];
       });
   };
