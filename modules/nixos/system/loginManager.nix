@@ -38,7 +38,7 @@ in
             (getExe pkgs.greetd.tuigreet)
               "--time"
               "--asterisks"
-              "--sessions '${sessionPath}'" # TODO: temporary solution
+              "--sessions '${sessionPath}'"
           ];
         };
       };

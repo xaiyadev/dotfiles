@@ -1,4 +1,5 @@
 {
+  # TODO: evaluation warning (cant use nixpkgs.config when using home-manager.useGlobalPkgs)
   nixpkgs.config = {
     # Allowance of packages
     allowUnfree = true;

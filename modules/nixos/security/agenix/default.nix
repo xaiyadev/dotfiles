@@ -1,9 +1,10 @@
 { lib, self, config, inputs, ... }:
 let
   inherit (lib.types) listOf path;
-
   inherit (self.lib.modules) mkOpt;
+
   cfg = config.sylveon.security.agenix;
+
   getSystemDirectory = "${self}/systems/${config.networking.hostName}";
 in {
 

@@ -2,12 +2,13 @@
 let
   inherit (lib.types) bool;
   inherit (lib) mkIf;
-
   inherit (self.lib.modules) mkOpt;
+
   cfg = config.sylveon.hardware.bluetooth;
   prof = config.sylveon.profiles;
 in
 {
+
   options.sylveon.hardware.bluetooth.enable = mkOpt
     bool
     prof.laptop.enable
@@ -27,6 +28,7 @@ in
       };
     };
 
-    services.blueman.enable = true;
+    services.blueman.enable = mkIf prof.graphical.enable true;
   };
+
 }

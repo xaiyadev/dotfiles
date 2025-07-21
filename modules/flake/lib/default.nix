@@ -7,6 +7,7 @@ let
 
       inherit (final.modules) mkOpt;
       inherit (final.users) hasGroup;
+      inherit (final.validation) anyHomeModuleActive;
   });
 
 in

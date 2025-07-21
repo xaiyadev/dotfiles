@@ -13,16 +13,16 @@ let
 in
 {
   options.sylveon.programs.discord.enable =
-    mkOpt bool false "Whether or not to enable discord (as vesktop)";
+    mkOpt bool false "Whether or not to enable discord";
 
   imports = [ inputs.nixcord.homeModules.nixcord ];
 
   config = mkIf cfg.enable {
     programs.nixcord = {
       enable = true;
+      discord.enable = true;
 
       config = {
-        transparent = true;
 
         # Activate and Configure Plugins
         plugins = {

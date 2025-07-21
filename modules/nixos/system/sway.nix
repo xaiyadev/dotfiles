@@ -23,6 +23,7 @@ in
     services.displayManager.sessionPackages = [ pkgs.swayfx ];
 
     xdg.portal.wlr.enable = true;
+
     # Sway cant load in in a virtual machine :( (at least fx)
     programs.sway = {
       enable = true;

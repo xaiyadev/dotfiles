@@ -1,9 +1,8 @@
 {
   imports = [
-    ./stylix.nix
-    ./cursor.nix
+    ./stylix.nix # easier and better styling
+    ./cursor.nix # cursor configuration
 
-    # Window Manager configuration
-    ./sway
+    ./sway # Window Manager
   ];
 }

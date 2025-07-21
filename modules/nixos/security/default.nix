@@ -1,5 +1,5 @@
 {
   imports = [
-    ./agenix
+    ./agenix # configuration for secrets
   ];
 }
