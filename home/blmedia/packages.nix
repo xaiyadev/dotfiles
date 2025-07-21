@@ -2,8 +2,6 @@
 { pkgs, inputs', ... }:
 {
   home.packages = [
-    pkgs.neovim
-
     pkgs.enpass
 
     # https://github.com/NixOS/nixpkgs/issues/426815#issuecomment-3094569105

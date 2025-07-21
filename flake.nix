@@ -18,6 +18,12 @@
       ref = "nixpkgs-unstable";
     };
 
+    nixvim = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nixvim";
+    };
+
     nixos-hardware = {
       type = "github";
       owner = "NixOS";
