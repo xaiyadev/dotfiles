@@ -1,14 +1,24 @@
-{ lib, self, config, inputs, ... }:
+{
+  lib,
+  self,
+  config,
+  inputs,
+  ...
+}:
 let
   inherit (lib.types) listOf path;
-
   inherit (self.lib.modules) mkOpt;
+
   cfg = config.sylveon.security.agenix;
+
   getSystemDirectory = "${self}/systems/${config.networking.hostName}";
-in {
+in
+{
 
   options.sylveon.security.agenix = {
-    masterIdentities = mkOpt (listOf path) [ ./age-yubikey.pub ] "A list of masterIdentities that should be used; defaults to my yubikey";
+    masterIdentities = mkOpt (listOf path) [
+      ./age-yubikey.pub
+    ] "A list of masterIdentities that should be used; defaults to my yubikey";
   };
 
   imports = [
@@ -16,11 +26,11 @@ in {
     inputs.agenix-rekey.nixosModules.default
   ];
 
-
-  /* The default Agenix configuration, with the new age-rekey module
-   * The age.rekey.hostPubkey is located in the hosts default file
-   * All secret files can be found in the hosts folder ${hostname}/secrets/
-   */
+  /*
+    The default Agenix configuration, with the new age-rekey module
+    The age.rekey.hostPubkey is located in the hosts default file
+    All secret files can be found in the hosts folder ${hostname}/secrets/
+  */
   config = {
     age = {
       rekey = {
@@ -34,10 +44,14 @@ in {
 
       generators = {
         # Generate a random string that is encrypted as sha256 after that
-        ranSha256 = { ... }: "echo tr -dc A-Za-z0-9 </dev/urandom | head -c 13 | sha256sum | cut -d ' ' -f1";
+        ranSha256 =
+          { ... }: "echo tr -dc A-Za-z0-9 </dev/urandom | head -c 13 | sha256sum | cut -d ' ' -f1";
       };
 
-      identityPaths = [ "/etc/ssh/ssh_host_rsa_key" "/etc/ssh/ssh_host_ed25519_key" ];
+      identityPaths = [
+        "/etc/ssh/ssh_host_rsa_key"
+        "/etc/ssh/ssh_host_ed25519_key"
+      ];
     };
   };
 }

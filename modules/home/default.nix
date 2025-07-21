@@ -1,7 +1,8 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   imports = [
     ./desktop # Desktop specific configuration and theming
-    ./apps
+    ./programs
     ./cli
 
     ./home.nix

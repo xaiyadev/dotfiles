@@ -1,20 +1,26 @@
-{ lib, self, config, ...}:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   inherit (lib) mkIf;
 
-  gpu = config.sylveon.hardware.gpu;
+  gpu = config.sylveon.device.gpu;
 in
 {
   config = mkIf (gpu == "amd") {
     boot = {
-      kernelParams = [
-        # Fix Color accuracy in Power saving modes
-        "amdgpu.abmlevel=0"
-      ];
-
       kernelModules = [ "amdgpu" ];
       initrd.kernelModules = [ "amdgpu" ];
     };
+
+    # enables AMDVLK & OpenCL support
+    hardware.graphics.extraPackages = [
+      pkgs.rocmPackages.clr
+      pkgs.rocmPackages.clr.icd
+    ];
 
     services.xserver.videoDrivers = [ "amdgpu" ];
   };

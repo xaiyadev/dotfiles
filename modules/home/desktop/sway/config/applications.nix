@@ -1,7 +1,13 @@
-{ pkgs, inputs', ... }: {
+{ pkgs, ... }:
+{
   wayland.windowManager.sway.config = {
-    window = { border = 3; titlebar = false; };
-    gaps = { inner = 5; };
+    window = {
+      border = 3;
+      titlebar = false;
+    };
+    gaps = {
+      inner = 5;
+    };
 
     floating = {
       # Windows that should be opened in floating mode
@@ -11,7 +17,6 @@
         # Steam Windows
         { title = "Steam Settings"; }
         { title = "Friends List"; }
-
 
         { class = "Enpass"; }
         { app_id = "yubioath-flutter"; }
@@ -26,15 +31,17 @@
         { app_id = "org.gnome.Nautilus"; }
         { app_id = "nemo"; }
 
-
         { app_id = "org.prismlauncher.PrismLauncher"; }
       ];
     };
 
     assigns = {
-      "1" = [{ class = "^jetbrains"; }];
-      "2" = [{ app_id = "librewolf"; }];
-      "4" = [ { class = "discord"; } { class = "teams-for-linux"; } ];
+      "1" = [ { class = "^jetbrains"; } ];
+      "2" = [ { app_id = "librewolf"; } ];
+      "4" = [
+        { class = "discord"; }
+        { class = "teams-for-linux"; }
+      ];
     };
 
     startup = [

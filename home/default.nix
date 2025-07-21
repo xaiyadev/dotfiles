@@ -1,4 +1,11 @@
-{ lib, config, self, inputs', inputs, ... }:
+{
+  lib,
+  config,
+  self,
+  inputs',
+  inputs,
+  ...
+}:
 let
   inherit (lib.attrsets) genAttrs;
 in
@@ -13,7 +20,7 @@ in
       useGlobalPkgs = true;
       backupFileExtension = "bak";
 
-      users = genAttrs config.sylveon.users (name: {
+      users = genAttrs config.sylveon.system.users (name: {
         imports = [ ./${name} ];
       });
 

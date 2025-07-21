@@ -4,7 +4,10 @@
       profile = {
         name = "docked_home";
         outputs = [
-          { criteria = "eDP-2"; status = "disable"; }
+          {
+            criteria = "eDP-2";
+            status = "disable";
+          }
 
           {
             criteria = "AOC 2460G4 0x0000A8E2";

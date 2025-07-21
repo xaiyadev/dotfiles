@@ -8,12 +8,11 @@
     ./power.nix
     ./bluetooth.nix
     ./yubikey.nix
-    ./inputs.nix
   ];
 
   config = {
     # Enables non-free firmware
-    hardware.enableRedistributableFirmware =  true;
+    hardware.enableRedistributableFirmware = true;
   };
 
 }

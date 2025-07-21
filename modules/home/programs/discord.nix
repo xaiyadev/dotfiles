@@ -1,26 +1,34 @@
-{ inputs, lib, self, config, ... }:
+{
+  inputs,
+  lib,
+  self,
+  config,
+  ...
+}:
 
 let
-    inherit (lib) mkForce;
-    inherit (lib.types) bool;
+  inherit (lib)
+    mkIf
+    mkForce
+    ;
 
-    inherit (self.lib.modules) mkOpt;
-    cfg = config.sylveon.apps.discord;
+  inherit (lib.types) bool;
+
+  inherit (self.lib.modules) mkOpt;
+  cfg = config.sylveon.programs.discord;
 in
 {
-  options.sylveon.apps.discord.enable =
-    mkOpt bool false "Whether or not to enable discord (as vesktop)";
+  options.sylveon.programs.discord.enable = mkOpt bool false "Whether or not to enable discord";
 
   imports = [ inputs.nixcord.homeModules.nixcord ];
 
-  config = {
+  config = mkIf cfg.enable {
     programs.nixcord = {
-      inherit (cfg) enable;
-
+      enable = true;
       discord.enable = true;
-      vesktop.enable = false;
 
       config = {
+
         # Activate and Configure Plugins
         plugins = {
           alwaysExpandRoles.enable = true;
@@ -41,7 +49,10 @@ in
           fixImagesQuality.enable = true;
           friendsSince.enable = true;
           fullSearchContext.enable = true;
-          memberCount = { enable = true; memberList = false; };
+          memberCount = {
+            enable = true;
+            memberList = false;
+          };
           mentionAvatars.enable = true;
           messageLogger.enable = true;
           noMaskedUrlPaste.enable = true;
@@ -50,7 +61,11 @@ in
           permissionFreeWill.enable = true;
           permissionsViewer.enable = true;
           plainFolderIcon.enable = true;
-          platformIndicators = { enable = true; lists = false; messages = false; };
+          platformIndicators = {
+            enable = true;
+            lists = false;
+            messages = false;
+          };
           serverInfo.enable = true;
           showAllMessageButtons.enable = true;
           showHiddenChannels.enable = true;
@@ -61,6 +76,10 @@ in
           volumeBooster.enable = true;
           whoReacted.enable = true;
           youtubeAdblock.enable = true;
+
+          /* Vesktop exclusive */
+          webKeybinds.enable = true;
+          webScreenShareFixes.enable = true;
         };
       };
     };

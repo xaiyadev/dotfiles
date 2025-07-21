@@ -1,13 +1,19 @@
 # Packages that are to small to put into a config, but still important!
-{ lib, config, self, ... }:
+{
+  lib,
+  config,
+  self,
+  ...
+}:
 let
   inherit (lib) mkIf mkMerge;
 
-  inherit (self.lib.validation) isGraphical anyHomeModuleActive;
+  inherit (self.lib.validation) anyHomeModuleActive;
+  graphical = config.sylveon.profiles.graphical;
 in
 {
   programs = mkMerge [
-    (mkIf (isGraphical config) {
+    (mkIf (graphical.enable) {
       # gnome configuration
       dconf.enable = true;
 
@@ -16,7 +22,14 @@ in
     })
 
     {
-      zsh.enable = (anyHomeModuleActive config [ "sylveon" "cli" "zsh" "enable" ]);
+      zsh.enable = (
+        anyHomeModuleActive config [
+          "sylveon"
+          "cli"
+          "zsh"
+          "enable"
+        ]
+      );
     }
   ];
 }

@@ -1,20 +1,33 @@
-{ pkgs, osConfig, config,  ... }:
+{
+  pkgs,
+  osConfig,
+  lib,
+  config,
+  ...
+}:
 let
-  windowManagers = osConfig.sylveon.system.graphical.windowManagers;
+  inherit (lib) mkIf;
+
+  sway = osConfig.sylveon.system.graphical.sway;
 in
 {
 
-  services.swayidle = {
-    enable = builtins.elem "sway" windowManagers;
-    timeouts =
-      [
-        { timeout = 300; command = "exec ${config.programs.swaylock.package}/bin/swaylock"; }
-      ];
+  services.swayidle = mkIf sway.enable {
+    enable = true;
 
-    events =
-     [
-       { event = "before-sleep"; command = "exec ${config.programs.swaylock.package}/bin/swaylock"; }
-     ];
+    timeouts = [
+      {
+        timeout = 300;
+        command = "exec ${config.programs.swaylock.package}/bin/swaylock";
+      }
+    ];
+
+    events = [
+      {
+        event = "before-sleep";
+        command = "exec ${config.programs.swaylock.package}/bin/swaylock";
+      }
+    ];
 
   };
 }

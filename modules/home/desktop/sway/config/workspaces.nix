@@ -4,11 +4,19 @@
 
     # Change screen DPI/scaling
     output = {
-      "LG Electronics LG ULTRAFINE 203NTXR8L890" = { scale = "1.3"; };
-      "LG Electronics LG ULTRAFINE 203NTFA8L891" = { scale = "1.3"; };
+      "LG Electronics LG ULTRAFINE 203NTXR8L890" = {
+        scale = "1.3";
+      };
+      "LG Electronics LG ULTRAFINE 203NTFA8L891" = {
+        scale = "1.3";
+      };
 
-      "LG Electronics LG ULTRAFINE 404NTGY9M335" = { scale = "1.3"; };
-      "LG Electronics LG ULTRAFINE 404NTYT9M282" = { scale = "1.3"; };
+      "LG Electronics LG ULTRAFINE 404NTGY9M335" = {
+        scale = "1.3";
+      };
+      "LG Electronics LG ULTRAFINE 404NTYT9M282" = {
+        scale = "1.3";
+      };
     };
 
     workspaceOutputAssign = [
@@ -37,8 +45,20 @@
 
       # Laptop screen should own workspace 4 and 5 when its docked
       # When at home/not using the laptop screen, these workspaces should be assigned to the secondary screen
-      { output = [ "eDP-2" "Acer Technologies RT240Y T75EE0042411" ]; workspace = "3"; }
-      { output = [ "eDP-2" "Acer Technologies RT240Y T75EE0042411" ]; workspace = "4"; }
+      {
+        output = [
+          "eDP-2"
+          "Acer Technologies RT240Y T75EE0042411"
+        ];
+        workspace = "3";
+      }
+      {
+        output = [
+          "eDP-2"
+          "Acer Technologies RT240Y T75EE0042411"
+        ];
+        workspace = "4";
+      }
     ];
   };
 }

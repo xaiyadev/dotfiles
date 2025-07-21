@@ -24,7 +24,7 @@
       repo = "nixos-hardware";
       ref = "master";
     };
-   
+
     home-manager = {
       type = "github";
       owner = "nix-community";
@@ -48,7 +48,6 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
 
     # bring all the mess together with flake-parts
     flake-parts = {

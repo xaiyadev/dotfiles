@@ -1,14 +1,23 @@
-{ config, self, lib, pkgs, ... }:
+{
+  config,
+  self,
+  lib,
+  pkgs,
+  ...
+}:
 let
   inherit (lib.types) bool;
   inherit (lib) mkIf;
-
   inherit (self.lib.modules) mkOpt;
+
   cfg = config.sylveon.hardware.bluetooth;
+  prof = config.sylveon.profiles;
 in
 {
+
   options.sylveon.hardware.bluetooth.enable =
-    mkOpt bool false "Whether or not bluetooth should be enabled or not";
+    mkOpt bool prof.laptop.enable
+      "Whether or not bluetooth should be enabled or not";
 
   config = mkIf cfg.enable {
     hardware.bluetooth = {
@@ -24,6 +33,7 @@ in
       };
     };
 
-    services.blueman.enable = true;
+    services.blueman.enable = mkIf prof.graphical.enable true;
   };
+
 }

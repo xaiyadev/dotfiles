@@ -1,4 +1,10 @@
-{ pkgs, lib, self, config, ... }:
+{
+  pkgs,
+  lib,
+  self,
+  config,
+  ...
+}:
 let
   inherit (lib) mkIf;
   inherit (self.lib.modules) mkPackageOpt;
@@ -7,19 +13,18 @@ let
 in
 {
 
-  options.sylveon.cli.git =
-    mkPackageOpt pkgs.gitFull "Whether or not to install and configure kitty";
+  options.sylveon.cli.git = mkPackageOpt pkgs.gitFull "Whether or not to install and configure kitty";
 
-  config = {
+  config = mkIf cfg.enable {
     programs.git = {
-      inherit (cfg) enable package;
+      enable = true;
+      inherit (cfg) package;
 
       userName = "Xaiya Schumin";
       userEmail = "d.schumin@proton.me";
 
       extraConfig = {
         push.autoSetupRemote = true;
-
         commit.gpgsign = true;
       };
     };

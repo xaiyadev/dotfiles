@@ -13,18 +13,19 @@ in
 
       # All input devices
       "*" = {
-        xkb_layout = keyboard.layout;
+        xkb_layout = "de";
 
         accel_profile = "flat";
-        pointer_accel = builtins.toString mouse.accelSpeed;
+        pointer_accel = "-0.7";
       };
 
       # Framework 16 touchpad
       "2362:628:PIXA3854:00_093A:0274_Touchpad" = {
-	      pointer_accel = builtins.toString touchpad.accelSpeed;
+        pointer_accel = "-0.2";
+        natural_scroll = "enabled";
 
-        natural_scroll = if touchpad.naturalScroll then "enabled" else "disabled";
-        dwt = if touchpad.disableWhileTyping then "enabled" else "disabled";
+        # Disable while typing could annoy some people while gaming
+        dwt = "enabled";
       };
 
     };

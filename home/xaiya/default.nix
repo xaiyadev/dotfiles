@@ -7,9 +7,9 @@
   ];
 
   sylveon = {
-    apps = {
+    programs = {
       librewolf.enable = true;
-      discord.enable = true;
+      # discord.enable = true; TODO: https://github.com/KaylorBen/nixcord/issues/114
     };
 
     cli = {
@@ -20,6 +20,4 @@
       kitty.enable = true;
     };
   };
-
-  home.stateVersion = "25.05";
 }

@@ -1,11 +1,17 @@
-{ config, self, lib, ... }:
+{
+  config,
+  self,
+  lib,
+  ...
+}:
 let
   inherit (lib) mkIf;
-  inherit (self.lib.validation) isGraphical;
 
+  prof = config.sylveon.profiles;
 in
 {
-  config = mkIf (isGraphical config) {
+  config = mkIf prof.graphical.enable {
+
     # Using pipewire as my sound backend
     services.pipewire = {
       enable = true;
@@ -18,8 +24,6 @@ in
         enable = true;
         support32Bit = true;
       };
-
-
     };
   };
 }

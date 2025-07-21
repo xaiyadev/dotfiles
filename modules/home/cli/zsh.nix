@@ -1,5 +1,15 @@
-{ self, config, pkgs, ... }:
+{
+  self,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
+  inherit (lib)
+    mkIf
+    ;
+
   inherit (self.lib.modules) mkPackageOpt;
 
   inherit (builtins)
@@ -12,17 +22,14 @@ let
 
 in
 {
-  options.sylveon.cli.zsh =
-    mkPackageOpt pkgs.zsh "Whether or not to use zsh as a terminal";
+  options.sylveon.cli.zsh = mkPackageOpt pkgs.zsh "Whether or not to use zsh as a terminal";
 
-  config = {
-    home.shell = {
-      enableShellIntegration = !cfg.enable;
-      enableZshIntegration = cfg.enable;
-    };
+  config = mkIf cfg.enable {
+    home.shell.enableZshIntegration = true;
 
     programs.zsh = {
-      inherit (cfg) enable package;
+      enable = true;
+      inherit (cfg) package;
 
       syntaxHighlighting.enable = true;
       autosuggestion.enable = true;
@@ -46,13 +53,14 @@ in
     };
 
     programs.starship = {
-      inherit (cfg) enable;
+      enable = true;
 
-      settings =
-        fromTOML (readFile (fetchurl {
-            url = "https://starship.rs/presets/toml/bracketed-segments.toml";
-            sha256 = "1f373znyrhxix8b3si7w9kqkm8v6z1hwxl62zsiffn7k973pfcgg";
-        }));
+      settings = fromTOML (
+        readFile (fetchurl {
+          url = "https://starship.rs/presets/toml/bracketed-segments.toml";
+          sha256 = "1f373znyrhxix8b3si7w9kqkm8v6z1hwxl62zsiffn7k973pfcgg";
+        })
+      );
     };
   };
 }

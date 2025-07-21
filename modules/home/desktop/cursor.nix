@@ -1,20 +1,27 @@
-{ osConfig, self, ...}:
+{
+  self,
+  lib,
+  pkgs,
+  osConfig,
+  ...
+}:
 let
-  inherit (self.lib.validation) isGraphical;
+  inherit (lib) mkIf;
 
-  theme = osConfig.sylveon.theme;
+  prof = osConfig.sylveon.profiles;
 in
 {
 
-  config = {
+  config = mkIf prof.graphical.enable {
     home.pointerCursor = {
-      enable = (isGraphical osConfig) && !(isNull theme.cursor.package || isNull theme.cursor.name);
-      package = theme.cursor.package;
-      name = theme.cursor.name;
+      enable = true;
+
+      name = "BreezeX-RosePineDawn-Linux";
+      package = pkgs.rose-pine-cursor;
       size = 32;
 
       sway.enable = true;
       gtk.enable = true;
-  };
+    };
   };
 }
