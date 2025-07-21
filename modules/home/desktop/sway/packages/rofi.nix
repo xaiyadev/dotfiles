@@ -30,10 +30,10 @@ in
   };
 
   wayland.windowManager.sway.config.menu = concatStringsSep ''\'' [
-    ''${pkgs.rofi-wayland}/bin/rofi''
-    ''-modi power:"${pkgs.rofi-power-menu}/bin/rofi-power-menu --symbols-font "Symbols Nerd Font Mono"''
-    ''-combi-modi "drun,power,emoji"''
-    ''-show-icons''
-    ''-show combi''
+    ''${pkgs.rofi-wayland}/bin/rofi ''
+    ''-modi power:"${pkgs.rofi-power-menu}/bin/rofi-power-menu" --symbols-font "Symbols Nerd Font Mono" ''
+    ''-combi-modi "drun,power,emoji" ''
+    ''-show-icons ''
+    ''-show combi ''
   ];
 }

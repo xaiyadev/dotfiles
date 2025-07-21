@@ -77,7 +77,7 @@ in
           whoReacted.enable = true;
           youtubeAdblock.enable = true;
 
-          /* Vesktop exclusive */
+          # Vesktop exclusive
           webKeybinds.enable = true;
           webScreenShareFixes.enable = true;
         };

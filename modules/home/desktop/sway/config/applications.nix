@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  inputs',
+  ...
+}:
 {
   wayland.windowManager.sway.config = {
     window = {

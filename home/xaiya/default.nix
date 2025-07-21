@@ -3,13 +3,12 @@
   imports = [
     ./packages.nix # Load packages
     ./cli # CLI configurations that are so unique that they are separated into the home folders
-    ./dconf.nix
   ];
 
   sylveon = {
     programs = {
       librewolf.enable = true;
-      # discord.enable = true; TODO: https://github.com/KaylorBen/nixcord/issues/114
+      discord.enable = true; # TODO: https://github.com/KaylorBen/nixcord/issues/114
     };
 
     cli = {

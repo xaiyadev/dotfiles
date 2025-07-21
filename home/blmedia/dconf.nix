@@ -1,4 +1,0 @@
-# Extra Specific dconf settings
-{
-
-}

@@ -19,10 +19,11 @@ let
 in
 {
 
-  options.sylveon.programs.librewolf = mkPackageOpt pkgs.librewolf "Whether or not to enable chromium";
+  options.sylveon.programs.librewolf = mkPackageOpt pkgs.librewolf "Whether or not to enable librewolf";
 
   config = mkIf cfg.enable {
     programs.librewolf = {
+      enable = true;
       inherit (cfg) package;
 
       # Install German and english languages
