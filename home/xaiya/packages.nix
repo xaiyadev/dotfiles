@@ -3,7 +3,8 @@
 {
   home.packages = [
     pkgs.neovim
-    pkgs.jetbrains.webstorm # Programming IDE for web
+    # https://github.com/NixOS/nixpkgs/issues/426815#issuecomment-3094569105
+    (pkgs.jetbrains.webstorm.override { jdk = pkgs.openjdk21; })
     pkgs.obsidian # Notes taking app
 
     pkgs.prismlauncher # Minecraft Launcher
