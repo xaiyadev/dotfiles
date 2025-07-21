@@ -1,4 +1,10 @@
-{ config, self, lib, pkgs, ... }:
+{
+  config,
+  self,
+  lib,
+  pkgs,
+  ...
+}:
 let
   inherit (lib.types) bool;
   inherit (lib) mkIf;
@@ -9,10 +15,9 @@ let
 in
 {
 
-  options.sylveon.hardware.bluetooth.enable = mkOpt
-    bool
-    prof.laptop.enable
-    "Whether or not bluetooth should be enabled or not";
+  options.sylveon.hardware.bluetooth.enable =
+    mkOpt bool prof.laptop.enable
+      "Whether or not bluetooth should be enabled or not";
 
   config = mkIf cfg.enable {
     hardware.bluetooth = {

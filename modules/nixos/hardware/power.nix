@@ -5,7 +5,6 @@ let
     mkDefault
     ;
 
-
   MHz = x: x * 1000;
   prof = config.sylveon.profiles;
 in

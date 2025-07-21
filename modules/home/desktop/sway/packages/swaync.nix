@@ -1,4 +1,4 @@
-{ osConfig, lib,  ... }:
+{ osConfig, lib, ... }:
 let
   inherit (lib) mkIf;
 
@@ -14,5 +14,5 @@ in
       positionX = "right";
       positionY = "top";
     };
- };
+  };
 }

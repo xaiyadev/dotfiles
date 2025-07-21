@@ -1,4 +1,10 @@
-{ lib, config, pkgs, self, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  self,
+  ...
+}:
 let
   inherit (lib)
     mkIf
@@ -13,11 +19,9 @@ let
 in
 {
 
-
-  options.sylveon.system.graphical.sway.enable = mkOpt
-    bool
-    prof.graphical.enable # Sway is currently my only windowManager, because of that if I want a graphical interface I automatically want this display manager
-    "Whether or not to enable the sway window manager";
+  options.sylveon.system.graphical.sway.enable =
+    mkOpt bool prof.graphical.enable # Sway is currently my only windowManager, because of that if I want a graphical interface I automatically want this display manager
+      "Whether or not to enable the sway window manager";
 
   config = mkIf (cfg.enable) {
     services.displayManager.sessionPackages = [ pkgs.swayfx ];

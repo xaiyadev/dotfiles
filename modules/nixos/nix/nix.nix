@@ -1,4 +1,9 @@
-{ self, config, pkgs, ... }:
+{
+  self,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (self.lib.users) filterTrustedUsers;
 
@@ -14,7 +19,6 @@ in
       max-free = 20 * 1024 * 1024 * 1024;
 
       auto-optimise-store = true;
-
 
       # Keep building even after one derivation fails
       keep-going = true;

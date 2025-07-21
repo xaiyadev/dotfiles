@@ -1,4 +1,10 @@
-{ pkgs, inputs, config, ... }: {
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
+{
   imports = [
     inputs.nixos-hardware.nixosModules.framework-16-7040-amd
     ./fileSystem.nix
@@ -8,15 +14,15 @@
 
   networking.hostName = "pineapple";
 
-  /* --- TEMPORARY --- */
-    nix.settings = inputs.aagl.nixConfig;
-    programs.sleepy-launcher.enable = true;
-    boot.extraModulePackages = [ config.boot.kernelPackages.xpadneo ];
+  # --- TEMPORARY ---
+  nix.settings = inputs.aagl.nixConfig;
+  programs.sleepy-launcher.enable = true;
+  boot.extraModulePackages = [ config.boot.kernelPackages.xpadneo ];
 
-    programs.steam.enable = true;
-    environment.systemPackages = [ pkgs.gamescope ];
+  programs.steam.enable = true;
+  environment.systemPackages = [ pkgs.gamescope ];
 
-  /* --- TEMPORARY --- */
+  # --- TEMPORARY ---
 
   sylveon = {
     profiles = {
@@ -30,7 +36,10 @@
     };
 
     system = {
-      users = [ "xaiya" "blmedia" ];
+      users = [
+        "xaiya"
+        "blmedia"
+      ];
     };
   };
 

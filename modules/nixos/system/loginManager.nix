@@ -1,4 +1,10 @@
-{ lib, self, config, pkgs, ... }:
+{
+  lib,
+  self,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib)
     mkIf
@@ -8,7 +14,6 @@ let
 
   inherit (lib.types) enum nullOr;
   inherit (self.lib.modules) mkOpt;
-
 
   sessionData = config.services.displayManager.sessionData.desktops;
   sessionPath = concatStringsSep ":" [
@@ -20,11 +25,10 @@ let
   prof = config.sylveon.profiles;
 in
 {
-  options.sylveon.system.loginManager =
-    mkOpt (
-      nullOr (enum [ "greetd" "gdm" ]))
-      (if prof.graphical.enable then "greetd" else null)
-      "The login manager used by the system";
+  options.sylveon.system.loginManager = mkOpt (nullOr (enum [
+    "greetd"
+    "gdm"
+  ])) (if prof.graphical.enable then "greetd" else null) "The login manager used by the system";
 
   config = {
     services.greetd = mkIf (cfg == "greetd") {
@@ -36,9 +40,9 @@ in
           user = "greeter";
           command = concatStringsSep " " [
             (getExe pkgs.greetd.tuigreet)
-              "--time"
-              "--asterisks"
-              "--sessions '${sessionPath}'"
+            "--time"
+            "--asterisks"
+            "--sessions '${sessionPath}'"
           ];
         };
       };

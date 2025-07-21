@@ -1,4 +1,10 @@
-{ lib, config, self, pkgs,... }:
+{
+  lib,
+  config,
+  self,
+  pkgs,
+  ...
+}:
 let
   inherit (lib.types) raw bool;
   inherit (lib)
@@ -45,14 +51,13 @@ in
         cleanOnBoot = mkDefault (!config.boot.tmp.useTmpfs);
       };
 
-      kernelParams =
-        optionals prof.laptop.enable [
-          # allow systemd to set and save the backlight state
-          "acpi_backlight=native"
+      kernelParams = optionals prof.laptop.enable [
+        # allow systemd to set and save the backlight state
+        "acpi_backlight=native"
 
-          # Fix Color accuracy in Power saving modes
-          "amdgpu.abmlevel=0"
-        ];
+        # Fix Color accuracy in Power saving modes
+        "amdgpu.abmlevel=0"
+      ];
 
       initrd = {
         verbose = false;

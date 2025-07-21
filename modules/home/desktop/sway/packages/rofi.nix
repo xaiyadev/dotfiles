@@ -1,4 +1,9 @@
-{ pkgs, osConfig, lib, ... }:
+{
+  pkgs,
+  osConfig,
+  lib,
+  ...
+}:
 let
   inherit (lib)
     mkIf
@@ -16,7 +21,10 @@ in
     # Only working when calling rofi from the terminal right now
     # Refer to https://discourse.nixos.org/t/rofi-on-wayland-and-plugins/17354/8
     plugins = [ pkgs.rofi-emoji-wayland ];
-    modes = [ "combi" "drun" /* "emoji" */ ];
+    modes = [
+      "combi"
+      "drun" # "emoji"
+    ];
 
     terminal = "${pkgs.kitty}/bin/kitty";
   };
@@ -27,5 +35,5 @@ in
     ''-combi-modi "drun,power,emoji"''
     ''-show-icons''
     ''-show combi''
-    ];
+  ];
 }

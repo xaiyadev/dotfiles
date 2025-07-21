@@ -1,4 +1,9 @@
-{ lib, self, config, ...}:
+{
+  lib,
+  self,
+  config,
+  ...
+}:
 let
   inherit (lib) mkIf;
 

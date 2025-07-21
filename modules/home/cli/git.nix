@@ -1,4 +1,10 @@
-{ pkgs, lib, self, config, ... }:
+{
+  pkgs,
+  lib,
+  self,
+  config,
+  ...
+}:
 let
   inherit (lib) mkIf;
   inherit (self.lib.modules) mkPackageOpt;
@@ -7,8 +13,7 @@ let
 in
 {
 
-  options.sylveon.cli.git =
-    mkPackageOpt pkgs.gitFull "Whether or not to install and configure kitty";
+  options.sylveon.cli.git = mkPackageOpt pkgs.gitFull "Whether or not to install and configure kitty";
 
   config = mkIf cfg.enable {
     programs.git = {

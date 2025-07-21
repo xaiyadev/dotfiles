@@ -7,24 +7,19 @@ in
 {
   options.sylveon.profiles = {
 
-    /* System profiles */
+    # System profiles
 
-    graphical.enable =
-      mkOpt bool false "Enable configurations for graphical systems";
+    graphical.enable = mkOpt bool false "Enable configurations for graphical systems";
 
-    laptop.enable =
-      mkOpt bool false "Enable configurations for laptops";
+    laptop.enable = mkOpt bool false "Enable configurations for laptops";
 
-    server.enable =
-      mkOpt bool false "Enable configurations for servers";
+    server.enable = mkOpt bool false "Enable configurations for servers";
 
-    /* Software profiles */
+    # Software profiles
 
-    gaming.enable =
-      mkOpt bool false "Configure the system for gaming";
+    gaming.enable = mkOpt bool false "Configure the system for gaming";
 
-    development.enable =
-      mkOpt bool false "Configure the system for development purposes";
+    development.enable = mkOpt bool false "Configure the system for development purposes";
 
   };
 }

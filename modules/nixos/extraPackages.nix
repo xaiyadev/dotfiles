@@ -1,5 +1,10 @@
 # Packages that are to small to put into a config, but still important!
-{ lib, config, self, ... }:
+{
+  lib,
+  config,
+  self,
+  ...
+}:
 let
   inherit (lib) mkIf mkMerge;
 
@@ -17,7 +22,14 @@ in
     })
 
     {
-      zsh.enable = (anyHomeModuleActive config [ "sylveon" "cli" "zsh" "enable" ]);
+      zsh.enable = (
+        anyHomeModuleActive config [
+          "sylveon"
+          "cli"
+          "zsh"
+          "enable"
+        ]
+      );
     }
   ];
 }

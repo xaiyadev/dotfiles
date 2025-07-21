@@ -1,4 +1,10 @@
-{ pkgs, self, lib, config, ... }:
+{
+  pkgs,
+  self,
+  lib,
+  config,
+  ...
+}:
 let
   inherit (self.lib.modules)
     mkOpt
@@ -19,7 +25,8 @@ in
 {
 
   options.sylveon.hardware.yubikey.enable =
-    mkOpt bool true "Whether or not yubikey support should be enabled";
+    mkOpt bool true
+      "Whether or not yubikey support should be enabled";
 
   config = mkMerge [
     (mkIf cfg.enable {
@@ -36,15 +43,15 @@ in
         udev.packages = [ pkgs.yubikey-personalization ];
       };
 
-       # use gpg agent instead of the ssh agent
-       programs = {
-         ssh.startAgent = false;
+      # use gpg agent instead of the ssh agent
+      programs = {
+        ssh.startAgent = false;
 
-         gnupg.agent = {
-           enable = true;
-           enableSSHSupport = true;
-           enableBrowserSocket = true;
-         };
+        gnupg.agent = {
+          enable = true;
+          enableSSHSupport = true;
+          enableBrowserSocket = true;
+        };
       };
 
       # Add yubico's official tools

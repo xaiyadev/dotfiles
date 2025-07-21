@@ -7,7 +7,8 @@ let
     ;
 
   sway = osConfig.sylveon.system.graphical.sway;
-in {
+in
+{
 
   imports = [
     ./docked_home.nix

@@ -1,4 +1,10 @@
-{ config, lib, self, pkgs, ... }:
+{
+  config,
+  lib,
+  self,
+  pkgs,
+  ...
+}:
 let
 
   inherit (lib)
@@ -13,8 +19,7 @@ let
 in
 {
 
-  options.sylveon.programs.librewolf =
-    mkPackageOpt pkgs.librewolf "Whether or not to enable chromium";
+  options.sylveon.programs.librewolf = mkPackageOpt pkgs.librewolf "Whether or not to enable chromium";
 
   config = mkIf cfg.enable {
     programs.librewolf = {
@@ -34,21 +39,22 @@ in
 
       policies = {
         ExtensionSettings =
-          genAttrs [
-            "uBlock0@raymondhill.net"
-            "languagetool-webextension@languagetool.org"
-            "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" # styl-us
-            "sponsorBlocker@ajay.app"
-            "FirefoxColor@mozilla.com"
-            "firefox-enpass@enpass.io" # TODO: only blmedia?
-          ]
-          (ext: {
-            installation_mode = "force_installed";
-            private_browsing = true;
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/${ext}/latest.xpi";
-          });
+          genAttrs
+            [
+              "uBlock0@raymondhill.net"
+              "languagetool-webextension@languagetool.org"
+              "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" # styl-us
+              "sponsorBlocker@ajay.app"
+              "FirefoxColor@mozilla.com"
+              "firefox-enpass@enpass.io" # TODO: only blmedia?
+            ]
+            (ext: {
+              installation_mode = "force_installed";
+              private_browsing = true;
+              install_url = "https://addons.mozilla.org/firefox/downloads/latest/${ext}/latest.xpi";
+            });
 
-          DisplayBookmarksToolbar = "never";
+        DisplayBookmarksToolbar = "never";
       };
 
       profiles = {
@@ -75,10 +81,17 @@ in
               MyNixOS = {
                 name = "MyNixOS";
 
-                urls = [{
-                  template = "https://mynixos.com/search";
-                  params = [{ name = "q"; value = "{searchTerms}"; }];
-                }];
+                urls = [
+                  {
+                    template = "https://mynixos.com/search";
+                    params = [
+                      {
+                        name = "q";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
 
                 icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
                 definedAliases = [ "@nix" ];

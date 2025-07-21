@@ -3,7 +3,7 @@
 
     "sway/window".format = "{title}";
 
-    /* Show the sway workspaces in your waybar */
+    # Show the sway workspaces in your waybar
     "sway/workspaces" = {
       disable-scroll = true;
       all-outputs = true;

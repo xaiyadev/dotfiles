@@ -1,19 +1,24 @@
-{ inputs, lib, self, config, ... }:
+{
+  inputs,
+  lib,
+  self,
+  config,
+  ...
+}:
 
 let
-    inherit (lib)
-      mkIf
-      mkForce
-      ;
+  inherit (lib)
+    mkIf
+    mkForce
+    ;
 
-    inherit (lib.types) bool;
+  inherit (lib.types) bool;
 
-    inherit (self.lib.modules) mkOpt;
-    cfg = config.sylveon.programs.discord;
+  inherit (self.lib.modules) mkOpt;
+  cfg = config.sylveon.programs.discord;
 in
 {
-  options.sylveon.programs.discord.enable =
-    mkOpt bool false "Whether or not to enable discord";
+  options.sylveon.programs.discord.enable = mkOpt bool false "Whether or not to enable discord";
 
   imports = [ inputs.nixcord.homeModules.nixcord ];
 
@@ -44,7 +49,10 @@ in
           fixImagesQuality.enable = true;
           friendsSince.enable = true;
           fullSearchContext.enable = true;
-          memberCount = { enable = true; memberList = false; };
+          memberCount = {
+            enable = true;
+            memberList = false;
+          };
           mentionAvatars.enable = true;
           messageLogger.enable = true;
           noMaskedUrlPaste.enable = true;
@@ -53,7 +61,11 @@ in
           permissionFreeWill.enable = true;
           permissionsViewer.enable = true;
           plainFolderIcon.enable = true;
-          platformIndicators = { enable = true; lists = false; messages = false; };
+          platformIndicators = {
+            enable = true;
+            lists = false;
+            messages = false;
+          };
           serverInfo.enable = true;
           showAllMessageButtons.enable = true;
           showHiddenChannels.enable = true;

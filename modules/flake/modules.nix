@@ -28,7 +28,7 @@ in
       };
     };
 
-    homeManagerModules  = {
+    homeManagerModules = {
       sylveon = mkModule {
         class = "homeManager";
         modules = [ "${self}/modules/home/default.nix" ];

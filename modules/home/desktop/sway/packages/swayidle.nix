@@ -1,4 +1,10 @@
-{ pkgs, osConfig, lib, config,  ... }:
+{
+  pkgs,
+  osConfig,
+  lib,
+  config,
+  ...
+}:
 let
   inherit (lib) mkIf;
 
@@ -9,15 +15,19 @@ in
   services.swayidle = mkIf sway.enable {
     enable = true;
 
-    timeouts =
-      [
-        { timeout = 300; command = "exec ${config.programs.swaylock.package}/bin/swaylock"; }
-      ];
+    timeouts = [
+      {
+        timeout = 300;
+        command = "exec ${config.programs.swaylock.package}/bin/swaylock";
+      }
+    ];
 
-    events =
-     [
-       { event = "before-sleep"; command = "exec ${config.programs.swaylock.package}/bin/swaylock"; }
-     ];
+    events = [
+      {
+        event = "before-sleep";
+        command = "exec ${config.programs.swaylock.package}/bin/swaylock";
+      }
+    ];
 
   };
 }

@@ -1,4 +1,10 @@
-{ self, lib, pkgs, osConfig, ... }:
+{
+  self,
+  lib,
+  pkgs,
+  osConfig,
+  ...
+}:
 let
   inherit (lib) mkIf;
 
@@ -16,6 +22,6 @@ in
 
       sway.enable = true;
       gtk.enable = true;
-  };
+    };
   };
 }

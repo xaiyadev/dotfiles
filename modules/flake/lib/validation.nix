@@ -15,11 +15,15 @@ let
   anyHomeModuleActive =
     config: modulePath:
     let
-      modulesList = (forEach config.sylveon.system.users (name:
-        getAttrFromPath modulePath config.home-manager.users.${name}
-      ));
+      modulesList = (
+        forEach config.sylveon.system.users (
+          name: getAttrFromPath modulePath config.home-manager.users.${name}
+        )
+      );
     in
-      any (x: x) modulesList;
+    any (x: x) modulesList;
 
 in
-{ inherit anyHomeModuleActive; }
+{
+  inherit anyHomeModuleActive;
+}

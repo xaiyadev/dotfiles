@@ -1,4 +1,4 @@
-/* Basic variables and configurations */
+# Basic variables and configurations
 { lib, self, ... }:
 let
   inherit (lib.types) str;

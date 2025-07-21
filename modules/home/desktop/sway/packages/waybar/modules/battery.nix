@@ -1,6 +1,6 @@
 {
   programs.waybar.settings.mainBar = {
-    /* The Battery status will be shown */
+    # The Battery status will be shown
     "battery" = {
       interval = 10;
       full-at = 80; # Changed in BIOS for better capacity
@@ -16,7 +16,18 @@
       format-charging = "( {icon}) {capacity}%";
       format-full = "󰚥";
 
-      format-icons = [ "󱟩" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰁹" ];
+      format-icons = [
+        "󱟩"
+        "󰁺"
+        "󰁻"
+        "󰁼"
+        "󰁽"
+        "󰁾"
+        "󰁿"
+        "󰂀"
+        "󰂁"
+        "󰁹"
+      ];
     };
   };
 }

@@ -1,4 +1,10 @@
-{ osConfig, lib, self, inputs, ... }:
+{
+  osConfig,
+  lib,
+  self,
+  inputs,
+  ...
+}:
 let
   inherit (lib) mkIf;
 

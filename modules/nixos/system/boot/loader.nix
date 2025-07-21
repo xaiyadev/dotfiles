@@ -1,4 +1,9 @@
-{ lib, config, self, ...}:
+{
+  lib,
+  config,
+  self,
+  ...
+}:
 let
   inherit (lib)
     mkIf
@@ -13,13 +18,10 @@ in
 {
 
   options.sylveon.system.boot = {
-    loader = mkOpt
-      (enum [
-        "grub"
-        "systemd-boot"
-      ])
+    loader = mkOpt (enum [
+      "grub"
       "systemd-boot"
-      "What boot loader should be used";
+    ]) "systemd-boot" "What boot loader should be used";
 
     grub = {
       device = mkOpt str "nodev" "The device that the bootloader should be installed on.";

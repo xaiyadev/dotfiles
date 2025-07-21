@@ -1,4 +1,10 @@
-{ self, config, lib, pkgs, ... }:
+{
+  self,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   inherit (lib)
     mkIf
@@ -16,8 +22,7 @@ let
 
 in
 {
-  options.sylveon.cli.zsh =
-    mkPackageOpt pkgs.zsh "Whether or not to use zsh as a terminal";
+  options.sylveon.cli.zsh = mkPackageOpt pkgs.zsh "Whether or not to use zsh as a terminal";
 
   config = mkIf cfg.enable {
     home.shell.enableZshIntegration = true;
@@ -50,11 +55,12 @@ in
     programs.starship = {
       enable = true;
 
-      settings =
-        fromTOML (readFile (fetchurl {
-            url = "https://starship.rs/presets/toml/bracketed-segments.toml";
-            sha256 = "1f373znyrhxix8b3si7w9kqkm8v6z1hwxl62zsiffn7k973pfcgg";
-        }));
+      settings = fromTOML (
+        readFile (fetchurl {
+          url = "https://starship.rs/presets/toml/bracketed-segments.toml";
+          sha256 = "1f373znyrhxix8b3si7w9kqkm8v6z1hwxl62zsiffn7k973pfcgg";
+        })
+      );
     };
   };
 }

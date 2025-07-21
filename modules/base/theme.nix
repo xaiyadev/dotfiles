@@ -1,4 +1,11 @@
-{ self, lib, config, inputs, pkgs, ... }:
+{
+  self,
+  lib,
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 let
   inherit (lib.types)
     path
@@ -14,10 +21,10 @@ let
 in
 {
   options.sylveon.system.theme = {
-    name =
-      mkOpt (nullOr (enum [ "rose-pine" ])) "rose-pine" "The theme that should be loaded";
+    name = mkOpt (nullOr (enum [ "rose-pine" ])) "rose-pine" "The theme that should be loaded";
 
     base16 =
-      mkOpt path "${inputs.tinted-theming-schemes}/base16/${cfg.name}.yaml" "Path to base16 file for your theme";
+      mkOpt path "${inputs.tinted-theming-schemes}/base16/${cfg.name}.yaml"
+        "Path to base16 file for your theme";
   };
 }

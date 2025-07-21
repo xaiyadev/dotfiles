@@ -1,4 +1,11 @@
-{ lib, config, self, inputs', inputs, ... }:
+{
+  lib,
+  config,
+  self,
+  inputs',
+  inputs,
+  ...
+}:
 let
   inherit (lib.attrsets) genAttrs;
 in

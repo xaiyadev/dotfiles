@@ -1,4 +1,10 @@
-{ osConfig, lib, pkgs, config, ... }:
+{
+  osConfig,
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   inherit (lib)
     mkIf
@@ -34,21 +40,17 @@ in
         terminal = "${pkgs.kitty}/bin/kitty";
 
         keybindings = mkOptionDefault {
-          "${modifier}+Escape" =
-            "exec ${config.programs.swaylock.package}/bin/swaylock"; # Lock screen
+          "${modifier}+Escape" = "exec ${config.programs.swaylock.package}/bin/swaylock"; # Lock screen
 
           "${modifier}+shift+s" =
             ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | ${pkgs.wl-clipboard}/bin/wl-copy''; # Take a screenshot
 
-          "${modifier}+e" =
-            ''exec ${pkgs.nemo-with-extensions}/bin/nemo'';
+          "${modifier}+e" = ''exec ${pkgs.nemo-with-extensions}/bin/nemo'';
 
-          "${modifier}+c" =
-            ''exec ${pkgs.gnome-calculator}/bin/gnome-calculator'';
+          "${modifier}+c" = ''exec ${pkgs.gnome-calculator}/bin/gnome-calculator'';
         };
 
       };
-
 
       extraConfig = concatStringsSep "\n" [
         # Touchpad configuration

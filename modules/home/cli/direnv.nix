@@ -1,4 +1,10 @@
-{ config, self, lib, pkgs, ... }:
+{
+  config,
+  self,
+  lib,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf;
   inherit (self.lib.modules) mkPackageOpt;
@@ -8,8 +14,7 @@ let
 in
 {
 
-  options.sylveon.cli.direnv =
-    mkPackageOpt pkgs.direnv "Whether or not to enable direnv support";
+  options.sylveon.cli.direnv = mkPackageOpt pkgs.direnv "Whether or not to enable direnv support";
 
   config = mkIf cfg.enable {
     programs.direnv = {
