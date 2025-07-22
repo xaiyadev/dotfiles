@@ -3,20 +3,19 @@
   self, 
   lib, 
   config,
-  osConfig,
   inputs,
   ... 
 }:
 let
   inherit (self.lib.modules) mkPackageOpt;
 
-
   inherit (lib) 
     mkIf
-    mkDefault
+    mkMerge
     ;
 
   cfg = config.sylveon.cli.neovim;
+  neov-plugins = config.programs.nixvim.plugins;
 in
 {
   imports = [
@@ -34,6 +33,36 @@ in
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
+
+      keymaps = mkMerge [
+        [
+          {
+            action = "<cmd>bnext<CR>";
+            key = "<A-l>";
+            options = {
+              silent = true;
+            };
+          }
+
+          {
+            action = "<cmd>bNext<CR>";
+            key = "<A-h>";
+            options = {
+              silent = true;
+            };
+          }
+        ]
+
+        (mkIf neov-plugins.nvim-tree.enable [
+          {
+            action = "<cmd>NvimTreeToggle<CR>";
+            key = "<A-1>";
+            options = {
+              silent = true;
+            };
+          }
+        ])
+      ];
 
       # global options defined for all files
       globalOpts = {
@@ -87,6 +116,121 @@ in
               diagnostics = "nvim_lsp";
             };
           };
+        };
+
+        nvim-tree = {
+          enable = true;
+          syncRootWithCwd = true;
+          diagnostics.enable = true;
+          modified.enable = true;
+        };
+
+        treesitter = {
+          enable = true;
+          autoLoad = true; # TODO: lazyload
+
+          settings.highlight.enable = true;
+        };
+
+        blink-cmp = {
+          enable = true;
+          autoLoad = true; # TODO: lazyload
+
+          settings = {
+            keymap = {
+              "<tab>" = [ "select_and_accept" "snippet_forward" "fallback" ];
+              "<C-space>" = [ "show" "show_documentation" "hide_documentation" ];
+              "<down>" = [ "select_next" "fallback" ];
+              "<up>" = [ "select_prev" "fallback" ];
+            };
+
+            completion = {
+              ghost_text.enabled = true;
+              list.cycle = {
+                from_bottom = false;
+                from_top = false;
+              };
+            };
+          };
+        };
+
+        lsp = {
+          enable = true;
+          autoLoad = true; # TODO: lazyload
+
+          servers = {
+            dockerls.enable = true;
+            bashls.enable = true;
+            cssls.enable = true;
+
+            twiggy_language_server = {
+              enable  = true;
+              package = pkgs.twig-language-server; # https://github.com/nixos/nixpkgs/issues/425846
+              cmd = [ "${pkgs.twig-language-server}/bin/twig-language-server" ];
+            };
+
+            emmet_language_server = {
+              filetypes = [
+                "css"
+                "html"
+                "javascript"
+                "javascriptreact"
+                "less"
+                "sass"
+                "scss"
+                "typescriptreact"
+              ];
+            };
+
+            html.enable = true;
+
+            intelephense = {
+              enable = true;
+              package = pkgs.intelephense;
+            };
+
+            jqls.enable = true;
+            jsonls.enable = true;
+            lua_ls.enable = true;
+
+            nil_ls = {
+              enable = true;
+              cmd = [ "${pkgs.nil}/bin/nil" ];
+              settings = {
+                formatting.command = [ "nix fmt" ];
+                nix.maxMemoryMB = null;
+              };
+            };
+
+            vuels = {
+              enable = true;
+              package = pkgs.vue-language-server;
+              cmd = [ "${pkgs.vue-language-server}/bin/vue-language-server" ];
+            };
+          };
+        };
+
+        cord = {
+          enable = true;
+          autoLoad = true; # TODO: lazyLoad
+          settings = {
+            display = {
+              swap_fields = true;
+
+              theme = "atom";
+              flavor = "accent";
+            };
+
+            editor.icon = "https://raw.githubusercontent.com/IogaMaster/neovim/main/.github/assets/nixvim-dark.webp";
+            text.file_browser = "Browsing through project";
+
+          };
+        };
+
+        direnv.enable = true;
+
+        telescope = {
+          enable = true;
         };
 
         web-devicons.enable = true;
