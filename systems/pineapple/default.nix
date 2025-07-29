@@ -20,7 +20,14 @@
   boot.extraModulePackages = [ config.boot.kernelPackages.xpadneo ];
 
   programs.steam.enable = true;
-  environment.systemPackages = [ pkgs.gamescope ];
+  environment.systemPackages = [ 
+    pkgs.gamescope 
+    pkgs.spotify
+  ];
+
+  virtualisation.docker = {
+    enable = true;
+  };
 
   # --- TEMPORARY ---
 

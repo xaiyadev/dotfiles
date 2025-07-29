@@ -26,8 +26,14 @@ in
     mkPackageOpt pkgs.neovim "vim editor, only better";
 
   config = mkIf cfg.enable {
+    home.packages = [
+      pkgs.ripgrep
+      pkgs.clang
+    ];
+
     programs.nixvim = {
       enable = true;
+      package = pkgs.neovim-unwrapped;
       enableMan = false;
 
       defaultEditor = true;
@@ -127,14 +133,17 @@ in
 
         treesitter = {
           enable = true;
-          autoLoad = true; # TODO: lazyload
 
-          settings.highlight.enable = true;
+          settings = {
+            auto_install = true;
+
+            folding = true;
+            highlight.enable = true;
+          };
         };
 
         blink-cmp = {
           enable = true;
-          autoLoad = true; # TODO: lazyload
 
           settings = {
             keymap = {
@@ -156,7 +165,6 @@ in
 
         lsp = {
           enable = true;
-          autoLoad = true; # TODO: lazyload
 
           servers = {
             dockerls.enable = true;
@@ -211,8 +219,8 @@ in
         };
 
         cord = {
-          enable = true;
-          autoLoad = true; # TODO: lazyLoad
+          enable = false; # TODO: disable for blmedia account
+
           settings = {
             display = {
               swap_fields = true;
@@ -227,13 +235,62 @@ in
           };
         };
 
-        direnv.enable = true;
 
         telescope = {
           enable = true;
+
+          settings = {
+            defaults = {
+              sorting_strategy = "ascending";
+              layout_config = {
+                prompt_position = "top";
+                preview_width = 0.5;
+                width = 0.40;
+                height = 0.40;
+              };
+            };
+
+            pickers = {
+              find_files.previewer = false;
+              live_grep.theme = "dropdown";
+            };
+          };
+
+          extensions = {
+            file-browser = {
+              enable = true;
+              settings.respect_gitignore = true;
+            };
+
+            live-grep-args.enable = true;
+            ui-select.enable = true;
+          };
+
+          keymaps = {
+            "<C-P>f" = {
+              action = "find_files";
+              options.desc = "Search for files in telescope";
+            };
+
+            "<C-P>" = {
+              action = "live_grep";
+              options.desc = "Search through all files for specific words";
+            };
+          };
+
         };
 
+        project-nvim = {
+          enable = true;
+        };
+
+        auto-save.enable = true;
+        auto-session.enable = true;
+
+        direnv.enable = true;
+
         web-devicons.enable = true;
+        lz-n.enable = true; # Lazy loading
       };
     };
 
