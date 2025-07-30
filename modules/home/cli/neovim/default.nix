@@ -20,6 +20,9 @@ in
 {
   imports = [
     inputs.nixvim.homeModules.nixvim
+
+    ./lsp.nix
+    ./telescope.nix
   ];
 
   options.sylveon.cli.neovim =
@@ -57,12 +60,20 @@ in
               silent = true;
             };
           }
+
+          {
+            action = "<cmd>bdelete<CR>";
+            key = "<C-w>";
+            options = {
+              silent = true;
+            };
+          }
         ]
 
         (mkIf neov-plugins.nvim-tree.enable [
           {
             action = "<cmd>NvimTreeToggle<CR>";
-            key = "<A-1>";
+            key = "<C-N>";
             options = {
               silent = true;
             };
@@ -126,13 +137,28 @@ in
 
         nvim-tree = {
           enable = true;
+          autoClose = true;
+
           syncRootWithCwd = true;
           diagnostics.enable = true;
           modified.enable = true;
+          view.width = "20%";
+
+          actions.openFile.quitOnOpen = true;
+
+          renderer = {
+            fullName = true;
+            indentMarkers.enable = true;
+          };
+
+
         };
 
         treesitter = {
           enable = true;
+
+          folding = true;
+
 
           settings = {
             auto_install = true;
@@ -163,61 +189,6 @@ in
           };
         };
 
-        lsp = {
-          enable = true;
-
-          servers = {
-            dockerls.enable = true;
-            bashls.enable = true;
-            cssls.enable = true;
-
-            twiggy_language_server = {
-              enable  = true;
-              package = pkgs.twig-language-server; # https://github.com/nixos/nixpkgs/issues/425846
-              cmd = [ "${pkgs.twig-language-server}/bin/twig-language-server" ];
-            };
-
-            emmet_language_server = {
-              filetypes = [
-                "css"
-                "html"
-                "javascript"
-                "javascriptreact"
-                "less"
-                "sass"
-                "scss"
-                "typescriptreact"
-              ];
-            };
-
-            html.enable = true;
-
-            intelephense = {
-              enable = true;
-              package = pkgs.intelephense;
-            };
-
-            jqls.enable = true;
-            jsonls.enable = true;
-            lua_ls.enable = true;
-
-            nil_ls = {
-              enable = true;
-              cmd = [ "${pkgs.nil}/bin/nil" ];
-              settings = {
-                formatting.command = [ "nix fmt" ];
-                nix.maxMemoryMB = null;
-              };
-            };
-
-            vuels = {
-              enable = true;
-              package = pkgs.vue-language-server;
-              cmd = [ "${pkgs.vue-language-server}/bin/vue-language-server" ];
-            };
-          };
-        };
-
         cord = {
           enable = false; # TODO: disable for blmedia account
 
@@ -235,54 +206,8 @@ in
           };
         };
 
-
-        telescope = {
-          enable = true;
-
-          settings = {
-            defaults = {
-              sorting_strategy = "ascending";
-              layout_config = {
-                prompt_position = "top";
-                preview_width = 0.5;
-                width = 0.40;
-                height = 0.40;
-              };
-            };
-
-            pickers = {
-              find_files.previewer = false;
-              live_grep.theme = "dropdown";
-            };
-          };
-
-          extensions = {
-            file-browser = {
-              enable = true;
-              settings.respect_gitignore = true;
-            };
-
-            live-grep-args.enable = true;
-            ui-select.enable = true;
-          };
-
-          keymaps = {
-            "<C-P>f" = {
-              action = "find_files";
-              options.desc = "Search for files in telescope";
-            };
-
-            "<C-P>" = {
-              action = "live_grep";
-              options.desc = "Search through all files for specific words";
-            };
-          };
-
-        };
-
-        project-nvim = {
-          enable = true;
-        };
+        project-nvim.enable = true;
+        colorizer.enable = true;
 
         auto-save.enable = true;
         auto-session.enable = true;
@@ -294,6 +219,11 @@ in
       };
     };
 
-    stylix.targets.nixvim.plugin = "base16-nvim";
+    stylix.targets.nixvim = {
+      plugin = "mini.base16";
+      transparentBackground.main = true;
+    };
+
   };
 }
+
