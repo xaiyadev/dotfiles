@@ -15,6 +15,7 @@
       direnv.enable = true;
       git.enable = true;
 
+      neovim.enable = true;
       kitty.enable = true;
     };
   };
