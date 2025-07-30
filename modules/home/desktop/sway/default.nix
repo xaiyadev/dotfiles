@@ -62,7 +62,7 @@ in
         "corner_radius 13"
 
         # Lower the opacity of specifc windows
-        ''for_window [app_id="^kitty$"] opacity 0.95''
+        ''for_window [app_id="^kitty$"] opacity 0.94''
         ''for_window [class="^tidal-hifi"] opacity 0.9''
 
         # Always load kanshi after a sway-reload, that prevents from the monitors bugging out

@@ -19,7 +19,7 @@ in
       enable = true;
       enableReleaseChecks = false; # Stylix is sometimes behind home-manager, nothing we can do
 
-      image = "${self}/assets/wallpaper/Mizuki_34_trained_art.png";
+      image = "${self}/assets/wallpaper/infinity-nikki-1.jpg";
       base16Scheme = theme.base16;
       polarity = "dark";
     };

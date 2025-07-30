@@ -4,8 +4,7 @@
   home.packages = [
     pkgs.enpass
 
-    # https://github.com/NixOS/nixpkgs/issues/426815#issuecomment-3094569105
-    (pkgs.jetbrains.phpstorm)
+    pkgs.jetbrains.phpstorm # Mainly using neovim, but for some work stuff still needed
     pkgs.obsidian # Notes taking app
 
     inputs'.tidaLuna.packages.default # Music Streaming Service (injected)
