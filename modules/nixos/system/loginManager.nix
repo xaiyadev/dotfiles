@@ -33,7 +33,6 @@ in
   config = {
     services.greetd = mkIf (cfg == "greetd") {
       enable = true;
-      vt = 2;
 
       settings = {
         default_session = {
