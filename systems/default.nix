@@ -14,6 +14,9 @@
     hosts = {
       # Framework laptop
       pineapple = { };
+
+      # Home server
+      apricot = { };
     };
   };
 }

@@ -10,12 +10,8 @@ in
     # System profiles
 
     graphical.enable = mkOpt bool false "Enable configurations for graphical systems";
-
     laptop.enable = mkOpt bool false "Enable configurations for laptops";
-
     server.enable = mkOpt bool false "Enable configurations for servers";
-
-    # Software profiles
 
     gaming.enable = mkOpt bool false "Configure the system for gaming";
 

@@ -12,4 +12,6 @@
     # Never mind, there are to many... for now!
     # showDerivationWarnings = [ "maintainerless" ];
   };
+
+  nixpkgs.overlays = [];
 }

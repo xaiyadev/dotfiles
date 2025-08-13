@@ -1,6 +1,6 @@
 { self, lib, ... }:
 let
-  inherit (lib.types) enum;
+  inherit (lib.types) enum nullOr;
 
   inherit (self.lib.modules) mkOpt;
 in
@@ -9,7 +9,7 @@ in
     ./amd.nix
   ];
 
-  options.sylveon.device.gpu = mkOpt (enum [ "amd" ]) null "What gpu your system uses";
+  options.sylveon.device.gpu = mkOpt (nullOr(enum [ "amd" ])) null "What gpu your system uses";
 
   config = {
     hardware.graphics = {

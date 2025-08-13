@@ -10,6 +10,7 @@
         inherit system;
 
         config.allowUnfree = true;
+        overlays = [ ];
       };
 
       formatter = pkgs.nixfmt-tree;

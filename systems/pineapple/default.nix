@@ -23,6 +23,7 @@
   environment.systemPackages = [ 
     pkgs.gamescope 
     pkgs.spotify
+    pkgs.lutris
   ];
 
   virtualisation.docker = {
