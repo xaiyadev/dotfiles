@@ -19,14 +19,21 @@
   age.secrets = {
     "ssh-gh" = {
       # Github
-      rekeyFile = "${self}/secrets/ssh-gh.age"; # Loading github ssh key
+      rekeyFile = "${self}/secrets/ssh-gh.age";
       mode = "644";
       group = "users";
     };
 
     "ssh-bb" = {
       # Bitbucket
-      rekeyFile = "${self}/secrets/ssh-bb.age"; # Loading github ssh key
+      rekeyFile = "${self}/secrets/ssh-bb.age";
+      mode = "644";
+      group = "users";
+    };
+
+    "ssh-gl-xy" = {
+      # Xaiya's Gitlab
+      rekeyFile = "${self}/secrets/ssh-gl-xy.age"; 
       mode = "644";
       group = "users";
     };

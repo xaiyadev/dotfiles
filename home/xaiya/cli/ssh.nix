@@ -11,6 +11,12 @@
         hostname = "github.com";
         identityFile = osConfig.age.secrets."ssh-gh".path;
       };
+
+      "apricot" = {
+        user = "gitlab";
+        hostname = "apricot";
+        identityFile = osConfig.age.secrets."ssh-gl-xy".path;
+      };
     };
   };
 }

@@ -44,8 +44,11 @@ in
 
       generators = {
         # Generate a random string that is encrypted as sha256 after that
-        ranSha256 =
+        sha256 =
           { ... }: "echo tr -dc A-Za-z0-9 </dev/urandom | head -c 13 | sha256sum | cut -d ' ' -f1";
+
+        rsa =
+          { pkgs, ... }: "${pkgs.openssl}/bin/openssl genrsa 2048";
       };
 
       identityPaths = [

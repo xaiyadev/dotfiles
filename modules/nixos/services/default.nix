@@ -5,6 +5,7 @@
     ./nginx.nix
 
     ./vaultwarden.nix
+    ./gitlab.nix
   ];
 
 }

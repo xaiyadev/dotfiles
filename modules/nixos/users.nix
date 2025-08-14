@@ -22,7 +22,7 @@ in
     # Generate random passwords for users
     age.secrets = genAttrs (forEach users (name: "${name}-passwd")) (name: {
       rekeyFile = "${self}/secrets/${name}.age";
-      generator.script = "ranSha255";
+      generator.script = "sha256";
     });
 
     # Create users from list
