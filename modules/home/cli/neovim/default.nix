@@ -139,19 +139,19 @@ in
           enable = true;
           autoClose = true;
 
-          syncRootWithCwd = true;
-          diagnostics.enable = true;
-          modified.enable = true;
-          view.width = "20%";
+          settings = {
+            syncRootWithCwd = true;
+            diagnostics.enable = true;
+            modified.enable = true;
+            view.width = "20%";
 
-          actions.openFile.quitOnOpen = true;
+            actions.openFile.quitOnOpen = true;
 
-          renderer = {
-            fullName = true;
-            indentMarkers.enable = true;
+            renderer = {
+              fullName = true;
+              indentMarkers.enable = true;
+            };
           };
-
-
         };
 
         treesitter = {
