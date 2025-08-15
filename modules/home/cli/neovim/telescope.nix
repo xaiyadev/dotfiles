@@ -37,6 +37,8 @@ in
         advanced-git-search.enable = true;
         live-grep-args.enable = true;
         ui-select.enable = true;
+
+        project.enable = true;
       };
 
       keymaps = {

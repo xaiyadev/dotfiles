@@ -18,6 +18,7 @@ let
   neov-plugins = config.programs.nixvim.plugins;
 in
 {
+
   imports = [
     inputs.nixvim.homeModules.nixvim
 
@@ -140,16 +141,17 @@ in
           autoClose = true;
 
           settings = {
-            syncRootWithCwd = true;
             diagnostics.enable = true;
             modified.enable = true;
             view.width = "20%";
 
-            actions.openFile.quitOnOpen = true;
+            actions = {
+              open_file.quit_on_open = true;
+            };
 
             renderer = {
-              fullName = true;
-              indentMarkers.enable = true;
+              full_name = true;
+              indent_markers.enable = true;
             };
           };
         };
@@ -203,7 +205,12 @@ in
           };
         };
 
-        project-nvim.enable = true;
+        /* Curently bricked TODO */
+        project-nvim = {
+          enable = false;
+          enableTelescope = true;
+        };
+        
         colorizer.enable = true;
 
         auto-save.enable = true;
