@@ -33,6 +33,9 @@
       nginx.enable = true;
       
       vaultwarden.enable = true;
+      gitlab.enable = true;
+
+      minecraft.enable = true;
     };
   };
 

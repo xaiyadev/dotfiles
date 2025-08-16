@@ -3,7 +3,7 @@ let
   inherit (lib) mkIf;
   inherit (self.lib.modules) mkPackageOpt;
 
-  cfg = config.sylveon.services.vaultwarden;
+  cfg = config.sylveon.services.gitlab;
 
   getSecret = x: config.age.secrets."gitlab-${x}".path;
 
