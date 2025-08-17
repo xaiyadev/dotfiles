@@ -63,9 +63,15 @@ in
     services.gitlab = {
       enable = true;
 
-      databaseCreateLocally = false; /* Use our postgres database */
-      databaseHost = "";
+      databaseCreateLocally = false; # Use our postgres databse
+      databaseHost = ""; # Using the local socket
       
+      port = 443;
+      https = true;
+      host = "git.xaiya.dev";
+
+      extraGitlabRb = '' '';
+
       databasePasswordFile = getSecret "password";
       initialRootPasswordFile = getSecret "password";
 
@@ -79,8 +85,6 @@ in
         activeRecordDeterministicKeyFile = getSecret "record-deterministic-key";
         activeRecordSaltFile = getSecret "salt";
       };
-
-      port = 8001;
     };
 
     services.openssh.enable = true; # TODO
