@@ -22,6 +22,7 @@ in
       openFirewall = true;
     
       declarative = true;
+
       whitelist = {
         xaiyadev = "46fbfb38-95fe-4065-8391-42b33d938b15"; # me :>
         DerHirschGamer = "91142f92-dba4-4a3b-806a-bea7983c5f70"; # Timo
@@ -31,10 +32,17 @@ in
         Pallgamer48 = "5942cf47-3c62-4286-bd1e-1d58d42deed5"; # Jane
         ein_fish2punkt0 = "a97c9751-8458-45df-b58a-4dd1c1e027c2"; # Richie
         Cobbeled = "ca1baad9-2168-4a8f-bdaf-d612f7569ace"; # Cobble
+        juijui0986 = "20a91ac9-e8fc-4032-b135-3c1550071a09"; # juijui
+        NeyroHD = "5f4b3403-9226-40a0-897a-fc545d039a95"; # Finn
+        m1Kaz1lla = "7bb7448c-8180-44de-bae4-bfe4b4f406bb"; # Mika
+        mythicalel = "6c99fe8f-8565-4781-ac1d-62121e6953e5"; # Phillip
+        M0rganite1 = "e8d654c9-6bd4-4572-b409-75e6a387f759"; # Leana
       };
     
       serverProperties = {
-        dificulty = 3;
+        difficulty = "hard";
+
+        spawn-protection = 0;
 
         gamemode = 0;
         force-gamemode = true;
