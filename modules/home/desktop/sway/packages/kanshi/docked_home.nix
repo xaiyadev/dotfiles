@@ -25,5 +25,26 @@
         ];
       };
     }
+    
+    {
+      profile = {
+        name = "docked_home__one_screen";
+        outputs = [
+          {
+            criteria = "eDP-2";
+            position = "0,0";
+          }
+
+          {
+            criteria = "AOC 2460G4 0x0000A8E2";
+            position = "2560,266";
+
+            mode = "1920x1080@119.982Hz";
+          }
+        ];
+      };
+    }
+
+
   ];
 }

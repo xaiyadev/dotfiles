@@ -38,6 +38,7 @@
           "LG Electronics LG ULTRAFINE 203NTFA8L891" # Second screen office (2nd workplace)
           "LG Electronics LG ULTRAFINE 404NTYT9M282" # Second screen office (3rd workplace)
           "Acer Technologies RT240Y T75EE0042411" # Second Screen home
+          "eDP-2"
         ];
 
         workspace = "2";
