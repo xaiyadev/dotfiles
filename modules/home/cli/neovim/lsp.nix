@@ -14,6 +14,8 @@
       };
 
       emmet_language_server = {
+        enable = true;
+
         filetypes = [
           "css"
           "html"
@@ -24,6 +26,11 @@
           "scss"
           "typescriptreact"
         ];
+      };
+
+      ts_ls = {
+        enable = true;
+        filetypes = [ "ts" "js" ];
       };
 
       html.enable = true;

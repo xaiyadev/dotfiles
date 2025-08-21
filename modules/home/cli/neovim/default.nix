@@ -179,11 +179,28 @@ in
             };
 
             completion = {
+              trigger.show_on_keyboard = true;
               ghost_text.enabled = true;
+
               list.cycle = {
                 from_bottom = false;
                 from_top = false;
               };
+
+              menu = {
+                scrolloff = 0;
+                border = "none";
+                draw = {
+                  padding = 1;
+                  gap = 1;
+                  treesitter = [ "lsp" "buffer" ];
+
+                };
+              };
+            };
+
+            sources = {
+              default = [ "lsp" "path" "snippets" "buffer" ];
             };
           };
         };
