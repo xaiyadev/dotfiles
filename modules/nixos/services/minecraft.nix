@@ -37,6 +37,7 @@ in
         m1Kaz1lla = "7bb7448c-8180-44de-bae4-bfe4b4f406bb"; # Mika
         mythicalel = "6c99fe8f-8565-4781-ac1d-62121e6953e5"; # Phillip
         M0rganite1 = "e8d654c9-6bd4-4572-b409-75e6a387f759"; # Leana
+        RosaKanickel = "613a8b60-c834-47d7-bff8-586d7681bb4c"; # Lennard
       };
     
       serverProperties = {
