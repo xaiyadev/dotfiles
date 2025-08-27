@@ -39,17 +39,5 @@ in
         environmentFile = config.age.secrets.cloudflare-acme.path;
       };
     };
-
-    services.nginx.virtualHosts."xaiya.dev" = {
-        forceSSL = true;
-        useACMEHost = "xaiya.dev";
-        locations."/".return = ''301 https://onesquareminesweeper.com/''; # Return to a cool catpedia page
-
-        /* Return to social media platforms */
-        locations."/bsky".return = "301 https://bsky.app/profile/xaiya.dev";
-        locations."/git".return = "301 https://github.com/xaiyadev";
-
-        extraConfig = "proxy_ssl_server_name on;";
-      };
   };
 }

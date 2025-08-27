@@ -34,6 +34,7 @@
       
       vaultwarden.enable = true;
       gitlab.enable = true;
+      glance.enable = true;
 
       minecraft.enable = true;
     };

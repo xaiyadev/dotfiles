@@ -3,10 +3,11 @@
   imports = [
     ./postgres.nix
     ./nginx.nix
-    ./minecraft.nix
 
+    ./minecraft.nix
     ./vaultwarden.nix
     ./gitlab.nix
+    ./glance.nix
   ];
 
 }
