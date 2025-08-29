@@ -7,7 +7,7 @@
     ./minecraft.nix
     ./vaultwarden.nix
     ./gitlab.nix
-    ./glance.nix
+    ./glance
   ];
 
 }

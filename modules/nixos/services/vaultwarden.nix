@@ -34,7 +34,7 @@ in
 
         ROCKET_ADDRESS = "::1";
         ROCKET_PORT = 8222;
-        DATABASE_URL=postgresql://vaultwarden?host=/run/postgresql;
+        DATABASE_URL="postgresql://vaultwarden?host=/run/postgresql";
       };
 
       environmentFile = config.age.secrets.vaultwarden-env.path;
