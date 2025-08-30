@@ -27,7 +27,7 @@ in
 
       settings = {
         pages = [
-          (import ./settings/pages/overview.nix)
+          (import ./pages/overview.nix)
         ];
 
 
