@@ -15,7 +15,7 @@ in
       enable = true;
       inherit (cfg) package;
 
-      # What world I want to use
+      # What world I want to use (TODO: needs some changes)
       dataDir = "/mnt/raid/Xaiya/minecraft/01";
 
       eula = true;

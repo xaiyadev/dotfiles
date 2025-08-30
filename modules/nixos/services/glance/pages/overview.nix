@@ -4,7 +4,7 @@
   center-vertically = true;
 
   head-widgets = [
-    (import ../../widgets/search.nix)
+    (import ./widgets/search.nix)
   ];
 
   columns = [
