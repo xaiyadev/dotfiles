@@ -37,6 +37,8 @@
       glance.enable = true;
       firefly.enable = true;
 
+      plex.enable = true;
+
       minecraft.enable = true;
     };
   };
