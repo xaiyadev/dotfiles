@@ -9,14 +9,6 @@ let
     mkPackageOpt
     ;
 
-    jsonOutputDrv = file:
-      pkgs.runCommand
-        "from-yaml"
-        { nativeBuildInputs = [ pkgs.remarshal ]; }
-       ''${pkgs.remarshal}/bin/remarshal -if yaml -i "${file}" -of json -o "$out"'';
-
-  fromYAML = builtins.fromJSON (builtins.readFile jsonOutputDrv);
-
   cfg = config.sylveon.services.glance;
 in
 {
@@ -31,27 +23,29 @@ in
       enable = true;
       openFirewall = false; /* Managed through nginx server */
 
-      settings = mkMerge [
-        {
-          server = {
-            host = ""; /* Needs to be an empty string, otherwise interfaces cant be found correctly */
-            port = 8002;
-            proxied = true;
-          };
+      environmentFile = config.age.secrets.glance-env.path;
 
-          /* rose-pine theme */
-          theme = {
-            constrat-multiplier = 1.3;
-            background-color = "249 22 12";
-            pirmary-color = "245 50 91";
-            positive-color = "247 23 15";
-            negative-color = "248 15 61";
-          };
-        }
+      settings = {
+        pages = [
+          (import ./settings/pages/overview.nix)
+        ];
 
-        fromYAML ./default.yaml
 
-      ];
+        server = {
+          host = ""; /* Needs to be an empty string, otherwise interfaces cant be found correctly */
+          port = 8002;
+          proxied = true;
+        };
+
+        /* rose-pine color theme */
+        theme = {
+          constrat-multiplier = 1.3;
+          background-color = "249 22 12"; # Base
+          pirmary-color = "245 50 91"; # Text
+          positive-color = "2 55 83"; # Rose
+          negative-color = "343 76 68"; # Love
+        };
+      };
     };
 
 
