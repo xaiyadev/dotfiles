@@ -36,6 +36,7 @@
       gitlab.enable = true;
       glance.enable = true;
       firefly.enable = true;
+      kitchenowl.enable = true;
 
       plex.enable = true;
 

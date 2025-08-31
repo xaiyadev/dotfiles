@@ -15,5 +15,9 @@
       title = "Firefly";
       url = "https://cash.xaiya.dev";
     }
+    {
+      title = "KitchenOwl";
+      url = "https://kitchen.xaiya.dev";
+    }
   ];
 }

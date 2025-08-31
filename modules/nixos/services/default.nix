@@ -9,6 +9,7 @@
     ./gitlab.nix
     ./firefly.nix
     ./glance
+    ./kitchenowl.nix
 
     ./plex.nix
   ];

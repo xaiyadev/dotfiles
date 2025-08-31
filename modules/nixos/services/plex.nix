@@ -1,6 +1,6 @@
 { lib, config, self, pkgs, ... }:
 let
-    inherit (lib) mkIf mkForce;
+    inherit (lib) mkIf;
 
     inherit (self.lib.modules) mkPackageOpt;
     cfg = config.sylveon.services.plex;
