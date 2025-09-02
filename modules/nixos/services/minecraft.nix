@@ -16,7 +16,7 @@ in
       inherit (cfg) package;
 
       # What world I want to use (TODO: needs some changes)
-      dataDir = "/mnt/raid/Xaiya/minecraft/01";
+      dataDir = "/mnt/raid/services/minecraft/01";
 
       eula = true;
       openFirewall = true;
