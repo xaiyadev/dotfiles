@@ -46,6 +46,7 @@
     };
 
     system = {
+      boot.loader = "grub";
       users = [
         "xaiya"
         "blmedia"
