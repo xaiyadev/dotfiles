@@ -26,10 +26,6 @@
     pkgs.lutris
   ];
 
-  virtualisation.docker = {
-    enable = true;
-  };
-
   services.gnome.gnome-keyring.enable = true;
 
   # --- TEMPORARY ---
@@ -51,6 +47,10 @@
         "xaiya"
         "blmedia"
       ];
+    };
+
+    services = {
+      docker.enable = true;
     };
   };
 

@@ -31,6 +31,7 @@
     services = {
       postgres.enable = true;
       nginx.enable = true;
+      docker.enable = true;
       
       vaultwarden.enable = true;
       gitlab.enable = true;

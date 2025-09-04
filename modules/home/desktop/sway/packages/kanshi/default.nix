@@ -16,6 +16,7 @@ in
     ./docked_second_office.nix
     ./docked_third_office.nix
     ./docked_fourth_office.nix
+    ./docked_fived_office.nix
   ];
 
   config = mkIf sway.enable {
