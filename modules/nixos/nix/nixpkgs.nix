@@ -13,5 +13,7 @@
     # showDerivationWarnings = [ "maintainerless" ];
   };
 
-  nixpkgs.overlays = [];
+  nixpkgs.overlays = [
+    (import ./overlays/mpv.nix)
+  ];
 }

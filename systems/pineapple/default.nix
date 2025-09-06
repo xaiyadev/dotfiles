@@ -22,12 +22,10 @@
   programs.steam.enable = true;
   environment.systemPackages = [ 
     pkgs.gamescope 
-    pkgs.spotify
     pkgs.lutris
   ];
 
   services.gnome.gnome-keyring.enable = true;
-
   # --- TEMPORARY ---
 
   sylveon = {
