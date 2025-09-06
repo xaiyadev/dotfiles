@@ -8,6 +8,7 @@
     ./power.nix
     ./bluetooth.nix
     ./yubikey.nix
+    ./controller.nix
   ];
 
   config = {

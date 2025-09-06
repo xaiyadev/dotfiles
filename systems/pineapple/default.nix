@@ -8,29 +8,14 @@
   imports = [
     inputs.nixos-hardware.nixosModules.framework-16-7040-amd
     ./fileSystem.nix
-
-    inputs.aagl.nixosModules.default
   ];
 
   networking.hostName = "pineapple";
 
-  # --- TEMPORARY ---
-  nix.settings = inputs.aagl.nixConfig;
-  programs.sleepy-launcher.enable = true;
-  boot.extraModulePackages = [ config.boot.kernelPackages.xpadneo ];
-
-  programs.steam.enable = true;
-  environment.systemPackages = [ 
-    pkgs.gamescope 
-    pkgs.lutris
-  ];
-
-  services.gnome.gnome-keyring.enable = true;
-  # --- TEMPORARY ---
-
   sylveon = {
     profiles = {
       graphical.enable = true;
+      gaming.enable = true;
       laptop.enable = true;
     };
 
@@ -40,7 +25,6 @@
     };
 
     system = {
-      boot.loader = "grub";
       users = [
         "xaiya"
         "blmedia"

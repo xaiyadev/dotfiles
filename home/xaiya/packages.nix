@@ -4,9 +4,6 @@
   home.packages = [
     pkgs.obsidian # Notes taking app
 
-    pkgs.prismlauncher # Minecraft Launcher
-    pkgs.steam # Steam, Games Launcher
-
     pkgs.mpv # Music streaming
     inputs'.tidaLuna.packages.default # Music Streaming Service (injected)
 

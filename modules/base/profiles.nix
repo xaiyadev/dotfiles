@@ -7,8 +7,6 @@ in
 {
   options.sylveon.profiles = {
 
-    # System profiles
-
     graphical.enable = mkOpt bool false "Enable configurations for graphical systems";
     laptop.enable = mkOpt bool false "Enable configurations for laptops";
     server.enable = mkOpt bool false "Enable configurations for servers";

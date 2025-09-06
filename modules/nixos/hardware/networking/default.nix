@@ -2,28 +2,34 @@
   lib,
   self,
   config,
+  inputs,
   ...
 }:
 let
-  inherit (lib.modules) mkForce;
+  inherit (lib.modules) mkForce mkIf;
   inherit (lib.types) bool;
 
   inherit (self.lib.modules) mkOpt;
 
   prof = config.sylveon.profiles;
+  cfg = config.sylveon.system.networking;
 in
 {
+
+  options.sylveon.system.networking = {
+    hasWifi = mkOpt bool prof.laptop.enable "Whether or not the device has wifi";
+    blockMihoyoTelemetry = mkOpt bool prof.gaming.enable "If the telemetry of mihoyo games should be blocked";
+
+    tailscale.enable = mkOpt bool true "Whether or not to enable tailscale VPN";
+  };
+
   imports = [
     ./networkManager.nix
     ./tailscale.nix
     ./ssh.nix
   ];
 
-  options.sylveon.system.networking = {
-    hasWifi = mkOpt bool prof.laptop.enable "Whether or not the device has wifi";
 
-    tailscale.enable = mkOpt bool true "Whether or not to enable tailscale VPN";
-  };
 
   config = {
     # enable wireless database, it helps keeping wifi speedy
@@ -36,6 +42,9 @@ in
       # however individual interfaces are still managed through dhcp in hardware configurations
       useDHCP = mkForce false;
       useNetworkd = mkForce true;
+
+      # Disable Mihoyo telemetry if neseceary
+      mihoyo-telemetry.block = cfg.blockMihoyoTelemetry;
 
       nameservers = [
         "1.1.1.1"

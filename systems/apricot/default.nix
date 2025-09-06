@@ -11,12 +11,6 @@
 
   networking.hostName = "apricot";
 
-  # --- TEMPORARY ---
-
-  virtualisation.docker.enable = true;
-
-  # --- TEMPORARY ---
-
   sylveon = {
     profiles = {
       server.enable = true;
