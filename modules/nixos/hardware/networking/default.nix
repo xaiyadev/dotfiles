@@ -27,6 +27,8 @@ in
     ./networkManager.nix
     ./tailscale.nix
     ./ssh.nix
+
+    inputs.aagl.nixosModules.default # TODO: only if profile gamine?
   ];
 
 
