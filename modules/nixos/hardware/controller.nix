@@ -22,7 +22,7 @@ in
   };
 
   config = mkMerge [
-    (mkIf cfg.xbox.enable {
+    (mkIf cfg.xbox.enable { 
       hardware.xpadneo.enable = true;
       boot.extraModulePackages = [ config.boot.kernelPackages.xpadneo ];
     })

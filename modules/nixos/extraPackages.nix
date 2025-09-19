@@ -23,7 +23,16 @@ in
     
     (mkIf (prof.gaming.enable) {
       # Setup configuration thingies for steam
+
+
+      # needs to be enabled or the config is not loaded
+      # this has to be enabled globaly, so steam will be on every account :(
       steam = {
+        enable = true;
+        gamescopeSession.enable = false; # TODO: use this as the last option
+        extest.enable = true;
+        protontricks.enable = true;
+
         dedicatedServer.openFirewall = true;
         localNetworkGameTransfers.openFirewall = true;
         remotePlay.openFirewall = true;

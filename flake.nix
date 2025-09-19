@@ -107,6 +107,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-gaming = {
+      type = "github";
+      owner = "fufexan";
+      repo = "nix-gaming";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     aagl = {
       type = "github";
       owner = "ezKEa";

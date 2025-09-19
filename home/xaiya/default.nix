@@ -9,6 +9,8 @@
     programs = {
       librewolf.enable = true;
       discord.enable = true; # TODO: https://github.com/KaylorBen/nixcord/issues/114
+
+      lutris.enable = true; # Game Launcher
     };
 
     cli = {

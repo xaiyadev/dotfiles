@@ -26,14 +26,18 @@ in
       powerOnBoot = true;
 
       settings = {
+        Policy.AutoEnable = true;
+
         General = {
+          Privacy = "device";
+
           MultiProfile = "multiple";
           Experimental = true;
         };
       };
     };
 
-    services.blueman.enable = mkIf prof.graphical.enable true;
+    services.blueman.enable = prof.graphical.enable;
   };
 
 }

@@ -4,11 +4,7 @@
   home.packages = [
     pkgs.obsidian # Notes taking app
 
-    # Gaming packages
-    pkgs.steam # Gaming stuff
-    pkgs.gamescope # Having games in a specific window with extra configurations
-
-    pkgs.lutris # Game launcher
+    pkgs.gamescope # game environment
     pkgs.prismlauncher # Minecraft
     inputs'.aagl.packages.sleepy-launcher # ZZZ launcher
 
