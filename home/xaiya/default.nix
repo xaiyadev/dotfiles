@@ -18,7 +18,10 @@
       direnv.enable = true;
       git.enable = true;
 
-      neovim.enable = true;
+      neovim = {
+        enable = true;
+        anonymous = false;
+      };
       kitty.enable = true;
     };
   };

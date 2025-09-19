@@ -7,7 +7,13 @@
   ... 
 }:
 let
-  inherit (self.lib.modules) mkPackageOpt;
+  inherit (self.lib.modules) 
+    mkOpt
+    ;
+
+  inherit (lib.types)
+    bool
+    ;
 
   inherit (lib) 
     mkIf
@@ -24,10 +30,15 @@ in
 
     ./lsp.nix
     ./telescope.nix
+    ./visual.nix
+    ./sessions.nix
+    ./social.nix
   ];
 
-  options.sylveon.cli.neovim =
-    mkPackageOpt pkgs.neovim "vim editor, only better";
+  options.sylveon.cli.neovim = {
+    enable = mkOpt bool false "vim editor, only better";
+    anonymous = mkOpt bool false "If the file data should be anonymous to people (e.g discord rpc)";
+  };
 
   config = mkIf cfg.enable {
     home.packages = [
@@ -105,136 +116,7 @@ in
 	      };
       };
 
-      # External neovim plugins that will be loaded
       plugins = {
-        lualine.enable = true; # TODO: configuration?
-
-        # Ghost message next to line, blaming who wrote the spaghetti
-        gitblame = {
-          enable = true;
-
-          settings = {
-            date_format = "%r";
-            message_template = " <summary> • <author> (<date>)";
-          };
-        };
-
-        # visualize currently open files
-        bufferline = {
-          enable = true;
-
-          settings = {
-            options = {
-              show_close_icon = false;
-              show_buffer_close_icons = false;
-              show_buffer_icons = false;
-              
-              mode = "buffers";
-              modified_icon = "●";
-              diagnostics = "nvim_lsp";
-            };
-          };
-        };
-
-        nvim-tree = {
-          enable = true;
-          autoClose = true;
-
-          settings = {
-            diagnostics.enable = true;
-            modified.enable = true;
-            view.width = "20%";
-
-            actions = {
-              open_file.quit_on_open = true;
-            };
-
-            renderer = {
-              full_name = true;
-              indent_markers.enable = true;
-            };
-          };
-        };
-
-        treesitter = {
-          enable = true;
-
-          settings = {
-            auto_install = true;
-
-            folding = true;
-            highlight.enable = true;
-          };
-        };
-
-        blink-cmp = {
-          enable = true;
-
-          settings = {
-            keymap = {
-              "<tab>" = [ "select_and_accept" "snippet_forward" "fallback" ];
-              "<C-space>" = [ "show" "show_documentation" "hide_documentation" ];
-              "<down>" = [ "select_next" "fallback" ];
-              "<up>" = [ "select_prev" "fallback" ];
-            };
-
-            completion = {
-              trigger.show_on_keyboard = true;
-              ghost_text.enabled = true;
-
-              list.cycle = {
-                from_bottom = false;
-                from_top = false;
-              };
-
-              menu = {
-                scrolloff = 0;
-                border = "none";
-                draw = {
-                  padding = 1;
-                  gap = 1;
-                  treesitter = [ "lsp" "buffer" ];
-
-                };
-              };
-            };
-
-            sources = {
-              default = [ "lsp" "path" "snippets" "buffer" ];
-            };
-          };
-        };
-
-        cord = {
-          enable = false; # TODO: disable for blmedia account
-
-          settings = {
-            display = {
-              swap_fields = true;
-
-              theme = "atom";
-              flavor = "accent";
-            };
-
-            editor.icon = "https://raw.githubusercontent.com/IogaMaster/neovim/main/.github/assets/nixvim-dark.webp";
-            text.file_browser = "Browsing through project";
-
-          };
-        };
-
-        /* Curently bricked TODO */
-        project-nvim = {
-          enable = false;
-          enableTelescope = true;
-        };
-        
-        colorizer.enable = true;
-
-        auto-save.enable = true;
-        auto-session.enable = true;
-
-        direnv.enable = true;
-
         web-devicons.enable = true;
         lz-n.enable = true; # Lazy loading
       };
