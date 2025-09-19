@@ -13,7 +13,6 @@ in
   config = mkIf (cpu == "intel") {
     hardware.cpu.intel.updateMicrocode = true;
 
-    
     boot = {
       kernelModules = [ "kvm-intel" ];
       kernelParams = [

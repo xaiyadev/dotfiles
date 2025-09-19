@@ -18,7 +18,9 @@ in
 
   options.sylveon.system.networking = {
     hasWifi = mkOpt bool prof.laptop.enable "Whether or not the device has wifi";
-    blockMihoyoTelemetry = mkOpt bool prof.gaming.enable "If the telemetry of mihoyo games should be blocked";
+    blockMihoyoTelemetry =
+      mkOpt bool prof.gaming.enable
+        "If the telemetry of mihoyo games should be blocked";
 
     tailscale.enable = mkOpt bool true "Whether or not to enable tailscale VPN";
   };
@@ -30,8 +32,6 @@ in
 
     inputs.aagl.nixosModules.default # TODO: only if profile gamine?
   ];
-
-
 
   config = {
     # enable wireless database, it helps keeping wifi speedy

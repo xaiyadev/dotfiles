@@ -1,4 +1,10 @@
-{ config, lib, self, pkgs, ... }:
+{
+  config,
+  lib,
+  self,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf;
   inherit (self.lib.modules) mkPackageOpt;
@@ -7,8 +13,7 @@ let
 in
 {
 
-  options.sylveon.services.vaultwarden =
-    mkPackageOpt pkgs.vaultwarden "Password manager";
+  options.sylveon.services.vaultwarden = mkPackageOpt pkgs.vaultwarden "Password manager";
 
   config = mkIf cfg.enable {
     age.secrets.vaultwarden-env.rekeyFile = "${self}/secrets/vaultwarden-env.age";
@@ -16,16 +21,18 @@ in
     services.postgresql = {
       ensureDatabases = [ "vaultwarden" ];
 
-      ensureUsers = [{
-        name = "vaultwarden";
-        ensureDBOwnership = true;
-      }];
+      ensureUsers = [
+        {
+          name = "vaultwarden";
+          ensureDBOwnership = true;
+        }
+      ];
     };
 
     services.vaultwarden = {
       enable = true;
       inherit (cfg) package;
-      
+
       dbBackend = "postgresql";
 
       config = {
@@ -34,7 +41,7 @@ in
 
         ROCKET_ADDRESS = "::1";
         ROCKET_PORT = 8222;
-        DATABASE_URL="postgresql://vaultwarden?host=/run/postgresql";
+        DATABASE_URL = "postgresql://vaultwarden?host=/run/postgresql";
       };
 
       environmentFile = config.age.secrets.vaultwarden-env.path;

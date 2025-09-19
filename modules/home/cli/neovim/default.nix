@@ -1,13 +1,13 @@
-{ 
-  pkgs, 
-  self, 
-  lib, 
+{
+  pkgs,
+  self,
+  lib,
   config,
   inputs,
-  ... 
+  ...
 }:
 let
-  inherit (self.lib.modules) 
+  inherit (self.lib.modules)
     mkOpt
     ;
 
@@ -15,7 +15,7 @@ let
     bool
     ;
 
-  inherit (lib) 
+  inherit (lib)
     mkIf
     mkMerge
     ;
@@ -102,18 +102,17 @@ in
         tabstop = 4;
       };
 
-	
       # extra files that should be added to the neovim runtime
       files = {
         "ftplugin/nix.lua" = {
-	        opts = {
+          opts = {
             number = true;
 
             expandtab = true;
-	          shiftwidth = 2;
-	          tabstop = 2;
-	        };
-	      };
+            shiftwidth = 2;
+            tabstop = 2;
+          };
+        };
       };
 
       plugins = {
@@ -129,4 +128,3 @@ in
 
   };
 }
-

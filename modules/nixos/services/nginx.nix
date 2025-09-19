@@ -1,4 +1,10 @@
-{ lib, pkgs, self, config, ... }: 
+{
+  lib,
+  pkgs,
+  self,
+  config,
+  ...
+}:
 let
 
   inherit (lib) mkIf;
@@ -9,8 +15,7 @@ let
 in
 {
 
-  options.sylveon.services.nginx =
-    mkPackageOpt pkgs.nginx "Manage domain stuff";
+  options.sylveon.services.nginx = mkPackageOpt pkgs.nginx "Manage domain stuff";
 
   config = mkIf cfg.enable {
     age.secrets.cloudflare-acme.rekeyFile = "${self}/secrets/cloudflare-acme.age";
@@ -26,7 +31,10 @@ in
     };
 
     # Base website ports opened for nginx
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+    ];
 
     security.acme = {
       acceptTerms = true;

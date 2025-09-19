@@ -25,7 +25,7 @@
         ];
       };
     }
-    
+
     {
       profile = {
         name = "docked_home__one_screen";
@@ -44,7 +44,6 @@
         ];
       };
     }
-
 
   ];
 }

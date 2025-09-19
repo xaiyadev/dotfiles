@@ -33,7 +33,7 @@
 
     "ssh-gl-xy" = {
       # Xaiya's Gitlab
-      rekeyFile = "${self}/secrets/ssh-gl-xy.age"; 
+      rekeyFile = "${self}/secrets/ssh-gl-xy.age";
       mode = "644";
       group = "users";
     };

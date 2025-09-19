@@ -1,11 +1,15 @@
-{ pkgs, lib, config, ... }: 
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   inherit (lib) mkIf;
 in
 {
 
-  home.packages = 
-    mkIf config.programs.nixvim.plugins.telescope.enable [ pkgs.ripgrep ];
+  home.packages = mkIf config.programs.nixvim.plugins.telescope.enable [ pkgs.ripgrep ];
 
   programs.nixvim.plugins = {
     telescope = {

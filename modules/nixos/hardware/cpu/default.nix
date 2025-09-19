@@ -10,6 +10,9 @@ in
     ./intel.nix
   ];
 
-  options.sylveon.device.cpu = mkOpt (enum [ "amd" "intel" ]) null "What cpu your system uses";
+  options.sylveon.device.cpu = mkOpt (enum [
+    "amd"
+    "intel"
+  ]) null "What cpu your system uses";
 
 }

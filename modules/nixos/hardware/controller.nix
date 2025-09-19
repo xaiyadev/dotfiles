@@ -18,11 +18,12 @@ in
 
   options.sylveon.hardware.controller = {
     xbox.enable =
-      mkOpt bool prof.gaming.enable "Whether or not xbox controller should be enabled or not";
+      mkOpt bool prof.gaming.enable
+        "Whether or not xbox controller should be enabled or not";
   };
 
   config = mkMerge [
-    (mkIf cfg.xbox.enable { 
+    (mkIf cfg.xbox.enable {
       hardware.xpadneo.enable = true;
       boot.extraModulePackages = [ config.boot.kernelPackages.xpadneo ];
     })

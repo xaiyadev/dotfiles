@@ -5,7 +5,11 @@
       type = "local";
       name = "Apricot";
 
-      mountpoints = { "/mnt/raid" = { name = "/mnt/raid"; }; };
+      mountpoints = {
+        "/mnt/raid" = {
+          name = "/mnt/raid";
+        };
+      };
     }
   ];
 }

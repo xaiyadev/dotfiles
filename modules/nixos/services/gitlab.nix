@@ -1,4 +1,10 @@
-{ config, lib, self, pkgs, ... }:
+{
+  config,
+  lib,
+  self,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf;
   inherit (self.lib.modules) mkPackageOpt;
@@ -7,57 +13,51 @@ let
 
   getSecret = x: config.age.secrets."gitlab-${x}".path;
 
-  createSecret = 
-    x: y: {
-      rekeyFile = "${self}/secrets/gitlab-${x}.age";
-      generator.script = "${y}";
+  createSecret = x: y: {
+    rekeyFile = "${self}/secrets/gitlab-${x}.age";
+    generator.script = "${y}";
 
-      owner = "gitlab";
-      group = "gitlab";
-    };
+    owner = "gitlab";
+    group = "gitlab";
+  };
 
 in
 {
 
-  options.sylveon.services.gitlab =
-    mkPackageOpt pkgs.gitlab "Git server";
+  options.sylveon.services.gitlab = mkPackageOpt pkgs.gitlab "Git server";
 
   config = mkIf cfg.enable {
     age.secrets = {
-      /* Using the same password for the most thing, makes it a bit more easier to manage */
-      gitlab-password = { 
-        rekeyFile = "${self}/secrets/gitlab-password.age"; 
+      # Using the same password for the most thing, makes it a bit more easier to manage
+      gitlab-password = {
+        rekeyFile = "${self}/secrets/gitlab-password.age";
 
         owner = "gitlab";
         group = "gitlab";
       };
 
-      gitlab-database-secret =
-        createSecret "database-secret" "base64";
+      gitlab-database-secret = createSecret "database-secret" "base64";
 
-      gitlab-otp-secret =
-        createSecret "otp-secret" "base64";
+      gitlab-otp-secret = createSecret "otp-secret" "base64";
 
-      gitlab-jws-secret =
-        createSecret "jws-secret" "rsa";
+      gitlab-jws-secret = createSecret "jws-secret" "rsa";
 
-      gitlab-record-primary-key =
-        createSecret "record-primary-key" "base64";
+      gitlab-record-primary-key = createSecret "record-primary-key" "base64";
 
-      gitlab-record-deterministic-key =
-        createSecret "record-deterministic-key" "base64";
+      gitlab-record-deterministic-key = createSecret "record-deterministic-key" "base64";
 
-      gitlab-salt =
-        createSecret "salt" "base64";
+      gitlab-salt = createSecret "salt" "base64";
     };
 
     services.postgresql = {
       ensureDatabases = [ "gitlab" ];
 
-      ensureUsers = [{
-        name = "gitlab";
-        ensureDBOwnership = true;
-      }];
+      ensureUsers = [
+        {
+          name = "gitlab";
+          ensureDBOwnership = true;
+        }
+      ];
     };
 
     services.gitlab = {
@@ -65,12 +65,12 @@ in
 
       databaseCreateLocally = false; # Use our postgres databse
       databaseHost = ""; # Using the local socket
-      
+
       port = 443;
       https = true;
       host = "git.xaiya.dev";
 
-      extraGitlabRb = '' '';
+      extraGitlabRb = '''';
 
       databasePasswordFile = getSecret "password";
       initialRootPasswordFile = getSecret "password";

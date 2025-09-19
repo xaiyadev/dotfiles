@@ -1,4 +1,10 @@
-{ pkgs, config, lib, self, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  self,
+  ...
+}:
 let
   inherit (self.lib.modules) mkPackageOpt;
 
@@ -7,8 +13,7 @@ let
 in
 {
 
-  options.sylveon.services.minecraft = 
-    mkPackageOpt pkgs.papermcServers.papermc "Minecraft Server as Service";
+  options.sylveon.services.minecraft = mkPackageOpt pkgs.papermcServers.papermc "Minecraft Server as Service";
 
   config = mkIf cfg.enable {
     services.minecraft-server = {
@@ -20,7 +25,7 @@ in
 
       eula = true;
       openFirewall = true;
-    
+
       declarative = true;
 
       whitelist = {
@@ -39,7 +44,7 @@ in
         M0rganite1 = "e8d654c9-6bd4-4572-b409-75e6a387f759"; # Leana
         RosaKanickel = "613a8b60-c834-47d7-bff8-586d7681bb4c"; # Lennard
       };
-    
+
       serverProperties = {
         difficulty = "hard";
 
@@ -50,11 +55,11 @@ in
 
         max-players = 10;
         view-dance = 32;
-    
+
         white-list = true;
         motd = "Sylveon Network";
       };
-    
+
       jvmOpts = "-Xms4092M -Xmx4092M";
     };
   };

@@ -8,27 +8,27 @@
   ];
 
   columns = [
-      {
-        size = "small";
-        widgets = [
-          (import ./widgets/calendar.nix)
-          (import ./widgets/clock.nix)
-          (import ./widgets/weather.nix)
-        ];
-      }
+    {
+      size = "small";
+      widgets = [
+        (import ./widgets/calendar.nix)
+        (import ./widgets/clock.nix)
+        (import ./widgets/weather.nix)
+      ];
+    }
 
-      {
-        size = "full";
-        widgets = [
-          {
-            type = "group";
-            widgets = [
-              (import ./widgets/monitor.nix)
-              (import ./widgets/mcstats.nix)
-            ];
-          }
+    {
+      size = "full";
+      widgets = [
+        {
+          type = "group";
+          widgets = [
+            (import ./widgets/monitor.nix)
+            (import ./widgets/mcstats.nix)
+          ];
+        }
 
-          (import ./widgets/trendingRepositories.nix)
+        (import ./widgets/trendingRepositories.nix)
       ];
     }
 
@@ -43,4 +43,3 @@
     }
   ];
 }
-

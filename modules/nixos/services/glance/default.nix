@@ -1,4 +1,10 @@
-{ config, lib, self, pkgs, ... }:
+{
+  config,
+  lib,
+  self,
+  pkgs,
+  ...
+}:
 let
   inherit (lib)
     mkIf
@@ -13,15 +19,14 @@ let
 in
 {
 
-  options.sylveon.services.glance =
-    mkPackageOpt pkgs.glance "Glance configuration (Dashboard)";
+  options.sylveon.services.glance = mkPackageOpt pkgs.glance "Glance configuration (Dashboard)";
 
   config = mkIf cfg.enable {
     age.secrets.glance-env.rekeyFile = "${self}/secrets/glance-env.age";
 
     services.glance = {
       enable = true;
-      openFirewall = false; /* Managed through nginx server */
+      openFirewall = false; # Managed through nginx server
 
       environmentFile = config.age.secrets.glance-env.path;
 
@@ -30,14 +35,13 @@ in
           (import ./pages/overview.nix)
         ];
 
-
         server = {
-          host = ""; /* Needs to be an empty string, otherwise interfaces cant be found correctly */
+          host = ""; # Needs to be an empty string, otherwise interfaces cant be found correctly
           port = 8002;
           proxied = true;
         };
 
-        /* rose-pine color theme */
+        # rose-pine color theme
         theme = {
           constrat-multiplier = 1.3;
           background-color = "249 22 12"; # Base
@@ -48,16 +52,15 @@ in
       };
     };
 
-
-    /* All the configurations neede */
+    # All the configurations neede
 
     services.nginx.virtualHosts."xaiya.dev" = {
-        forceSSL = true;
-        useACMEHost = "xaiya.dev";
-        locations."/".proxyPass = "http://[::1]:8002";
+      forceSSL = true;
+      useACMEHost = "xaiya.dev";
+      locations."/".proxyPass = "http://[::1]:8002";
 
-        extraConfig = "proxy_ssl_server_name on;";
-      };
+      extraConfig = "proxy_ssl_server_name on;";
+    };
   };
 
 }

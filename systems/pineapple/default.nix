@@ -12,7 +12,6 @@
 
   networking.hostName = "pineapple";
 
-
   boot.extraModulePackages = [ config.boot.kernelPackages.xpadneo ];
 
   sylveon = {

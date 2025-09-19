@@ -16,14 +16,13 @@ in
     (mkIf (prof.graphical.enable) {
       # gnome configuration
       dconf.enable = true;
-  
+
       # Gnome keyring
       seahorse.enable = true;
     })
-    
+
     (mkIf (prof.gaming.enable) {
       # Setup configuration thingies for steam
-
 
       # needs to be enabled or the config is not loaded
       # this has to be enabled globaly, so steam will be on every account :(
@@ -38,7 +37,7 @@ in
         remotePlay.openFirewall = true;
       };
     })
-    
+
     {
       zsh.enable = (
         anyHomeModuleActive config [
