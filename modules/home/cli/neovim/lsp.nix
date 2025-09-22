@@ -11,15 +11,24 @@
             "snippet_forward"
             "fallback"
           ];
+
+          "<CR>" = [
+            "select_and_accept"
+            "snippet_forward"
+            "fallback"
+          ];
+
           "<C-space>" = [
             "show"
             "show_documentation"
             "hide_documentation"
           ];
+
           "<down>" = [
             "select_next"
             "fallback"
           ];
+
           "<up>" = [
             "select_prev"
             "fallback"
@@ -28,7 +37,7 @@
 
         completion = {
           trigger.show_on_keyboard = true;
-          ghost_text.enabled = true;
+          ghost_text.enabled = false;
 
           list.cycle = {
             from_bottom = false;
@@ -37,7 +46,11 @@
 
           menu = {
             scrolloff = 0;
-            border = "none";
+            min_width = 20;
+            max_height = 15;
+            border = "rounded";
+            show_documentation = true;
+
             draw = {
               padding = 1;
               gap = 1;
@@ -46,10 +59,16 @@
                 "buffer"
               ];
             };
+
           };
         };
 
         sources = {
+          
+          providers = {
+            
+          };
+
           default = [
             "lsp"
             "path"
@@ -57,6 +76,7 @@
             "buffer"
           ];
         };
+
       };
     };
 
