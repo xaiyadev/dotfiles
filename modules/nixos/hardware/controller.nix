@@ -24,8 +24,17 @@ in
 
   config = mkMerge [
     (mkIf cfg.xbox.enable {
-      hardware.xpadneo.enable = true;
-      boot.extraModulePackages = [ config.boot.kernelPackages.xpadneo ];
+      hardware = {
+        # Xbox controller configuration and kernel setup
+        xpadneo.enable = true;
+
+        # steam-hardware support and configuration
+        steam-hardware.enable = true;
+      };
+
+      boot.extraModprobeConfig = ''
+          options bluetooth disable_ertm=Y
+      '';
     })
   ];
 

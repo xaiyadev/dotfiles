@@ -28,7 +28,6 @@ in
       # this has to be enabled globaly, so steam will be on every account :(
       steam = {
         enable = true;
-        gamescopeSession.enable = false; # TODO: use this as the last option
         extest.enable = true;
         protontricks.enable = true;
 
