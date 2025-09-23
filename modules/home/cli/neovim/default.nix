@@ -72,14 +72,6 @@ in
               silent = true;
             };
           }
-
-          {
-            action = "<cmd>bdelete<CR>";
-            key = "<C-w>";
-            options = {
-              silent = true;
-            };
-          }
         ]
 
         (mkIf neov-plugins.nvim-tree.enable [

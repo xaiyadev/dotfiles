@@ -20,20 +20,37 @@ in
         timestamp.shared = true;
 
         editor = {
-          tooltip = "NixOS managed VIM (sylveon flake)";
+          tooltip = "NixOS managed VIM";
           icon = "https://raw.githubusercontent.com/IogaMaster/neovim/main/.github/assets/nixvim-dark.webp";
         };
 
-        text = mkMerge [
-          {
-            file_browser = "Browsing through project";
-          }
+        text = (if cfg.anonymous then {
+          file_browser = ''Browsing through ***'';
+          workspace = ''In ***'';
+          viewing = ''Viewing ***'';
+          lsp = ''Configuring LSP'';
+          docs = ''Reading ***'';
+          vsc = ''Committing changes in ***'';
+          notes = ''Taking notes in ***'';
+          debug = ''Debugging in ***'';
+          test = ''Testing in ***'';
+          diagnostics = ''Fixing problems in ***'';
+          games = ''Playing ***'';
+          terminal = ''Running commands in ***'';
 
-          (mkIf cfg.anonymous {
-            workspace = "In anonymised project";
-            editing = "Editing anonymised file";
-          })
-        ];
+          editing.__raw = ''
+            function(opts)
+              return string.format('Editing ***.%s', opts.filetype)
+            end
+          '';
+
+        } else {
+          file_browser.__raw = ''
+            function(opts)
+              return string.format('Browsing through %s', opts.workspace)
+            end
+          '';
+        });
       };
     };
   };

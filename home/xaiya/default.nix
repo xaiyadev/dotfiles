@@ -22,6 +22,7 @@
         enable = true;
         anonymous = false;
       };
+
       kitty.enable = true;
     };
   };
