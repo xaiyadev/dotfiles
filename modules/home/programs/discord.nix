@@ -9,7 +9,6 @@
 let
   inherit (lib)
     mkIf
-    mkForce
     ;
 
   inherit (lib.types) bool;
@@ -54,7 +53,7 @@ in
             memberList = false;
           };
           mentionAvatars.enable = true;
-          messageLogger.enable = true;
+          # messageLogger.enable = true;
           noMaskedUrlPaste.enable = true;
           noUnblockToJump.enable = true;
           openInApp.enable = true;
@@ -76,10 +75,6 @@ in
           volumeBooster.enable = true;
           whoReacted.enable = true;
           youtubeAdblock.enable = true;
-
-          # Vesktop exclusive
-          webKeybinds.enable = true;
-          webScreenShareFixes.enable = true;
         };
       };
     };

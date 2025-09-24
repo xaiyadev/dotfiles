@@ -1,8 +1,12 @@
 {
   pkgs,
-  inputs',
+  config,
+  lib,
   ...
 }:
+let
+  inherit (lib) getExe;
+in
 {
   wayland.windowManager.sway.config = {
     window = {
@@ -49,8 +53,8 @@
     };
 
     startup = [
-      { command = "${inputs'.nixcord.packages.discord}/bin/discord"; }
-      { command = "${pkgs.teams-for-linux}/bin/teams-for-linux"; }
+      { command = (getExe config.programs.nixcord.finalPackage.discord); }
+      { command = (getExe pkgs.teams-for-linux); }
     ];
 
   };

@@ -101,8 +101,9 @@
 
     nixcord = {
       type = "github";
-      owner = "kaylorben";
+      owner = "xaiyadev";
       repo = "nixcord";
+      ref = "fix/user-cfg-no-option";
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
