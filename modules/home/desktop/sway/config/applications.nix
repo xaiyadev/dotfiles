@@ -44,8 +44,6 @@ in
     };
 
     assigns = {
-      "1" = [ { class = "^jetbrains"; } ];
-      "2" = [ { app_id = "librewolf"; } ];
       "4" = [
         { class = "discord"; }
         { class = "teams-for-linux"; }

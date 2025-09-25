@@ -16,12 +16,7 @@ in
 {
 
   imports = [
-    ./modules/sway.nix
-    ./modules/control_center.nix
-    ./modules/clock.nix
-    ./modules/battery.nix
-    ./modules/mpris.nix
-    ./modules/tray.nix
+    ./modules
   ];
 
   config = mkIf sway.enable {
