@@ -10,6 +10,7 @@ let
     mkIf
     mkOptionDefault
     concatStringsSep
+    getExe
     ;
 
   modifier = "Mod4";
@@ -40,7 +41,7 @@ in
         terminal = "${pkgs.kitty}/bin/kitty";
 
         keybindings = mkOptionDefault {
-          "${modifier}+Escape" = "exec ${config.programs.swaylock.package}/bin/swaylock"; # Lock screen
+          "${modifier}+Escape" = "exec ${config.programs.swaylock.package}/bin/swaylock";
 
           "${modifier}+shift+s" =
             ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | ${pkgs.wl-clipboard}/bin/wl-copy''; # Take a screenshot
@@ -61,10 +62,11 @@ in
 
         # Lower the opacity of specifc windows
         ''for_window [app_id="^kitty$"] opacity 0.94''
-        ''for_window [class="^tidal-hifi"] opacity 0.9''
 
         # Always load kanshi after a sway-reload, that prevents from the monitors bugging out
-        "exec_always ${pkgs.kanshi}/bin/kanshi"
+        "exec_always ${getExe pkgs.kanshi}"
+
+        "exec ${getExe pkgs.brightnesscli} set 40%" # Update brightness when starting sway
       ];
     };
   };

@@ -18,6 +18,7 @@ let
     ;
 
   sway = osConfig.sylveon.system.graphical.sway;
+  modifier = config.wayland.windowManager.sway.config.modifier;
 in
 {
 
@@ -26,13 +27,11 @@ in
       enable = true;
       package = pkgs.rofi;
 
-      # Only working when calling rofi from the terminal right now
-      # Refer to https://discourse.nixos.org/t/rofi-on-wayland-and-plugins/17354/8
       modes = [
         "drun"
         {
           name = "power";
-          path = getExe pkgs.rofi-power-menu;
+          path = (getExe pkgs.rofi-power-menu);
         }
       ];
 
@@ -43,10 +42,8 @@ in
       terminal = "${pkgs.kitty}/bin/kitty";
     };
 
-    # Calculator
     wayland.windowManager.sway.config.keybindings = mkOptionDefault {
-      "${config.wayland.windowManager.sway.config.modifier}+c" =
-          ''exec ${config.programs.rofi.finalPackage}/bin/rofi -show calc'';
+      "${modifier}+c" = ''exec ${config.programs.rofi.finalPackage}/bin/rofi -show calc'';
     };
 
     
