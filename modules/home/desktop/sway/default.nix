@@ -3,6 +3,7 @@
   lib,
   pkgs,
   config,
+  inputs',
   ...
 }:
 let
@@ -38,6 +39,8 @@ in
       config = {
         inherit modifier;
 
+
+        menu = (getExe inputs'.vicinae.packages.default);
         terminal = "${pkgs.kitty}/bin/kitty";
 
         keybindings = mkOptionDefault {
@@ -66,7 +69,8 @@ in
         # Always load kanshi after a sway-reload, that prevents from the monitors bugging out
         "exec_always ${getExe pkgs.kanshi}"
 
-        "exec ${getExe pkgs.brightnesscli} set 40%" # Update brightness when starting sway
+        "exec ${getExe pkgs.brightnessctl} set 40%" # Update brightness when starting sway
+        "exec ${getExe inputs'.vicinae.packages.default} server" # Start the vicinae Server if sway startup
       ];
     };
   };

@@ -120,6 +120,16 @@
       type = "github";
       owner = "ezKEa";
       repo = "aagl-gtk-on-nix";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    vicinae = {
+      type = "github";
+      owner = "vicinaehq";
+      repo = "vicinae";
+
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }
