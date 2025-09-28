@@ -9,8 +9,6 @@
 let
   inherit (lib)
     mkIf
-    getExe
-    mkOptionDefault
     ;
 
   sway = osConfig.sylveon.system.graphical.sway;
