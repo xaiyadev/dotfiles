@@ -40,7 +40,7 @@ in
 
           editing.__raw = ''
             function(opts)
-              return string.format('Editing ***.%s', opts.filetype)
+              return string.format('Editing %s file', opts.filetype)
             end
           '';
 
