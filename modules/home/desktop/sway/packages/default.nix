@@ -2,7 +2,6 @@
   imports = [
     ./waybar
     ./kanshi
-    ./eww
     # ./rofi TODO: configure rofi for other use-cases
 
     ./vicinae.nix
