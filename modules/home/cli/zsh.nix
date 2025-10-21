@@ -17,50 +17,41 @@ let
     readFile
     fromTOML
     ;
-
-  cfg = config.sylveon.cli.zsh;
-
 in
 {
-  options.sylveon.cli.zsh = mkPackageOpt pkgs.zsh "Whether or not to use zsh as a terminal";
+  home.shell.enableZshIntegration = true;
 
-  config = mkIf cfg.enable {
-    home.shell.enableZshIntegration = true;
+  programs.zsh = {
+    enable = true;
 
-    programs.zsh = {
-      enable = true;
-      inherit (cfg) package;
+    syntaxHighlighting.enable = true;
+    autosuggestion.enable = true;
 
-      syntaxHighlighting.enable = true;
-      autosuggestion.enable = true;
+    plugins = [
 
-      plugins = [
+      # Nix Shell support
+      {
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
 
-        # Nix Shell support
-        {
-          name = "zsh-nix-shell";
-          file = "nix-shell.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "chisui";
+          repo = "zsh-nix-shell";
+          rev = "82ca15e638cc208e6d8368e34a1625ed75e08f90"; # v0.8.0
+          sha256 = "1l99ayc9j9ns450blf4rs8511lygc2xvbhkg1xp791abcn8krn26";
+        };
+      }
+    ];
+  };
 
-          src = pkgs.fetchFromGitHub {
-            owner = "chisui";
-            repo = "zsh-nix-shell";
-            rev = "82ca15e638cc208e6d8368e34a1625ed75e08f90"; # v0.8.0
-            sha256 = "1l99ayc9j9ns450blf4rs8511lygc2xvbhkg1xp791abcn8krn26";
-          };
-        }
+  programs.starship = {
+    enable = true;
 
-      ];
-    };
-
-    programs.starship = {
-      enable = true;
-
-      settings = fromTOML (
-        readFile (fetchurl {
-          url = "https://starship.rs/presets/toml/bracketed-segments.toml";
-          sha256 = "1f373znyrhxix8b3si7w9kqkm8v6z1hwxl62zsiffn7k973pfcgg";
-        })
-      );
-    };
+    settings = fromTOML (
+      readFile (fetchurl {
+        url = "https://starship.rs/presets/toml/bracketed-segments.toml";
+        sha256 = "1f373znyrhxix8b3si7w9kqkm8v6z1hwxl62zsiffn7k973pfcgg";
+      })
+    );
   };
 }

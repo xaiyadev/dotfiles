@@ -14,7 +14,7 @@ in
 {
   imports = [ inputs.stylix.homeModules.stylix ];
 
-  config = mkIf prof.graphical.enable {
+  config = mkIf prof.graphical.enable { # TODO: deprecate this
     stylix = {
       enable = true;
       enableReleaseChecks = false; # Stylix is sometimes behind home-manager, nothing we can do

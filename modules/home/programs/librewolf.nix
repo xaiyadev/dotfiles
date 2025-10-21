@@ -32,10 +32,13 @@ in
         "de"
       ];
 
-      # Enable cookies for librewolf
       settings = {
         "privacy.clearOnShutdown.cookies" = false;
         "network.cookie.lifetimePolicy" = 0;
+
+        # Enable Canvas
+        "webgl.disabled" = false;
+        "privacy.fingerprintingProtection" = false;
       };
 
       policies = {
@@ -44,10 +47,9 @@ in
             [
               "uBlock0@raymondhill.net"
               "languagetool-webextension@languagetool.org"
-              "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" # styl-us
               "sponsorBlocker@ajay.app"
               "FirefoxColor@mozilla.com"
-              "firefox-enpass@enpass.io" # TODO: only blmedia?
+              "firefox-enpass@enpass.io"
             ]
             (ext: {
               installation_mode = "force_installed";
@@ -66,7 +68,6 @@ in
             force = true;
             settings = {
               # ColorTheme is managed by stylix
-
               "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}".settings = {
                 dbInChromeStorage = true; # required for Stylus
               };
@@ -81,7 +82,6 @@ in
             engines = {
               MyNixOS = {
                 name = "MyNixOS";
-
                 urls = [
                   {
                     template = "https://mynixos.com/search";
@@ -93,16 +93,12 @@ in
                     ];
                   }
                 ];
-
                 icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
                 definedAliases = [ "@nix" ];
               };
 
               ddg.metaData.hidden = true;
               wikipedia.metaData.hidden = true;
-
-              google.metaData.alias = "@g";
-
             };
           };
         };

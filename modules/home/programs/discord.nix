@@ -48,10 +48,12 @@ in
           fixImagesQuality.enable = true;
           friendsSince.enable = true;
           fullSearchContext.enable = true;
+
           memberCount = {
             enable = true;
             memberList = false;
           };
+
           mentionAvatars.enable = true;
           # messageLogger.enable = true;
           noMaskedUrlPaste.enable = true;
@@ -60,11 +62,13 @@ in
           permissionFreeWill.enable = true;
           permissionsViewer.enable = true;
           plainFolderIcon.enable = true;
+
           platformIndicators = {
             enable = true;
             lists = false;
             messages = false;
           };
+
           serverInfo.enable = true;
           showAllMessageButtons.enable = true;
           showHiddenChannels.enable = true;

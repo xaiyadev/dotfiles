@@ -12,23 +12,18 @@ let
   cfg = config.sylveon.cli.git;
 in
 {
+  programs.git = {
+    enable = true;
 
-  options.sylveon.cli.git = mkPackageOpt pkgs.gitFull "Whether or not to install and configure kitty";
-
-  config = mkIf cfg.enable {
-    programs.git = {
-      enable = true;
-      inherit (cfg) package;
-
-      settings = {
-        user = {
-          name = "Xaiya Schumin";
-          email = "d.schumin@proton.me";
-        };
-
-        push.autoSetupRemote = true;
-        commit.gpgsign = true;
+    # Could be moved to home (if git expands)
+    settings = {
+      user = {
+        name = "Xaiya Schumin";
+        email = "d.schumin@proton.me";
       };
+
+      push.autoSetupRemote = true;
+      commit.gpgsign = true;
     };
   };
 }

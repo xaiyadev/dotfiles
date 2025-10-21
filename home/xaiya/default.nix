@@ -7,22 +7,10 @@
   sylveon = {
     programs = {
       librewolf.enable = true;
-      discord.enable = true; # TODO: https://github.com/KaylorBen/nixcord/issues/114
-
-      lutris.enable = true; # Game Launcher
+      discord.enable = true;
+      lutris.enable = true;
     };
 
-    cli = {
-      zsh.enable = true;
-      direnv.enable = true;
-      git.enable = true;
-
-      neovim = {
-        enable = true;
-        anonymous = false;
-      };
-
-      kitty.enable = true;
-    };
+    cli.neovim.enable = true;
   };
 }

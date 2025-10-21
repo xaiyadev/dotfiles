@@ -28,13 +28,10 @@ in
     # Create users from list
     users.users = genAttrs users (
       name:
-      let
-        zsh = config.home-manager.users.${name}.sylveon.cli.zsh;
-      in
       {
         hashedPasswordFile = config.age.secrets."${name}-passwd".path;
         isNormalUser = true;
-        shell = if zsh.enable then zsh.package else pkgs.bash;
+        shell = config.home-manager.users.${name}.programs.zsh.package; # This might change if introducing multiple shells
 
         extraGroups = [
           "wheel"

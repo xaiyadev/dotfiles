@@ -29,8 +29,6 @@ in
       steamPackage = osConfig.programs.steam.package;
 
       # Wine packages build to long, find a solution TODO
-      protonPackages = [ pkgs.proton-ge-bin ];
-
       # Game runners TODO
       runners = { };
     };

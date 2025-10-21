@@ -14,11 +14,7 @@ in
 {
   programs = mkMerge [
     (mkIf (prof.graphical.enable) {
-      # gnome configuration
       dconf.enable = true;
-
-      # Gnome keyring
-      seahorse.enable = true;
     })
 
     (mkIf (prof.gaming.enable) {
@@ -38,14 +34,8 @@ in
     })
 
     {
-      zsh.enable = (
-        anyHomeModuleActive config [
-          "sylveon"
-          "cli"
-          "zsh"
-          "enable"
-        ]
-      );
+      # TODO: should this just stand here?
+      zsh.enable = true; 
     }
   ];
 }
