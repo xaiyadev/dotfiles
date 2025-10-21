@@ -2,16 +2,23 @@
 {
   programs.ssh = {
     enable = true;
-    enableDefaultConfig = false;
+    enableDefaultConfig = false; # Option will be deprecated
 
+    # Default Matchblocks that should be on every System
+    # This might change over time if any other (not me) person joins this flake
     matchBlocks = {
-      "*" = { /* https://mynixos.com/home-manager/option/programs.ssh.enableDefaultConfig */
-        compression = true; 
+      "*" = {
+        addKeysToAgent = "no"; # These SSH Keys do not need to be managed through an agent
+
+        serverAliveCountMax = 3; 
+
         hashKnownHosts = true; 
         userKnownHostsFile = "~/.ssh/known_hosts"; 
-        controlPath = "~/.ssh/master-%r@%n:%p"; 
-      };
 
+        controlPath = "~/.ssh/master-%r@%n:%p"; 
+        controlPersist = "no";
+      };
+      
       "github.com" = {
         user = "git";
         hostname = "github.com";

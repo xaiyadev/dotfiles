@@ -45,7 +45,7 @@ in
     };
 
     wayland.windowManager.sway.config.menu = 
-      (getExe config.services.vicinae.package);
+      "${getExe config.services.vicinae.package} toggle";
   };
 }
  
