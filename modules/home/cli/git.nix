@@ -20,10 +20,12 @@ in
       enable = true;
       inherit (cfg) package;
 
-      userName = "Xaiya Schumin";
-      userEmail = "d.schumin@proton.me";
+      settings = {
+        user = {
+          name = "Xaiya Schumin";
+          email = "d.schumin@proton.me";
+        };
 
-      extraConfig = {
         push.autoSetupRemote = true;
         commit.gpgsign = true;
       };

@@ -28,15 +28,10 @@ in
       # packages
       steamPackage = osConfig.programs.steam.package;
 
-      winePackages = [
-        inputs'.nix-gaming.packages.wine-ge
-      ];
+      # Wine packages build to long, find a solution TODO
+      protonPackages = [ pkgs.proton-ge-bin ];
 
-      protonPackages = [
-        pkgs.proton-ge-bin
-      ];
-
-      # Game runners
+      # Game runners TODO
       runners = { };
     };
   };

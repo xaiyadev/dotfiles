@@ -147,12 +147,6 @@
             nix.maxMemoryMB = null;
           };
         };
-
-        vuels = {
-          enable = true;
-          package = pkgs.vue-language-server;
-          cmd = [ "${pkgs.vue-language-server}/bin/vue-language-server" ];
-        };
       };
     };
   };
