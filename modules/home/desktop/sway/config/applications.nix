@@ -50,10 +50,8 @@ in
       ];
     };
 
-    startup = [
-      { command = (getExe config.programs.nixcord.finalPackage.discord); }
-      { command = (getExe pkgs.teams-for-linux); }
-    ];
+    # TODO: remove?
+    startup = [ { command = "${getExe config.programs.nixcord.finalPackage.discord} --start-minimized"; } ];
 
   };
 }

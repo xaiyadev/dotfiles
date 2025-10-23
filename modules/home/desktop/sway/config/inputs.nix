@@ -1,11 +1,3 @@
-{ osConfig, lib, ... }:
-let
-  # inherit (lib) toString;
-
-  keyboard = osConfig.sylveon.hardware.inputs.keyboard;
-  mouse = osConfig.sylveon.hardware.inputs.mouse;
-  touchpad = osConfig.sylveon.hardware.inputs.touchpad;
-in
 {
 
   wayland.windowManager.sway.config = {

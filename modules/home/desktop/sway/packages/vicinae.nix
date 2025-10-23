@@ -23,7 +23,7 @@ in
   config = mkIf sway.enable {
     services.vicinae = {
       enable = true;
-      autoStart = false; # Start the server with sway TODO: create stand-alone module
+      autoStart = false; # Is started through sway
       package = inputs'.vicinae.packages.default;
 
       settings = {

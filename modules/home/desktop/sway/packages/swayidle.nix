@@ -11,7 +11,6 @@ let
   sway = osConfig.sylveon.system.graphical.sway;
 in
 {
-
   services.swayidle = mkIf sway.enable {
     enable = true;
 

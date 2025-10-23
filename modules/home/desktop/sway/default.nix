@@ -30,7 +30,6 @@ in
       # Package is set to null because it is already created in the original config
       package = null;
 
-      # Adds a systemd target, for tools like kanshi to work
       systemd = {
         enable = true;
         xdgAutostart = true;
@@ -38,10 +37,10 @@ in
 
       config = {
         inherit modifier;
-        terminal = "${pkgs.kitty}/bin/kitty";
+        terminal = "${getExe config.programs.kitty.package}";
 
         keybindings = mkOptionDefault {
-          "${modifier}+Escape" = "exec ${config.programs.swaylock.package}/bin/swaylock";
+          "${modifier}+Escape" = "exec ${getExe config.programs.swaylock.package}";
 
           "${modifier}+shift+s" =
             ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | ${pkgs.wl-clipboard}/bin/wl-copy''; # Take a screenshot
@@ -52,22 +51,16 @@ in
       };
 
       extraConfig = concatStringsSep "\n" [
-        # Touchpad configuration
-        "bindgesture swipe:right workspace prev"
-        "bindgesture swipe:left workspace next"
-
         # SwayFX spesific configuration
         "shadows enable"
         "corner_radius 13"
 
-        # Lower the opacity of specifc windows
-        ''for_window [app_id="^kitty$"] opacity 0.94''
-
-        # Always load kanshi after a sway-reload, that prevents from the monitors bugging out
-        "exec_always ${getExe pkgs.kanshi}"
+        "exec_always ${getExe pkgs.kanshi}" # Always load kanshi after a sway-reload, that prevents from the monitors bugging out
+        "exec ${getExe pkgs.sway-audio-idle-inhibit}" # stops swayidle from stopping when playing audio; TODO: add waybar integration?
 
         "exec ${getExe pkgs.brightnessctl} set 40%" # Update brightness when starting sway
         "exec ${getExe inputs'.vicinae.packages.default} server" # Start the vicinae Server if sway startup TODO: buggy if in another tty
+
       ];
     };
   };
