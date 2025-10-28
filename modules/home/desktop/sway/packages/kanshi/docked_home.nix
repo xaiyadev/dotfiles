@@ -1,24 +1,32 @@
+let
+  name = "docked_home";
+in
 {
   services.kanshi.settings = [
     {
+      output = {
+        alias = "AOC";
+
+        criteria = "AOC 2460G4 0x0000A8E2";
+        mode = "1920x1080@119.982Hz";
+      };
+    }
+
+    {
       profile = {
-        name = "docked_home";
+        inherit name;
+          
         outputs = [
-          {
-            criteria = "eDP-2";
-            status = "disable";
-          }
+          { criteria = "$disabled_internal"; }
 
           {
-            criteria = "AOC 2460G4 0x0000A8E2";
+            criteria = "$AOC";
             position = "1920,80";
-
-            mode = "1920x1080@119.982Hz";
           }
 
           {
             criteria = "Acer Technologies RT240Y T75EE0042411";
-
+        
             position = "0,0";
             mode = "1920x1080@60.000Hz";
           }
@@ -28,22 +36,17 @@
 
     {
       profile = {
-        name = "docked_home__one_screen";
+        name = "${name}--single_screen";
+
         outputs = [
+          { criteria = "$enabled_internal"; }
+            
           {
-            criteria = "eDP-2";
-            position = "0,0";
-          }
-
-          {
-            criteria = "AOC 2460G4 0x0000A8E2";
+            criteria = "$AOC";
             position = "2560,266";
-
-            mode = "1920x1080@119.982Hz";
           }
         ];
       };
     }
-
   ];
 }

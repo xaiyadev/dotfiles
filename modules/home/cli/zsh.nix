@@ -50,7 +50,7 @@ in
     settings = fromTOML (
       readFile (fetchurl {
         url = "https://starship.rs/presets/toml/bracketed-segments.toml";
-        sha256 = "1f373znyrhxix8b3si7w9kqkm8v6z1hwxl62zsiffn7k973pfcgg";
+        sha256 = "sha256-PSpL6DzvNEBGA87z/mDKXicRlRpYp8QL+M45sq4eUWI=";
       })
     );
   };
