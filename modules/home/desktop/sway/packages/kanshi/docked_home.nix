@@ -17,7 +17,10 @@ in
         inherit name;
           
         outputs = [
-          { criteria = "$disabled_internal"; }
+          { 
+            criteria = "eDP-2";
+            status = "disable";
+          }
 
           {
             criteria = "$AOC";

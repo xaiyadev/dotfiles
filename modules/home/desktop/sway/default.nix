@@ -47,20 +47,12 @@ in
 
           "${modifier}+e" = ''exec ${pkgs.nemo-with-extensions}/bin/nemo'';
         };
-
       };
 
+      # SwayFx specific configuration
       extraConfig = concatStringsSep "\n" [
-        # SwayFX spesific configuration
         "shadows enable"
         "corner_radius 13"
-
-        "exec_always ${getExe pkgs.kanshi}" # Always load kanshi after a sway-reload, that prevents from the monitors bugging out
-        "exec ${getExe pkgs.sway-audio-idle-inhibit}" # stops swayidle from stopping when playing audio; TODO: add waybar integration?
-
-        "exec ${getExe pkgs.brightnessctl} set 40%" # Update brightness when starting sway
-        "exec ${getExe inputs'.vicinae.packages.default} server" # Start the vicinae Server if sway startup TODO: buggy if in another tty
-
       ];
     };
   };

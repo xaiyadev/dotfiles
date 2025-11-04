@@ -21,17 +21,7 @@ in
 
       # global outputs
       settings = [
-        # Internal screen disabled
-        {
-          output = {
-            alias = "disabled_internal";
-
-            criteria = "eDP-2";
-            status = "disable";
-          };
-        }
-
-        # Internal screen enabled
+        # Internal screen configuration
         {
           output = {
             alias = "enabled_internal";

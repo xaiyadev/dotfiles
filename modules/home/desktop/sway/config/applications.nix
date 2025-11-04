@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  inputs',
   ...
 }:
 let
@@ -21,25 +22,13 @@ in
       # Windows that should be opened in floating mode
       criteria = [
         { class = "tidal-hifi"; }
-
-        # Steam Windows
-        { title = "Steam Settings"; }
-        { title = "Friends List"; }
-
+        { class = "steam"; }
         { class = "Enpass"; }
-        { app_id = "yubioath-flutter"; }
+        { app_id = "nemo"; }
+        { app_id = "com.yubico.yubioath"; }
 
         { app_id = ".blueman-manager-wrapped"; }
         { app_id = "org.pulseaudio.pavucontrol"; }
-
-        { app_id = "org.gnome.Calculator"; }
-        { app_id = "org.gnome.Calendar"; }
-        { app_id = "org.gnome.TextEditor"; }
-
-        { app_id = "org.gnome.Nautilus"; }
-        { app_id = "nemo"; }
-
-        { app_id = "org.prismlauncher.PrismLauncher"; }
       ];
     };
 
@@ -50,8 +39,17 @@ in
       ];
     };
 
-    # TODO: remove?
-    startup = [ { command = "${getExe config.programs.nixcord.finalPackage.discord} --start-minimized"; } ];
+    startup = [ 
+      # Software
+      { command = "${getExe config.programs.nixcord.finalPackage.discord} --start-minimized"; } 
 
+      # Display and configurations
+      { command = (getExe pkgs.kanshi); always = true; }
+      { command = "${getExe pkgs.brightnessctl} set 68%"; always = true; }
+
+      # Background Services
+      { command = (getExe pkgs.sway-audio-idle-inhibit); }
+      { command = "${getExe inputs'.vicinae.packages.default} server"; }
+    ];
   };
 }
