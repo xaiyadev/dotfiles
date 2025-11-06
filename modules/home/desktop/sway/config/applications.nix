@@ -45,7 +45,6 @@ in
 
       # Display and configurations
       { command = (getExe pkgs.kanshi); always = true; }
-      { command = "${getExe pkgs.brightnessctl} set 68%"; always = true; }
 
       # Background Services
       { command = (getExe pkgs.sway-audio-idle-inhibit); }
