@@ -36,5 +36,37 @@ in
         ];
       };
     }
+
+    # Desk 2 (Dominik)
+    {
+      profile = {
+        name = "${name}-dthoene";
+        outputs = [
+          { 
+            criteria = "$enabled_internal";
+            position = "5003,590";
+
+            scale = 1.3;
+          }
+
+          {
+            criteria = "${office_screen_2} ULTRAFINE 203NTXR8L890";
+            position = "1801,699";
+
+            scale = 1.2;
+            mode = "3840x2160@60.000Hz";
+          }
+
+          {
+            criteria = "${office_screen_2} ULTRAFINE 203NTFA8L891";
+            position = "0,0";
+            transform = "90";
+
+            scale = 1.2;
+            mode = "3840x2160@60.000Hz";
+          }
+        ];
+      };
+    }
   ];
 }

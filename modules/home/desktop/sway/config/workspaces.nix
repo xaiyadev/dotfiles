@@ -7,6 +7,7 @@
         output = [
           # Office Screens
           "Philips Consumer Electronics Company PHL 272B4Q AU11531001040"
+          "LG Electronics LG ULTRAFINE 203NTXR8L890"
 
           # Private Screens
           "AOC 2460G4 0x0000A8E2"
@@ -22,6 +23,7 @@
         output = [
           # Office Screens
           "Philips Consumer Electronics Company PHL 272B4Q AU11526001821"
+          "LG Electronics LG ULTRAFINE 203NTFA8L891"
 
           # Private Screens
           "Acer Technologies RT240Y T75EE0042411"
