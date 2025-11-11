@@ -1,59 +1,44 @@
+{ config, lib, ... }:
+let
+  inherit (lib) 
+    forEach
+    mkMerge
+    mkIf
+    ;
+
+  inherit (builtins)
+    elemAt
+    toString
+    ;
+in
 {
   wayland.windowManager.sway.config = {
     defaultWorkspace = "1";
 
-    workspaceOutputAssign = [
-      {
-        output = [
-          # Office Screens
-          "Philips Consumer Electronics Company PHL 272B4Q AU11531001040"
-          "LG Electronics LG ULTRAFINE 203NTXR8L890"
+    workspaceOutputAssign = mkMerge [
+      # Automated generated outputs with the help of kanshi
+      (mkIf config.services.kanshi.enable (forEach [1 2] (x: {
+        output = 
+          forEach config.services.kanshi.settings (y: (
+            (elemAt y.profile.outputs (x - 1)).criteria)
+          );
 
-          # Private Screens
-          "AOC 2460G4 0x0000A8E2"
-
-          # Internal Screen
-          "eDP-2"
-        ];
-
-        workspace = "1";
-      }
-
-      {
-        output = [
-          # Office Screens
-          "Philips Consumer Electronics Company PHL 272B4Q AU11526001821"
-          "LG Electronics LG ULTRAFINE 203NTFA8L891"
-
-          # Private Screens
-          "Acer Technologies RT240Y T75EE0042411"
-        ];
-
-        workspace = "2";
-      }
-
-      # Laptop screen should own workspace 4 and 5 when its docked
-      # if the laptop screen is not available, use the default second screens
-      # TODO: automate this process
-      {
-        output = [
-          "eDP-2"
-
-          "Acer Technologies RT240Y T75EE0042411"
-          "Philips Consumer Electronics Company PHL 272B4Q AU11526001821"
-        ];
-        workspace = "3";
-      }
-
-      {
-        output = [
-          "eDP-2"
-
-          "Acer Technologies RT240Y T75EE0042411"
-          "Philips Consumer Electronics Company PHL 272B4Q AU11526001821"
-        ];
-        workspace = "4";
-      }
+        # Assign the 10 workspaces we have
+        workspace = toString x;
+      })))
+      
+      # Manual configuration of the 3rd and 4th workspace
+      [
+        {
+          output = [ "eDP-2" ];
+          workspace = "3";
+        }
+        
+        {
+          output = [ "eDP-2" ];
+          workspace = "4";
+        }
+      ]
     ];
   };
 }

@@ -1,7 +1,7 @@
 # Basic variables and configurations
 { lib, self, ... }:
 let
-  inherit (lib.types) str;
+  inherit (lib.tpes) str;
   inherit (self.lib.modules) mkOpt;
 in
 {

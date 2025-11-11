@@ -4,5 +4,6 @@
     ./cursor.nix # cursor configuration
 
     ./sway # Window Manager
+    ./kanshi # Screen manager
   ];
 }

@@ -4,26 +4,14 @@ in
 {
   services.kanshi.settings = [
     {
-      output = {
-        alias = "AOC";
-
-        criteria = "AOC 2460G4 0x0000A8E2";
-        mode = "1920x1080@119.982Hz";
-      };
-    }
-
-    {
       profile = {
         inherit name;
           
         outputs = [
-          { 
-            criteria = "eDP-2";
-            status = "disable";
-          }
-
           {
-            criteria = "$AOC";
+            criteria = "AOC 2460G4 0x0000A8E2";
+
+            mode = "1920x1080@119.982Hz";
             position = "1920,80";
           }
 
@@ -33,6 +21,8 @@ in
             position = "0,0";
             mode = "1920x1080@60.000Hz";
           }
+
+          { criteria = "eDP-2"; status = "disable"; }
         ];
       };
     }
@@ -45,7 +35,9 @@ in
           { criteria = "$enabled_internal"; }
             
           {
-            criteria = "$AOC";
+            criteria = "AOC 2460G4 0x0000A8E2";
+
+            mode = "1920x1080@119.982Hz";
             position = "2560,266";
           }
         ];

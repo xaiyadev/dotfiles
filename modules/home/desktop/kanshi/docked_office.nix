@@ -12,14 +12,7 @@ in
     {
       profile = {
         inherit name;
-        outputs = [
-          { 
-            criteria = "$enabled_internal";
-            position = "5120,0";
-
-            scale = 1.3;
-          }
-
+        outputs = [          
           {
             criteria = "${office_screen_1} AU11526001821";             
             position = "0,81";
@@ -33,6 +26,16 @@ in
 
             mode = "2560x1440@59.951Hz";
           }
+
+          { 
+            criteria = "eDP-2";
+            position = "5120,0";
+
+            mode = "2560x1600@165.000Hz";
+            scale = 1.3;
+          }
+
+
         ];
       };
     }
@@ -42,13 +45,6 @@ in
       profile = {
         name = "${name}-dthoene";
         outputs = [
-          { 
-            criteria = "$enabled_internal";
-            position = "5003,590";
-
-            scale = 1.3;
-          }
-
           {
             criteria = "${office_screen_2} ULTRAFINE 203NTXR8L890";
             position = "1801,699";
@@ -64,6 +60,14 @@ in
 
             scale = 1.2;
             mode = "3840x2160@60.000Hz";
+          }
+
+          { 
+            criteria = "eDP-2";
+            position = "5120,0";
+
+            mode = "2560x1600@165.000Hz";
+            scale = 1.3;
           }
         ];
       };
