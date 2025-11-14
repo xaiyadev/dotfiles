@@ -1,10 +1,12 @@
-{ inputs, ... }:
+{ osConfig, ... }:
 {
   imports = [
     ./desktop # Desktop specific configuration and theming
     ./programs
     ./cli
-
-    ./home.nix
   ];
+
+  config = {
+    home.stateVersion = osConfig.system.stateVersion;
+  };
 }

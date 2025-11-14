@@ -16,7 +16,9 @@ in
     defaultWorkspace = "1";
 
     workspaceOutputAssign = mkMerge [
+
       # Automated generated outputs with the help of kanshi
+      # TODO: this *can* have double outputs, not imediatly bad but can hurt the config
       (mkIf config.services.kanshi.enable (forEach [1 2] (x: {
         output = 
           forEach config.services.kanshi.settings (y: (
@@ -27,7 +29,6 @@ in
         workspace = toString x;
       })))
       
-      # Manual configuration of the 3rd and 4th workspace
       [
         {
           output = [ "eDP-2" ];

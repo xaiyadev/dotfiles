@@ -1,14 +1,7 @@
 {
   config,
-  self,
-  lib,
-  pkgs,
   ...
 }:
-let
-  inherit (lib) mkIf;
-  inherit (self.lib.modules) mkPackageOpt;
-in
 {
 
   config = {
@@ -21,6 +14,6 @@ in
 
     # Enable starship configuration for direnv
     programs.starship.settings.direnv.disabled =
-     config.programs.starship.enable;
+     !config.programs.direnv.enable;
   };
 }

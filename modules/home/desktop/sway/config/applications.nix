@@ -21,18 +21,18 @@ in
     floating = {
       # Windows that should be opened in floating mode
       criteria = [
-        { class = "tidal-hifi"; }
-        { class = "steam"; }
+        # Configuration apps
         { class = "Enpass"; }
-        { app_id = "nemo"; }
         { app_id = "com.yubico.yubioath"; }
 
+        # Settings apps
         { app_id = ".blueman-manager-wrapped"; }
         { app_id = "org.pulseaudio.pavucontrol"; }
       ];
     };
 
     assigns = {
+      # Assign social apps to workspace 4
       "4" = [
         { class = "discord"; }
         { class = "teams-for-linux"; }

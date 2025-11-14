@@ -5,7 +5,6 @@ let
 in
 {
   services.kanshi.settings = [
-    /* --- Configuration of Office desks --- */
     # TODO: generalization of desktops needed
 
     # Desk 1 (Xaiya)
@@ -13,16 +12,17 @@ in
       profile = {
         inherit name;
         outputs = [          
+
           {
-            criteria = "${office_screen_1} AU11526001821";             
-            position = "0,81";
+            criteria = "${office_screen_1} AU11531001040";             
+            position = "2560,0";
 
             mode = "2560x1440@59.951Hz";
           }
 
           {
-            criteria = "${office_screen_1} AU11531001040";             
-            position = "2560,0";
+            criteria = "${office_screen_1} AU11526001821";             
+            position = "0,81";
 
             mode = "2560x1440@59.951Hz";
           }
