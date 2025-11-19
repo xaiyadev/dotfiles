@@ -1,15 +1,18 @@
+{ lib, config, ... }:
+let
+  inherit (lib) forEach attrsToList genAttrs;
+in
 {
   type = "server-stats";
   servers = [
     {
       type = "local";
-      name = "Apricot";
+      name = config.networking.hostName;
 
-      mountpoints = {
-        "/mnt/raid" = {
-          name = "/mnt/raid";
-        };
-      };
+      mountpoints = 
+        genAttrs 
+          (forEach (attrsToList config.fileSystems) (x: x.name)) 
+          (name: { "${name}" = { inherit name; }; });
     }
   ];
 }

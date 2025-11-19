@@ -8,7 +8,6 @@
 let
   inherit (lib)
     mkIf
-    mkMerge
     ;
 
   inherit (self.lib.modules)
@@ -32,7 +31,7 @@ in
 
       settings = {
         pages = [
-          (import ./pages/overview.nix)
+          (import ./pages/overview.nix { config = config; lib = lib; })
         ];
 
         server = {

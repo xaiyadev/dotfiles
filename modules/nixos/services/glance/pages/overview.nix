@@ -1,43 +1,56 @@
+{ config, lib, ... }:
+let
+  hour-format = "24h";
+in
 {
   name = "Overview";
   hide-desktop-navigation = true;
   center-vertically = true;
 
   head-widgets = [
-    (import ./widgets/search.nix)
+    { type = "search"; autofocus = true; } 
   ];
 
   columns = [
     {
       size = "small";
       widgets = [
-        (import ./widgets/calendar.nix)
-        (import ./widgets/clock.nix)
-        (import ./widgets/weather.nix)
+        { type = "calendar"; }
+
+        {
+          type = "clock";
+          inherit hour-format;
+        }
+
+        {
+          type = "weather";
+          location = "Berlin, Germany"; # TODO: automate based on server location
+
+          inherit hour-format;
+        }
       ];
     }
 
     {
       size = "full";
-      widgets = [
-        {
-          type = "group";
-          widgets = [
-            (import ./widgets/monitor.nix)
-            (import ./widgets/mcstats.nix)
-          ];
-        }
-
-        (import ./widgets/trendingRepositories.nix)
-      ];
+      widgets = [ (import ./widgets/monitor.nix { config = config; lib = lib; } ) ];
     }
 
     {
       size = "small";
       widgets = [
         (import ./widgets/recentListens.nix)
-        (import ./widgets/releases.nix)
-        (import ./widgets/serverStats.nix)
+
+        {
+          type = "releases";
+          show-source-icon = true;
+          repositories = [ # TODO: add a connection to this flakes knot
+            "WillPower3309/swayfx"
+            "Inrixia/TidaLuna"
+          ];
+        }
+
+        (import ./widgets/serverStats.nix { config = config; lib = lib; })
         (import ./widgets/tailscaleDevices.nix)
       ];
     }

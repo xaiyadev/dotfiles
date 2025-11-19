@@ -11,6 +11,7 @@
     ./firefly.nix
     ./glance
     ./kitchenowl.nix
+    ./knot.nix
 
     ./plex.nix
   ];

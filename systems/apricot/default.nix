@@ -28,10 +28,11 @@
       docker.enable = true;
 
       vaultwarden.enable = true;
-      gitlab.enable = true;
+      # gitlab.enable = true;
       glance.enable = true;
-      firefly.enable = true;
+      # firefly.enable = true; TODO
       kitchenowl.enable = true;
+      tangled.knot.enable = true;
 
       plex.enable = true;
 

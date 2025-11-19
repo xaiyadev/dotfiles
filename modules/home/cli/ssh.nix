@@ -28,7 +28,7 @@
       "apricot" = {
         user = "gitlab";
         hostname = "apricot";
-        identityFile = osConfig.age.secrets."ssh-gl-xy".path;
+        identityFile = osConfig.age.secrets."ssh-tangled".path;
       };
     };
   };

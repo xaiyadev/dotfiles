@@ -1,4 +1,0 @@
-{
-  type = "search";
-  autofocus = true;
-}

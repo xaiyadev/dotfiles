@@ -1,23 +1,20 @@
+{ lib, config, ... }:
+let
+  inherit (lib) forEach attrsToList;
+in
 {
   type = "monitor";
   cache = "30s";
   title = "Services";
-  sites = [
-    {
-      title = "Vaultwarden";
-      url = "https://vault.xaiya.dev";
-    }
-    {
-      title = "GitLab";
-      url = "https://git.xaiya.dev";
-    }
-    {
-      title = "Firefly";
-      url = "https://cash.xaiya.dev";
-    }
-    {
-      title = "KitchenOwl";
-      url = "https://kitchen.xaiya.dev";
-    }
-  ];
+
+  # Automaticly create the sites based on domains passing through nginx
+  sites = 
+    forEach 
+      (attrsToList config.services.nginx.virtualHosts) 
+      (x: {
+        title = 
+          builtins.elemAt (builtins.split "(.)xaiya.dev" x.name) 0;
+
+        url = "https://${x.name}";
+      });
 }

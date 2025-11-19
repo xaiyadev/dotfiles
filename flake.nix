@@ -11,6 +11,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Tangled knots
+    tangled = {
+      url = "git+https://tangled.org/tangled.org/core";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs = {
       type = "github";
       owner = "NixOS";

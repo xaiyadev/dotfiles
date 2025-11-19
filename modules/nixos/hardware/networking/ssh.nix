@@ -6,8 +6,8 @@
 
     banner = ''
       You have connected to ${config.networking.hostName} @ NixOS (v ${config.system.nixos.release})"
-
       This is part of the sylveon flake network! :>
+
     '';
 
     settings = {
@@ -31,9 +31,9 @@
       group = "users";
     };
 
-    "ssh-gl-xy" = {
-      # Xaiya's Gitlab
-      rekeyFile = "${self}/secrets/ssh-gl-xy.age";
+    "ssh-tangled" = {
+      # Tangled ssh key
+      rekeyFile = "${self}/secrets/ssh-tangled.age";
       mode = "644";
       group = "users";
     };
