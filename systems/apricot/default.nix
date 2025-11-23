@@ -28,11 +28,16 @@
       docker.enable = true;
 
       vaultwarden.enable = true;
-      # gitlab.enable = true;
       glance.enable = true;
       # firefly.enable = true; TODO
       kitchenowl.enable = true;
-      tangled.knot.enable = true;
+
+      atprotocol = {
+        tangled = {
+          knot.enable = true;
+          spindle.enable = true;
+        };
+      };
 
       plex.enable = true;
 

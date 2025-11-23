@@ -3,12 +3,13 @@ let
   inherit (lib) mkIf;
 
   inherit (self.lib.modules) mkPackageOpt;
-  cfg = config.sylveon.services.tangled.knot;
+  cfg = config.sylveon.services.atprotocol.tangled.knot;
+  knot = config.services.tangled.knot;
 in
 {
 
   imports = [ inputs.tangled.nixosModules.knot ];
-  options.sylveon.services.tangled.knot = mkPackageOpt null "Tangled knot for git repos";
+  options.sylveon.services.atprotocol.tangled.knot = mkPackageOpt null "Tangled knot for git repos";
 
   config = mkIf cfg.enable {
     services.tangled.knot = {
@@ -20,11 +21,11 @@ in
       };
 
       motd = ''
-        >> Tangled Knot !! (owned by: ${config.services.tangled.knot.server.owner})
+        >> Tangled Knot !! (owned by: ${knot.server.owner})
       '';
     };
 
-    services.nginx.virtualHosts."knot.xaiya.dev" = {
+    services.nginx.virtualHosts.${knot.server.hostname} = {
       enableACME = true;
       forceSSL = true;
 

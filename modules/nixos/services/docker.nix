@@ -17,7 +17,7 @@ in
   config = mkIf cfg.enable {
     virtualisation.docker = {
       enable = true;
-      storageDriver = "btrfs";
+      # storageDriver = "btrfs"; TODO: 0 // change if redoing apricot
 
       rootless = {
         enable = true;
