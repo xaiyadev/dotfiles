@@ -13,5 +13,7 @@
     pkgs.wasistlos # Whatsapp for linux
 
     pkgs.teams-for-linux # Teams; Need that for school and work
+
+    pkgs.devenv
   ];
 }

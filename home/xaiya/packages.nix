@@ -16,5 +16,7 @@
 
     pkgs.teams-for-linux # Teams; Need that for school and work
     #pkgs.ciscoPacketTracer8 # Cisco software that I need for school
+
+    pkgs.devenv
   ];
 }
