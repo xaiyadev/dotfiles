@@ -2,32 +2,30 @@
   config,
   lib,
   self,
-  pkgs,
   ...
 }:
 let
   inherit (lib) mkIf;
-  inherit (self.lib.modules) mkPackageOpt;
+  inherit (lib.types) bool;
+  inherit (self.lib.modules) mkOpt mkService;
 
   cfg = config.sylveon.services.vaultwarden;
 in
 {
 
-  options.sylveon.services.vaultwarden = mkPackageOpt pkgs.vaultwarden "Password manager";
+  options.sylveon.services.vaultwarden = {
+    enable = mkOpt bool false "Enable Password Manager vaultwarden";
+  };
 
-  config = mkIf cfg.enable {
-    age.secrets.vaultwarden-env.rekeyFile = "${self}/secrets/vaultwarden-env.age";
+  config = (mkIf cfg.enable (mkService {
+    secrets = [{ name = "vaultwarden-env"; }];
+    databases = [ "vaultwarden" ];
 
-    services.postgresql = {
-      ensureDatabases = [ "vaultwarden" ];
-
-      ensureUsers = [
-        {
-          name = "vaultwarden";
-          ensureDBOwnership = true;
-        }
-      ];
+    proxy = {
+      domain = "vault.xaiya.dev";
+      port = (toString config.services.vaultwarden.config.ROCKET_PORT);
     };
+  } // {
 
     services.vaultwarden = {
       enable = true;
@@ -47,13 +45,5 @@ in
       environmentFile = config.age.secrets.vaultwarden-env.path;
     };
 
-    services.nginx.virtualHosts."vault.xaiya.dev" = {
-      enableACME = true;
-      forceSSL = true;
-
-      locations."/".proxyPass = "http://[::1]:${toString config.services.vaultwarden.config.ROCKET_PORT}";
-      extraConfig = "proxy_ssl_server_name on;";
-    };
-  };
-
+  }));
 }

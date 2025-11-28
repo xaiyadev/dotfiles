@@ -1,17 +1,27 @@
 { inputs, lib, self, config, ... }: 
 let
   inherit (lib) mkIf;
+  inherit (lib.types) bool;
+  inherit (self.lib.modules) mkOpt mkService;
 
-  inherit (self.lib.modules) mkPackageOpt;
   cfg = config.sylveon.services.atprotocol.tangled.knot;
   knot = config.services.tangled.knot;
 in
 {
 
   imports = [ inputs.tangled.nixosModules.knot ];
-  options.sylveon.services.atprotocol.tangled.knot = mkPackageOpt null "Tangled knot for git repos";
 
-  config = mkIf cfg.enable {
+  options.sylveon.services.atprotocol.tangled.knot = {
+    enable = mkOpt bool false "Enable a tangled knot (git repositorys)";
+  };
+
+  config = (mkIf cfg.enable (mkService {
+    proxy = {
+      domain = knot.server.hostname;
+      port = "5555";
+    };
+  } // {
+
     services.tangled.knot = {
       enable = true;
 
@@ -25,14 +35,8 @@ in
       '';
     };
 
-    services.nginx.virtualHosts.${knot.server.hostname} = {
-      enableACME = true;
-      forceSSL = true;
-
-      locations."/".proxyPass = "http://127.0.0.1:5555";
-      extraConfig = "proxy_ssl_server_name on;";
-    };
  
     # settings.firewall.allowedTCPPorts = [ 22 ]; # TODO: unsecure?
-  };
+  }));
+
 }

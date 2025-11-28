@@ -6,23 +6,24 @@
   ...
 }:
 let
-
   inherit (lib) mkIf;
+  inherit (lib.types) bool;
 
-  inherit (self.lib.modules) mkPackageOpt;
+  inherit (self.lib.modules) mkOpt;
 
   cfg = config.sylveon.services.nginx;
 in
 {
 
-  options.sylveon.services.nginx = mkPackageOpt pkgs.nginx "Manage domain stuff";
+  options.sylveon.services.nginx = {
+    enable = mkOpt bool false "Enable Nginx proxy";
+  };
 
   config = mkIf cfg.enable {
     age.secrets.cloudflare-acme.rekeyFile = "${self}/secrets/cloudflare-acme.age";
 
     services.nginx = {
       enable = true;
-      inherit (cfg) package;
 
       recommendedGzipSettings = true;
       recommendedOptimisation = true;

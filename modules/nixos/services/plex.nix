@@ -7,12 +7,15 @@
 }:
 let
   inherit (lib) mkIf;
+  inherit (lib.types) bool;
 
-  inherit (self.lib.modules) mkPackageOpt;
+  inherit (self.lib.modules) mkOpt;
   cfg = config.sylveon.services.plex;
 in
 {
-  options.sylveon.services.plex = mkPackageOpt pkgs.plex "Plex (for my dad blegh)";
+  options.sylveon.services.plex = {
+    enable = mkOpt bool false "Enable a plex media server";
+  };
 
   config = mkIf cfg.enable {
     services.plex = {

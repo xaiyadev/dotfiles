@@ -2,26 +2,35 @@
   config,
   lib,
   self,
-  pkgs,
   ...
 }:
 let
   inherit (lib)
     mkIf
     ;
+  inherit (lib.types) bool;
 
   inherit (self.lib.modules)
-    mkPackageOpt
+    mkOpt
+    mkService
     ;
 
   cfg = config.sylveon.services.glance;
 in
 {
 
-  options.sylveon.services.glance = mkPackageOpt pkgs.glance "Glance configuration (Dashboard)";
+  options.sylveon.services.glance = {
+    enable = mkOpt bool false "Enable web dashboard application";
+  }; 
 
-  config = mkIf cfg.enable {
-    age.secrets.glance-env.rekeyFile = "${self}/secrets/glance-env.age";
+  config = (mkIf cfg.enable (mkService {
+    secrets = [{ name = "glance-env"; }];
+
+    proxy = {
+      name = "xaiya.dev";
+      port = (toString config.services.glance.settings.server.port);
+    };
+  } // {
 
     services.glance = {
       enable = true;
@@ -51,15 +60,5 @@ in
       };
     };
 
-    # All the configurations neede
-
-    services.nginx.virtualHosts."xaiya.dev" = {
-      forceSSL = true;
-      useACMEHost = "xaiya.dev";
-      locations."/".proxyPass = "http://[::1]:8002";
-
-      extraConfig = "proxy_ssl_server_name on;";
-    };
-  };
-
+  }));
 }

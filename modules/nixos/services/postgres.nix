@@ -7,12 +7,15 @@
 }:
 let
   inherit (lib) mkIf mkForce;
+  inherit (lib.types) bool;
 
-  inherit (self.lib.modules) mkPackageOpt;
+  inherit (self.lib.modules) mkOpt;
   cfg = config.sylveon.services.postgres;
 in
 {
-  options.sylveon.services.postgres = mkPackageOpt pkgs.postgresql "Postgres databases and stuff";
+  options.sylveon.services.postgres = {
+    enable = mkOpt bool false "Enable postgres databases mkService";
+  };
 
   config = mkIf cfg.enable {
     services.postgresql = {

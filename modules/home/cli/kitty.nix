@@ -8,13 +8,16 @@
 }:
 let
   inherit (lib) mkIf;
-  inherit (self.lib.modules) mkPackageOpt;
+  inherit (lib.types) bool;
+  inherit (self.lib.modules) mkOpt;
 
   sway = osConfig.sylveon.system.graphical.sway;
   cfg = config.sylveon.cli.kitty;
 in
 {
-  options.sylveon.cli.kitty = mkPackageOpt pkgs.kitty "Whether or not to install and configure kitty";
+  options.sylveon.cli.kitty = {
+    enable = mkOpt bool false "Enable cutest terminal like evveeerr !!";
+  };
 
   config = mkIf (cfg.enable || sway.enable) {
     programs.kitty = {

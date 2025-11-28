@@ -7,12 +7,15 @@
 }:
 let
   inherit (lib) mkIf;
+  inherit (lib.types) bool;
 
-  inherit (self.lib.modules) mkPackageOpt;
+  inherit (self.lib.modules) mkOpt;
   cfg = config.sylveon.services.docker;
 in
 {
-  options.sylveon.services.docker = mkPackageOpt pkgs.docker "Docker for managing";
+  options.sylveon.services.docker = { 
+    enable = mkOpt bool false "Docher Service"; 
+  };
 
   config = mkIf cfg.enable {
     virtualisation.docker = {
