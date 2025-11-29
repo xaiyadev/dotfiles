@@ -10,6 +10,7 @@ let
   inherit (lib)
     mkIf
     getExe
+    mkForce
     ;
 
   sway = osConfig.sylveon.system.graphical.sway;
@@ -24,24 +25,24 @@ in
     services.vicinae = {
       enable = true;
       autoStart = false; # Is started through sway
-      package = inputs'.vicinae.packages.default;
 
-      settings = {
-        closeOnFocusLoss = true;
-        font.size = 10;
-        faviconService = "google";
-
-        theme = {
-          iconTheme = "BreezeX-RoséPine";
-          name = "rosepine-base.json";
-        };
-
-        window = {
-          csd = true;
-          opacity = 1;
-          rounding = 10;
-        };
-      };
+      # TODO: problems with writing into the json file
+      #settings = {
+      #  closeOnFocusLoss = true;
+      #  font.size = 10;
+      #  faviconService = "google";
+      #
+      #  theme = {
+      #    iconTheme = "BreezeX-RoséPine";
+      #    # name = mkForce "rosepine-base.json"; # TODO: get that fuckass stylix out of here alreadyy !!
+      #  };
+      #
+      #  window = {
+      #    csd = true;
+      #    opacity = 1;
+      #    rounding = 10;
+      #  };
+      #};
     };
 
     wayland.windowManager.sway.config.menu = 

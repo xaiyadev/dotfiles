@@ -9,6 +9,7 @@
 let
   inherit (lib)
     mkIf
+    mkForce
     ;
 
   inherit (lib.types) bool;
@@ -24,7 +25,10 @@ in
   config = mkIf cfg.enable {
     programs.nixcord = {
       enable = true;
-      discord.enable = true;
+      discord = {
+        vencord.enable = mkForce false;
+        equicord.enable = true;
+      };
 
       config = {
 
@@ -36,10 +40,10 @@ in
           betterGifPicker.enable = true;
           betterSessions.enable = true;
           betterSettings.enable = true;
-          blurNSFW.enable = true;
+          blurNsfw.enable = true;
           callTimer.enable = true;
-          clearURLs.enable = true;
-          copyUserURLs.enable = true;
+          clearUrLs.enable = true;
+          copyUserUrLs.enable = true;
           disableCallIdle.enable = true;
           dontRoundMyTimestamps.enable = true;
           favoriteEmojiFirst.enable = true;
@@ -65,7 +69,7 @@ in
 
           platformIndicators = {
             enable = true;
-            lists = false;
+            list = false;
             messages = false;
           };
 

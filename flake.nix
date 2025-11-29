@@ -87,8 +87,10 @@
     # Injected TIDAL
     tidaLuna = {
       type = "github";
-      owner = "Inrixia";
+      owner = "vMohammad24";
       repo = "TidaLuna";
+
+      ref = "getCredsFix";
     };
 
     stylix = {
@@ -108,9 +110,8 @@
 
     nixcord = {
       type = "github";
-      owner = "xaiyadev";
+      owner = "KaylorBen";
       repo = "nixcord";
-      ref = "fix/user-cfg-no-option";
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
