@@ -4,7 +4,7 @@ let
   inherit (lib.types) bool;
   inherit (self.lib.modules) mkOpt mkService;
 
-  cfg = config.sylveon.services.atprotocol.tangled.knot;
+  cfg = config.sylveon.services.atprotocol.tangled.spindle;
   spindle = config.services.tangled.spindle;
 in
 {

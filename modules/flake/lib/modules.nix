@@ -11,24 +11,31 @@ let
     mkOption { inherit type default description; };
 
   # funtion to generelize service stuff
-  # proxy: { domain; port OR socket OR locations }
+  # proxy: { domain; port OR socket }
   # secrets: [{ name; (optional) owner; (optional) script; (optional) mode; }]
   # databases: [ name ]
   # transparent
-  mkService = { proxy ? null, secrets ? null, databases ? null }: transparent: {
+  mkService = 
+    { 
+      proxy ? null, 
+      secrets ? null, 
+      databases ? [], 
+      transparent ? false 
+    }: {
 
-    age.secrets = (mkIf secrets (forEach secrets (x: {
+
+
+    # Write secrets if any secrets are given
+    age.secrets = (mkIf (!builtins.isNull secrets) (forEach secrets (x: {
       
-      # Secrets
       ${x.name} = mkMerge [
-        { 
-          inherit (x) mode;
-          rekeyFile = "${inputs.self}/secrets/${x}.age";
-        }
+        # A secret needs to have a name
+        { rekeyFile = "${inputs.self}/secrets/${x.name}.age"; }
 
-        (mkIf x.script { generator.script = x.script; })
+        (mkIf (builtins.hasAttr "mode" x) { mode = x.mode; })
+        (mkIf (builtins.hasAttr "script" x) { generator.script = x.script; })
 
-        (mkIf x.owner {
+        (mkIf (builtins.hasAttr "owner" x) {
           inherit (x) owner;
           group = x.owner;
         })
@@ -36,34 +43,34 @@ let
     })));
 
 
-    services = {
-      # Databases
-      postgresql = (mkIf databases {
-        ensureDatabases = databases;
+    services = mkMerge [
+      {
+        # Create databases if given
+        postgresql = {
+          ensureDatabases = databases;
 
-        ensureUsers = 
-          forEach databases (x: { name = x; ensureDBOwnership = true; });
-      });
-      
-      # Proxy
-      nginx.virtualHosts.${proxy.domain} = (mkIf proxy {
-        enableACME = true;
-        useACMEHost = "xaiya.dev";
-        forceSSL = true;
+          ensureUsers = 
+            forEach databases (x: { name = x; ensureDBOwnership = true; });
+        };
+      }
 
-        inherit (proxy) root;
-        
-        locations = 
-          (if 
-            (proxy.locations) then proxy.locations
-          else {
-            "/".proxyPass = 
-              if proxy.socket then proxy.socket else "http://[::1]:${proxy.port}";
-          });
+      (mkIf (proxy != null) {
+        # create a (simple) nginx configuration
+        nginx.virtualHosts.${proxy.domain} = {
+            enableACME = true;
+            useACMEHost = "xaiya.dev";
+            forceSSL = true;
+            
+            locations."/".proxyPass = 
+              if (builtins.hasAttr "socket" proxy) 
+              then proxy.socket 
+              else "http://[::1]:${proxy.port}";
+            
+            extraConfig = "proxy_ssl_server_name on;";
+        };
+      })
 
-        extraConfig = "proxy_ssl_server_name on;";
-      });
-    };
+    ];
   };
 
 in
