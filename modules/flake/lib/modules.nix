@@ -1,8 +1,7 @@
 { lib, inputs, }:
 let
   inherit (lib.options) mkOption;
-  inherit (lib.types) package bool;
-  inherit (lib) mkIf forEach mkMerge;
+  inherit (lib.types) bool str int;
 
   # Simplified one lining mkOption
   # example: ``mkOpt str "" "Example Option"``
@@ -10,73 +9,27 @@ let
     type: default: description:
     mkOption { inherit type default description; };
 
-  # funtion to generelize service stuff
-  # proxy: { domain; port OR socket }
-  # secrets: [{ name; (optional) owner; (optional) script; (optional) mode; }]
-  # databases: [ name ]
-  # transparent
-  mkService = 
-    { 
-      proxy ? null, 
-      secrets ? null, 
-      databases ? [], 
-      transparent ? false 
+  # Creating options for my services
+  # Inspired from: isabelroses
+  # example: ``mkServiceOpt "service" { port = 3000; host = "127.0.0.1"; domain = "xaiya.dev"; extraConfig = { //// }; }
+  mkServiceOpt = 
+    name:
+    {
+      port ? 0,
+      host ? "[::1]",
+      domain ? "xaiya.dev", # Change if new domains/other devices?
+      extraConfig ? {}
     }: {
-
-
-
-    # Write secrets if any secrets are given
-    age.secrets = (mkIf (!builtins.isNull secrets) (forEach secrets (x: {
-      
-      ${x.name} = mkMerge [
-        # A secret needs to have a name
-        { rekeyFile = "${inputs.self}/secrets/${x.name}.age"; }
-
-        (mkIf (builtins.hasAttr "mode" x) { mode = x.mode; })
-        (mkIf (builtins.hasAttr "script" x) { generator.script = x.script; })
-
-        (mkIf (builtins.hasAttr "owner" x) {
-          inherit (x) owner;
-          group = x.owner;
-        })
-      ];
-    })));
-
-
-    services = mkMerge [
-      {
-        # Create databases if given
-        postgresql = {
-          ensureDatabases = databases;
-
-          ensureUsers = 
-            forEach databases (x: { name = x; ensureDBOwnership = true; });
-        };
-      }
-
-      (mkIf (proxy != null) {
-        # create a (simple) nginx configuration
-        nginx.virtualHosts.${proxy.domain} = {
-            enableACME = true;
-            useACMEHost = "xaiya.dev";
-            forceSSL = true;
-            
-            locations."/".proxyPass = 
-              if (builtins.hasAttr "socket" proxy) 
-              then proxy.socket 
-              else "http://[::1]:${proxy.port}";
-            
-            extraConfig = "proxy_ssl_server_name on;";
-        };
-      })
-
-    ];
-  };
+      enable = mkOpt bool false ''Enable the "${name}" service'';
+      port = mkOpt int port ''On what port ${name} runs on'';
+      host = mkOpt str host ''On what host ${name} runs on'';
+      domain = mkOpt str domain ''What domain should be used for ${name}'';
+    } // extraConfig ;
 
 in
 {
   inherit 
     mkOpt 
-    mkService
+    mkServiceOpt
     ;
 }

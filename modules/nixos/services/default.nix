@@ -7,7 +7,6 @@
 
     ./minecraft.nix
     ./vaultwarden.nix
-    ./firefly.nix
     ./glance
     ./kitchenowl.nix
 

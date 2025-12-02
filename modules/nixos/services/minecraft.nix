@@ -8,7 +8,7 @@
 let
   inherit (self.lib.modules) mkOpt;
   inherit (lib.modules) mkIf;
-  inherit (lib.types) bool pkg;
+  inherit (lib.types) bool package;
 
   cfg = config.sylveon.services.minecraft;
 in
@@ -16,7 +16,7 @@ in
 
   options.sylveon.services.minecraft = {
     enable = mkOpt bool false "Enable a Minecraft server";
-    package = mkOpt pkg pkgs.papermcServers.papermc "On what package this server should be based on";
+    package = mkOpt package pkgs.papermcServers.papermc "On what package this server should be based on";
   };
 
   config = mkIf cfg.enable {

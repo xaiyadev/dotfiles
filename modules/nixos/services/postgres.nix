@@ -20,7 +20,6 @@ in
   config = mkIf cfg.enable {
     services.postgresql = {
       enable = true;
-      inherit (cfg) package;
 
       # Allow access to databases for users with the same username
       authentication = pkgs.lib.mkOverride 10 ''

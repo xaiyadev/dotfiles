@@ -1,6 +1,5 @@
 {
   imports = [
-    ./knot.nix
-    ./spindle.nix
+    ./tangled.nix
   ];
 }
