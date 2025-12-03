@@ -22,7 +22,6 @@ in
   config = mkIf (cfg.enable || sway.enable) {
     programs.kitty = {
       enable = true;
-      inherit (cfg) package;
 
       shellIntegration.enableZshIntegration = config.programs.zsh.enable;
       enableGitIntegration = true;
