@@ -1,7 +1,7 @@
-{ lib, config, ... }:
+{ lib, config, inputs, ... }:
 let
   sylveonLib = lib.fixedPoints.makeExtensible (final: {
-    modules = import ./modules.nix { inherit lib; };
+    modules = import ./modules.nix { inherit lib inputs; };
     users = import ./users.nix { inherit lib; };
     validation = import ./validation.nix { inherit lib config; };
 

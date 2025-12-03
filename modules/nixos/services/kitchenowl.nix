@@ -7,33 +7,39 @@
 }:
 let
   inherit (lib) mkIf;
-  inherit (lib.types) bool;
 
-  inherit (self.lib.modules) mkOpt;
-  cfg = config.sylveon.services.plex;
+  inherit (self.lib.modules) mkServiceOpt;
+  cfg = config.sylveon.services.kitchenowl;
 in
 {
-  options.sylveon.services.kitchenowl.enable =
-    mkOpt bool false
-      "cooking book (still maintend on docker)"; # TODO
+  options.sylveon.services.kitchenowl =
+    mkServiceOpt "Kitchenowl" { port = 8050; domain = "kitchen.xaiya.dev"; };
 
   config = mkIf cfg.enable {
+    # Create secrets
     age.secrets.kitchenowl-env.rekeyFile = "${inputs.self}/secrets/kitchenowl.env.age";
 
+    # Enable the kitchenowl container
     virtualisation.oci-containers.containers.kitchenowl = {
       image = "tombursch/kitchenowl:latest";
-      ports = [ "8050:8080" ];
+      ports = [ "${builtins.toString cfg.port}:${builtins.toString cfg.port}" ];
 
       environmentFiles = [ config.age.secrets.kitchenowl-env.path ];
       volumes = [ "/mnt/raid/services/kitchenowl/data:/data" ];
     };
 
-    services.nginx.virtualHosts."kitchen.xaiya.dev" = {
+    # Enable proxy
+    services.nginx.virtualHosts.${cfg.domain} = {
       enableACME = true;
       forceSSL = true;
 
-      locations."/".proxyPass = "http://127.0.0.1:8050";
+      locations."/" = {
+        proxyPass = "http://${cfg.host}:${builtins.toString cfg.port}";
+        proxyWebsockets = true;
+      };
+
       extraConfig = "proxy_ssl_server_name on;";
     };
+
   };
 }

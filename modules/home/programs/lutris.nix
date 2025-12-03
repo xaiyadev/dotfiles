@@ -13,13 +13,17 @@ let
     mkIf
     ;
 
-  inherit (self.lib.modules) mkPackageOpt;
+  inherit (lib.types) bool;
+
+  inherit (self.lib.modules) mkOpt;
 
   cfg = config.sylveon.programs.lutris;
 in
 {
 
-  options.sylveon.programs.lutris = mkPackageOpt pkgs.lutris "Game Launcher";
+  options.sylveon.programs.lutris = {
+    enable = mkOpt bool false "Enable Game launcher";
+  };
 
   config = mkIf cfg.enable {
     programs.lutris = {

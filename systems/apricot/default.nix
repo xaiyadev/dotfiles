@@ -29,7 +29,6 @@
 
       vaultwarden.enable = true;
       glance.enable = true;
-      # firefly.enable = true; TODO
       kitchenowl.enable = true;
 
       atprotocol = {

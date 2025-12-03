@@ -6,14 +6,18 @@
   ...
 }:
 let
-  inherit (self.lib.modules) mkPackageOpt;
-
+  inherit (self.lib.modules) mkOpt;
   inherit (lib.modules) mkIf;
+  inherit (lib.types) bool package;
+
   cfg = config.sylveon.services.minecraft;
 in
 {
 
-  options.sylveon.services.minecraft = mkPackageOpt pkgs.papermcServers.papermc "Minecraft Server as Service";
+  options.sylveon.services.minecraft = {
+    enable = mkOpt bool false "Enable a Minecraft server";
+    package = mkOpt package pkgs.papermcServers.papermc "On what package this server should be based on";
+  };
 
   config = mkIf cfg.enable {
     services.minecraft-server = {

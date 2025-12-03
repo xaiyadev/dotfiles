@@ -8,23 +8,25 @@
 let
 
   inherit (lib)
-    mkMerge
     mkIf
     genAttrs
     ;
 
-  inherit (self.lib.modules) mkPackageOpt;
+  inherit (lib.types) bool;
+
+  inherit (self.lib.modules) mkOpt;
 
   cfg = config.sylveon.programs.librewolf;
 in
 {
 
-  options.sylveon.programs.librewolf = mkPackageOpt pkgs.librewolf "Whether or not to enable librewolf";
+  options.sylveon.programs.librewolf = {
+    enable = mkOpt bool false "Enable webbrowser based on firefox";
+  };
 
   config = mkIf cfg.enable {
     programs.librewolf = {
       enable = true;
-      inherit (cfg) package;
 
       # Install German and english languages
       languagePacks = [

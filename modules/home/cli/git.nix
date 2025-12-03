@@ -1,17 +1,4 @@
 {
-  pkgs,
-  lib,
-  self,
-  config,
-  ...
-}:
-let
-  inherit (lib) mkIf;
-  inherit (self.lib.modules) mkPackageOpt;
-
-  cfg = config.sylveon.cli.git;
-in
-{
   programs.git = {
     enable = true;
 

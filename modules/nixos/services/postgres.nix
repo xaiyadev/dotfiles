@@ -7,17 +7,20 @@
 }:
 let
   inherit (lib) mkIf mkForce;
+  inherit (lib.types) bool;
 
-  inherit (self.lib.modules) mkPackageOpt;
+  inherit (self.lib.modules) mkOpt;
   cfg = config.sylveon.services.postgres;
 in
 {
-  options.sylveon.services.postgres = mkPackageOpt pkgs.postgresql "Postgres databases and stuff";
+  options.sylveon.services.postgres = {
+    enable = mkOpt bool false "Enable postgres databases";
+  };
 
   config = mkIf cfg.enable {
     services.postgresql = {
       enable = true;
-      inherit (cfg) package;
+      package = pkgs.postgresql;
 
       # Allow access to databases for users with the same username
       authentication = pkgs.lib.mkOverride 10 ''
