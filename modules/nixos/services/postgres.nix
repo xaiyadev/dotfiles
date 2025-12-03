@@ -14,12 +14,13 @@ let
 in
 {
   options.sylveon.services.postgres = {
-    enable = mkOpt bool false "Enable postgres databases mkService";
+    enable = mkOpt bool false "Enable postgres databases";
   };
 
   config = mkIf cfg.enable {
     services.postgresql = {
       enable = true;
+      package = pkgs.postgresql;
 
       # Allow access to databases for users with the same username
       authentication = pkgs.lib.mkOverride 10 ''
