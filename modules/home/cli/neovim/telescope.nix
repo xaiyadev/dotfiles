@@ -20,7 +20,7 @@ in
           sorting_strategy = "ascending";
           layout_config = {
             prompt_position = "top";
-            preview_width = 0.5;
+            # preview_width = 0.5;
             width = 0.40;
             height = 0.40;
           };
