@@ -87,10 +87,8 @@
     # Injected TIDAL
     tidaLuna = {
       type = "github";
-      owner = "vMohammad24";
+      owner = "Inrixia";
       repo = "TidaLuna";
-
-      ref = "getCredsFix";
     };
 
     stylix = {
