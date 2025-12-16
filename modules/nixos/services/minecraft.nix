@@ -16,20 +16,25 @@ in
 
   options.sylveon.services.minecraft = {
     enable = mkOpt bool false "Enable a Minecraft server";
-    package = mkOpt package pkgs.papermcServers.papermc "On what package this server should be based on";
+    package = mkOpt package pkgs.papermcServers.papermc-1_21_9 "On what package this server should be based on";
   };
 
   config = mkIf cfg.enable {
+
+    # Open Minecraft port and proximity port
+    networking.firewall = {
+      allowedUDPPorts = [ 24454 25565 ];
+      allowedTCPPorts = [ 24454 25565 ];
+    };
+
     services.minecraft-server = {
       enable = true;
       inherit (cfg) package;
 
       # What world I want to use (TODO: needs some changes)
-      dataDir = "/mnt/raid/services/minecraft/01";
+      dataDir = "/mnt/raid/services/minecraft/02";
 
       eula = true;
-      openFirewall = true;
-
       declarative = true;
 
       whitelist = {
@@ -51,20 +56,20 @@ in
 
       serverProperties = {
         difficulty = "hard";
-
         spawn-protection = 0;
 
         gamemode = 0;
         force-gamemode = true;
 
         max-players = 10;
-        view-dance = 32;
+        view-dance = 18;
+        simulation-distance = 8;
 
         white-list = true;
         motd = "Sylveon Network";
       };
 
-      jvmOpts = "-Xms4092M -Xmx4092M";
+      jvmOpts = "-Xms2G -Xmx8G";
     };
   };
 }

@@ -39,7 +39,6 @@
       };
 
       plex.enable = true;
-
       minecraft.enable = true;
     };
   };
