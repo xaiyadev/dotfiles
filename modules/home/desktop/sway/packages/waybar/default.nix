@@ -8,7 +8,6 @@
 let
   inherit (lib)
     mkIf
-    concatStringsSep
     ;
 
   sway = osConfig.sylveon.system.graphical.sway;
@@ -23,10 +22,9 @@ in
     # replace default bar with waybar
     wayland.windowManager.sway.config.bars = [ { command = "${pkgs.waybar}/bin/waybar"; } ];
 
-    # only add colors and fonts from stylix
-    stylix.targets.waybar.addCss = false;
+    catppuccin.waybar.enable = true;
 
-    programs.waybar = {
+    programs.waybar = { # TODO: replace?
       enable = true;
 
       settings = {
@@ -35,16 +33,16 @@ in
           position = "top";
           fixed-center = true;
 
-          height = 35;
-          margin-top = 5;
-          margin-left = 5;
-          margin-right = 5;
+          height = 23;
+          margin-top = 10;
+          margin-left = 10;
+          margin-right = 10;
 
-          margin-bottom = 3;
+          margin-bottom = 10;
 
           # Enable modules in the right positions
           modules-left = [
-            "image#nix"
+            # "image#nix"
             "sway/workspaces"
             "sway/window"
           ];

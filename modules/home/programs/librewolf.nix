@@ -28,88 +28,71 @@ in
     programs.librewolf = {
       enable = true;
 
-      # Install German and english languages
-      languagePacks = [
-        "en-GB"
-        "de"
-      ];
+      languagePacks = [ "en-GB" "de" ];
 
+      # Settings usually disabled by librewolf, enabled again for convience reasons
       settings = {
         "privacy.clearOnShutdown.cookies" = false;
         "network.cookie.lifetimePolicy" = 0;
-
-        # Enable Canvas
         "webgl.disabled" = false;
         "privacy.fingerprintingProtection" = false;
       };
 
       policies = {
+        DisplayBookmarksToolbar = "never";
+        DisableFirefoxAccounts = true;
+        DisableFeedbackCommands = true;
+
         ExtensionSettings =
           genAttrs
             [
               "uBlock0@raymondhill.net"
-              "languagetool-webextension@languagetool.org"
               "sponsorBlocker@ajay.app"
               "FirefoxColor@mozilla.com"
               "firefox-enpass@enpass.io"
+              "{446900e4-71c2-419f-a6a7-df9c091e268b}" # Bitwarden
             ]
             (ext: {
               installation_mode = "force_installed";
-              private_browsing = true;
               install_url = "https://addons.mozilla.org/firefox/downloads/latest/${ext}/latest.xpi";
             });
-
-        DisplayBookmarksToolbar = "never";
       };
 
-      profiles = {
-        default = {
+      profiles.default = {
+        # TODO: containers?
+        containersForce = true;
+        extensions.force = true; # Needed for catppuccin
 
-          # Extensions are managed via policies, not here!
-          extensions = {
-            force = true;
-            settings = {
-              # ColorTheme is managed by stylix
-              "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}".settings = {
-                dbInChromeStorage = true; # required for Stylus
-              };
+        settings = {
+          # Default page should be my homepage
+          "browser.startup.homepage" = "https://xaiya.dev";
+        };
 
+        search = {
+          force = true;
+          default = "ddg";
+
+          engines = {
+            MyNixOS = {
+              name = "MyNixOS";
+              urls = [{
+                  template = "https://mynixos.com/search";
+                  params = [ { name = "q"; value = "{searchTerms}"; } ];
+              }];
+
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
+              definedAliases = [ "@n" ];
             };
-          };
 
-          search = {
-            force = true;
-            default = "google";
-
-            engines = {
-              MyNixOS = {
-                name = "MyNixOS";
-                urls = [
-                  {
-                    template = "https://mynixos.com/search";
-                    params = [
-                      {
-                        name = "q";
-                        value = "{searchTerms}";
-                      }
-                    ];
-                  }
-                ];
-                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
-                definedAliases = [ "@nix" ];
-              };
-
-              ddg.metaData.hidden = true;
-              wikipedia.metaData.hidden = true;
-            };
+            google.metaData.alias = "@g";
           };
         };
       };
     };
 
-    stylix.targets.librewolf = {
-      colorTheme.enable = true;
-      profileNames = [ "default" ]; # https://stylix.danth.me/options/modules/firefox.html
+    catppuccin.librewolf = {
+      force = true;
+      profiles.default.force = true;
     };
   };
 }

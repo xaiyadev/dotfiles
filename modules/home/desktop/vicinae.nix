@@ -32,11 +32,6 @@ in
       #  font.size = 10;
       #  faviconService = "google";
       #
-      #  theme = {
-      #    iconTheme = "BreezeX-RoséPine";
-      #    # name = mkForce "rosepine-base.json"; # TODO: get that fuckass stylix out of here alreadyy !!
-      #  };
-      #
       #  window = {
       #    csd = true;
       #    opacity = 1;

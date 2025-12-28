@@ -25,12 +25,9 @@ in
 
       shellIntegration.enableZshIntegration = config.programs.zsh.enable;
       enableGitIntegration = true;
-      themeFile = "rose-pine";
 
       # removing annoying things
       settings.enable_audio_bell = false;
     };
-
-    stylix.targets.kitty.enable = false; # Using the kitty theme instead of base16
   };
 }

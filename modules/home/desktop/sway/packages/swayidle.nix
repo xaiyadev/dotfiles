@@ -20,13 +20,7 @@ in
         command = "exec ${config.programs.swaylock.package}/bin/swaylock";
       }
     ];
-
-    events = [
-      {
-        event = "before-sleep";
-        command = "exec ${config.programs.swaylock.package}/bin/swaylock";
-      }
-    ];
-
+    
+    events."before-sleep" = "exec ${config.programs.swaylock.package}/bin/swaylock";
   };
 }

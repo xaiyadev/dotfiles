@@ -31,6 +31,7 @@ in
       };
 
       config = {
+        enabledThemes = [ "https://catppuccin.github.io/discord/dist/catppuccin-mocha-pink.theme.css" ];
 
         # Activate and Configure Plugins
         plugins = {
