@@ -9,6 +9,8 @@
     programs = {
       librewolf.enable = true;
       discord.enable = true;
+
+      jetbrains.phpstorm.enable = true;
     };
 
     cli = {
