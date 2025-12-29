@@ -10,12 +10,23 @@ let
   inherit (lib)
     mkIf
     mkForce
+    mkMerge
+    forEach
+    ;
+
+  inherit (lib.strings)
+    splitString
+    ;
+
+  inherit (lib.lists)
+    last
     ;
 
   inherit (lib.types) bool;
 
   inherit (self.lib.modules) mkOpt;
   cfg = config.sylveon.programs.discord;
+  nixcordcfg = config.programs.nixcord.config;
 in
 {
   options.sylveon.programs.discord.enable = mkOpt bool false "Whether or not to enable discord";
@@ -31,7 +42,17 @@ in
       };
 
       config = {
-        enabledThemes = [ "https://catppuccin.github.io/discord/dist/catppuccin-mocha-pink.theme.css" ];
+        # This will only work if there is one main theme, and other are just tweakin stuff
+        themes = {
+          mocha-flamingo = 
+            builtins.fetchurl {
+              url = "https://catppuccin.github.io/discord/dist/catppuccin-mocha-flamingo.theme.css";
+              sha256 = "sha256-M2bUKjknn6jTkUcjbzpgjsje+BdeNBGr75sLYK9KzI4="; # TODO: make this auto update? (versioned)
+            };
+        };
+
+        enabledThemes = 
+          forEach (builtins.attrNames nixcordcfg.themes) (x: x + ".css");
 
         # Activate and Configure Plugins
         plugins = {
