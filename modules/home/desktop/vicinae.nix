@@ -24,7 +24,7 @@ in
   config = mkIf sway.enable {
     services.vicinae = {
       enable = true;
-      autoStart = false; # Is started through sway
+      systemd.enable = false; # Is started through sway
 
       # TODO: problems with writing into the json file
       #settings = {

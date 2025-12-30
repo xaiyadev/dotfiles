@@ -62,10 +62,10 @@ in
           betterGifPicker.enable = true;
           betterSessions.enable = true;
           betterSettings.enable = true;
-          blurNsfw.enable = true;
+          BlurNSFW.enable = true;
           callTimer.enable = true;
-          clearUrLs.enable = true;
-          copyUserUrLs.enable = true;
+          ClearURLs.enable = true;
+          CopyUserURLs.enable = true;
           disableCallIdle.enable = true;
           dontRoundMyTimestamps.enable = true;
           favoriteEmojiFirst.enable = true;
