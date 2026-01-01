@@ -10,7 +10,8 @@
     ./glance
     ./kitchenowl.nix
 
-    ./atprotocol
+    ./tangled.nix
+    ./piper.nix
 
     ./plex.nix
   ];

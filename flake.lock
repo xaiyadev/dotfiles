@@ -218,7 +218,7 @@
         "flake-parts": "flake-parts_7",
         "git-hooks": "git-hooks",
         "nix": "nix",
-        "nixpkgs": "nixpkgs_6"
+        "nixpkgs": "nixpkgs_7"
       },
       "locked": {
         "lastModified": 1760162706,
@@ -1133,6 +1133,19 @@
     },
     "nixpkgs_6": {
       "locked": {
+        "lastModified": 1767151656,
+        "narHash": "sha256-enBX1DxL9cttnrJ+rzOds/GXWqSj/vcB97+X9mgiJho=",
+        "rev": "f665af0cdb70ed27e1bd8f9fdfecaf451260fc55",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre920165.f665af0cdb70/nixexprs.tar.xz?lastModified=1767151656&rev=f665af0cdb70ed27e1bd8f9fdfecaf451260fc55"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz"
+      }
+    },
+    "nixpkgs_7": {
+      "locked": {
         "lastModified": 1758532697,
         "narHash": "sha256-bhop0bR3u7DCw9/PtLCwr7GwEWDlBSxHp+eVQhCW9t4=",
         "owner": "cachix",
@@ -1147,7 +1160,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_7": {
+    "nixpkgs_8": {
       "locked": {
         "lastModified": 1760103332,
         "narHash": "sha256-BMsGVfKl4Q80Pr9T1AkCRljO1bpwCmY8rTBVj8XGuhA=",
@@ -1264,6 +1277,7 @@
         "stylix": "stylix",
         "systems": "systems_4",
         "tangled": "tangled",
+        "tgirlpkgs": "tgirlpkgs",
         "tidaLuna": "tidaLuna",
         "tinted-theming-schemes": "tinted-theming-schemes",
         "vicinae": "vicinae"
@@ -1469,11 +1483,29 @@
         "url": "https://tangled.org/tangled.org/core"
       }
     },
+    "tgirlpkgs": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_6"
+      },
+      "locked": {
+        "lastModified": 1767229092,
+        "narHash": "sha256-HFi+WvYK7mLVL6Cka2m9wKpy9lt2K5wPQ+oN/bmuc0Q=",
+        "owner": "tgirlcloud",
+        "repo": "pkgs",
+        "rev": "1d1d8e13541eaf85492e758be2a032fd20412a33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tgirlcloud",
+        "repo": "pkgs",
+        "type": "github"
+      }
+    },
     "tidaLuna": {
       "inputs": {
         "devenv": "devenv",
         "flake-parts": "flake-parts_8",
-        "nixpkgs": "nixpkgs_7",
+        "nixpkgs": "nixpkgs_8",
         "systems": "systems_6"
       },
       "locked": {

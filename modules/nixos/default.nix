@@ -1,5 +1,9 @@
-{
+{ inputs, ... }: {
   imports = [
+    # General module imports
+    inputs.tgirlpkgs.nixosModules.default
+
+    # Modules import
     ./hardware # hardware configuration (e.g gpu, cpu, networking, etc.)
     ./nix # specific configuration for the nix environment
     ./environment # environment variables and configurations (e.g fonts, time etc.)

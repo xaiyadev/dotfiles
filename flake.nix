@@ -25,6 +25,13 @@
       ref = "nixos-unstable";
     };
 
+    # Package collection
+    tgirlpkgs = {
+      type = "github";
+      owner = "tgirlcloud";
+      repo = "pkgs";
+    };
+
     nixvim = {
       type = "github";
       owner = "nix-community";
