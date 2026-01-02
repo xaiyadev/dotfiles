@@ -13,7 +13,7 @@ let
 in
 {
   options.sylveon.services.kitchenowl =
-    mkServiceOpt "Kitchenowl" { port = 8050; domain = "kitchen.xaiya.dev"; };
+    mkServiceOpt "Kitchenowl" { port = 8050; domain = "kitchen.xaiya.dev"; host = "127.0.0.1"; };
 
   config = mkIf cfg.enable {
     # Create secrets
@@ -22,7 +22,7 @@ in
     # Enable the kitchenowl container
     virtualisation.oci-containers.containers.kitchenowl = {
       image = "tombursch/kitchenowl:latest";
-      ports = [ "${builtins.toString cfg.port}:${builtins.toString cfg.port}" ];
+      ports = [ "${builtins.toString cfg.port}:8080" ];
 
       environmentFiles = [ config.age.secrets.kitchenowl-env.path ];
       volumes = [ "/mnt/raid/services/kitchenowl/data:/data" ];
@@ -35,7 +35,6 @@ in
 
       locations."/" = {
         proxyPass = "http://${cfg.host}:${builtins.toString cfg.port}";
-        proxyWebsockets = true;
       };
 
       extraConfig = "proxy_ssl_server_name on;";
