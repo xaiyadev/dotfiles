@@ -6,7 +6,8 @@ let
 in
 {
 
-  # SwayNC is right now only used for the notification popup
+  # TODO: make icon dissapearrs?
+  # notification center point/something different?
   services.swaync = mkIf sway.enable {
     enable = true;
 

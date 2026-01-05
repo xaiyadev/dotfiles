@@ -26,18 +26,19 @@ in
       enable = true;
       systemd.enable = false; # Is started through sway
 
-      # TODO: problems with writing into the json file
-      #settings = {
-      #  closeOnFocusLoss = true;
-      #  font.size = 10;
-      #  faviconService = "google";
-      #
-      #  window = {
-      #    csd = true;
-      #    opacity = 1;
-      #    rounding = 10;
-      #  };
-      #};
+      settings = {
+        closeOnFocusLoss = true;
+        font.size = 10;
+        faviconService = "google";
+
+        # theme configured by catppuccin
+      
+        window = {
+          csd = true;
+          opacity = 1;
+          rounding = 10;
+        };
+      };
     };
 
     wayland.windowManager.sway.config.menu = 

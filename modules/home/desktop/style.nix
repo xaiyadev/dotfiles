@@ -12,22 +12,12 @@ let
 in
 {
 
-  /*
-    TODO 
-    manual configurutions/needs to automate
-    - TIDALuna
-    - Jetbrains IDE
-    - Sway (flmaingo stuff)
-    - Kitty (write own config?)
-    - vicaine
-
-    - firefox browser websites
-    - rose-pine alternative (?)
-  */
-
   imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
   /* Configurating the basic theme */
+  /*
+   * TODO: global catpuccin
+  */
   config = mkIf prof.graphical.enable {
     catppuccin = {
       enable = true;

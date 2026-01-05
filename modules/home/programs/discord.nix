@@ -42,17 +42,9 @@ in
       };
 
       config = {
-        # This will only work if there is one main theme, and other are just tweakin stuff
-        themes = {
-          mocha-flamingo = 
-            builtins.fetchurl {
-              url = "https://catppuccin.github.io/discord/dist/catppuccin-mocha-flamingo.theme.css";
-              sha256 = "sha256-M2bUKjknn6jTkUcjbzpgjsje+BdeNBGr75sLYK9KzI4="; # TODO: make this auto update? (versioned)
-            };
-        };
-
-        enabledThemes = 
-          forEach (builtins.attrNames nixcordcfg.themes) (x: x + ".css");
+        # Themes based on files is currently bugged with equicord (TODO)
+        themeLinks = [ "https://catppuccin.github.io/discord/dist/catppuccin-mocha-flamingo.theme.css" ];
+        transparent = true;
 
         # Activate and Configure Plugins
         plugins = {
