@@ -99,6 +99,10 @@ in
           youtubeAdblock.enable = true;
         };
       };
+
+      extraConfig = {
+				enabledThemeLinks = nixcordcfg.themeLinks;
+      };
     };
   };
 }
