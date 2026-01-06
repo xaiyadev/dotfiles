@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, self, ... }:
 let
   inherit (lib) 
     forEach
@@ -13,6 +13,10 @@ let
 in
 {
   wayland.windowManager.sway.config = {
+    # Configure wallpaper
+    output."*" = {
+      bg = "${self}/assets/wallpaper/catppuccin-cat.png fill";
+    };
     defaultWorkspace = "1";
 
     workspaceOutputAssign = mkMerge [

@@ -4,7 +4,8 @@
 * {
     background-color: transparent;
     font-family: "JetBrainsMono Nerd Font", sans-serif;
-    color: @base04;
+    font-size: 14px;
+    color: @text;
 
     min-height: 0;
     padding: 0;
@@ -14,17 +15,20 @@
     border: unset;
 }
 
-window { background-color: transparent; }
-tooltip { background-color: @base00; }
-#tray menu { background-color: @base00; }
+window#waybar { 
+  background-color: @base; 
+  border-radius: 5px; 
+}
+
+tooltip { background-color: @crust; }
+#tray menu { background-color: @crust; }
 
 .module {
-    background-color: @base00;
-    border-radius: 13px;
+    background-color: transparent;
 
     min-width: 20px;
 
-    padding: 0 13px;
+    padding: 5px 11px;
     margin: 0 3px;
 }
 
@@ -51,25 +55,20 @@ tooltip { background-color: @base00; }
     padding: 0;
 }
 
-#workspaces button {
-    padding: 0 0 0 3px;
-    margin: 0 3px;
-    transition: 0.5s;
+#workspaces button.focused label {
+    font-weight: bolder;
+    font-size: 15px;
+    color: @flamingo;
 }
 
-#workspaces button.focused {
-    box-shadow: inset 0 -2px @base0A;
+#workspaces button.urgent label {
+    color: @red;
 }
 
-#workspaces button.urgent {
-    box-shadow: inset 0 -2px @base08;
+.module#battery.warning label {
+    color: @rosewater;
 }
 
-.module#battery.warning {
-    box-shadow: inset 0 -4px @base0E;
-}
-
-.module#battery.critical {
-
-    box-shadow: inset 0 -4px @base08;
+.module#battery.critical label {
+    color: @red;
 }

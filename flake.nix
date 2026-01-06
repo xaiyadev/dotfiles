@@ -11,6 +11,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    catppuccin = {
+      type = "github";
+      owner = "catppuccin";
+      repo = "nix";
+    };
+
     # Tangled knots
     tangled = {
       url = "git+https://tangled.org/tangled.org/core";
@@ -96,14 +102,6 @@
       type = "github";
       owner = "Inrixia";
       repo = "TidaLuna";
-    };
-
-    stylix = {
-      type = "github";
-      owner = "danth";
-      repo = "stylix";
-
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     tinted-theming-schemes = {

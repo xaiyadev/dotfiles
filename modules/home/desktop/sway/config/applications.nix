@@ -11,11 +11,13 @@ in
 {
   wayland.windowManager.sway.config = {
     window = {
-      border = 3;
+      border = 1;
       titlebar = false;
     };
+
     gaps = {
-      inner = 5;
+      inner = 8;
+      outer = 3;
     };
 
     floating = {
