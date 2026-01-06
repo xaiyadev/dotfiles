@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   inputs,
   inputs',
   osConfig,
@@ -24,18 +25,30 @@ in
   config = mkIf sway.enable {
     services.vicinae = {
       enable = true;
+      package = pkgs.vicinae; # Outdated but more stable version built by hydra
       systemd.enable = false; # Is started through sway
 
       settings = {
-        closeOnFocusLoss = true;
+        pop_to_root_on_close = true;
         font.size = 10;
-        faviconService = "google";
+        favicon_service = "twenty";
 
-        # theme configured by catppuccin
+        # Theme configuration with catppuccin currently bugged
+        # https://github.com/catppuccin/nix/pull/800
+        theme =
+        let
+        	ctp = config.catppuccin;
+        in
+        {
+        	dark = {
+        		name = "catppuccin-${ctp.flavor}";
+            iconTheme = "Catppuccin ${lib.toSentenceCase ctp.flavor} ${lib.toSentenceCase ctp.accent}";
+        	};
+        };
       
-        window = {
+        launcher_window = {
           csd = true;
-          opacity = 1;
+          opacity = 0.95;
           rounding = 10;
         };
       };
