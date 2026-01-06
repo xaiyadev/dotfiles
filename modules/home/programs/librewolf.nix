@@ -12,6 +12,12 @@ let
     genAttrs
     ;
 
+  inherit (builtins)
+    fromJSON
+    readFile
+    fetchurl
+    ;
+
   inherit (lib.types) bool;
 
   inherit (self.lib.modules) mkOpt;
@@ -30,12 +36,32 @@ in
 
       languagePacks = [ "en-GB" "de" ];
 
-      # Settings usually disabled by librewolf, enabled again for convience reasons
       settings = {
-        "privacy.clearOnShutdown.cookies" = false;
-        "network.cookie.lifetimePolicy" = 0;
+        "browser.fullscreen.autohide" = false;
+
         "webgl.disabled" = false;
         "privacy.fingerprintingProtection" = false;
+        "browser.translations.enable" = false;
+
+        "media.ffmpeg.vaapi.enabled" = true;
+        "media.rdd-ffmpeg.enabled" = true;
+
+        "extensions.abuseReport.enabled" = false;
+        "extensions.formautofill.creditCards.enabled" = false;
+        "browser.contentblocking.report.lockwise.enabled" = false;
+
+        "identity.fxaccounts.enabled" = false;
+        "identity.fxaccounts.toolbar.enabled" = false;
+        "identity.fxaccounts.pairing.enabled" = false;
+        "identity.fxaccounts.commands.enabled" = false;
+        "privacy.clearOnShutdown.history" = false;
+        "privacy.clearOnShutdown.cookies" = false;
+        "network.cookie.lifetimePolicy" = 0;
+
+        # disable notifications
+        "dom.push.enabled" = false;
+        "dom.push.connection.enabled" = false;
+        "dom.battery.enabled" = false;
       };
 
       policies = {
@@ -50,6 +76,7 @@ in
               "sponsorBlocker@ajay.app"
               "FirefoxColor@mozilla.com"
               "firefox-enpass@enpass.io"
+              "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" # Stylus
               "{446900e4-71c2-419f-a6a7-df9c091e268b}" # Bitwarden
             ]
             (ext: {
@@ -59,9 +86,17 @@ in
       };
 
       profiles.default = {
-        # TODO: containers?
-        containersForce = true;
-        extensions.force = true; # Needed for catppuccin
+        extensions = {
+          force = true; # Needed for catppuccin
+
+          settings = {
+            # stylus themes need to be manually imported from now
+            # please create and import a new style file from here: https://catppuccin-userstyles-customizer.uncenter.dev/
+            "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}".settings = {
+              dbInChromeStorage = true; # required for Stylus
+            };
+          };
+        };
 
         settings = {
           # Default page should be my homepage

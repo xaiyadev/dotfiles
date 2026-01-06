@@ -3,29 +3,52 @@
   lib,
   inputs,
   pkgs,
+  config,
   ...
 }:
 let
   inherit (lib) mkIf;
-
-  prof = osConfig.sylveon.profiles;
+  cfg = config.catppuccin;
 in
 {
-
   imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
-  /* Configurating the basic theme */
-  /*
-   * TODO: global catpuccin
-  */
-  config = mkIf prof.graphical.enable {
-    catppuccin = {
-      enable = true;
-      cache.enable = true;
+	# Use the global catppuccin configuration
+	/*
+    TODO: applications that need to be manaul integrated/need nix integration
+    - TidaLuna
+	*/
+	config = mkIf osConfig.catppuccin.enable {
+	  catppuccin = {
+	    enable = true;
 
-      accent = "flamingo";
-      flavor = "mocha";
+	    inherit (osConfig.catppuccin)
+        accent
+        flavor
+        ;
     };
+
+    gtk = {
+      enable = true;
+
+      theme = {
+        name = "catppuccin-${cfg.flavor}-${cfg.accent}-standard";
+        package = pkgs.catppuccin-gtk.override {
+          size = "standard";
+          accents = [ cfg.accent ];
+          variant = cfg.flavor;
+        };
+      };
+
+      gtk3.extraConfig = {
+        gtk-application-prefer-dark-theme = true;
+      };
+
+      gtk4.extraConfig = {
+        # make things look nice
+        gtk-application-prefer-dark-theme = true;
+      };
+     };
 
     home.pointerCursor = {
       enable = true;
@@ -37,6 +60,5 @@ in
       sway.enable = true;
       gtk.enable = true;
     };
-
   };
 }

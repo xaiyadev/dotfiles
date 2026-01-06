@@ -7,6 +7,7 @@
     ./system # configuration for our system
     ./services
 
+    ./style.nix
     ./users.nix # load and create users
     ./extraPackages.nix # packages that need to be loaded but are not big enough to be an own module
   ];

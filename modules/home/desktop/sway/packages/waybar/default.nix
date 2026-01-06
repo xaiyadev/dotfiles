@@ -33,7 +33,7 @@ in
           position = "top";
           fixed-center = true;
 
-          height = 23;
+          height = 30;
           margin-top = 10;
           margin-left = 10;
           margin-right = 10;
@@ -51,7 +51,6 @@ in
             "clock"
           ];
           modules-right = [
-            "mpris"
             "pulseaudio"
             "network"
             "bluetooth"

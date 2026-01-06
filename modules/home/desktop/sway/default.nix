@@ -48,19 +48,21 @@ in
 
               # Configuration needed only if using the title bar
               text = "$text";
-              border = "#ffffff";
-              background = "#ffffff";
+              border = submodule.childBorder;
+              background = "$base";
             };
           in
           {
             focused = submodule // rec {
             	childBorder = "\$${config.catppuccin.accent}";
             	indicator = childBorder;
+              border = childBorder;
             };
 
             urgent = submodule // rec {
             	childBorder = "$red";
             	indicator = childBorder;
+              border = childBorder;
             };
 
             placeholder = submodule;
