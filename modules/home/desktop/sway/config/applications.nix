@@ -11,15 +11,13 @@ in
 {
   wayland.windowManager.sway.config = {
     window = {
-      border = 2;
+      border = 1;
       titlebar = false;
     };
 
     gaps = {
-      # smartGaps = true;
-
       inner = 8;
-      outer = 5;
+      outer = 3;
     };
 
     floating = {

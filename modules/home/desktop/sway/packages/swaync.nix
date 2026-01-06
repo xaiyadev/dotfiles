@@ -6,14 +6,14 @@ let
 in
 {
 
-  # TODO: make icon dissapearrs?
-  # notification center point/something different?
   services.swaync = mkIf sway.enable {
     enable = true;
 
     settings = {
       positionX = "right";
       positionY = "top";
+
+      image-visibility = "never";
     };
   };
 }

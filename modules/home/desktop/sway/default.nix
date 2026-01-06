@@ -16,6 +16,7 @@ let
 
   modifier = "Mod4";
   sway = osConfig.sylveon.system.graphical.sway;
+  cfg = config.wayland.windowManager.sway.config;
 in
 {
   imports = [
@@ -43,7 +44,7 @@ in
           let
             submodule = {
               childBorder = "$base";
-              indicator = submodule.childBorder;              
+              indicator = submodule.childBorder;
 
               # Configuration needed only if using the title bar
               text = "$text";
@@ -52,13 +53,19 @@ in
             };
           in
           {
-            focused = submodule // { childBorder = "\$${config.catppuccin.accent}"; };
-            urgent = submodule // { childBorder = "$red"; };
+            focused = submodule // rec {
+            	childBorder = "\$${config.catppuccin.accent}";
+            	indicator = childBorder;
+            };
+
+            urgent = submodule // rec {
+            	childBorder = "$red";
+            	indicator = childBorder;
+            };
 
             placeholder = submodule;
             focusedInactive = submodule;
             unfocused = submodule;
-
           };
 
         keybindings = mkOptionDefault {
