@@ -11,6 +11,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-jetbrains-plugins = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nix-jetbrains-plugins";
+    };
+
     catppuccin = {
       type = "github";
       owner = "catppuccin";

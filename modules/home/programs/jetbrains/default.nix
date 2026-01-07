@@ -3,7 +3,7 @@
   lib,
   self,
   pkgs,
-  inputs',
+  inputs,
   osConfig,
   ...
 }:
@@ -15,7 +15,6 @@ let
     ;
 
   inherit (lib.types) bool;
-
   inherit (self.lib.modules) mkOpt;
 
   cfg = config.sylveon.programs.jetbrains;
@@ -23,32 +22,37 @@ in
 {
 
   options.sylveon.programs.jetbrains = {
-    phpstorm.enable = mkOpt bool false "Enable the PHP Editor for jetbrains";
+    phpstorm.enable = mkOpt bool false "Enable the PHP-Editor for jetbrains";
     webstorm.enable = mkOpt bool false "Enable the Web-Editor for jetbrains";
   };
 
-  config = mkMerge [
+  config = {
+    home.packages =
+      let
+        defaultPlugins =
+          [
 
-    # Default configuration
-    ((mkIf builtins.any (x: x.enable) cfg) { 
-      # VIM configuration
+          ]
+          ;
 
-      # plugins installation ++ configuration
-      # plugin list: IDEAVim; Rainbowbrackets; Atom Material Icons ++ Theme; NixIdea
+        loadIde =
+          ide: plugins:
+          pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains."${ide}" defaultPlugins ++ (
+            builtins.map (p: TODO."${ide}"."${pkgs.jetbrains."${ide}".version}"."${p}") plugins
+          )
+          ;
 
-      # Settings configuration
-        # Theme configuration
-
-      # Keybindings
-    })
-
-    # Install packages
-    {
-      home.packages = [ # TODO: move to own parts if bigger separating configs?
-        (mkIf cfg.phpstorm.enable pkgs.jetbrains.phpstorm)
-        (mkIf cfg.webstorm.enable pkgs.webstorm.phpstorm)
+      in
+      lib.optionals cfg.phpstorm.enable [
+        (inputs.nix-jetbrains-plugins.lib."${system}".buildIdeWithPlugins pkgs.jetbrains "webstorm" defaultPlugins ++ [
+        ])
+      ]
+      ++ lib.optionals cfg.webstorm.enable [
+        (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.webstorm defaultPlugins ++ (
+          builtins.map (p: plugins.webstorm."${pkgs.jetbrains.webstorm.version}"."${p}") [
+            ""
+          ]
+        ))
       ];
-    }
-
-  ];
+  };
 }

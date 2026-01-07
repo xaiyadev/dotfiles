@@ -3,6 +3,7 @@
   config,
   self,
   inputs',
+  system,
   inputs,
   ...
 }:
@@ -29,6 +30,7 @@ in
           self
           inputs
           inputs'
+          system
           ;
       };
 
