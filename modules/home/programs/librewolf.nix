@@ -12,6 +12,12 @@ let
     genAttrs
     ;
 
+  inherit (builtins)
+    fromJSON
+    readFile
+    fetchurl
+    ;
+
   inherit (lib.types) bool;
 
   inherit (self.lib.modules) mkOpt;
@@ -28,88 +34,100 @@ in
     programs.librewolf = {
       enable = true;
 
-      # Install German and english languages
-      languagePacks = [
-        "en-GB"
-        "de"
-      ];
+      languagePacks = [ "en-GB" "de" ];
 
       settings = {
+        "browser.fullscreen.autohide" = false;
+
+        "webgl.disabled" = false;
+        "privacy.fingerprintingProtection" = false;
+        "browser.translations.enable" = false;
+
+        "media.ffmpeg.vaapi.enabled" = true;
+        "media.rdd-ffmpeg.enabled" = true;
+
+        "extensions.abuseReport.enabled" = false;
+        "extensions.formautofill.creditCards.enabled" = false;
+        "browser.contentblocking.report.lockwise.enabled" = false;
+
+        "identity.fxaccounts.enabled" = false;
+        "identity.fxaccounts.toolbar.enabled" = false;
+        "identity.fxaccounts.pairing.enabled" = false;
+        "identity.fxaccounts.commands.enabled" = false;
+        "privacy.clearOnShutdown.history" = false;
         "privacy.clearOnShutdown.cookies" = false;
         "network.cookie.lifetimePolicy" = 0;
 
-        # Enable Canvas
-        "webgl.disabled" = false;
-        "privacy.fingerprintingProtection" = false;
+        # disable notifications
+        "dom.push.enabled" = false;
+        "dom.push.connection.enabled" = false;
+        "dom.battery.enabled" = false;
       };
 
       policies = {
+        DisplayBookmarksToolbar = "never";
+        DisableFirefoxAccounts = true;
+        DisableFeedbackCommands = true;
+
         ExtensionSettings =
           genAttrs
             [
               "uBlock0@raymondhill.net"
-              "languagetool-webextension@languagetool.org"
               "sponsorBlocker@ajay.app"
               "FirefoxColor@mozilla.com"
               "firefox-enpass@enpass.io"
+              "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" # Stylus
+              "{446900e4-71c2-419f-a6a7-df9c091e268b}" # Bitwarden
             ]
             (ext: {
               installation_mode = "force_installed";
-              private_browsing = true;
               install_url = "https://addons.mozilla.org/firefox/downloads/latest/${ext}/latest.xpi";
             });
-
-        DisplayBookmarksToolbar = "never";
       };
 
-      profiles = {
-        default = {
+      profiles.default = {
+        extensions = {
+          force = true; # Needed for catppuccin
 
-          # Extensions are managed via policies, not here!
-          extensions = {
-            force = true;
-            settings = {
-              # ColorTheme is managed by stylix
-              "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}".settings = {
-                dbInChromeStorage = true; # required for Stylus
-              };
-
+          settings = {
+            # stylus themes need to be manually imported from now
+            # please create and import a new style file from here: https://catppuccin-userstyles-customizer.uncenter.dev/
+            "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}".settings = {
+              dbInChromeStorage = true; # required for Stylus
             };
           };
+        };
 
-          search = {
-            force = true;
-            default = "google";
+        settings = {
+          # Default page should be my homepage
+          "browser.startup.homepage" = "https://xaiya.dev";
+        };
 
-            engines = {
-              MyNixOS = {
-                name = "MyNixOS";
-                urls = [
-                  {
-                    template = "https://mynixos.com/search";
-                    params = [
-                      {
-                        name = "q";
-                        value = "{searchTerms}";
-                      }
-                    ];
-                  }
-                ];
-                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
-                definedAliases = [ "@nix" ];
-              };
+        search = {
+          force = true;
+          default = "ddg";
 
-              ddg.metaData.hidden = true;
-              wikipedia.metaData.hidden = true;
+          engines = {
+            MyNixOS = {
+              name = "MyNixOS";
+              urls = [{
+                  template = "https://mynixos.com/search";
+                  params = [ { name = "q"; value = "{searchTerms}"; } ];
+              }];
+
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
+              definedAliases = [ "@n" ];
             };
+
+            google.metaData.alias = "@g";
           };
         };
       };
     };
 
-    stylix.targets.librewolf = {
-      colorTheme.enable = true;
-      profileNames = [ "default" ]; # https://stylix.danth.me/options/modules/firefox.html
+    catppuccin.librewolf = {
+      force = true;
+      profiles.default.force = true;
     };
   };
 }

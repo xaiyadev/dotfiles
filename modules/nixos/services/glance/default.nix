@@ -36,7 +36,7 @@ in
             proxied = true;
           };
         
-          # rose-pine color theme
+          # rose-pine color theme TODO
           theme = {
             constrat-multiplier = 1.3;
             background-color = "249 22 12"; # Base

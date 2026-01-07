@@ -4,7 +4,7 @@ let
   inherit (lib.types) str;
   inherit (self.lib.modules) mkServiceOpt mkOpt;
 
-  cfg = config.sylveon.services.atprotocol.tangled;
+  cfg = config.sylveon.services.tangled;
 in
 {
 
@@ -13,7 +13,7 @@ in
     inputs.tangled.nixosModules.spindle
   ];
 
-  options.sylveon.services.atprotocol.tangled = {
+  options.sylveon.services.tangled = {
     owner = mkOpt str "did:plc:mycafjhyplj5z7a6qi5qjcil" "The owner of this tangled instance";
 
     knot = 

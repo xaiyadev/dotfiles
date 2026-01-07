@@ -10,12 +10,23 @@ let
   inherit (lib)
     mkIf
     mkForce
+    mkMerge
+    forEach
+    ;
+
+  inherit (lib.strings)
+    splitString
+    ;
+
+  inherit (lib.lists)
+    last
     ;
 
   inherit (lib.types) bool;
 
   inherit (self.lib.modules) mkOpt;
   cfg = config.sylveon.programs.discord;
+  nixcordcfg = config.programs.nixcord.config;
 in
 {
   options.sylveon.programs.discord.enable = mkOpt bool false "Whether or not to enable discord";
@@ -31,6 +42,9 @@ in
       };
 
       config = {
+        # Themes based on files is currently bugged with equicord (TODO)
+        themeLinks = [ "https://catppuccin.github.io/discord/dist/catppuccin-mocha-flamingo.theme.css" ];
+        transparent = true;
 
         # Activate and Configure Plugins
         plugins = {
@@ -40,10 +54,10 @@ in
           betterGifPicker.enable = true;
           betterSessions.enable = true;
           betterSettings.enable = true;
-          blurNsfw.enable = true;
+          BlurNSFW.enable = true;
           callTimer.enable = true;
-          clearUrLs.enable = true;
-          copyUserUrLs.enable = true;
+          ClearURLs.enable = true;
+          CopyUserURLs.enable = true;
           disableCallIdle.enable = true;
           dontRoundMyTimestamps.enable = true;
           favoriteEmojiFirst.enable = true;
@@ -84,6 +98,10 @@ in
           whoReacted.enable = true;
           youtubeAdblock.enable = true;
         };
+      };
+
+      extraConfig = {
+				enabledThemeLinks = nixcordcfg.themeLinks;
       };
     };
   };

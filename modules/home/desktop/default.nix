@@ -1,7 +1,7 @@
 {
   imports = [
-    ./stylix.nix # easier and better styling
-    ./cursor.nix # cursor configuration
+    ./style.nix # Style configuration
+
     ./vicinae.nix # Application selector + manager
 
     ./sway # Window Manager

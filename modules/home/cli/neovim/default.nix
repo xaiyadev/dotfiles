@@ -113,11 +113,5 @@ in
         lz-n.enable = true; # Lazy loading
       };
     };
-
-    stylix.targets.nixvim = {
-      plugin = "mini.base16";
-      transparentBackground.main = true;
-    };
-
   };
 }

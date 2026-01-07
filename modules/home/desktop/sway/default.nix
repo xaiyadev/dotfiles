@@ -16,6 +16,7 @@ let
 
   modifier = "Mod4";
   sway = osConfig.sylveon.system.graphical.sway;
+  cfg = config.wayland.windowManager.sway.config;
 in
 {
   imports = [
@@ -38,6 +39,36 @@ in
       config = {
         inherit modifier;
         terminal = "${getExe config.programs.kitty.package}";
+
+        colors = 
+          let
+            submodule = {
+              childBorder = "$base";
+              indicator = submodule.childBorder;
+
+              # Configuration needed only if using the title bar
+              text = "$text";
+              border = submodule.childBorder;
+              background = "$base";
+            };
+          in
+          {
+            focused = submodule // rec {
+            	childBorder = "\$${config.catppuccin.accent}";
+            	indicator = childBorder;
+              border = childBorder;
+            };
+
+            urgent = submodule // rec {
+            	childBorder = "$red";
+            	indicator = childBorder;
+              border = childBorder;
+            };
+
+            placeholder = submodule;
+            focusedInactive = submodule;
+            unfocused = submodule;
+          };
 
         keybindings = mkOptionDefault {
           "${modifier}+Escape" = "exec ${getExe config.programs.swaylock.package}";

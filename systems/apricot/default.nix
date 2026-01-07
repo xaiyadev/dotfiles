@@ -12,9 +12,7 @@
   networking.hostName = "apricot";
 
   sylveon = {
-    profiles = {
-      server.enable = true;
-    };
+    profiles.server.enable = true;
 
     device.cpu = "intel";
 
@@ -31,12 +29,11 @@
       glance.enable = true;
       kitchenowl.enable = true;
 
-      atprotocol = {
-        tangled = {
-          knot.enable = true;
-          spindle.enable = true;
-        };
+      tangled = {
+        knot.enable = true;
+        spindle.enable = true;
       };
+      piper.enable = true;
 
       plex.enable = true;
       minecraft.enable = true;

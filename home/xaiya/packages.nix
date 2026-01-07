@@ -1,5 +1,5 @@
 # Packages that are not configurable/are not configured will land here
-{ pkgs, inputs', ... }:
+{ pkgs, inputs', osConfig, ... }:
 {
   home.packages = [
     pkgs.obsidian # Notes taking app

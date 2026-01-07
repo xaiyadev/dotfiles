@@ -72,5 +72,36 @@ in
         ];
       };
     }
+
+    {
+      profile = {
+        name = "${name}-elvis";
+        outputs = [
+          {
+            criteria = "${office_screen_2} ULTRAFINE 404NTGY9M335";
+            position = "2560,132";
+
+            scale = 1.2;
+            mode = "3840x2160@60.000Hz";
+          }
+
+          {
+            criteria = "${office_screen_2} ULTRAFINE 404NTYT9M282";
+            position = "5762,132";
+
+            scale = 1.2;
+            mode = "3840x2160@60.000Hz";
+          }
+
+          { 
+            criteria = "eDP-2";
+            position = "0,99";
+
+            mode = "2560x1600@165.000Hz";
+            scale = 1.3;
+          }
+        ];
+      };
+    }
   ];
 }
