@@ -1,0 +1,21 @@
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+set incsearch
+map Q gq
+
+
+" amount of lines to scroll before the cursor hits the screen
+set scrolloff=5
+
+" Clipboard support
+set clipboard+=unnamed
+set clipboard+=ideaput
+
+" Enabling Plugins
+Plug 'tpope/vim-commentary' " Commentary plugin
+Plug 'machakann/vim-highlightedyank' " Highlight copied text
+
+"" amount of lines to scroll before the cursor hits the screen
+set scrolloff=5

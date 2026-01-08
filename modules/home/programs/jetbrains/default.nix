@@ -14,7 +14,7 @@ let
     mkMerge
     ;
 
-  inherit (lib.types) bool;
+  inherit (lib.types) bool package;
   inherit (self.lib.modules) mkOpt;
 
   cfg = config.sylveon.programs.jetbrains;
@@ -22,37 +22,49 @@ in
 {
 
   options.sylveon.programs.jetbrains = {
-    phpstorm.enable = mkOpt bool false "Enable the PHP-Editor for jetbrains";
-    webstorm.enable = mkOpt bool false "Enable the Web-Editor for jetbrains";
+    phpstorm = {
+      enable = mkOpt bool false "Whether or not to enable the jetbrains php-editor";
+      package = mkOpt package pkgs.jetbrains.phpstorm "What package to use for the jetbrains php-editor";
+    };
+
+    webstorm = {
+      enable = mkOpt bool false "Whether or not to enable the jetbrains web-editor";
+      package = mkOpt package pkgs.jetbrains.webstorm "What package to use for the jetbrains web-editor";
+    };
   };
 
-  config = {
+  config = mkIf (cfg.phpstorm.enable || cfg.webstorm.enable) {
+    home.file.".ideavimrc".source = ./.ideavimrc;
+
     home.packages =
-      let
-        defaultPlugins =
-          [
+    let
+      defaultPlugins = with pkgs.jetbrains-plugins; [
+        com.github.catppuccin.jetbrains
+        com.mallowigi # Atom material icons
 
-          ]
-          ;
+        io.github.pandier.intellijdiscordrp
+        # com.wakatime.intellij.plugin TODO
 
-        loadIde =
-          ide: plugins:
-          pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains."${ide}" defaultPlugins ++ (
-            builtins.map (p: TODO."${ide}"."${pkgs.jetbrains."${ide}".version}"."${p}") plugins
-          )
-          ;
+        IdeaVIM
 
-      in
+        nix-idea
+        com.jetbrains.plugins.ini4idea
+      ];
+    in
       lib.optionals cfg.phpstorm.enable [
-        (inputs.nix-jetbrains-plugins.lib."${system}".buildIdeWithPlugins pkgs.jetbrains "webstorm" defaultPlugins ++ [
-        ])
+        (pkgs.jetbrains-plugins.lib.buildIdeWithPlugins
+          cfg.phpstorm.package
+          (with pkgs.jetbrains-plugins; [
+            # adrienbrault.idea.symfony2plugin
+          ] ++ defaultPlugins)
+        )
       ]
+
       ++ lib.optionals cfg.webstorm.enable [
-        (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.webstorm defaultPlugins ++ (
-          builtins.map (p: plugins.webstorm."${pkgs.jetbrains.webstorm.version}"."${p}") [
-            ""
-          ]
-        ))
+        (pkgs.jetbrains-plugins.lib.buildIdeWithPlugins
+          cfg.webstorm.package
+          defaultPlugins
+        )
       ];
   };
 }

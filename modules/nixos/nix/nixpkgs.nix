@@ -1,4 +1,4 @@
-{
+{ inputs, ... }: {
   # TODO: evaluation warning (cant use nixpkgs.config when using home-manager.useGlobalPkgs)
   nixpkgs.config = {
     # Allowance of packages
@@ -15,5 +15,6 @@
 
   nixpkgs.overlays = [
     (import ./overlays/mpv.nix)
+    inputs.nix-jetbrains-plugins.overlays.default
   ];
 }

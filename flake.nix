@@ -13,8 +13,8 @@
 
     nix-jetbrains-plugins = {
       type = "github";
-      owner = "nix-community";
-      repo = "nix-jetbrains-plugins";
+      owner = "Janrupf";
+      repo = "nix-jetbrains-plugin-repository";
     };
 
     catppuccin = {
