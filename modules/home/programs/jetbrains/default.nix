@@ -18,6 +18,7 @@ let
   inherit (self.lib.modules) mkOpt;
 
   cfg = config.sylveon.programs.jetbrains;
+  cfgFolder = ''.config/Jetbrains/${cfg.webstorm.package.version}'';
 in
 {
 
@@ -34,6 +35,8 @@ in
   };
 
   config = mkIf (cfg.phpstorm.enable || cfg.webstorm.enable) {
+
+    home.file.".vimrc".source = ./.vimrc; # TODO: move to a new vim configuration
     home.file.".ideavimrc".source = ./.ideavimrc;
 
     home.packages =
@@ -42,7 +45,6 @@ in
         com.github.catppuccin.jetbrains
         com.mallowigi # Atom material icons
 
-        io.github.pandier.intellijdiscordrp
         # com.wakatime.intellij.plugin TODO
 
         IdeaVIM
@@ -55,7 +57,7 @@ in
         (pkgs.jetbrains-plugins.lib.buildIdeWithPlugins
           cfg.phpstorm.package
           (with pkgs.jetbrains-plugins; [
-            # adrienbrault.idea.symfony2plugin
+            # adrienbrault.idea.symfony2plugin Not available?
           ] ++ defaultPlugins)
         )
       ]
@@ -63,7 +65,9 @@ in
       ++ lib.optionals cfg.webstorm.enable [
         (pkgs.jetbrains-plugins.lib.buildIdeWithPlugins
           cfg.webstorm.package
-          defaultPlugins
+          (with pkgs.jetbrains-plugins; [
+            io.github.pandier.intellijdiscordrp
+          ] ++ defaultPlugins)
         )
       ];
   };
