@@ -33,7 +33,9 @@
         knot.enable = true;
         spindle.enable = true;
       };
-      piper.enable = true;
+
+      # https://github.com/teal-fm/piper/issues/42
+      # piper.enable = true;
 
       plex.enable = true;
       minecraft.enable = true;
