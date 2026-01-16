@@ -12,6 +12,7 @@
 
     ./tangled.nix
     ./piper.nix
+    ./radicale.nix
 
     ./plex.nix
   ];

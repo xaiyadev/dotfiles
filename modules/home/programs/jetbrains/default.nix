@@ -50,7 +50,7 @@ in
         IdeaVIM
 
         nix-idea
-        cohttps://github.com/teal-fm/piper/issues/42m.jetbrains.plugins.ini4idea
+        com.jetbrains.plugins.ini4idea
       ];
     in
       lib.optionals cfg.phpstorm.enable [

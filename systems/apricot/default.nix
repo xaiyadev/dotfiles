@@ -21,13 +21,18 @@
     };
 
     services = {
+      # General services
       postgres.enable = true;
       nginx.enable = true;
       docker.enable = true;
 
-      vaultwarden.enable = true;
-      glance.enable = true;
+      # Docker based services
       kitchenowl.enable = true;
+
+      # System-managed services
+      glance.enable = true;
+
+      vaultwarden.enable = true;
 
       tangled = {
         knot.enable = true;
@@ -36,6 +41,8 @@
 
       # https://github.com/teal-fm/piper/issues/42
       # piper.enable = true;
+
+      radicale.enable = true;
 
       plex.enable = true;
       minecraft.enable = true;

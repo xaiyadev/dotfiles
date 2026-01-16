@@ -26,6 +26,11 @@ in
   config = mkIf (cfg.enable) {
     services.displayManager.sessionPackages = [ pkgs.swayfx ];
 
+    # Enable important services to work for some applications
+    services.gnome.evolution-data-server.enable = true;
+    services.gnome.gnome-online-accounts.enable = true;
+    services.gnome.gnome-keyring.enable = true;
+
     xdg.portal.wlr.enable = true;
 
     # Sway cant load in in a virtual machine :( (at least fx)

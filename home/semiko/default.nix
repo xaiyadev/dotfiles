@@ -1,5 +1,9 @@
 {
+  imports = [
+    ./packages.nix
+  ];
+
   sylveon = {
-    cli.neovim.enable = true;
+    # cli.neovim.enable = true;
   };
 }
