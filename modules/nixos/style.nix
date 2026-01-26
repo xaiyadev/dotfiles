@@ -19,7 +19,7 @@ in
 	    cache.enable = true;
 
       accent = "flamingo";
-      flavor = "mocha";
+      flavor = "latte";
 		};
 
 		# https://github.com/isabelroses/dotfiles/blob/88d1cb29e2da4ef977b4a06fcbf9a22efbd398a7/modules/nixos/catppuccin.nix#L21

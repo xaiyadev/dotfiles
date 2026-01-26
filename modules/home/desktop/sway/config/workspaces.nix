@@ -15,7 +15,7 @@ in
   wayland.windowManager.sway.config = {
     # Configure wallpaper
     output."*" = {
-      bg = "${self}/assets/wallpaper/catppuccin-cat.png fill";
+      bg = "${self}/assets/wallpaper/white.png fill";
     };
     defaultWorkspace = "1";
 

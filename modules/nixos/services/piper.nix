@@ -26,17 +26,24 @@ in
 
         settings = {
           SERVER_PORT = cfg.port;
-          SERVER_HOST = "localhost";
           SERVER_ROOT_URL = "https://${cfg.domain}";
 
-          ENABLE_SPOTIFY = false;
-          ENABLE_LASTFM = true; # Only for migration purposes
+          ENABLE_SPOTIFY = "false";
+          ENABLE_LASTFM = "true"; # Only for migration purposes
         };
       };
 
       # Create proxy entry
       nginx.virtualHosts.${cfg.domain} = {
-        locations."/".proxyPass = "http://localhost:${builtins.toString cfg.port}";
+        enableACME = true;
+        forceSSL = true;
+
+        locations."/" = {
+          proxyPass = "http://localhost:${builtins.toString cfg.port}";
+        };
+
+        extraConfig = "proxy_ssl_server_name on;";
+
       };
     };
   };

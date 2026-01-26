@@ -11,7 +11,7 @@ in
 {
   wayland.windowManager.sway.config = {
     window = {
-      border = 1;
+      border = 3;
       titlebar = false;
     };
 

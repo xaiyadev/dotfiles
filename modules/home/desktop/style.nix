@@ -17,6 +17,7 @@ in
 	/*
     TODO: applications that need to be manaul integrated/need nix integration
     - TidaLuna
+    - kitty terminal texts hard to read !!
 	*/
 	config = mkIf osConfig.catppuccin.enable {
 	  catppuccin = {
