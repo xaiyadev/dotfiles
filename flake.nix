@@ -5,6 +5,14 @@
     inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } { imports = [ ./modules/flake ]; };
 
   inputs = {
+
+    nixpkgs = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixpkgs";
+      ref = "nixpkgs-unstable";
+    };
+
     # Forked and better version of nix :>
     lix = {
       url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
@@ -28,13 +36,6 @@
       url = "git+https://tangled.org/tangled.org/core";
 
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixpkgs = {
-      type = "github";
-      owner = "NixOS";
-      repo = "nixpkgs";
-      ref = "nixos-unstable";
     };
 
     # Package collection

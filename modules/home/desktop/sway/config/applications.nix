@@ -50,7 +50,7 @@ in
 
       # Background Services
       { command = (getExe pkgs.sway-audio-idle-inhibit); }
-      { command = "${getExe inputs'.vicinae.packages.default} server"; }
+      { command = "${getExe config.services.vicinae.package} server"; }
     ];
   };
 }
