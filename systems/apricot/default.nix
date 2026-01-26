@@ -38,9 +38,7 @@
         knot.enable = true;
         spindle.enable = true;
       };
-
-      # https://github.com/teal-fm/piper/issues/42
-      # piper.enable = true;
+      piper.enable = true;
 
       radicale.enable = true;
 
