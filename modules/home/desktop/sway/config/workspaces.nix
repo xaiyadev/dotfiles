@@ -15,7 +15,7 @@ in
   wayland.windowManager.sway.config = {
     # Configure wallpaper
     output."*" = {
-      bg = "${self}/assets/wallpaper/white.png fill";
+      bg = "${self}/assets/wallpaper/flamingo_bkg5.png fill";
     };
     defaultWorkspace = "1";
 

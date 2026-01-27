@@ -42,9 +42,6 @@ in
     };
 
     startup = [ 
-      # Software
-      { command = "${getExe config.programs.nixcord.finalPackage.discord} --start-minimized"; } 
-
       # Display and configurations
       { command = (getExe pkgs.kanshi); always = true; }
 

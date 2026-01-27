@@ -33,7 +33,7 @@ in
           position = "top";
           fixed-center = true;
 
-          height = 30;
+          height = 37;
           margin-top = 10;
           margin-left = 10;
           margin-right = 10;

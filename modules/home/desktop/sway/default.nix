@@ -82,7 +82,17 @@ in
 
       # SwayFx specific configuration
       extraConfig = concatStringsSep "\n" [
+        # Shadows
         "shadows enable"
+        "shadows_on_csd enable"
+
+        "shadow_color #7c7f93"
+        "shadow_inactive_color #7c7f93"
+
+        # "shadow_offset 5 5"
+        "shadow_blur_radius 20"
+
+        # Corners
         "corner_radius 13"
       ];
     };

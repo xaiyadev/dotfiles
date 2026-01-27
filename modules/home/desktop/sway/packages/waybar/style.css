@@ -1,6 +1,3 @@
-/* colors can be found here: */
-/* https://github.com/edunfelt/base16-rose-pine-scheme/blob/main/rose-pine.yaml  */
-
 * {
     background-color: transparent;
     font-family: "JetBrainsMono Nerd Font", sans-serif;
@@ -15,9 +12,9 @@
     border: unset;
 }
 
-window#waybar { 
-  background-color: @base; 
-  border-radius: 5px; 
+window#waybar {
+  background-color: alpha(@mantle, 0.93);
+  border-radius: 8px;
 }
 
 tooltip { background-color: @crust; }
