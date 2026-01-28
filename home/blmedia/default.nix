@@ -13,7 +13,7 @@
       jetbrains.phpstorm.enable = true;
     };
 
-    cli = {
+    tui = {
       neovim = {
         enable = true;
         anonymous = true;

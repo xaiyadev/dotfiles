@@ -20,7 +20,7 @@ let
     mkMerge
     ;
 
-  cfg = config.sylveon.cli.neovim;
+  cfg = config.sylveon.tui.neovim;
   neov-plugins = config.programs.nixvim.plugins;
 in
 {
@@ -36,7 +36,7 @@ in
   ];
 
   # Neovim should be used as a lightweigt editor (used for small changes)
-  options.sylveon.cli.neovim = {
+  options.sylveon.tui.neovim = {
     enable = mkOpt bool false "vim editor, only better";
     anonymous = mkOpt bool false "If the file data should be anonymous to people (e.g discord rpc)";
   };

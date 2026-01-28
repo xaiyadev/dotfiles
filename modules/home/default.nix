@@ -1,9 +1,11 @@
 { osConfig, ... }:
 {
   imports = [
-    ./desktop # Desktop specific configuration and theming
-    ./programs
+    ./gui
     ./cli
+    ./tui
+
+    ./style.nix # Style configuration
   ];
 
   config = {

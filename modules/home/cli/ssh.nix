@@ -2,15 +2,11 @@
 {
   programs.ssh = {
     enable = true;
-    enableDefaultConfig = false; # Option will be deprecated
+    enableDefaultConfig = false;
 
-    # Default Matchblocks that should be on every System
-    # This might change over time if any other (not me) person joins this flake
     matchBlocks = {
       "*" = {
-        addKeysToAgent = "no"; # These SSH Keys do not need to be managed through an agent
-
-        serverAliveCountMax = 3; 
+        serverAliveCountMax = 3;
 
         hashKnownHosts = true; 
         userKnownHostsFile = "~/.ssh/known_hosts"; 
@@ -25,7 +21,7 @@
         identityFile = osConfig.age.secrets."ssh-gh".path;
       };
 
-      "apricot" = {
+      "apricot" = { # TODO: manage it into: knot.xaiya.dev
         user = "git";
         hostname = "apricot";
         identityFile = osConfig.age.secrets."ssh-tangled".path;
