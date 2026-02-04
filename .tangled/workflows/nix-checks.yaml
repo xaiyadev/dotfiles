@@ -1,8 +1,12 @@
-# Format and lint files
+# run through nix checks
 
 when:
   - event: ["push", "manual"]
+    branch: [ "*" ]
   - event: ["pull_request"]
+    branch: [ "*" ]
+
+engine: "nixery"
 
 steps:
   - name: "Enter development environment"
