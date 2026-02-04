@@ -8,7 +8,6 @@
           ''
             cd ${self}
             treefmt --no-cache --fail-on-change
-            touch $out
           '';
     };
 }
