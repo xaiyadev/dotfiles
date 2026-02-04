@@ -11,4 +11,4 @@ steps:
   - name: "Enter development environment"
     command: "nix develop ."
   - name: "run through nix checks"
-    command: "nix check"
+    command: "nix flake check"
