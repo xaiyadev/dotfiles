@@ -1,5 +1,9 @@
 # Packages that are not configurable/are not configured will land here
-{ pkgs, inputs', osConfig, ... }:
+{
+  pkgs,
+  inputs',
+  ...
+}:
 {
   # TODO: generalized home.packages (extra packages) ?
   home.packages = [

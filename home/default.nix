@@ -1,15 +1,9 @@
 {
   lib,
-  config,
   self,
-  inputs',
-  system,
   inputs,
   ...
 }:
-let
-  inherit (lib.attrsets) genAttrs;
-in
 {
 
   imports = [ inputs.home-manager.nixosModules.home-manager ];
@@ -21,18 +15,7 @@ in
       useGlobalPkgs = true;
       backupFileExtension = "bak";
 
-      users = genAttrs config.sylveon.system.users (name: {
-        imports = [ ./${name} ];
-      });
-
-      extraSpecialArgs = {
-        inherit
-          self
-          inputs
-          inputs'
-          system
-          ;
-      };
+      extraSpecialArgs = { };
 
       sharedModules = [ "${self}/modules/home/default.nix" ];
     };

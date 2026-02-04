@@ -1,0 +1,13 @@
+# Format and lint files
+
+when:
+  - event: ["push", "manual"]
+    branch: ["main"]
+  - event: ["pull_request"]
+    branch: ["main"]
+
+steps:
+  - name: "Enter development environment"
+    command: "nix develop ."
+  - name: "check code (with nix fmt)"
+    command: "nix fmt"
