@@ -2,9 +2,9 @@
 
 when:
   - event: ["push", "manual"]
-    branch: [ "*" ]
+    branch: [ "v5" "refactor/full" ]
   - event: ["pull_request"]
-    branch: [ "*" ]
+    branch: [ "v5" "refactor/full" ]
 
 engine: "nixery"
 
