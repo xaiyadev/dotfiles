@@ -2,12 +2,10 @@
 
 when:
   - event: ["push", "manual"]
-    branch: ["main"]
   - event: ["pull_request"]
-    branch: ["main"]
 
 steps:
   - name: "Enter development environment"
     command: "nix develop ."
-  - name: "check code (with nix fmt)"
-    command: "nix fmt"
+  - name: "run through nix checks"
+    command: "nix check"

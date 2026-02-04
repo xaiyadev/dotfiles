@@ -3,9 +3,6 @@
   perSystem =
     { pkgs, ... }:
     {
-      # The nix formatter checks the files instead of formating them
-      # The formatter is put into a workflow at .tangled/workflows/format.yaml
-
       formatter = pkgs.treefmt.withConfig {
         runtimeInputs = with pkgs; [
           nixfmt # nix formating tool
@@ -18,9 +15,9 @@
 
           # useful script for statix commands to work
           # https://github.com/isabelroses/dotfiles/blob/23c7db61455348653703d32ffdc2135fd045f6b8/modules/flake/programs/formatter.nix#L22C1-L26C14
-          (writeShellScriptBin "statix-check" ''
+          (writeShellScriptBin "statix-fix" ''
             for file in "$@"; do
-              ${lib.getExe statix} check "$file"
+              ${lib.getExe statix} fix "$file"
             done
           '')
         ];
@@ -37,8 +34,6 @@
           formatter = {
             nixfmt = {
               command = "nixfmt";
-              options = "-c"; # Check files instead of formating
-
               includes = [ "*.nix" ];
             };
 
@@ -46,12 +41,12 @@
               command = "deadnix";
 
               # Warn if there was any dead nix files
-              options = [ "--fail" ];
+              options = [ "--edit" ];
               includes = [ "*.nix" ];
             };
 
             statix = {
-              command = "statix-check";
+              command = "statix-fix";
               includes = [ "*.nix" ];
             };
 
@@ -70,7 +65,7 @@
               command = "shfmt";
               options = [
                 "-s" # simplify the code
-                "-d" # error out of the changes
+                "-w" # write changes if found changes
                 "-i"
                 "2" # indent files for 2 spaces
               ];
@@ -85,15 +80,14 @@
 
             taplo = {
               command = "taplo";
-              options = "error";
+              options = "format";
               includes = [ "*.toml" ];
             };
 
             yamlfmt = {
               command = "yamlfmt";
               options = [
-                "-dry"
-                "-continue_on_error"
+                "-formatter"
               ];
 
               includes = [
