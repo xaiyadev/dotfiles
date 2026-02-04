@@ -186,7 +186,7 @@ in
         "shadows enable"
         "shadows_on_csd enable"
 
-        "shadow_color #7c7f93sway"
+        "shadow_color #7c7f93"
         "shadow_inactive_color #7c7f93"
 
         # "shadow_offset 5 5"
