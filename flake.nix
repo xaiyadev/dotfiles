@@ -6,12 +6,10 @@
 
   inputs = {
 
-    nixpkgs = {
-      type = "github";
-      owner = "NixOS";
-      repo = "nixpkgs";
-      ref = "nixpkgs-unstable";
-    };
+    # main-repository
+    # Also important note:
+    # https://deer.social/profile/did:plc:mojgntlezho4qt7uvcfkdndg/post/3loogwsoqok2w
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
 
     # Forked and better version of nix :>
     lix = {
@@ -19,38 +17,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-jetbrains-plugins = {
-      type = "github";
-      owner = "Janrupf";
-      repo = "nix-jetbrains-plugin-repository";
-    };
-
+    # declarative theme manager; The one I use the most currently !!
     catppuccin = {
       type = "github";
       owner = "catppuccin";
       repo = "nix";
     };
 
-    # Tangled knots
+    # ATProtocol git platform
     tangled = {
       url = "git+https://tangled.org/@tangled.org/core";
-
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Package collection
-    tgirlpkgs = {
-      type = "github";
-      owner = "tgirlcloud";
-      repo = "pkgs";
-    };
-
-    nixvim = {
-      type = "github";
-      owner = "nix-community";
-      repo = "nixvim";
-    };
-
+    # TODO: change once at hardware part of this configuration?
+    # uses an entire repository with lots of configuration for just one (framework) module
+    # could write it into an own module
     nixos-hardware = {
       type = "github";
       owner = "NixOS";
@@ -62,18 +44,20 @@
       type = "github";
       owner = "nix-community";
       repo = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Make passwords go puff
+    # secret manager based on age encryption
+    # the original agenix is needed for agenix-rekey, so dont mind them two being there
     agenix = {
       type = "github";
       owner = "ryantm";
       repo = "agenix";
-
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Make password go puff (with the help of keys)
+    # secret manager based on age encryption
+    # this adds security key and system based encryption support !!
     agenix-rekey = {
       type = "github";
       owner = "oddlama";
@@ -82,7 +66,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # bring all the mess together with flake-parts
+    # Flake management tool, keeping all together nicely
     flake-parts = {
       type = "github";
       owner = "hercules-ci";
@@ -91,6 +75,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    # easily manage our hosts devices
     easy-hosts = {
       type = "github";
       owner = "tgirlcloud";
@@ -98,54 +83,26 @@
     };
 
     # Nix systems list
+    # TODO: needed?
     systems = {
       type = "github";
       owner = "nix-systems";
       repo = "default";
     };
 
-    # Injected TIDAL
+    # TIDAL (music client)
+    # injection for features like plugins and themes
     tidaLuna = {
       type = "github";
       owner = "Inrixia";
       repo = "TidaLuna";
     };
 
-    tinted-theming-schemes = {
-      type = "github";
-      owner = "tinted-theming";
-      repo = "schemes";
-      flake = false;
-    };
-
+    # TODO: other solution?
     nixcord = {
       type = "github";
       owner = "KaylorBen";
       repo = "nixcord";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-gaming = {
-      type = "github";
-      owner = "fufexan";
-      repo = "nix-gaming";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    aagl = {
-      type = "github";
-      owner = "ezKEa";
-      repo = "aagl-gtk-on-nix";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    vicinae = {
-      type = "github";
-      owner = "vicinaehq";
-      repo = "vicinae";
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
