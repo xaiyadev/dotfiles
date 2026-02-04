@@ -4,6 +4,9 @@ when:
     branch: ["v5", "refactor/full"]
   - event: ["pull_request"]
     branch: ["v5", "refactor/full"]
+
+engine: "nixery"
+
 steps:
   - name: "Enter development environment"
     command: "nix develop ."
