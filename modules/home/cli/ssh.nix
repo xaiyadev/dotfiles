@@ -1,4 +1,7 @@
-{ osConfig, ... }:
+{ osConfig, lib, ... }:
+let
+  inherit (lib) mkIf;
+in
 {
   programs.ssh = {
     enable = true;
@@ -15,17 +18,17 @@
         controlPersist = "no";
       };
       
-      "github.com" = {
+      "github.com" = (mkIf (builtins.hasAttr "ssh-gh" osConfig.age.secrets) {
         user = "git";
         hostname = "github.com";
         identityFile = osConfig.age.secrets."ssh-gh".path;
-      };
+      });
 
-      "apricot" = { # TODO: manage it into: knot.xaiya.dev
+      "apricot" = (mkIf (builtins.hasAttr "ssh-tangled" osConfig.age.secrets) { # TODO: manage it into: knot.xaiya.dev
         user = "git";
         hostname = "apricot";
         identityFile = osConfig.age.secrets."ssh-tangled".path;
-      };
+      });
     };
   };
 }

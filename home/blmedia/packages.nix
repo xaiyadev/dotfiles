@@ -2,7 +2,7 @@
 { pkgs, inputs', ... }:
 {
   home.packages = [
-    pkgs.enpass
+    # pkgs.enpass TODO: borked
 
     pkgs.obsidian # Notes taking app
 

@@ -8,7 +8,6 @@
 
     pkgs.gamescope # game environment
     pkgs.prismlauncher # Minecraft
-    inputs'.aagl.packages.sleepy-launcher # ZZZ launcher
 
     # Music/Media players
     pkgs.mpv # Music streaming
@@ -16,6 +15,8 @@
 
     pkgs.teams-for-linux # Teams; Need that for school and work
     #pkgs.ciscoPacketTracer8 # Cisco software that I need for school
+
+    pkgs.deadlock-mod-manager
 
     pkgs.devenv
   ];

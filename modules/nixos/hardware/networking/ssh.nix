@@ -40,6 +40,5 @@ in
       mode = "644";
       group = "users";
     };
-
   });
 }

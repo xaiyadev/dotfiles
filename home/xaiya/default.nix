@@ -12,6 +12,6 @@
       jetbrains.webstorm.enable = true;
     };
 
-    tui.neovim.enable = true;
+    # tui.neovim.enable = true; TODO: borked
   };
 }

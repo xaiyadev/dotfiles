@@ -8,7 +8,7 @@
 let
   inherit (lib.types) listOf str;
   inherit (lib.attrsets) genAttrs;
-  inherit (lib) forEach mkIf;
+  inherit (lib) forEach mkIf mkMerge;
 
   inherit (self.lib.modules) mkOpt;
   inherit (self.lib.validation) hasHomeModule;
@@ -28,26 +28,28 @@ in
     # Create users from list
     users.users = genAttrs users (
       name:
-      {
-        hashedPasswordFile =
-          if config.age.secrets."${name}-passwd"
-          then config.age.secrets."${name}-passwd".path
-          else null;
+        mkMerge [
 
-        initialPassword = "password123";
+          (if (builtins.hasAttr "path" config.age.secrets."${name}-passwd") then {
+            hashedPasswordFile = config.age.secrets."${name}-passwd".path;
+          } else {
+            initialPassword = "password123";
+          })
 
-        isNormalUser = true;
-        shell = config.home-manager.users.${name}.programs.zsh.package; # This might change if introducing multiple shells
+          {
+            isNormalUser = true;
+            shell = config.home-manager.users.${name}.programs.zsh.package; # This might change if introducing multiple shells
 
-        extraGroups = [
-          "wheel"
-          "nix"
-          "docker"
+            extraGroups = [
+              "wheel"
+              "nix"
+              "docker"
 
-          "video"
-          "audio"
-        ];
-      }
+              "video"
+              "audio"
+            ];
+          }
+        ]
     );
   };
 }
