@@ -17,6 +17,9 @@
 
       # Home server
       apricot = { };
+
+      # school system
+      apple = { };
     };
   };
 }

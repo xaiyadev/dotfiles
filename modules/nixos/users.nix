@@ -8,7 +8,7 @@
 let
   inherit (lib.types) listOf str;
   inherit (lib.attrsets) genAttrs;
-  inherit (lib) forEach;
+  inherit (lib) forEach mkIf;
 
   inherit (self.lib.modules) mkOpt;
   inherit (self.lib.validation) hasHomeModule;
@@ -20,16 +20,22 @@ in
 
   config = {
     # Generate random passwords for users
-    age.secrets = genAttrs (forEach users (name: "${name}-passwd")) (name: {
+    age.secrets = (mkIf (!config.sylveon.profiles.server.enable) (genAttrs (forEach users (name: "${name}-passwd")) (name: {
       rekeyFile = "${self}/secrets/${name}.age";
       generator.script = "sha256";
-    });
+    })));
 
     # Create users from list
     users.users = genAttrs users (
       name:
       {
-        hashedPasswordFile = config.age.secrets."${name}-passwd".path;
+        hashedPasswordFile =
+          if config.age.secrets."${name}-passwd"
+          then config.age.secrets."${name}-passwd".path
+          else null;
+
+        initialPassword = "password123";
+
         isNormalUser = true;
         shell = config.home-manager.users.${name}.programs.zsh.package; # This might change if introducing multiple shells
 

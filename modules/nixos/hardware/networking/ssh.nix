@@ -1,4 +1,7 @@
-{ config, self, ... }:
+{ config, self, lib, ... }:
+let
+  inherit (lib) mkIf;
+in
 {
   services.openssh = {
     enable = true;
@@ -16,7 +19,7 @@
   };
 
   # Load ssh keys
-  age.secrets = {
+  age.secrets = (mkIf config.sylveon.profiles.development.enable {
     "ssh-gh" = {
       # Github
       rekeyFile = "${self}/secrets/ssh-gh.age";
@@ -38,5 +41,5 @@
       group = "users";
     };
 
-  };
+  });
 }
