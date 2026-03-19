@@ -30,7 +30,7 @@ in
       name:
         mkMerge [
 
-          (if (builtins.hasAttr "path" config.age.secrets."${name}-passwd") then {
+          (if (builtins.hasAttr "${name}-passwd" config.age.secrets) then {
             hashedPasswordFile = config.age.secrets."${name}-passwd".path;
           } else {
             initialPassword = "password123";

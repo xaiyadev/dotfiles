@@ -15,6 +15,7 @@
     ./radicale.nix
 
     ./plex.nix
+    ./nextcloud.nix
   ];
 
 }

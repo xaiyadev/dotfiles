@@ -25,7 +25,7 @@
       postgres.enable = true;
 
       # school task
-      # nextcloud.enable = true;
+      nextcloud.enable = true;
 
     };
   };
