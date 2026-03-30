@@ -1,9 +1,7 @@
 # run through nix checks
 when:
-  - event: ["push", "manual"]
-    branch: ["v5", "refactor/full"]
-  - event: ["pull_request"]
-    branch: ["v5", "refactor/full"]
+  - event: ["push", "manual", "pull_request" ]
+    branch: [ "v5" ]
 
 engine: "nixery"
 
