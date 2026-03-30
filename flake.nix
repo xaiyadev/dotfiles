@@ -81,30 +81,5 @@
       owner = "tgirlcloud";
       repo = "easy-hosts";
     };
-
-    # Nix systems list
-    # TODO: needed?
-    systems = {
-      type = "github";
-      owner = "nix-systems";
-      repo = "default";
-    };
-
-    # TIDAL (music client)
-    # injection for features like plugins and themes
-    tidaLuna = {
-      type = "github";
-      owner = "Inrixia";
-      repo = "TidaLuna";
-    };
-
-    # TODO: other solution?
-    nixcord = {
-      type = "github";
-      owner = "KaylorBen";
-      repo = "nixcord";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 }
