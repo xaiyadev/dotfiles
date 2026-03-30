@@ -30,7 +30,9 @@ in
     # Garbage collector,, yaay !!
     gc = {
       automatic = true;
+
       options = "--delete-older-than 3d";
+      dates = "Mon *-*-* 03:00";
     };
 
     # No using of channels here !!
@@ -74,6 +76,13 @@ in
 
       keep-derivations = true;
       keep-outputs = true;
+
+      optimise = {
+        automatic = true;
+        dates = [ "04:00" ];
+      };
+
+      build-dir = "/var/tmp";
 
       # keep it xdg based
       use-xdg-base-directories = true;
