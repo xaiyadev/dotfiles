@@ -12,6 +12,18 @@
 
   networking.hostName = "pineapple";
 
+  # TODO
+  virtualisation.waydroid.enable = true;
+  virtualisation.waydroid.package = pkgs.waydroid-nftables;
+
+  # Network configuration for Waydroid
+  networking.firewall.trustedInterfaces = [ "waydroid0" ];
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv4.conf.all.forwarding" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
+
   sylveon = {
     profiles = {
       graphical.enable = true;

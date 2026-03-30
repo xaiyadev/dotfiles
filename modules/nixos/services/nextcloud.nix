@@ -19,7 +19,7 @@ in
   config = (mkMerge [
     (mkIf cfg.enable {
       # Create secrets
-      #age.secrets."nextcloud-adminpass".rekeyFile = "${self}/secrets/nextcloud-adminpass.age";
+      age.secrets."nextcloud-adminpass".rekeyFile = "${self}/secrets/nextcloud-adminpass.age";
 
       services = {
         nextcloud = {
@@ -30,7 +30,7 @@ in
           database.createLocally = true;
 
           config = {
-            #adminpassFile = config.age.secrets."nextcloud-adminpass".path;
+            adminpassFile = config.age.secrets."nextcloud-adminpass".path;
 
             dbhost = "postgresql://nextcloud?host=/run/postgresql";
           };

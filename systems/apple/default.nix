@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    # ./fileSystem.nix TODO
+    ./fileSystem.nix
   ];
 
   networking.hostName = "apple";
