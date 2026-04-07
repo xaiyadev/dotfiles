@@ -1,13 +1,9 @@
-{ osConfig, lib, ... }:
-let
-  inherit (lib) mkIf;
-in
+{ osConfig, ... }:
 {
   # Git login used only for work related things
-  programs.ssh.matchBlocks."bitbucket.org" =
-    (mkIf (builtins.hasAttr "ssh-tangled" osConfig.age.secrets) { # TODO: manage it into: knot.xaiya.dev
+  programs.ssh.matchBlocks."bitbucket.org" = {
       user = "git";
       hostname = "bitbucket.org";
       identityFile = osConfig.age.secrets."ssh-bb".path;
-    });
+    };
 }

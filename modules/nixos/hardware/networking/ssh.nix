@@ -19,7 +19,7 @@ in
   };
 
   # Load ssh keys
-  age.secrets = (mkIf config.sylveon.profiles.development.enable {
+  age.secrets = {
     "ssh-gh" = {
       # Github
       rekeyFile = "${self}/secrets/ssh-gh.age";
@@ -40,5 +40,5 @@ in
       mode = "644";
       group = "users";
     };
-  });
+  };
 }
