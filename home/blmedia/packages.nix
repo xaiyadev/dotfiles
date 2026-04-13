@@ -9,7 +9,7 @@
     pkgs.mpv # Music streaming
     inputs'.tidaLuna.packages.default # Music Streaming Service (injected)
 
-    # pkgs.teams-for-linux # Teams; Need that for school and work TODO: borked
+    pkgs.teams-for-linux # Teams; Need that for school and work
 
     pkgs.devenv
   ];
