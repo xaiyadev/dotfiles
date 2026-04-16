@@ -9,15 +9,6 @@ in
           
         outputs = [
           {
-            criteria = "eDP-2";
-
-
-            mode = "2560x1600@165.000Hz";
-            scale = 1.4;
-            position = "0,0";
-          }
-
-          {
             criteria = "AOC 2460G4 0x0000A8E2";
 
             mode = "1920x1080@119.982Hz";
@@ -29,6 +20,15 @@ in
         
             position = "3750,0";
             mode = "1920x1080@60.000Hz";
+          }
+
+          {
+            criteria = "eDP-2";
+
+
+            mode = "2560x1600@165.000Hz";
+            scale = 1.4;
+            position = "0,0";
           }
         ];
       };
