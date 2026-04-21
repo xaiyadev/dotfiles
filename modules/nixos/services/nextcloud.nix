@@ -9,7 +9,7 @@ let
   inherit (lib) mkIf mkMerge;
   inherit (self.lib.modules) mkServiceOpt;
 
-  cfg = config.sylveon.services.piper;
+  cfg = config.sylveon.services.nextcloud;
 in
 {
 
@@ -24,31 +24,15 @@ in
       services = {
         nextcloud = {
           enable = true;
-          package = pkgs.nextcloud31;
-          hostName = "127.0.0.1";
-
-          database.createLocally = true;
+          package = pkgs.nextcloud33;
+          hostName = "100.112.47.9";
 
           config = {
             adminpassFile = config.age.secrets."nextcloud-adminpass".path;
 
-            dbhost = "postgresql://nextcloud?host=/run/postgresql";
+            dbtype = "sqlite"; # TODO
           };
         };
-      };
-    })
-
-    (mkIf config.sylveon.nginx.enable {
-      services.nginx.virtualHosts.${cfg.domain} = {
-        enableACME = true;
-        forceSSL = true;
-
-        locations."/" = {
-          proxyPass = "http://localhost:${builtins.toString cfg.port}";
-        };
-
-        extraConfig = "proxy_ssl_server_name on;";
-
       };
     })
   ]);

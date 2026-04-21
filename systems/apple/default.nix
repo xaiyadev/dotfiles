@@ -21,9 +21,6 @@
     };
 
     services = {
-      # General services
-      postgres.enable = true;
-
       # school task
       nextcloud.enable = true;
 
