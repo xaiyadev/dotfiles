@@ -7,12 +7,6 @@ in
     enable = true;
     ports = [ 22 ];
 
-    banner = ''
-      You have connected to ${config.networking.hostName} @ NixOS (v ${config.system.nixos.release})"
-      This is part of the sylveon flake network! :>
-
-    '';
-
     settings = {
       PermitRootLogin = "no";
     };

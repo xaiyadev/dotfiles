@@ -14,7 +14,7 @@ in
         outputs = [          
 
           {
-            criteria = "${office_screen_1} AU11531001040";             
+            criteria = "${office_screen_1} 0x00000410";
             position = "2560,0";
 
             mode = "2560x1440@59.951Hz";
