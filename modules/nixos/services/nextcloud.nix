@@ -14,7 +14,7 @@ in
 {
 
   options.sylveon.services.nextcloud =
-    mkServiceOpt "nextcloud" { port = 3015; domain = "cloud.xaiya.dev"; };
+    mkServiceOpt "nextcloud" { port = 3015; domain = "nextcloud.its..."; }; # TODO
 
   config = (mkMerge [
     (mkIf cfg.enable {
@@ -25,7 +25,7 @@ in
         nextcloud = {
           enable = true;
           package = pkgs.nextcloud33;
-          hostName = "100.112.47.9";
+          hostName = cfg.domain;
 
           config = {
             adminpassFile = config.age.secrets."nextcloud-adminpass".path;
