@@ -7,6 +7,8 @@
 let
   inherit (lib)
     filterAttrs
+    mapAttrs
+    mkForce
       ;
 
   inherit (lib.types) isType;
