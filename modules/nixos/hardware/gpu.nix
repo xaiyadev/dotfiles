@@ -5,14 +5,21 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkMerge;
+  inherit (lib) mkIf mkMerge mkOption;
+  inherit (lib.types) enum;
 
-  cpu = config.sylveon.device.cpu;
+  cpu = config.sylveon.hardware.cpu;
 in
 {
-  options.sylveon.device.gpu = mkOpt (enum [
-    "amd"
-  ]) null "What gpu your system uses";
+
+  options.sylveon.system.gpu = mkOption {
+      type = enum [ "amd" ];
+      default = null;
+      example = "amd";
+      description = ''
+        What GPU your system uses
+      '';
+    };
 
   config = mkIf (cpu == "amd") {
     boot = {

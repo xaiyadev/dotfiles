@@ -20,7 +20,7 @@ in
     mkOpt bool prof.laptop.enable
       "Whether or not bluetooth should be enabled or not";
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable { # TODO: controller not working?
     sylveon.packages = {
       inherit (pkgs) overskride;
     };

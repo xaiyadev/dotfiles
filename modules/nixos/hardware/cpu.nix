@@ -4,15 +4,22 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkMerge;
+  inherit (lib) mkIf mkMerge mkOption;
+  inherit (lib) enum;
 
-  cpu = config.sylveon.device.cpu;
+  cpu = config.sylveon.hardware.cpu;
 in
 {
-  options.sylveon.device.cpu = mkOpt (enum [
-    "amd"
-    "intel"
-  ]) null "What cpu your system uses";
+
+  options.sylveon.system.cpu = mkOption {
+      type = enum [ "amd" "intel" ];
+      default = null;
+      example = "amd";
+      description = ''
+        What CPU your system uses
+      '';
+    };
+
 
   config = mkMerge [
     (mkIf (cpu == "amd") {
