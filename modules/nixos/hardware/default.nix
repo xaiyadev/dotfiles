@@ -7,5 +7,7 @@
     ./audio.nix # Audio settings and configuration (pipewire; alsa; etc.)
     ./bluetooth.nix
     ./yubikey.nix
+
+    ./firmware.nix # updating firmware
   ];
 }

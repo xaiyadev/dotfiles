@@ -86,9 +86,6 @@
 
             yamlfmt = {
               command = "yamlfmt";
-              options = [
-                "-formatter"
-              ];
 
               includes = [
                 "*.yml"

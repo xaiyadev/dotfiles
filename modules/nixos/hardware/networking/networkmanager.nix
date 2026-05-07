@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   inherit (lib) mkIf;
 
@@ -9,7 +14,7 @@ in
     inherit (pkgs) networkmanagerapplet; # GUI tool for networking
   };
 
-  network.networkmanager = {
+  networking.networkmanager = {
     enable = true;
     dns = "systemd-resolved";
 

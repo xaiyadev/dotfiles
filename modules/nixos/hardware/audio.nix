@@ -1,6 +1,5 @@
 {
   config,
-  self,
   lib,
   pkgs,
   ...
@@ -16,7 +15,7 @@ in
       inherit (pkgs)
         qpwgraph
         pwvucontrol
-      ;
+        ;
     };
 
     services.pipewire = {

@@ -8,8 +8,7 @@ let
   inherit (lib)
     filterAttrs
     mapAttrs
-    mkForce
-      ;
+    ;
 
   inherit (lib.types) isType;
 
@@ -78,11 +77,6 @@ in
 
       keep-derivations = true;
       keep-outputs = true;
-
-      optimise = {
-        automatic = true;
-        dates = [ "04:00" ];
-      };
 
       build-dir = "/var/tmp";
 

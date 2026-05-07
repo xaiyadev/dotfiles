@@ -1,10 +1,8 @@
 # run through nix checks
 when:
-  - event: ["push", "manual", "pull_request" ]
-    branch: [ "v5" ]
-
+  - event: ["push", "manual", "pull_request"]
+    branch: ["v5"]
 engine: "nixery"
-
 steps:
   - name: "Enter development environment"
     command: "nix develop ."

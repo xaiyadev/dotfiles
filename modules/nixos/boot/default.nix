@@ -11,11 +11,13 @@ in
 
   options.sylveon.system.boot = {
     raid.enable = mkEnableOption "Whether or not raid paritions should be enabled or not";
-    tmpOnTmpfs = mkEnableOption "/tml living on tmpfs. false menas it will be cleared each reboot" // { default = true; };
+    tmpOnTmpfs = mkEnableOption "/tml living on tmpfs. false menas it will be cleared each reboot" // {
+      default = true;
+    };
   };
 
   config.boot = {
-    consolelogLevel = 3; # only show errors and emergency alerts
+    consoleLogLevel = 3; # only show errors and emergency alerts
 
     swraid.enable = cfg.raid.enable;
 

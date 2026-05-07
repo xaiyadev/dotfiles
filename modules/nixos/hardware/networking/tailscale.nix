@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  inherit (lib) mkIf mkEnableOption;
+  inherit (lib) mkEnableOption mkIf;
 
   cfg = config.sylveon.system.networking.tailscale;
 in
@@ -12,7 +12,7 @@ in
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     services.tailscale = {
       enable = true;
       openFirewall = true;

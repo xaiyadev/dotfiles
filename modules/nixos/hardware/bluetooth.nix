@@ -1,15 +1,12 @@
 {
 
   config,
-  self,
   lib,
   pkgs,
   ...
 }:
 let
-  inherit (lib.types) bool;
-  inherit (lib) mkIf;
-  inherit (self.lib.modules) mkOpt;
+  inherit (lib) mkIf mkEnableOption;
 
   cfg = config.sylveon.hardware.bluetooth;
   prof = config.sylveon.profiles;
@@ -17,10 +14,13 @@ in
 {
 
   options.sylveon.hardware.bluetooth.enable =
-    mkOpt bool prof.laptop.enable
-      "Whether or not bluetooth should be enabled or not";
+    mkEnableOption "Whether or not bluetooth should be enabled or not"
+    // {
+      default = prof.laptop.enable;
+    };
 
-  config = mkIf cfg.enable { # TODO: controller not working?
+  config = mkIf cfg.enable {
+    # TODO: controller not working?
     sylveon.packages = {
       inherit (pkgs) overskride;
     };

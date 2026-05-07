@@ -5,23 +5,23 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkMerge mkOption;
+  inherit (lib) mkIf mkOption;
   inherit (lib.types) nullOr enum;
 
-  cpu = config.sylveon.hardware.cpu;
+  inherit (config.sylveon.hardware) gpu;
 in
 {
 
   options.sylveon.hardware.gpu = mkOption {
-      type = (nullOr (enum [ "amd" ]));
-      default = null;
-      example = "amd";
-      description = ''
-        What GPU your system uses
-      '';
-    };
+    type = nullOr (enum [ "amd" ]);
+    default = null;
+    example = "amd";
+    description = ''
+      What GPU your system uses
+    '';
+  };
 
-  config = mkIf (cpu == "amd") {
+  config = mkIf (gpu == "amd") {
     boot = {
       kernelModules = [ "amdgpu" ];
       initrd.kernelModules = [ "amdgpu" ];
@@ -34,10 +34,17 @@ in
     };
 
     # enables AMDVLK & OpenCL support
-    hardware.graphics.extraPackages = [
-      pkgs.rocmPackages.clr
-      pkgs.rocmPackages.clr.icd
-    ];
+    hardware = {
+      graphics = {
+        enable = true;
+        enable32Bit = true;
+
+        extraPackages = [
+          pkgs.rocmPackages.clr
+          pkgs.rocmPackages.clr.icd
+        ];
+      };
+    };
 
     services.xserver.videoDrivers = [ "amdgpu" ];
   };

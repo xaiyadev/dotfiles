@@ -1,10 +1,14 @@
-{ self, lib, config,... }:
+{
+  self,
+  lib,
+  config,
+  ...
+}:
 let
   inherit (lib) mkIf mkOption;
   inherit (lib.types) bool;
 
   cfg = config.sylveon.system.networking.openssh;
-  prof = config.sylveon.profiles;
 in
 {
   options.sylveon.system.networking.openssh = {
@@ -12,19 +16,19 @@ in
       github.enable = mkOption {
         type = bool;
         default = true;
-        description = ''Enable the github SSH key'';
+        description = "Enable the github SSH key";
       };
 
       bitbucket.enable = mkOption {
         type = bool;
         default = true;
-        description = ''Enable the bitbucket SSH key'';
+        description = "Enable the bitbucket SSH key";
       };
 
       tangled.enable = mkOption {
         type = bool;
         default = true;
-        description = ''Enable the tangled SSH key'';
+        description = "Enable the tangled SSH key";
       };
     };
   };
@@ -81,13 +85,13 @@ in
 
     age.secrets = {
       "ssh-github" = mkIf cfg.loadKeys.github.enable {
-        rekeyFile = "${self}/secrets/ssh-gh.age";
+        rekeyFile = "${self}/secrets/ssh-github.age";
         mode = "644";
         group = "users";
       };
 
       "ssh-bitbucket" = mkIf cfg.loadKeys.bitbucket.enable {
-        rekeyFile = "${self}/secrets/ssh-bb.age";
+        rekeyFile = "${self}/secrets/ssh-bitbucket.age";
         mode = "644";
         group = "users";
       };

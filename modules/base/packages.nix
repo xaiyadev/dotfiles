@@ -6,7 +6,7 @@
   ...
 }:
 let
-  inherit (lib) mkOption mergeAttrsList;
+  inherit (lib) mkOption;
   inherit (lib.types) attrsOf package;
 in
 {
@@ -20,10 +20,13 @@ in
 
   # Check if the packages should be installed on system level or user level
   config =
-    (if (_class == "nixos") then {
-      environment.systemPackages = builtins.attrValues config.sylveon.packages;
-    } else {
-      home.packages = builtins.attrValues config.sylveon.packages;
-    });
+    if (_class == "nixos") then
+      {
+        environment.systemPackages = builtins.attrValues config.sylveon.packages;
+      }
+    else
+      {
+        home.packages = builtins.attrValues config.sylveon.packages;
+      };
 
 }

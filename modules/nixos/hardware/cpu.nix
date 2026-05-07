@@ -5,21 +5,23 @@
 }:
 let
   inherit (lib) mkIf mkMerge mkOption;
-  inherit (lib) enum;
+  inherit (lib.types) nullOr enum;
 
-  cpu = config.sylveon.hardware.cpu;
+  inherit (config.sylveon.hardware) cpu;
 in
 {
 
   options.sylveon.hardware.cpu = mkOption {
-      type = enum [ "amd" "intel" ];
-      default = null;
-      example = "amd";
-      description = ''
-        What CPU your system uses
-      '';
-    };
-
+    type = nullOr (enum [
+      "amd"
+      "intel"
+    ]);
+    default = null;
+    example = "amd";
+    description = ''
+      What CPU your system uses
+    '';
+  };
 
   config = mkMerge [
     (mkIf (cpu == "amd") {
@@ -32,15 +34,15 @@ in
     })
 
     (mkIf (cpu == "intel") {
-        hardware.cpu.intel.updateMicrocode = true;
+      hardware.cpu.intel.updateMicrocode = true;
 
-        boot = {
-          kernelModules = [ "kvm-intel" ];
-          kernelParams = [
-            "i915.fastboot=1"
-            "enable_gvt=1"
-          ];
-        };
+      boot = {
+        kernelModules = [ "kvm-intel" ];
+        kernelParams = [
+          "i915.fastboot=1"
+          "enable_gvt=1"
+        ];
+      };
     })
   ];
 }

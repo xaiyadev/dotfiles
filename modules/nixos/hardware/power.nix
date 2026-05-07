@@ -22,16 +22,16 @@ in
       ];
     };
 
-    # Prevent wakeup from keyboard touch if lid is close
-    udev.extraRules = mkIf prof.laptop.eanble ''
-      SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0012", ATTR{power/wakeup}="disabled", ATTR{driver/1-1.1.1.4/power/wakeup}="disabled"
-      SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0014", ATTR{power/wakeup}="disabled", ATTR{driver/1-1.1.1.4/power/wakeup}="disabled"
-    '';
-
     # services running on life system to manage power
     services = {
       # handle ACPI events
       acpid.enable = true;
+
+      # Prevent wakeup from keyboard touch if lid is close
+      udev.extraRules = mkIf prof.laptop.enable ''
+        SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0012", ATTR{power/wakeup}="disabled", ATTR{driver/1-1.1.1.4/power/wakeup}="disabled"
+        SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0014", ATTR{power/wakeup}="disabled", ATTR{driver/1-1.1.1.4/power/wakeup}="disabled"
+      '';
 
       # DBus service providing power information to applications
       upower = {

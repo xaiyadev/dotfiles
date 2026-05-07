@@ -1,5 +1,8 @@
+{ inputs, ... }:
 {
   imports = [
+    inputs.agenix-rekey.flakeModule
+
     ../../systems
 
     ./lib # The library used by our configuration

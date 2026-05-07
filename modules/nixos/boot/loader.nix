@@ -1,8 +1,6 @@
-{ config, lib, ... }:
+{ lib, ... }:
 let
-  inherit (lib) mkEnableOption mkForce;
-
-  cfg = config.sylveon.system.boot;
+  inherit (lib) mkForce;
 in
 {
   boot.loader = {
