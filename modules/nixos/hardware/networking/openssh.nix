@@ -8,10 +8,10 @@ let
   inherit (lib) mkIf mkOption;
   inherit (lib.types) bool;
 
-  cfg = config.sylveon.system.networking.openssh;
+  cfg = config.sylveon.networking.openssh;
 in
 {
-  options.sylveon.system.networking.openssh = {
+  options.sylveon.networking.openssh = {
     loadKeys = {
       github.enable = mkOption {
         type = bool;

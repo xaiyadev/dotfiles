@@ -36,11 +36,12 @@ in
 
     # Create users from list
     users.users = genAttrs users (name: {
-      hashedPasswordFile = config.age.secrets."${name}-passwd".path;
+      # hashedPasswordFile = config.age.secrets."${name}-passwd".path;
+      initialPassword = "test";
       isNormalUser = true;
 
       # same as in nixos/programs/extraPackages.nx
-      # shell = config.home-manager.users.${name}.programs.zsh.package;
+      shell = config.home-manager.users.${name}.programs.zsh.package;
 
       extraGroups = mkMerge [
         [

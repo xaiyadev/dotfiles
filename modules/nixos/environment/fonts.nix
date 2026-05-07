@@ -1,15 +1,12 @@
 { pkgs, ... }:
 {
   fonts = {
-    packages = [
-      # Add the Jetbrains mono font
-      pkgs.jetbrains-mono
-      pkgs.nerd-fonts.jetbrains-mono
-
-      # extra fonts to support specific glyphs and icons
-      pkgs.noto-fonts
-      pkgs.noto-fonts-emoji-blob-bin
-    ];
+    # font managed through home-manager
+    fontconfig = {
+      enable = true;
+      hinting.enable = true;
+      antialias =  true;
+    };
 
     # save up some storage
     fontDir.decompressFonts = true;

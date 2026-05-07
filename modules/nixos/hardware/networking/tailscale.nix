@@ -2,11 +2,11 @@
 let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.sylveon.system.networking.tailscale;
+  cfg = config.sylveon.networking.tailscale;
 in
 {
 
-  options.sylveon.system.networking.tailscale = {
+  options.sylveon.networking.tailscale = {
     enable = mkEnableOption "Tailscale VPN" // {
       default = true;
     };

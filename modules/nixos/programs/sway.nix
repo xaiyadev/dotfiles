@@ -7,12 +7,12 @@
 let
   inherit (lib) mkIf mkEnableOption;
 
-  cfg = config.sylveon.system.graphical.sway;
+  cfg = config.sylveon.graphical.sway;
   prof = config.sylveon.profiles;
 in
 {
 
-  options.sylveon.system.graphical.sway.enable =
+  options.sylveon.graphical.sway.enable =
     mkEnableOption "Whether or not to enable the sway window manager"
     // {
       default = prof.graphical.enable; # Sway is currently my only windowManager
@@ -24,8 +24,6 @@ in
       glib-networking.enable = true;
       gnome-keyring.enable = true;
     };
-
-    xdg.portal.wlr.enable = false;
 
     programs.sway = {
       enable = true;

@@ -2,14 +2,15 @@
 let
   inherit (lib) mkEnableOption mkDefault;
 
-  cfg = config.sylveon.system.boot;
+  cfg = config.sylveon.boot;
 in
 {
   imports = [
     ./loader.nix # Boot loader to use
+    ./loginManager.nix # TODO: move
   ];
 
-  options.sylveon.system.boot = {
+  options.sylveon.boot = {
     raid.enable = mkEnableOption "Whether or not raid paritions should be enabled or not";
     tmpOnTmpfs = mkEnableOption "/tml living on tmpfs. false menas it will be cleared each reboot" // {
       default = true;

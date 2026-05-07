@@ -5,6 +5,11 @@
 
   sylveon = {
 
+    profiles = {
+      graphical.enable = true;
+      laptop.enable = true;
+    };
+
     users = [
       "xaiya"
       "blmedia"
