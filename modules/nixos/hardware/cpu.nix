@@ -11,7 +11,7 @@ let
 in
 {
 
-  options.sylveon.system.cpu = mkOption {
+  options.sylveon.hardware.cpu = mkOption {
       type = enum [ "amd" "intel" ];
       default = null;
       example = "amd";

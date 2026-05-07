@@ -29,7 +29,7 @@ in
       alsa = {
         enable = true; # Alsa very nice for exclusive mode
         support32Bit = true;
-      }
+      };
     };
   };
 }

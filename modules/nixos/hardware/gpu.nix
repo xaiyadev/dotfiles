@@ -6,14 +6,14 @@
 }:
 let
   inherit (lib) mkIf mkMerge mkOption;
-  inherit (lib.types) enum;
+  inherit (lib.types) nullOr enum;
 
   cpu = config.sylveon.hardware.cpu;
 in
 {
 
-  options.sylveon.system.gpu = mkOption {
-      type = enum [ "amd" ];
+  options.sylveon.hardware.gpu = mkOption {
+      type = (nullOr (enum [ "amd" ]));
       default = null;
       example = "amd";
       description = ''
@@ -25,6 +25,12 @@ in
     boot = {
       kernelModules = [ "amdgpu" ];
       initrd.kernelModules = [ "amdgpu" ];
+
+      kernelParams = [
+        # Fix color accuracy in power saving mode
+        "amdpgu.admblevel=0"
+        "acpi_backlight=native"
+      ];
     };
 
     # enables AMDVLK & OpenCL support

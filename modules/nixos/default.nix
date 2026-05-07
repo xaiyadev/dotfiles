@@ -2,7 +2,6 @@
   imports = [
     ./nix # nix environment configuration (e.g nixpkgs)
     ./environment # Configurations of the systems environment (timezone; fonts; etc.)
-    ./system # System configuration itself (window-manager; login-manager; etc.)
     ./hardware # hardware specific configuration (cpu; gpu; touchpad; etc.)
     ./boot # Configuration for booting up the system (e.g bootloader)
     ./security # Security of the system (yubikey; sudo)

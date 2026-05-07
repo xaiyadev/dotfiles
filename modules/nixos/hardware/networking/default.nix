@@ -1,3 +1,7 @@
+{ lib, ... }:
+let
+  inherit (lib) mkForce;
+in
 {
 
   imports = [
