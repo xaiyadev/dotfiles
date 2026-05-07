@@ -1,12 +1,11 @@
-{ lib, osConfig, pkgs, ... }:
+{ lib, osConfig, ... }:
 
 let
   inherit (lib)
     mkIf
-    getExe
     ;
 
-  sway = osConfig.sylveon.graphical.sway;
+  inherit (osConfig.sylveon.graphical) sway;
 in
 {
 

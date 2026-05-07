@@ -1,4 +1,4 @@
-{ lib, ... }:
+_:
 let
   inherit (builtins)
     fromTOML
@@ -7,7 +7,8 @@ let
     ;
 in
 {
-  programs.starship = { # TODO: configure self
+  programs.starship = {
+    # TODO: configure self
     enable = true;
 
     settings = fromTOML (

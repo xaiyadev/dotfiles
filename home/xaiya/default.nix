@@ -3,7 +3,7 @@
     programs = {
       librewolf.enable = true;
 
-     # discord.enable = true;
+      # discord.enable = true;
     };
   };
 }

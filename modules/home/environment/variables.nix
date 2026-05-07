@@ -1,7 +1,4 @@
-{ config, osConfig, ... }:
-let
-  inherit (config.sylveon.programs) defaults;
-in
+{ config, ... }:
 {
   home.sessionVariables = {
     EDITOR = "nvim";

@@ -1,15 +1,12 @@
 {
   config,
   osConfig,
-  pkgs,
   lib,
   ...
 }:
 let
-  inherit (lib) mkEnableOption;
-  inherit (lib.types) bool;
 
-  sway = osConfig.sylveon.graphical.sway;
+  inherit (osConfig.sylveon.graphical) sway;
 in
 {
   config = mkIf sway.enable {

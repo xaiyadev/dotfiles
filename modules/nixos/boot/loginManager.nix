@@ -1,6 +1,5 @@
 {
   lib,
-  self,
   config,
   pkgs,
   ...
@@ -26,8 +25,8 @@ let
 in
 {
   options.sylveon.system.loginManager = mkOption {
-    type = (nullOr (enum [ "greetd" ]));
-    default = (if prof.graphical.enable then "greetd" else null);
+    type = nullOr (enum [ "greetd" ]);
+    default = if prof.graphical.enable then "greetd" else null;
     description = "The login manager used by the system";
   };
 

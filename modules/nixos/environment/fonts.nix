@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+_:
 {
   fonts = {
     # font managed through home-manager
     fontconfig = {
       enable = true;
       hinting.enable = true;
-      antialias =  true;
+      antialias = true;
     };
 
     # save up some storage

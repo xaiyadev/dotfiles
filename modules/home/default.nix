@@ -8,7 +8,7 @@
     ./programs
 
     ./docs.nix
-     ./style.nix
+    ./style.nix
   ];
 
   config = {

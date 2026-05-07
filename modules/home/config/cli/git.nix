@@ -1,7 +1,4 @@
-{ pkgs, lib, config, ... }:
-let
-  inherit (lib.hm.dag) entryBefore;
-in
+{ pkgs, lib, ... }:
 {
 
   programs = {
@@ -10,9 +7,9 @@ in
       package = pkgs.gitMinimal;
 
       settings = {
-        user ={
-         name = "xaiya";
-         email = "d.schumin@proton.me";
+        user = {
+          name = "xaiya";
+          email = "d.schumin@proton.me";
         };
 
         push.autoSetupRemote = true;

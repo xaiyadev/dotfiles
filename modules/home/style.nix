@@ -13,15 +13,13 @@ in
 {
   imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
-	# Use the global catppuccin configuration
-	/*
-    TODO: applications that need to be manaul integrated/need nix integration
-	*/
-	config = mkIf osConfig.catppuccin.enable {
-	  catppuccin = {
-	    enable = true;
+  # Use the global catppuccin configuration
+  # TODO: applications that need to be manaul integrated/need nix integration
+  config = mkIf osConfig.catppuccin.enable {
+    catppuccin = {
+      enable = true;
 
-	    inherit (osConfig.catppuccin)
+      inherit (osConfig.catppuccin)
         accent
         flavor
         ;
@@ -44,13 +42,13 @@ in
       };
 
       gtk4 = {
-        theme = config.gtk.theme;
+        inherit (config.gtk) theme;
         extraConfig = {
           # make things look nice
           gtk-application-prefer-dark-theme = true;
         };
       };
-     };
+    };
 
     home.pointerCursor = {
       enable = true;

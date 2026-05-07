@@ -11,7 +11,7 @@ in
     {
       profile = {
         inherit name;
-        outputs = [          
+        outputs = [
 
           {
             criteria = "${office_screen_1} 0x00000410";
@@ -21,20 +21,19 @@ in
           }
 
           {
-            criteria = "${office_screen_1} AU11526001821";             
+            criteria = "${office_screen_1} AU11526001821";
             position = "0,81";
 
             mode = "2560x1440@59.951Hz";
           }
 
-          { 
+          {
             criteria = "eDP-2";
             position = "5120,0";
 
             mode = "2560x1600@165.000Hz";
             scale = 1.3;
           }
-
 
         ];
       };
@@ -62,7 +61,7 @@ in
             mode = "3840x2160@60.000Hz";
           }
 
-          { 
+          {
             criteria = "eDP-2";
             position = "5120,0";
 
@@ -93,7 +92,7 @@ in
             mode = "3840x2160@60.000Hz";
           }
 
-          { 
+          {
             criteria = "eDP-2";
             position = "0,99";
 

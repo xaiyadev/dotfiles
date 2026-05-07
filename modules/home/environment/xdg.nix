@@ -1,6 +1,5 @@
 { config, ... }:
 let
-  inherit (config.sylveon.programs) defaults;
   inherit (config.home) homeDirectory;
 in
 {

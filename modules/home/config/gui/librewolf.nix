@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  self,
   pkgs,
   ...
 }:
@@ -13,24 +12,20 @@ let
     mkEnableOption
     ;
 
-  inherit (builtins)
-    fromJSON
-    readFile
-    fetchurl
-    ;
-
   cfg = config.sylveon.programs.librewolf;
 in
 {
 
-  options.sylveon.programs.librewolf.enable =
-   mkEnableOption "Enable webBrowser based on firefox" ;
+  options.sylveon.programs.librewolf.enable = mkEnableOption "Enable webBrowser based on firefox";
 
   config = mkIf cfg.enable {
     programs.librewolf = {
       enable = true;
 
-      languagePacks = [ "en-GB" "de" ];
+      languagePacks = [
+        "en-GB"
+        "de"
+      ];
 
       settings = {
         "browser.fullscreen.autohide" = false;
@@ -106,7 +101,7 @@ in
           engines = {
             MyNixOS = {
               name = "MyNixOS";
-              urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
+              urls = [ { template = "https://mynixos.com/search?q={searchTerms}"; } ];
 
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
               definedAliases = [ "@n" ];
@@ -114,7 +109,7 @@ in
 
             kagi = {
               name = "Kagi";
-              urls = [{ template = "https://kagi.com/search?q={searchTerms}"; }];
+              urls = [ { template = "https://kagi.com/search?q={searchTerms}"; } ];
             };
 
             google.metaData.alias = "@g";

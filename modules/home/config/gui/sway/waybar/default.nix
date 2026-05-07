@@ -2,7 +2,6 @@
   pkgs,
   osConfig,
   lib,
-  config,
   ...
 }:
 let
@@ -10,7 +9,7 @@ let
     mkIf
     ;
 
-  sway = osConfig.sylveon.graphical.sway;
+  inherit (osConfig.sylveon.graphical) sway;
 in
 {
 
@@ -24,7 +23,8 @@ in
 
     catppuccin.waybar.enable = true;
 
-    programs.waybar = { # TODO: replace?
+    programs.waybar = {
+      # TODO: replace?
       enable = true;
 
       settings = {

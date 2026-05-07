@@ -3,7 +3,6 @@
   lib,
   pkgs,
   config,
-  inputs',
   self,
   ...
 }:
@@ -19,8 +18,7 @@ let
     ;
 
   modifier = "Mod4";
-  sway = osConfig.sylveon.graphical.sway;
-  cfg = config.wayland.windowManager.sway.config;
+  inherit (osConfig.sylveon.graphical) sway;
 in
 {
   imports = [
@@ -102,7 +100,7 @@ in
           # Automaticly generated configuration based on kanshi
           (mkIf config.services.kanshi.enable (
             forEach [ 1 2 ] (x: {
-              output = forEach config.services.kanshi.settings (y: ((elemAt y.profile.outputs (x - 1)).criteria));
+              output = forEach config.services.kanshi.settings (y: (elemAt y.profile.outputs (x - 1)).criteria);
 
               # Assign the 10 workspaces we have
               workspace = toString x;
@@ -157,12 +155,12 @@ in
         startup = [
           # Display and configurations
           {
-            command = (getExe pkgs.kanshi);
+            command = getExe pkgs.kanshi;
             always = true;
           }
 
           # Background Services
-          { command = (getExe pkgs.sway-audio-idle-inhibit); }
+          { command = getExe pkgs.sway-audio-idle-inhibit; }
           { command = "${getExe config.programs.vicinae.package} server"; }
         ];
 

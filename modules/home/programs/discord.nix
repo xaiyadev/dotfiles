@@ -1,6 +1,11 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
-  inherit (lib) mkEnableOption mkOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
 
   settingsFormat = pkgs.formats.json { };
   cfg = config.programs.discord;

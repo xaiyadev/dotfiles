@@ -1,6 +1,4 @@
 {
-  config,
-  inputs,
   osConfig,
   lib,
   ...
@@ -10,7 +8,7 @@ let
     mkIf
     ;
 
-  sway = osConfig.sylveon.graphical.sway;
+  inherit (osConfig.sylveon.graphical) sway;
 in
 {
   config = mkIf sway.enable {
