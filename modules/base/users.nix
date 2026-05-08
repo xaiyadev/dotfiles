@@ -28,16 +28,9 @@ in
   };
 
   config = {
-    # Generate random passwords for users
-    age.secrets = genAttrs (forEach users (name: "${name}-passwd")) (name: {
-      rekeyFile = "${self}/secrets/${name}.age";
-      generator.script = "sha256";
-    });
-
     # Create users from list
     users.users = genAttrs users (name: {
-      # hashedPasswordFile = config.age.secrets."${name}-passwd".path;
-      initialPassword = "test";
+      initialPassword = "password"; # set password yourself later (IMPORTANT !!)
       isNormalUser = true;
 
       # same as in nixos/programs/extraPackages.nx

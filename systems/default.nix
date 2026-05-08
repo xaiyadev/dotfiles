@@ -5,7 +5,9 @@
   config.easy-hosts = {
     perClass = class: {
       modules = [
+        "${self}/modules/generic"
         "${self}/modules/base"
+
         "${self}/modules/${class}"
         "${self}/home"
       ];
@@ -17,6 +19,11 @@
 
       # Home server
       apricot = { };
+
+      # iso
+      kiwano = {
+        class = "iso";
+      };
     };
   };
 }

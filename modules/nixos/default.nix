@@ -9,7 +9,6 @@
     ./programs # default programs that should or need to be run system-wide
 
     ./style.nix # Configure the users style configuration
-    ./users.nix # Configure the users given in this environment
     ./server.nix # Configuration needed for the server
   ];
 }

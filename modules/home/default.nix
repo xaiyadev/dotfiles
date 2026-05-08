@@ -1,7 +1,7 @@
 { osConfig, ... }:
 {
   imports = [
-    ../base # TODO
+    ../generic
     ./config # configuration the defaults for most users
 
     ./environment
