@@ -9,6 +9,7 @@
 
     ./docs.nix
     ./style.nix
+    ./profiles.nix
   ];
 
   config = {

@@ -1,6 +1,5 @@
 {
   imports = [
-    ./profiles.nix # Profiles that should be applied to a system (specific configurations)
-    ./users.nix
+    ./users.nix # Configure and create users
   ];
 }

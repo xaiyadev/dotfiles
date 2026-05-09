@@ -1,6 +1,10 @@
 { pkgs, ... }:
 {
   sylveon = {
+    profiles.user = {
+      gaming.enable = true;
+    };
+
     programs = {
       librewolf.enable = true;
 

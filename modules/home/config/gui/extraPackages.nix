@@ -1,6 +1,6 @@
 {
   lib,
-  osConfig,
+  config,
   pkgs,
   inputs',
   ...
@@ -8,7 +8,7 @@
 let
   inherit (lib) mkIf mkMerge;
 
-  prof = osConfig.sylveon.profiles;
+  prof = config.sylveon.profiles;
 in
 {
   sylveon.packages = mkMerge [
@@ -22,9 +22,11 @@ in
       inherit (inputs'.tidaLuna.packages) default;
     })
 
-    (mkIf prof.gaming.enable {
+    (mkIf prof.user.gaming.enable {
       inherit (pkgs)
         gamescope # TODO
+        steam
+
         prismlauncher # TODO
         deadlock-mod-manager # TODO
         ;

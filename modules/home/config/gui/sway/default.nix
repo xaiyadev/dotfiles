@@ -46,7 +46,7 @@ in
         menu = "${getExe config.programs.vicinae.package} toggle";
 
         output."*" = {
-          bg = "${self}/assets/wallpaper/flamingo_bkg5.png fill";
+          bg = "${self}/assets/wallpaper/abstract.webp fill";
         };
 
         colors =
@@ -188,7 +188,7 @@ in
         "shadow_inactive_color #7c7f93"
 
         # "shadow_offset 5 5"
-        "shadow_blur_radius 20"
+        "shadow_blur_radius 10"
 
         # Corners
         "corner_radius 13"
