@@ -3,6 +3,7 @@
   lib,
   config,
   inputs,
+  inputs',
   ...
 }:
 let
@@ -23,7 +24,7 @@ in
         imports = [ ./${name} ];
       });
 
-      extraSpecialArgs = { inherit self inputs; };
+      extraSpecialArgs = { inherit self inputs inputs'; };
 
       sharedModules = [ "${self}/modules/home/default.nix" ];
     };

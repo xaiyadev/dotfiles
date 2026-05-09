@@ -8,6 +8,7 @@ in
     ./networkmanager.nix
     ./openssh.nix
     ./tailscale.nix
+    ./systemd.nix
   ];
 
   networking = {

@@ -1,20 +1,23 @@
-{
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/ce3212c1-5170-48bf-91cd-73c07aa49f83";
-    fsType = "btrfs";
-    options = [ "subvol=@" ];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/B4BE-0C8C";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
+{ modulesPath, lib, config, ...}: {
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
-  };
 
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/303ddaaa-7ee6-4ef6-bd4f-88fd25071899"; }
-  ];
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/277aad2a-b128-4c54-8351-2c18c94b9f5d";
+      fsType = "btrfs";
+      options = [ "subvol=@" ];
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/7DD9-50F7";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/6355637c-d51c-4718-9133-ad301068e561"; }
+    ];
+
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

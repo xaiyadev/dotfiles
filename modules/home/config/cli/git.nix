@@ -8,7 +8,7 @@
 
       settings = {
         user = {
-          name = "xaiya";
+          name = "Xaiya Schumin";
           email = "d.schumin@proton.me";
         };
 

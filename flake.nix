@@ -18,6 +18,14 @@
       repo = "nix";
     };
 
+    tidaLuna = {
+      type = "github";
+      owner = "Inrixia";
+      repo = "tidaLuna";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       type = "github";
       owner = "nix-community";

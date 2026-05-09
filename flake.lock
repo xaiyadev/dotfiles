@@ -303,7 +303,8 @@
         "easy-hosts": "easy-hosts",
         "flake-parts": "flake-parts_2",
         "home-manager": "home-manager_2",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "tidaLuna": "tidaLuna"
       }
     },
     "systems": {
@@ -318,6 +319,26 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tidaLuna": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778321706,
+        "narHash": "sha256-13bz1CqjGr1CxR3wqpKb1kx4NrgvcsdDri0VSbwf/d4=",
+        "owner": "Inrixia",
+        "repo": "tidaLuna",
+        "rev": "af95ee755c31c594d7aabb06b444e23251259ba8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Inrixia",
+        "repo": "tidaLuna",
         "type": "github"
       }
     },
