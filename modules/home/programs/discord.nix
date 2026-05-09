@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkOption mkIf;
 
   settingsFormat = pkgs.formats.json { };
   cfg = config.programs.discord;
@@ -15,7 +15,7 @@ in
     moonlight = {
       enable = mkEnableOption "Discord with the moonlight client";
 
-      settings = {
+      settings = mkOption {
         inherit (settingsFormat) type;
         default = { };
         description = "Settings for the moonlight client";
