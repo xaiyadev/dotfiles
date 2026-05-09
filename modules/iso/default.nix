@@ -1,4 +1,10 @@
-{ config, lib, inputs, self, ... }:
+{
+  config,
+  lib,
+  inputs,
+  self,
+  ...
+}:
 let
   inherit (lib.sources) cleanSource;
   inherit (lib) mkImageMediaOverride;
@@ -34,11 +40,13 @@ in
       # remove "minimal" from the name
       edition = "";
 
-      contents = [{
-        # provide our flake
-        source = cleanSource self;
-        target = "/flake";
-      }];
+      contents = [
+        {
+          # provide our flake
+          source = cleanSource self;
+          target = "/flake";
+        }
+      ];
     };
   };
 }

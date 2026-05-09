@@ -1,5 +1,4 @@
 {
-  self,
   lib,
   config,
   ...
@@ -9,7 +8,6 @@ let
   inherit (lib.attrsets) genAttrs;
 
   inherit (lib)
-    forEach
     mkIf
     mkMerge
     mkOption

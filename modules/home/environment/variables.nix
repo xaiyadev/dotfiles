@@ -1,4 +1,4 @@
-{ config, ... }:
+_:
 {
   home.sessionVariables = {
     EDITOR = "nvim";

@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   system = {
     disableInstallerTools = true;
 
@@ -10,6 +11,5 @@
   };
 
   programs.git.package = pkgs.gitMinimal;
-
 
 }

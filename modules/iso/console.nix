@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ lib, ... }:
 {
   console.keyMap = lib.mkForce "de";
 }

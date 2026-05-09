@@ -19,16 +19,16 @@ in
       };
 
       "github.com" = mkIf (builtins.hasAttr "ssh-github" osConfig.age.secrets) {
-          user = "git";
-          hostname = "github.com";
-          identityFile = osConfig.age.secrets."ssh-github".path;
-        };
+        user = "git";
+        hostname = "github.com";
+        identityFile = osConfig.age.secrets."ssh-github".path;
+      };
 
       "apricot" = mkIf (builtins.hasAttr "ssh-tangled" osConfig.age.secrets) {
-          user = "git";
-          hostname = "apricot"; # change it to: knot.xaiya.dev TODO
-          identityFile = osConfig.age.secrets."ssh-tangled".path;
-        };
+        user = "git";
+        hostname = "apricot"; # change it to: knot.xaiya.dev TODO
+        identityFile = osConfig.age.secrets."ssh-tangled".path;
+      };
     };
   };
 }

@@ -1,5 +1,4 @@
-_:
-{
+_: {
   fonts = {
     # font managed through home-manager
     fontconfig = {
