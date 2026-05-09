@@ -40,10 +40,11 @@ in
       # remove "minimal" from the name
       edition = "";
 
+      # TODO: does.. nothing?
       contents = [
         {
           # provide our flake
-          source = cleanSource self;
+          source = self;
           target = "/flake";
         }
       ];
