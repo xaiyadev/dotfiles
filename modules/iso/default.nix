@@ -6,7 +6,6 @@
   ...
 }:
 let
-  inherit (lib.sources) cleanSource;
   inherit (lib) mkImageMediaOverride;
 
   hostname = config.networking.hostName or "nixos";

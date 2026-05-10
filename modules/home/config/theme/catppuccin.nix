@@ -2,13 +2,11 @@
   osConfig,
   lib,
   inputs,
-  pkgs,
   config,
   ...
 }:
 let
   inherit (lib) mkIf;
-  cfg = config.catppuccin;
 in
 {
   imports = [ inputs.catppuccin.homeModules.catppuccin ];

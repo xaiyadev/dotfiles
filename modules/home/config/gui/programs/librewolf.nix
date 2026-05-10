@@ -7,7 +7,6 @@
 let
 
   inherit (lib)
-    mkIf
     genAttrs
     mkEnableOption
     ;
@@ -16,8 +15,7 @@ let
 in
 {
 
-  options.sylveon.programs.librewolf.enable =
-    mkEnableOption "enable web-browser based on firefox";
+  options.sylveon.programs.librewolf.enable = mkEnableOption "enable web-browser based on firefox";
 
   config = {
     programs.librewolf = {

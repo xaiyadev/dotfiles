@@ -7,7 +7,6 @@
 let
   inherit (lib)
     concatLists
-    mkIf
     mkEnableOption
     concatMapStrings
     ;

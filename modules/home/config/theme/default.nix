@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+{
   imports = [
     ./catppuccin.nix
     ./gtk.nix
@@ -8,7 +9,7 @@
   config = {
     # global configuration for cursors
     home.pointerCursor = {
-      enable = config.sylveon.profiles.graphical.enable;
+      inherit (config.sylveon.profiles.graphical) enable;
 
       name = "catppuccin-mocha-flamingo-cursors";
       package = pkgs.catppuccin-cursors.mochaFlamingo;
