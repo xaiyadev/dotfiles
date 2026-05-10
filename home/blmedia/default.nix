@@ -1,15 +1,21 @@
 { pkgs, ... }:
 {
-  sylveon = {
-    programs = {
-      librewolf.enable = true;
 
-      # discord.enable = true; TODO
-    };
+  imports = [
+    ./programs
+  ];
 
-    packages = {
-      # TODO
-      inherit (pkgs.jetbrains) phpstorm;
+  config = {
+    sylveon = {
+      programs = {
+        chromium.enable = true;
+        discord.enable = true;
+      };
+
+      packages = {
+        # TODO
+        inherit (pkgs.jetbrains) phpstorm;
+      };
     };
   };
 }

@@ -6,9 +6,8 @@
     };
 
     programs = {
-      librewolf.enable = true;
-
-      # discord.enable = true; TODO
+      chromium.enable = true;
+      discord.enable = true;
     };
 
     packages = {
@@ -16,6 +15,4 @@
       inherit (pkgs.jetbrains) webstorm;
     };
   };
-
-  programs.discord.enable = true;
 }

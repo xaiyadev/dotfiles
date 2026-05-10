@@ -8,7 +8,6 @@
     ./programs
 
     ./docs.nix
-    ./style.nix
     ./profiles.nix
   ];
 

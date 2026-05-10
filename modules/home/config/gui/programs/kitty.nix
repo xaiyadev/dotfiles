@@ -1,9 +1,11 @@
 {
   config,
   osConfig,
+  lib,
   ...
 }:
 let
+  inherit (lib) mkIf;
 
   inherit (osConfig.sylveon.graphical) sway;
 in

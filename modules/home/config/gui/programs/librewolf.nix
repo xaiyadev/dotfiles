@@ -16,11 +16,12 @@ let
 in
 {
 
-  options.sylveon.programs.librewolf.enable = mkEnableOption "Enable webBrowser based on firefox";
+  options.sylveon.programs.librewolf.enable =
+    mkEnableOption "enable web-browser based on firefox";
 
-  config = mkIf cfg.enable {
+  config = {
     programs.librewolf = {
-      enable = true;
+      inherit (cfg) enable;
 
       languagePacks = [
         "en-GB"
@@ -45,7 +46,8 @@ in
         "identity.fxaccounts.toolbar.enabled" = false;
         "identity.fxaccounts.pairing.enabled" = false;
         "identity.fxaccounts.commands.enabled" = false;
-        "privacy.clearOnShutdown.history" = false;
+        "privacy.clearOnShutdown.history" = true;
+
         "privacy.clearOnShutdown.cookies" = false;
         "network.cookie.lifetimePolicy" = 0;
 
