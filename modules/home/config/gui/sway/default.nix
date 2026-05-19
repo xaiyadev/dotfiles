@@ -46,7 +46,7 @@ in
         menu = "${getExe config.programs.vicinae.package} toggle";
 
         output."*" = {
-          bg = "${self}/assets/wallpaper/abstract.webp fill";
+          bg = "${self}/assets/wallpaper/current.png fill";
         };
 
         colors =
