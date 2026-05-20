@@ -11,19 +11,22 @@
     # https://deer.social/profile/did:plc:mojgntlezho4qt7uvcfkdndg/post/3loogwsoqok2w
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
 
+    # own package repository
+    xaipkgs.url = "git+https://tangled.org/xaiya.dev/nix-pkgs";
+
+    # TODO: other solution for storing this file in the path without adding it to nix?
+    # The beta build of the musicpresence-software
+    musicpresence = {
+      url = "path:/home/xaiya/documents/packages";
+      flake = false;
+    };
+
+
     # declarative theme manager; The one I use the most currently !!
     catppuccin = {
       type = "github";
       owner = "catppuccin";
       repo = "nix";
-    };
-
-    tidaLuna = {
-      type = "github";
-      owner = "Inrixia";
-      repo = "tidaLuna";
-
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {

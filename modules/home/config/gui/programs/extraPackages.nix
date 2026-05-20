@@ -18,8 +18,6 @@ in
         teams-for-linux # Needed for all graphical users currently TODO change when leaving school
         obsidian # TODO
         ;
-
-      inherit (inputs'.tidaLuna.packages) default;
     })
 
     (mkIf prof.user.gaming.enable {

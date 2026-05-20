@@ -6,12 +6,14 @@
     ./cli
   ];
 
-  config = {
-    sylveon = {
-      programs = {
-        chromium.enable = true;
-        discord.enable = true; # TODO: load only arpc?
-      };
+  sylveon = {
+    profiles.user = {
+      music.enable = true;
+    };
+
+    programs = {
+      chromium.enable = true;
+      discord.enable = true; # TODO: load only arpc?
     };
   };
 }

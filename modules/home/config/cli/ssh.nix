@@ -7,7 +7,7 @@ in
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks = {
+    settings = {
       "*" = {
         serverAliveCountMax = 3;
 
@@ -26,7 +26,7 @@ in
 
       "apricot" = mkIf (builtins.hasAttr "ssh-tangled" osConfig.age.secrets) {
         user = "git";
-        hostname = "apricot"; # change it to: knot.xaiya.dev TODO
+        hostname = "100.102.169.64"; # change it to: knot.xaiya.dev TODO
         identityFile = osConfig.age.secrets."ssh-tangled".path;
       };
     };

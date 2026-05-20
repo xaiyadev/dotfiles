@@ -1,5 +1,6 @@
 {
   imports = [
     ./mpv.nix
+    ./music
   ];
 }

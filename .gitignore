@@ -13,3 +13,6 @@ result-*
 # Disable vm outputs that are called when starting a vm in this directory
 *.qcow
 *.qcow2
+
+# software that is not public yet/that should be hidden
+**/musicpresence-*
