@@ -161,6 +161,8 @@ in
 
           # Background Services
           { command = getExe pkgs.sway-audio-idle-inhibit; }
+          { command = getExe config.services.easyeffects.package; }
+
           { command = "${getExe config.programs.vicinae.package} server"; }
         ];
 
