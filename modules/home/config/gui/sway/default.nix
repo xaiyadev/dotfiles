@@ -32,6 +32,7 @@ in
   imports = [
     ./waybar # Title bar TODO: replace with eww?
     ./kanshi # Window/Output manager
+    ./quickshell
   ];
 
   config = mkIf sway.enable {
