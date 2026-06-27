@@ -74,6 +74,37 @@ in
 
     {
       profile = {
+        name = "${name}-prak";
+        outputs = [
+          {
+            criteria = "${office_screen_2} HDR 4K 0x0009ED6F";
+            position = "2327,98";
+
+            scale = 1.5;
+            mode = "3840x2160@60.000Hz";
+          }
+
+          {
+            criteria = "Iiyama North America PL2792Q 1152184902292";
+            position = "4887,98";
+
+            mode = "2560x1440@59.951";
+          }
+
+          {
+            criteria = "eDP-2";
+            position = "0,0";
+
+            mode = "2560x1600@165.000Hz";
+            scale = 1.1;
+          }
+        ];
+      };
+    }
+
+
+    {
+      profile = {
         name = "${name}-elvis";
         outputs = [
           {
