@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, osConfig, ... }:
 {
 
   programs = {
@@ -13,7 +13,7 @@
         };
 
         push.autoSetupRemote = true;
-        commit.gpgsign = true;
+        commit.gpgsign = osConfig.sylveon.hardware.yubikey; # only sign with gpg if the system can read my yubikey
 
         init.defaultBranch = "master";
         color.ui = "auto";

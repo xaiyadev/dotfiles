@@ -1,4 +1,5 @@
 {
+  # TODO: needs changes because.. ueghh,, Framework burned maybe
   imports = [
     ./fileSystem.nix
   ];
@@ -7,7 +8,6 @@
 
     profiles = {
       graphical.enable = true;
-      laptop.enable = true;
     };
 
     users = [
@@ -16,10 +16,8 @@
     ];
 
     hardware = {
-      yubikey.enable = true;
-
       cpu = "amd";
-      gpu = "amd";
+      gpu = "nvidia";
     };
 
     services.docker.enable = true;

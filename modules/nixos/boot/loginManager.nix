@@ -41,7 +41,7 @@ in
             (getExe pkgs.tuigreet)
             "--time"
             "--asterisks"
-            "--sessions '${sessionPath}'"
+            "--sessions '${sessionPath}'" # TODO: add option for sway to run with unsupported gpus
           ];
         };
       };
