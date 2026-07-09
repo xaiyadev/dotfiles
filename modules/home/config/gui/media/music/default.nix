@@ -1,14 +1,18 @@
-{ lib, config, pkgs, inputs', inputs, ... }:
+{
+  lib,
+  config,
+  inputs',
+  inputs,
+  ...
+}:
 let
-  inherit (lib) mkIf mkMerge mkOption getExe;
+  inherit (lib) mkIf mkOption getExe;
   inherit (lib.lists) any;
   inherit (lib.types) nullOr enum listOf;
 
-  inherit (builtins) elem;
-
   players = config.sylveon.programs.music-players;
 
-  discord-music-presence = inputs'.xaipkgs.packages.discord-music-presence.overrideAttrs (_:{
+  discord-music-presence = inputs'.xaipkgs.packages.discord-music-presence.overrideAttrs (_: {
     version = "2.4.0";
     src = "${inputs.private-files}/musicpresence-2.4.0-beta.10-linux-x86_64.tar.gz";
   });
@@ -22,7 +26,13 @@ in
   ];
 
   options.sylveon.programs.music-players = mkOption {
-    type = nullOr (listOf (enum [ "spotify" "tidal" "youtube-music" ]));
+    type = nullOr (
+      listOf (enum [
+        "spotify"
+        "tidal"
+        "youtube-music"
+      ])
+    );
     default = null;
     example = "spotify";
     description = ''

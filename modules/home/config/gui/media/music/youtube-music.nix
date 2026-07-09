@@ -1,4 +1,9 @@
-{ lib, config, pkgs, inputs', inputs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf;
   inherit (lib.lists) any;

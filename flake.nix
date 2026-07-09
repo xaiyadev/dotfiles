@@ -23,7 +23,6 @@
       flake = false;
     };
 
-
     # declarative theme manager; The one I use the most currently !!
     catppuccin = {
       type = "github";

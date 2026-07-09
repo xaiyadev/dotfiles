@@ -35,7 +35,8 @@ in
 
       extraConfig.pipewire = {
         "10-loopback" = {
-          "context.modules" = [{
+          "context.modules" = [
+            {
               "node.description" = "playback loop";
               "audio.position" = [
                 "FL"
@@ -54,7 +55,8 @@ in
                 "media.class" = "Audio/Source";
                 "node.passive" = true;
               };
-          }];
+            }
+          ];
         };
       };
     };

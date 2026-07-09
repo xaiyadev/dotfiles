@@ -1,5 +1,5 @@
 { pkgs, ... }: {
   sylveon.packages = {
-      inherit (pkgs.jetbrains) webstorm;
+    inherit (pkgs.jetbrains) webstorm;
   };
 }

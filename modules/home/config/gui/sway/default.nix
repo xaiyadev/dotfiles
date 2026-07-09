@@ -4,8 +4,6 @@
   pkgs,
   config,
   self,
-  inputs',
-  inputs,
   ...
 }:
 let

@@ -5,10 +5,8 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkOption;
+  inherit (lib) mkOption;
   inherit (lib.types) nullOr enum;
-
-  inherit (config.sylveon.hardware) gpu;
 in
 {
 
@@ -18,7 +16,10 @@ in
   ];
 
   options.sylveon.hardware.gpu = mkOption {
-    type = nullOr (enum [ "amd" "nvidia" ]);
+    type = nullOr (enum [
+      "amd"
+      "nvidia"
+    ]);
     default = null;
     example = "amd";
     description = ''
@@ -27,16 +28,16 @@ in
   };
 
   config = {
-   hardware = {
-        graphics = {
-          enable = true;
-          enable32Bit = true;
+    hardware = {
+      graphics = {
+        enable = true;
+        enable32Bit = true;
 
-          extraPackages = [
-            pkgs.rocmPackages.clr
-            pkgs.rocmPackages.clr.icd
-          ];
-        };
+        extraPackages = [
+          pkgs.rocmPackages.clr
+          pkgs.rocmPackages.clr.icd
+        ];
       };
+    };
   };
 }

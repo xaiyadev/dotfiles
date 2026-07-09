@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 let
   inherit (config.sylveon.hardware) gpu;
   inherit (lib) mkIf;

@@ -2,7 +2,6 @@
   osConfig,
   lib,
   inputs,
-  config,
   ...
 }:
 let
