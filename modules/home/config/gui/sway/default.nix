@@ -22,11 +22,6 @@ let
   modifier = "Mod4";
   inherit (osConfig.sylveon.graphical) sway;
 
-  discord-music-presence = inputs'.xaipkgs.packages.discord-music-presence.overrideAttrs (_:{ # scrobbeling + discord-status # TODO: double
-    version = "2.4.0";
-    src = "${inputs.private-files}/musicpresence-2.4.0-beta.10-linux-x86_64.tar.gz";
-  });
-
 in
 {
   imports = [
@@ -170,8 +165,6 @@ in
 
           # Background Services
           { command = getExe pkgs.sway-audio-idle-inhibit; }
-          { command = getExe discord-music-presence; } # scorbbeling and status for music streaming
-
           { command = "${getExe config.programs.vicinae.package} server"; }
         ];
 
