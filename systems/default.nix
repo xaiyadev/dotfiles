@@ -19,11 +19,6 @@
 
       # Home server
       apricot = { };
-
-      # iso
-      kiwano = {
-        class = "iso";
-      };
     };
   };
 }

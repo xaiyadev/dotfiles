@@ -14,13 +14,11 @@
     # own package repository
     # using local version, so that I dont have to push every single change when testing
     # xaipkgs.url = "path:/home/xaiya/documents/development/nix-pkgs";
-    xaipkgs.url = "git+https://tangled.org/xaiya.dev/nix-pkgs";
-
-    # TODO: other solution for storing this file in the path without adding it to nix?
-    # The beta build of the musicpresence-software
-    private-files = {
-      url = "path:/home/xaiya/documents/packages";
-      flake = false;
+    xaipkgs = {
+      type = "github";
+      owner = "xaiyadev";
+      repo = "nix-pkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # declarative theme manager; The one I use the most currently !!

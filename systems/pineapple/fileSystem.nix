@@ -5,7 +5,6 @@
   ...
 }:
 {
-  # TODO: add extra ssd that is in the tower
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];

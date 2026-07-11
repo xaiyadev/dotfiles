@@ -11,12 +11,6 @@ let
   inherit (lib.types) nullOr enum listOf;
 
   players = config.sylveon.programs.music-players;
-
-  discord-music-presence = inputs'.xaipkgs.packages.discord-music-presence.overrideAttrs (_: {
-    version = "2.4.0";
-    src = "${inputs.private-files}/musicpresence-2.4.0-beta.10-linux-x86_64.tar.gz";
-  });
-
 in
 {
   imports = [
@@ -42,7 +36,7 @@ in
 
   config = (mkIf (any (x: x != "spotify") players)) {
     # install packages for scrobelling music data
-    sylveon.packages = { inherit discord-music-presence; };
-    wayland.windowManager.sway.config.startup = [ { command = getExe discord-music-presence; } ];
+    sylveon.packages = { inherit (inputs'.xaipkgs.packages) discord-music-presence; };
+    wayland.windowManager.sway.config.startup = [ { command = getExe inputs'.xaipkgs.packages.discord-music-presence; } ];
   };
 }

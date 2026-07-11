@@ -3,13 +3,23 @@
     ./fileSystem.nix
   ];
 
-  sylveon = {
+  networking.hostName = "apricot";
 
-    users = [ "semiko" ];
+  sylveon = {
+    profiles.server.enable = true;
+
+    users = [ "xaiya" ];
     hardware.cpu = "intel";
 
     services = {
+      postgres.enable = true;
+      nginx.enable = true;
       docker.enable = true;
+
+      # ---
+
+      kitchenowl.enable = true;
+      vaultwarden.enable = true;
     };
   };
 
