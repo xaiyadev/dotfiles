@@ -17,6 +17,8 @@
     hardware = {
       cpu = "amd";
       gpu = "amd";
+
+      yubikey.enable = true;
     };
 
     services.docker.enable = true;
