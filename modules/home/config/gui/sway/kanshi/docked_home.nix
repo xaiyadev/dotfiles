@@ -9,20 +9,20 @@ in
 
         outputs = [
           {
-            criteria = "AOC 2460G4 0x0000A8E2";
+            criteria = "Acer Technologies RT240Y T75EE0042411";
+            position = "1831,0";
 
-            mode = "1920x1080@119.982Hz";
-            position = "0,475";
+            mode = "1920x1080@60.000Hz";
           }
 
           {
-            criteria = "Acer Technologies RT240Y T75EE0042411";
+             criteria = "eDP-2";
+             position = "0,0";
 
-            position = "1920,0";
-
-            transform = "90";
-            mode = "1920x1080@60.000Hz";
+             mode = "2560x1600@165.000Hz";
+             scale = 1.4;
           }
+
         ];
       };
     }
