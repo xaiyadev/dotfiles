@@ -16,6 +16,12 @@ in
       ];
     };
 
+    nixpkgs.config.rocmSupport = true;
+    hardware.amdgpu.opencl.enable = true;
+
     services.xserver.videoDrivers = [ "amdgpu" ];
+
+    # tool for overclocking and managing amd gpus
+    services.lact.enable = true;
   };
 }

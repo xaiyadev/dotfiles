@@ -15,6 +15,7 @@ in
   config = {
     catppuccin = {
       inherit (prof.graphical) enable;
+      autoEnable = config.catppuccin.enable;
       cache.enable = true;
 
       accent = "flamingo";

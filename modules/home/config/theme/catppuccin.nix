@@ -15,6 +15,7 @@ in
   config = mkIf osConfig.catppuccin.enable {
     catppuccin = {
       enable = true;
+      autoEnable = true;
 
       inherit (osConfig.catppuccin)
         accent

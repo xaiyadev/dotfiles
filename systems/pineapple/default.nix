@@ -3,6 +3,11 @@
     ./fileSystem.nix
   ];
 
+  # These settings are only framework related, should I create an own module? TODO
+  hardware.fw-fanctrl = {
+    enable = true;
+  };
+
   sylveon = {
 
     profiles = {
@@ -12,6 +17,7 @@
 
     users = [
       "xaiya"
+      "blmedia"
     ];
 
     hardware = {
