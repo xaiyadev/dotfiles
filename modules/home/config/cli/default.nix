@@ -1,5 +1,7 @@
 {
   imports = [
+    ./neovim
+
     ./direnv.nix
     ./git.nix
     ./starship.nix

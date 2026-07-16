@@ -9,7 +9,9 @@
   sylveon = {
     programs = {
       chromium.enable = true;
-      discord.enable = true; # TODO: load only arpc?
+      discord.enable = true;
+
+      neovim.enable = true;
 
       music-players = [ "spotify" ];
     };

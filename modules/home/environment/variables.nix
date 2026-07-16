@@ -1,9 +1,9 @@
 _: {
   home.sessionVariables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
     TERMINAL = "kitty";
     PAGER = "less -FR";
-    MANPAGER = "vim +Man!";
+    MANPAGER = "nvim +Man!";
   };
 }

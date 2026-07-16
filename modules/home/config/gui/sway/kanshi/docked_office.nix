@@ -108,17 +108,17 @@ in
         outputs = [
           {
             criteria = "${office_screen_2} ULTRAFINE 404NTGY9M335";
-            position = "2560,132";
+            position = "1968,0";
 
-            scale = 1.2;
+            scale = 1.5;
             mode = "3840x2160@60.000Hz";
           }
 
           {
             criteria = "${office_screen_2} ULTRAFINE 404NTYT9M282";
-            position = "5762,132";
+            position = "4528,0";
 
-            scale = 1.2;
+            scale = 1.5;
             mode = "3840x2160@60.000Hz";
           }
 
