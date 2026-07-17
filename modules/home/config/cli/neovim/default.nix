@@ -1,4 +1,4 @@
-{ osConfig, lib, config, ... }:
+{ osConfig, lib, pkgs, config, ... }:
 let
   inherit (lib) mkIf fileContents mkEnableOption;
 in
@@ -18,7 +18,24 @@ in
       withRuby = false;
       withPython3 = false;
 
-      plugins = [ ];
+      plugins = [
+        pkgs.vimPlugins.nvim-lspconfig
+      ];
+
+      extraPackages = [
+        # LSPs
+        pkgs.bash-language-server
+        pkgs.vscode-langservers-extracted # HTML/CSS/JSON/ESLint lsp extracted from vscode
+        pkgs.dockerfile-language-server
+        pkgs.emmet-language-server
+        pkgs.lua-language-server
+        pkgs.pyright
+        # pkgs.stylelint-lsp
+        pkgs.typescript-language-server
+        pkgs.vue-language-server
+        pkgs.yaml-language-server
+        pkgs.nil
+      ];
     };
   };
 }
