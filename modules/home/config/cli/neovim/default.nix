@@ -19,11 +19,16 @@ in
       withPython3 = false;
 
       plugins = [
-        pkgs.vimPlugins.nvim-lspconfig
+        pkgs.vimPlugins.nvim-lspconfig # LSP
+        pkgs.vimPlugins.neo-tree-nvim # tree-view
+        pkgs.vimPlugins.bufferline-nvim # bufferline (tabs)
+        pkgs.vimPlugins.snacks-nvim # QoL plugins
+        pkgs.vimPlugins.telescope-nvim # Telescope
+        pkgs.vimPlugins.cord-nvim # discord integration
       ];
 
       extraPackages = [
-        # LSPs
+        # specific language servers
         pkgs.bash-language-server
         pkgs.vscode-langservers-extracted # HTML/CSS/JSON/ESLint lsp extracted from vscode
         pkgs.dockerfile-language-server
@@ -35,6 +40,9 @@ in
         pkgs.vue-language-server
         pkgs.yaml-language-server
         pkgs.nil
+
+        # telescope packages
+        pkgs.ripgrep
       ];
     };
   };

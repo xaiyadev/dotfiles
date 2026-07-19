@@ -21,8 +21,8 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- indentations settings
-vim.o.shiftwidth = 2
-vim.o.tabstop = 2
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
 vim.o.softtabstop = 0
 vim.o.expandtab = true
 vim.o.smartindent = true
