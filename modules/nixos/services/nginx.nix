@@ -35,16 +35,18 @@ in
       recommendedTlsSettings = true;
     };
 
+
     security.acme = {
       acceptTerms = true;
       defaults.email = "d.schumin@proton.me";
-      certs."xaiya.dev" = {
-        domain = "*.xaiya.dev";
 
+      certs."xaiya.dev" = {
+        group = "nginx";
+
+        domain = "*.xaiya.dev";
         dnsProvider = "cloudflare";
         webroot = null;
 
-        group = "nginx";
         environmentFile = config.age.secrets.cloudflare-acme.path;
       };
     };

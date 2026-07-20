@@ -6,7 +6,6 @@
 }:
 let
   inherit (lib) mkIf mkEnableOption;
-  inherit (self.lib.modules) mkServiceOpt;
 
   cfg = config.sylveon.services.vaultwarden;
 in
@@ -26,7 +25,7 @@ in
 
         config = {
           DOMAIN = "https://vault.xaiya.dev";
-          SIGNUPS_ALLOWED = true;
+          SIGNUPS_ALLOWED = false;
 
           ROCKET_ADDRESS = "::1";
           ROCKET_PORT = 8222;
@@ -41,9 +40,10 @@ in
         ensureUsers = [{ name = "vaultwarden"; ensureDBOwnership = true; }];
       };
 
+
       # Create proxy entry
       nginx.virtualHosts."vault.xaiya.dev" = {
-        enableACME = true;
+        useACMEHost = "xaiya.dev";
         forceSSL = true;
 
         locations."/" = {

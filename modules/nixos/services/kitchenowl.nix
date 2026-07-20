@@ -28,7 +28,7 @@ in
 
     # Enable proxy
     services.nginx.virtualHosts."kitchen.xaiya.dev" = {
-      enableACME = true;
+      useACMEHost = "xaiya.dev";
       forceSSL = true;
 
       locations."/" = {
@@ -37,6 +37,5 @@ in
 
       extraConfig = "proxy_ssl_server_name on;";
     };
-
   };
 }
