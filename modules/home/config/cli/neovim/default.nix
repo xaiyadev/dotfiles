@@ -25,6 +25,12 @@ in
         pkgs.vimPlugins.snacks-nvim # QoL plugins
         pkgs.vimPlugins.telescope-nvim # Telescope
         pkgs.vimPlugins.cord-nvim # discord integration
+        pkgs.vimPlugins.catppuccin-nvim # theme
+        pkgs.vimPlugins.indent-blankline-nvim # marking indents
+        pkgs.vimPlugins.lualine-nvim # line/bar at the bottom :D
+        pkgs.vimPlugins.blink-cmp # cmp (autocomplete)
+        pkgs.vimPlugins.nvim-treesitter-context # treesitter
+        pkgs.vimPlugins.todo-comments-nvim # highlight "TODO" comments
       ];
 
       extraPackages = [
