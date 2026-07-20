@@ -27,6 +27,7 @@ require('snacks').setup({
         sections = { { section = "header" }, },
     },
 
+
     -- undo defaults
     notifier = { enabled = false },
     explorer = { enabled = false },
@@ -39,3 +40,4 @@ require('snacks').setup({
     image = { enabled = false },
 })
 
+vim.keymap.set("n", "<C-q>", function() Snacks.bufdelete() end, { desc = "Delete Buffer" })
