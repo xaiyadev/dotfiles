@@ -12,14 +12,9 @@
     hardware.cpu = "intel";
 
     services = {
-      postgres.enable = true;
-      nginx.enable = true;
       docker.enable = true;
 
-      # ---
-
-      kitchenowl.enable = true;
-      vaultwarden.enable = true;
+      nginx.enable = true;
     };
   };
 
