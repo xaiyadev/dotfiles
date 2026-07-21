@@ -13,8 +13,11 @@
 
     services = {
       docker.enable = true;
-
       nginx.enable = true;
+
+      # -- TODO
+      # -- add better tailscale support (NAS; droplets; etc.)
+      # -- add keepass support (new way for storring passwords)
     };
   };
 
