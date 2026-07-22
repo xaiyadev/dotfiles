@@ -16,7 +16,11 @@ in
     services = {
       immich = {
         enable = true;
+
         host = "127.0.0.1";
+        port = 2283;
+
+        mediaLocation = "/mnt/storage/services/immich";
 
         settings.server.externalDomain = "https://photos.xaiya.dev";
       };
@@ -26,9 +30,17 @@ in
         forceSSL = true;
 
         locations."/" = {
-          proxyPass = "http://127.0.0.1:2283";
+          proxyPass = "http://${config.services.immich.host}:${builtins.toString config.services.immich.port}";
           proxyWebsockets = true;
-        };
+          recommendedProxySettings = true;
+
+          extraConfig = ''
+            client_max_body_size 50000M;
+            proxy_read_timeout   600s;
+            proxy_send_timeout   600s;
+            send_timeout         600s;
+          '';
+          };
 
         extraConfig = "proxy_ssl_server_name on;";
       };
