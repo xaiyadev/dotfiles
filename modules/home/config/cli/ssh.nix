@@ -23,12 +23,6 @@ in
         hostname = "github.com";
         identityFile = osConfig.age.secrets."ssh-github".path;
       };
-
-      "apricot" = mkIf (builtins.hasAttr "ssh-tangled" osConfig.age.secrets) {
-        user = "git";
-        hostname = "100.102.169.64"; # change it to: knot.xaiya.dev TODO
-        identityFile = osConfig.age.secrets."ssh-tangled".path;
-      };
     };
   };
 }

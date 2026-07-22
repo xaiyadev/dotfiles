@@ -9,9 +9,7 @@ let
   cfg = config.sylveon.services.docker;
 in
 {
-  options.sylveon.services.docker = {
-    enable = mkEnableOption "Whether or not to enable Docker";
-  };
+  options.sylveon.services.docker.enable = mkEnableOption "Whether or not to enable Docker";
 
   config = mkIf cfg.enable {
     virtualisation.docker = {
