@@ -1,9 +1,10 @@
 {
   imports = [
     ./docker.nix
-    ./immich.nix
-
     ./nginx.nix
+
+    ./immich.nix
     ./kitchenowl.nix
+    ./webdav.nix
   ];
 }

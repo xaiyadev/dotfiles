@@ -23,7 +23,7 @@ in
       ports = [ "8050:8080" ];
 
       environmentFiles = [ config.age.secrets.kitchenowl-env.path ];
-      volumes = [ "/mnt/storage/services/kitchenowl/data:/data" ];
+      volumes = [ "/mnt/storage/services/kitchenowl:/data" ];
     };
 
     # Enable proxy

@@ -13,13 +13,12 @@
 
     services = {
       docker.enable = true;
+      nginx.enable = true;
 
       # -- services
       immich.enable = true;
-      nginx.enable = true;
-
-      # -- TODO
-      # -- add keepass support (new way for storring passwords)
+      kitchenowl.enable = true;
+      webdav.enable = true;
     };
   };
 
