@@ -20,7 +20,10 @@ in
     };
 
   config = mkIf cfg.enable {
-    # TODO: controller not working?
+
+    # putting ths here because this makes the controller work; maybe move? TODO
+    hardware.steam-hardware.enable = true;
+
     sylveon.packages = {
       inherit (pkgs) overskride;
     };
