@@ -19,6 +19,7 @@
       immich.enable = true;
       kitchenowl.enable = true;
       webdav.enable = true;
+      paperless.enable = true;
     };
   };
 

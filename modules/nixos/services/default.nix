@@ -6,5 +6,6 @@
     ./immich.nix
     ./kitchenowl.nix
     ./webdav.nix
+    ./paperless.nix
   ];
 }
