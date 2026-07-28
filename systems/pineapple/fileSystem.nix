@@ -46,8 +46,12 @@
       "x-systemd.automount"
       "x-systemd.idle-timeout=600"
       "_netdev"
-      "user"
-      "uid=1002" # xaiya user TODO
+
+      # set permissions for users
+      "users"
+      "gid=users"
+      "dir_mode=0770"
+      "file_mode=0660"
     ];
   };
   
