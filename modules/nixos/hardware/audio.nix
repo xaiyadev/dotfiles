@@ -12,12 +12,10 @@ in
 {
   config = mkIf prof.graphical.enable {
     sylveon.packages = {
-      inherit (pkgs)
-        qpwgraph
-        pwvucontrol
-        ;
+      inherit (pkgs) pwvucontrol;
     };
 
+    # we dont wanna use pulse audio, only pipewire
     services.pulseaudio.enable = lib.mkForce false;
 
     services.pipewire = {
@@ -26,39 +24,29 @@ in
       audio.enable = true;
       pulse.enable = true;
       jack.enable = true;
+
       alsa = {
-        enable = true; # Alsa very nice for exclusive mode
+        enable = true;
         support32Bit = true;
       };
 
       extraLadspaPackages = [ pkgs.rnnoise-plugin ];
-
+      
       extraConfig.pipewire = {
-        "10-loopback" = {
-          "context.modules" = [
-            {
-              "node.description" = "playback loop";
-              "audio.position" = [
-                "FL"
-                "FR"
-              ];
+        # configuration for my FiiO Btr5
+        "hires" = {
+          "context.properties" = {
+            "default.clock.rate" = 44100;
+            "default.clock.allowed-rates" = [ 32000 64000 128000 44100 48000 88200 96000 176400 192000 352800 384000 ];
+          };
+          
+          "stream.properties" = {
+            "resample.quality" = 14;
+          };  
 
-              "capture.props" = {
-                "node.name" = "playback_sink";
-                "node.description" = "playback-sink";
-                "media.class" = "Audio/Sink";
-              };
-
-              "playback.props" = {
-                "node.name" = "playback_sink.output";
-                "node.description" = "playback-sink-output";
-                "media.class" = "Audio/Source";
-                "node.passive" = true;
-              };
-            }
-          ];
         };
       };
+
     };
 
     systemd.user.services = {
