@@ -31,22 +31,59 @@ in
       };
 
       extraLadspaPackages = [ pkgs.rnnoise-plugin ];
-      
-      extraConfig.pipewire = {
-        # configuration for my FiiO Btr5
-        "hires" = {
-          "context.properties" = {
-            "default.clock.rate" = 44100;
-            "default.clock.allowed-rates" = [ 32000 64000 128000 44100 48000 88200 96000 176400 192000 352800 384000 ];
-          };
-          
-          "stream.properties" = {
-            "resample.quality" = 14;
-          };  
 
-        };
+      wireplumber.extraConfig."51-alsa-btr5" = {
+        "monitor.alsa.rules" = [
+          {
+            matches = [ { "device.name" = "alsa_card.usb-FiiO_FiiO_BTR5-00"; } ];
+            actions = {
+              update-props = {
+                "device.profile" = "pro-audio";
+                "api.alsa.period-size" = 64;
+                "api.alsa.period-num" = 3;
+                "audio.rate" = 44100;
+              };
+            };
+          }
+        ];
       };
+      
+      
+      extraConfig = {
+        pipewire = {
+          # configuration for my FiiO Btr5/Hi-Res streaming
+          "hires" = {
+            "context.properties" = {
+              "default.clock.rate" = 44100;
+              "default.clock.allowed-rates" = [ 44100 ];
+          
+              "default.clock.quantum" = 64;
+              "default.clock.min-quantum" = 32;
+              "default.clock.max-quantum" = 64;
+              "default.clock.quantum-limit" = 64;
+            };
+            
+            "stream.properties" = {
+              "resample.quality" = 14;
+            };  
+          
+          };
+        };
 
+        pipewire-pulse = {
+          "hires-pulse" = {
+            "pulse.properties" = {  
+              "pulse.min.req"     = "64/44100";
+              "pulse.default.req" = "64/44100";
+              "pulse.min.frag"    = "64/44100";
+              "pulse.default.frag" = "64/44100";
+              "pulse.min.quantum" = "64/44100";
+            };
+          };
+        };
+
+
+      };
     };
 
     systemd.user.services = {
