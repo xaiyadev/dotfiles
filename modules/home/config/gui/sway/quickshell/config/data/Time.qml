@@ -11,7 +11,7 @@ Singleton {
   Process {
     id: timeProcess
 
-    command: ["date"]
+    command: ["date", "+%H:%M"]
     running: true
 
     stdout: StdioCollector {
@@ -20,7 +20,7 @@ Singleton {
   }
 
   Timer {
-    interval: 1000
+    interval: 60000
 
     running: true
     repeat: true

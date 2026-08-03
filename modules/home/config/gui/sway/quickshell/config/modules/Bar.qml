@@ -18,10 +18,28 @@ Scope {
         right: true
       }
 
-      implicitHeight: 30
+      implicitHeight: 36
+      color: "transparent"
+
+      margins {
+        top: 10
+        left: 10
+        right: 10
+      }
+
+      // Background of the Bar
+      Rectangle {
+        anchors.fill: parent
+        radius: 8
+        color: "#1e1e2e"
+      }
+
+      Workspaces {
+        anchors.fill: parent
+      }
 
       Clock {
-        anchors.centerIn: parent
+        anchors.fill: parent
       }
     }
   }

@@ -4,7 +4,12 @@ import "../data"
 
 Item {
     id: root
+
     Text {
-        text: Time.time
+        anchors.centerIn: parent
+        color: "#cdd6f4"
+        font.pixelSize: 14
+
+        text: "󱑅  " + Time.time
     }
 }
