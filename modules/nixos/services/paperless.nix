@@ -6,7 +6,7 @@
 let
   inherit (lib) mkIf mkEnableOption;
 
-  cfg = config.sylveon.services.immich;
+  cfg = config.sylveon.services.paperless;
 in
 {
 
@@ -17,7 +17,7 @@ in
       paperless = {
         enable = true;
         
-        domain = "documents.xaiya.dev";
+        domain = "paperless.xaiya.dev";
         configureTika = true;
 
         dataDir = "/mnt/storage/services/paperless";
