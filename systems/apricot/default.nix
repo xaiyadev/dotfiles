@@ -20,6 +20,8 @@
       kitchenowl.enable = true;
       webdav.enable = true;
       paperless.enable = true;
+      
+      gameCloud.enable = true;
     };
   };
 
