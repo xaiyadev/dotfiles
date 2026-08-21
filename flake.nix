@@ -21,6 +21,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # TODO: other solution for storing this file in the path without adding it to nix?
+    # The beta build of the musicpresence-software
+    private-files = {
+      url = "path:/home/xaiya/documents/packages";
+      flake = false;
+    };
+
     # declarative theme manager; The one I use the most currently !!
     catppuccin = {
       type = "github";

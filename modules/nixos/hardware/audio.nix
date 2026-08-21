@@ -32,57 +32,39 @@ in
 
       extraLadspaPackages = [ pkgs.rnnoise-plugin ];
 
-      wireplumber.extraConfig."51-alsa-btr5" = {
+      wireplumber.extraConfig."51-alsa-dx1ii" = {
         "monitor.alsa.rules" = [
           {
-            matches = [ { "device.name" = "alsa_card.usb-FiiO_FiiO_BTR5-00"; } ];
+            matches = [ { "device.name" = "alsa_card.usb-TOPPING_DX1_II-00"; } ];
             actions = {
               update-props = {
                 "device.profile" = "pro-audio";
-                "api.alsa.period-size" = 64;
+                "api.alsa.period-size" = 512;
                 "api.alsa.period-num" = 3;
-                "audio.rate" = 44100;
+                "audio.rate" = 384000;
               };
             };
           }
         ];
       };
-      
-      
+
+
       extraConfig = {
         pipewire = {
-          # configuration for my FiiO Btr5/Hi-Res streaming
-          "hires" = {
+          # configuration for my Topping DX1 II/Hi-Res bit-perfect streaming
+          "default" = {
             "context.properties" = {
-              "default.clock.rate" = 44100;
-              "default.clock.allowed-rates" = [ 44100 ];
-          
-              "default.clock.quantum" = 64;
-              "default.clock.min-quantum" = 32;
-              "default.clock.max-quantum" = 64;
-              "default.clock.quantum-limit" = 64;
+              "default.clock.quantum" = 512;
+              "default.clock.min-quantum" = 256;
+              "default.clock.max-quantum" = 512;
+              "default.clock.quantum-limit" = 512;
             };
-            
+
             "stream.properties" = {
               "resample.quality" = 14;
-            };  
-          
-          };
-        };
-
-        pipewire-pulse = {
-          "hires-pulse" = {
-            "pulse.properties" = {  
-              "pulse.min.req"     = "64/44100";
-              "pulse.default.req" = "64/44100";
-              "pulse.min.frag"    = "64/44100";
-              "pulse.default.frag" = "64/44100";
-              "pulse.min.quantum" = "64/44100";
             };
           };
         };
-
-
       };
     };
 

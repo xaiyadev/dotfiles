@@ -292,6 +292,19 @@
         "type": "github"
       }
     },
+    "private-files": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1787309548,
+        "narHash": "sha256-NYEfl9HuC5dKPlSStzE9rZJsR+hZNfuw9d85WNuIvVQ=",
+        "path": "/home/xaiya/documents/packages",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/xaiya/documents/packages",
+        "type": "path"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -301,6 +314,7 @@
         "flake-parts": "flake-parts_2",
         "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs_2",
+        "private-files": "private-files",
         "xaipkgs": "xaipkgs"
       }
     },

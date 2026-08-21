@@ -18,7 +18,7 @@
 
       neovim.enable = true;
 
-      music-players = [ "spotify" ];
+      music-players = [ "tidal" ];
     };
   };
 }
