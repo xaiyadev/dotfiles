@@ -13,7 +13,7 @@ in
 {
   config = mkIf (any (x: x == "tidal") players) {
     sylveon.packages = {
-      inherit (pkgs) high-tide;
+      inherit (pkgs) sone;
     };
   };
 }
