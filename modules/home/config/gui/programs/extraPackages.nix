@@ -19,16 +19,6 @@ in
         ;
     })
 
-    (mkIf prof.user.gaming.enable {
-      inherit (pkgs)
-        gamescope # TODO
-        steam
-
-        prismlauncher # TODO
-        deadlock-mod-manager # TODO
-        ;
-    })
-
     {
       inherit (pkgs)
         vim # TODO neovim config

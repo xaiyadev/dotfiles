@@ -22,7 +22,7 @@ in
       ])
     );
     default = null;
-    example = "spotify";
+    example = [ "spotify" ];
     description = ''
       Which music players the user should have installed.
     '';

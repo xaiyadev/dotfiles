@@ -19,6 +19,11 @@
       neovim.enable = true;
 
       music-players = [ "tidal" ];
+      game-clients = [ 
+        "steam" 
+        "lutris" 
+        "minecraft" 
+      ];
     };
   };
 }
