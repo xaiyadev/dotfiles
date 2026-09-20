@@ -8,8 +8,11 @@ Item {
     Text {
         anchors.centerIn: parent
         color: "#cdd6f4"
-        font.pixelSize: 14
+        font {
+            family: "JetBrainsMono Nerd Font"
+            pixelSize: 15
+        }
 
-        text: "󱑅  " + Time.time
+        text: Time.time
     }
 }

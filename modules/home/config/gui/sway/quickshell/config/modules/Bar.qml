@@ -38,7 +38,7 @@ Scope {
       Workspaces { 
         anchors {
           left: parent.left
-          leftMargin: 16
+          leftMargin: 15
 
           verticalCenter: parent.verticalCenter
         }
@@ -51,7 +51,7 @@ Scope {
       Volume {
           anchors {
               right: parent.right
-              rightMargin: 30
+              rightMargin: 15
 
               verticalCenter: parent.verticalCenter
           }

@@ -15,7 +15,7 @@ Item {
                 required property I3Workspace modelData
                 id: wsDelegate
 
-                implicitWidth: 13
+                implicitWidth: 10
                 color: "#1e1e2e"
 
                 Text {
