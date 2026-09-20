@@ -30,16 +30,31 @@ Scope {
       // Background of the Bar
       Rectangle {
         anchors.fill: parent
-        radius: 8
+        radius: 12
         color: "#1e1e2e"
       }
 
-      Workspaces {
-        anchors.fill: parent
+      // modules
+      Workspaces { 
+        anchors {
+          left: parent.left
+          leftMargin: 16
+
+          verticalCenter: parent.verticalCenter
+        }
       }
 
-      Clock {
-        anchors.fill: parent
+      Clock { 
+        anchors.fill: parent 
+      }
+
+      Volume {
+          anchors {
+              right: parent.right
+              rightMargin: 30
+
+              verticalCenter: parent.verticalCenter
+          }
       }
     }
   }
