@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Io
+import QtQuick.Layouts
 import QtQuick
 
 import "../components"
@@ -35,26 +36,45 @@ Scope {
       }
 
       // modules
-      Workspaces { 
+      RowLayout {
         anchors {
           left: parent.left
           leftMargin: 15
 
           verticalCenter: parent.verticalCenter
         }
+
+        height: 20
+        spacing: 10
+
+        Workspaces { }
       }
 
-      Clock { 
-        anchors.fill: parent 
+      RowLayout {
+        anchors {
+          horizontalCenter: parent.horizontalCenter
+          verticalCenter: parent.verticalCenter
+        }
+
+        height: 20
+        spacing: 10
+
+        Clock { }
       }
 
-      Volume {
-          anchors {
-              right: parent.right
-              rightMargin: 15
+      RowLayout {
+        anchors {
+          right: parent.right
+          rightMargin: 15
 
-              verticalCenter: parent.verticalCenter
-          }
+          verticalCenter: parent.verticalCenter
+        }
+
+        height: 20
+        spacing: 10
+
+        Volume { }
+        MprisPlayer { }
       }
     }
   }

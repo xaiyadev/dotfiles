@@ -5,7 +5,12 @@ import Quickshell.I3
 Item {
     id: root
 
+    implicitWidth: layout.implicitWidth
+    implicitHeight: layout.implicitHeight
+
     RowLayout {
+        id: layout
+        anchors.verticalCenter: parent.verticalCenter
         spacing: 8
 
         Repeater {

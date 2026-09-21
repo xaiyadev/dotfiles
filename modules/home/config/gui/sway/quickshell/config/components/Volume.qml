@@ -13,8 +13,25 @@ Item {
     Icon {
       id: volumeIcon
       anchors.centerIn: parent
-      icon: Pipewire.sinkExclusive ? "folder-music-symbolic" : Pipewire.sinkIcon
+
+      property bool displayExclusive: Pipewire.sinkExclusive
+
+      icon: displayExclusive ? "folder-music-symbolic" : Pipewire.sinkIcon
       size: 18
+    }
+
+    // exclusive on/off animation
+    SequentialAnimation {
+        id: exclusiveFade
+
+        NumberAnimation { target: volumeIcon; property: "opacity"; to: 0; duration: 400; easing.type: Easing.OutCubic }
+        ScriptAction { script: volumeIcon.displayExclusive = Pipewire.sinkExclusive }
+        NumberAnimation { target: volumeIcon; property: "opacity"; to: 1; duration: 400; easing.type: Easing.OutCubic }
+    }
+
+    Connections {
+        target: Pipewire
+        function onSinkExclusiveChanged() { exclusiveFade.restart() }
     }
 
     // on scroll -> change pulsewire audio

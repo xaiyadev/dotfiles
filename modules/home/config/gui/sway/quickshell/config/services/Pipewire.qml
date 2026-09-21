@@ -1,9 +1,10 @@
 pragma Singleton
 
 import Quickshell
-import Quickshell.Io
 import Quickshell.Services.Pipewire as QsPipewire
 import QtQuick
+
+import '../data'
 
 Singleton {
     id: root
@@ -37,49 +38,6 @@ Singleton {
         }
     }
 
-    // Whether some other process is currently holding the default output
-    // meaning alsa or exclusive mode
-    // TODO: work this out
-    // TODO: in a different service?
-    property bool sinkExclusive: false
-
-    Process {
-        id: exclusiveCheck
-
-        command: ["sh", "-c", `
-            sink=$(pactl get-default-sink)
-            card=$(printf '%s' "$sink" | sed -E 's/^alsa_output\\.//; s/\\.[^.]*$//')
-            alsanum=$(pactl list cards | awk -v RS='' -v pat="alsa_card.$card" '$0 ~ pat' | grep -m1 'alsa.card = ' | awk -F'"' '{print $2}')
-
-            if [ -z "$alsanum" ]; then echo false; exit; fi
-
-            pat=$(printf 'pcmC%sD' "$alsanum")
-            holder=""
-
-            for l in $(find /proc -maxdepth 3 -path '*/fd/*' -type l -lname "*$pat*p" 2>/dev/null); do
-                pid=$(echo "$l" | cut -d/ -f3)
-                comm=$(cat "/proc/$pid/comm" 2>/dev/null)
-                case "$comm" in
-                    pipewire|wireplumber|pipewire-pulse) ;;
-                    *) holder="$comm" ;;
-                esac
-            done
-
-            if [ -n "$holder" ]; then echo true; else echo false; fi
-        `]
-
-        stdout: StdioCollector {
-            onStreamFinished: root.sinkExclusive = this.text.trim() === "true"
-        }
-    }
-
-    // TODO: different services especially because of this?
-    Timer {
-        interval: 2000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-
-        onTriggered: exclusiveCheck.running = true
-    }
+    // Whether the sink is in Exclusive mode or not
+    readonly property bool sinkExclusive: AlsaExclusive.exclusive
 }
