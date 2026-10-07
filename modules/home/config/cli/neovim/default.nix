@@ -1,4 +1,4 @@
-{ osConfig, lib, pkgs, config, ... }:
+{ lib, pkgs, config, ... }:
 let
   inherit (lib) mkIf fileContents mkEnableOption;
 in
@@ -7,8 +7,6 @@ in
   options.sylveon.programs.neovim.enable = mkEnableOption "Neovim with configuration";
 
   config = mkIf config.sylveon.programs.neovim.enable {
-    xdg.configFile."nvim".source = ./config;
-
     programs.neovim = {
       enable = true;
 
@@ -18,7 +16,17 @@ in
       withRuby = false;
       withPython3 = false;
 
+      initLua = fileContents ./config/init.lua;
+
       plugins = [
+        # install our configuration as a plugin
+        (pkgs.vimUtils.buildVimPlugin {
+          name = "sylveon-config";
+          src = ./config;
+
+          doCheck = false; # this is our configuration, not a plugin
+        })
+
         pkgs.vimPlugins.nvim-lspconfig # LSP
         pkgs.vimPlugins.neo-tree-nvim # tree-view
         pkgs.vimPlugins.bufferline-nvim # bufferline (tabs)

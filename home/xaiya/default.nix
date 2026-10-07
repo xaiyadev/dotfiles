@@ -1,10 +1,5 @@
 { ... }:
 {
-
-  imports = [
-    ./programs
-  ];
-
   sylveon = {
     profiles.user = {
       gaming.enable = true;
