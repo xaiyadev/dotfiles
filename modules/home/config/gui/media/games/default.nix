@@ -9,6 +9,7 @@ in
 {
   imports = [
     ./lutris.nix
+    ./bottles.nix
     ./minecraft.nix
     ./steam.nix
   ];
@@ -16,7 +17,8 @@ in
   options.sylveon.programs.game-clients = mkOption {
     type = nullOr (
       listOf (enum [
-        "lutris"
+        "lutris" # deprecated
+        "bottles"
         "minecraft"
         "steam"
       ])
