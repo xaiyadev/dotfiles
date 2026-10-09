@@ -17,7 +17,6 @@
 
       game-clients = [ 
         "steam" 
-        "lutris" 
         "bottles"
         "minecraft" 
       ];

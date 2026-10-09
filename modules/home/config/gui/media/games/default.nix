@@ -8,7 +8,6 @@ let
 in
 {
   imports = [
-    ./lutris.nix
     ./bottles.nix
     ./minecraft.nix
     ./steam.nix
@@ -17,14 +16,13 @@ in
   options.sylveon.programs.game-clients = mkOption {
     type = nullOr (
       listOf (enum [
-        "lutris" # deprecated
         "bottles"
         "minecraft"
         "steam"
       ])
     );
     default = null;
-    example = [ "lutris" ];
+    example = [ "bottles" ];
     description = ''
       ### Steam needs to be installed system-wide, meaning it wont be added here
       which game-clients should be installed
