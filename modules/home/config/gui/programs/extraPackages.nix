@@ -15,7 +15,7 @@ in
       inherit (pkgs)
         gnome-calendar
         teams-for-linux # Needed for all graphical users currently TODO change when leaving school
-        obsidian # TODO
+        
         ;
     })
 

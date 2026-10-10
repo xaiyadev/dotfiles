@@ -18,6 +18,10 @@ in
     useDHCP = mkForce false;
     useNetworkd = mkForce true;
 
+    # anytype configuration TODO (add option to check if enabled in home config/enabled configuration)
+    firewall.allowedUDPPorts = [ 5353 38787 ];
+    firewall.allowedTCPPorts = [ 38787 ];
+
     nameservers = [
       "1.1.1.1"
       "1.0.0.1"
