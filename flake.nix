@@ -21,6 +21,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # vicinae extensions
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # TODO: other solution for storing this file in the path without adding it to nix?
     # The beta build of the musicpresence-software
     private-files = {
@@ -64,8 +70,6 @@
       type = "github";
       owner = "hercules-ci";
       repo = "flake-parts";
-
-      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
     # easily manage our hosts devices

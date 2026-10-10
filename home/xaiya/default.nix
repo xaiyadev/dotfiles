@@ -1,5 +1,10 @@
 { ... }:
 {
+
+  imports = [
+    ./config
+  ];
+
   sylveon = {
     profiles.user = {
       gaming.enable = true;

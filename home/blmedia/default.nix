@@ -2,8 +2,7 @@
 {
 
   imports = [
-    ./programs
-    ./cli
+    ./config
   ];
 
   sylveon = {

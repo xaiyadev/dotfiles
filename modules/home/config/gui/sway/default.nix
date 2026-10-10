@@ -174,9 +174,6 @@ in
 
           "${modifier}+e" = "exec ${pkgs.nemo-with-extensions}/bin/nemo";
           "${modifier}+o" = "exec ${getExe pkgs.obsidian}";
-
-          "${modifier}+shift+v" =
-            "exec ${getExe config.programs.vicinae.package} deeplink vicinae://extensions/vicinae/clipboard/history";
         };
       };
 
