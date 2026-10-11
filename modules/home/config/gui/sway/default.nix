@@ -173,7 +173,7 @@ in
             ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | ${pkgs.wl-clipboard}/bin/wl-copy''; # Take a screenshot
 
           "${modifier}+e" = "exec ${pkgs.nemo-with-extensions}/bin/nemo";
-          "${modifier}+o" = "exec ${getExe pkgs.obsidian}";
+          "${modifier}+o" = "exec ${getExe pkgs.anytype}";
         };
       };
 
