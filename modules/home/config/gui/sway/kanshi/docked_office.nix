@@ -12,14 +12,14 @@ in
         outputs = [
 
           {
-            criteria = "Iiyama North America PL2792Q 1152180401975";
+            criteria = "iiyama Corporation PL2792Q 1152180401975";
             position = "2133,0";
 
             mode = "2560x1440@59.951Hz";
           }
 
           {
-            criteria = "Iiyama North America PL2792Q 1152184902292";
+            criteria = "iiyama Corporation PL2792Q 1152184902292";
             position = "4693,0";
 
             mode = "2560x1440@59.951Hz";
@@ -83,7 +83,7 @@ in
           }
 
           {
-            criteria = "Iiyama North America PL2792Q 1152184902292";
+            criteria = "iiyama Corporation PL2792Q 1152184902292";
             position = "4887,98";
 
             mode = "2560x1440@59.951";
