@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs',
   ...
 }:
 let
@@ -16,8 +17,9 @@ in
       inherit (pkgs) 
         steam
         gamescope
-        deadlock-mod-manager # maybe move?
         ;
+
+      inherit (inputs'.grimoire.packages) default; 
     };
   };
 }

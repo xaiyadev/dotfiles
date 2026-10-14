@@ -11,27 +11,22 @@
     # https://deer.social/profile/did:plc:mojgntlezho4qt7uvcfkdndg/post/3loogwsoqok2w
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
 
-    # own package repository
-    # using local version, so that I dont have to push every single change when testing
-    # xaipkgs.url = "path:/home/xaiya/documents/development/nix-pkgs";
-    xaipkgs = {
+    # deadlock mod manager
+    grimoire = {
       type = "github";
-      owner = "xaiyadev";
-      repo = "nix-pkgs";
+      owner = "Slush97";
+      repo = "grimoire";
+
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # vicinae extensions
     vicinae-extensions = {
-      url = "github:vicinaehq/extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+      type = "github";
+      owner = "vicinaehq";
+      repo = "extensions";
 
-    # TODO: other solution for storing this file in the path without adding it to nix?
-    # The beta build of the musicpresence-software
-    private-files = {
-      url = "path:/home/xaiya/documents/packages";
-      flake = false;
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # declarative theme manager; The one I use the most currently !!
