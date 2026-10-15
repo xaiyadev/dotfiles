@@ -42,3 +42,5 @@ require('blink.cmp').setup({
     },
 
 })
+
+require('trouble').setup({ })

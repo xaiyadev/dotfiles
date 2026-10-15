@@ -29,7 +29,7 @@ require('snacks').setup({
 
 
     -- undo defaults
-    notifier = { enabled = true }, -- TODO switch to another?
+    notifier = { enabled = true }, -- TODO: switch to another?
     explorer = { enabled = false },
     picker = { enabled = false },
     indent = { enabled = false },

@@ -1,10 +1,10 @@
 -- config
-require('options') -- vim options
-require('lsp') -- language server protocol
-require('disable') -- disable default vim plugins
+require('config/options') -- vim options
+require('config/lsp') -- language server protocol
+require('config/disable') -- disable default vim plugins
 
 -- plugins
-require('plugins/cmp') -- autocomplete
+require('plugins/lsp') -- lsp plugins
 require('plugins/treesitter')
 require('plugins/bufferline')
 require('plugins/snacks') -- QOL plugins

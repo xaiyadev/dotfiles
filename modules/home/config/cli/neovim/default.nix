@@ -3,7 +3,6 @@ let
   inherit (lib) mkIf fileContents mkEnableOption;
 in
 {
-
   options.sylveon.programs.neovim.enable = mkEnableOption "Neovim with configuration";
 
   config = mkIf config.sylveon.programs.neovim.enable {
@@ -32,6 +31,7 @@ in
         pkgs.vimPlugins.bufferline-nvim # bufferline (tabs)
         pkgs.vimPlugins.snacks-nvim # QoL plugins
         pkgs.vimPlugins.telescope-nvim # Telescope
+        pkgs.vimPlugins.trouble-nvim # diagnostics list
         pkgs.vimPlugins.cord-nvim # discord integration
         pkgs.vimPlugins.catppuccin-nvim # theme
         pkgs.vimPlugins.indent-blankline-nvim # marking indents
