@@ -340,7 +340,8 @@
         "grimoire": "grimoire",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
-        "vicinae-extensions": "vicinae-extensions"
+        "vicinae-extensions": "vicinae-extensions",
+        "xaivim": "xaivim"
       }
     },
     "systems": {
@@ -441,6 +442,26 @@
         "owner": "Slush97",
         "ref": "v0.21.1",
         "repo": "vpkmerge",
+        "type": "github"
+      }
+    },
+    "xaivim": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792096505,
+        "narHash": "sha256-Up6rm1CUwsu1dPg/Sa5z2y73bclP7Me96J4eRNoFUhE=",
+        "owner": "xaiyadev",
+        "repo": "nvim",
+        "rev": "8762de8e1b0cae38718f17be89eda9ed3d68adbc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xaiyadev",
+        "repo": "nvim",
         "type": "github"
       }
     }

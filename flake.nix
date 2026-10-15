@@ -11,6 +11,14 @@
     # https://deer.social/profile/did:plc:mojgntlezho4qt7uvcfkdndg/post/3loogwsoqok2w
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
 
+    xaivim = {
+      type = "github";
+      owner = "xaiyadev";
+      repo = "nvim";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # deadlock mod manager
     grimoire = {
       type = "github";

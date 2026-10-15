@@ -19,7 +19,7 @@ in
         gamescope
         ;
 
-      inherit (inputs'.grimoire.packages) default; 
+      grimoire = inputs'.grimoire.packages.default; 
     };
   };
 }

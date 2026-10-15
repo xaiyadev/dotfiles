@@ -1,6 +1,6 @@
 {
   imports = [
-    ./neovim
+    ./neovim.nix
 
     ./direnv.nix
     ./git.nix
