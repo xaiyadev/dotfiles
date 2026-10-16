@@ -13,14 +13,14 @@ in
 
           {
             criteria = "iiyama Corporation PL2792Q 1152180401975";
-            position = "2133,0";
+            position = "2134,0";
 
             mode = "2560x1440@59.951Hz";
           }
 
           {
             criteria = "iiyama Corporation PL2792Q 1152184902292";
-            position = "4693,0";
+            position = "4694,0";
 
             mode = "2560x1440@59.951Hz";
           }
@@ -76,7 +76,7 @@ in
         outputs = [
           {
             criteria = "${office_screen} HDR 4K 0x0009ED6F";
-            position = "2327,98";
+            position = "2328,98";
 
             scale = 1.5;
             mode = "3840x2160@60.000Hz";
@@ -84,7 +84,7 @@ in
 
           {
             criteria = "iiyama Corporation PL2792Q 1152184902292";
-            position = "4887,98";
+            position = "4888,98";
 
             mode = "2560x1440@59.951";
           }
@@ -106,7 +106,7 @@ in
         outputs = [
           {
             criteria = "${office_screen} ULTRAFINE 404NTGY9M335";
-            position = "1968,0";
+            position = "1970,0";
 
             scale = 1.5;
             mode = "3840x2160@60.000Hz";
@@ -114,7 +114,7 @@ in
 
           {
             criteria = "${office_screen} ULTRAFINE 404NTYT9M282";
-            position = "4528,0";
+            position = "4530,0";
 
             scale = 1.5;
             mode = "3840x2160@60.000Hz";
