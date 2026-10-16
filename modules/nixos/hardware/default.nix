@@ -9,5 +9,6 @@
     ./yubikey.nix
 
     ./firmware.nix # updating firmware
+    ./framework.nix # configuration for framework-specific tools (e.g fw-fanctrl)
   ];
 }
