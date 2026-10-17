@@ -26,6 +26,7 @@
         "steam" 
         "bottles"
         "minecraft" 
+        "deadlock"
       ];
     };
   };

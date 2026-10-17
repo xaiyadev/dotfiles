@@ -18,8 +18,6 @@ in
         steam
         gamescope
         ;
-
-      grimoire = inputs'.grimoire.packages.default; 
     };
   };
 }

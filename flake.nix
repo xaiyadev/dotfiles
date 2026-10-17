@@ -19,11 +19,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # deadlock mod manager
+    # deadlock related flakes
     grimoire = {
       type = "github";
       owner = "Slush97";
       repo = "grimoire";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    deadlock-api-ingest = {
+      type = "github";
+      owner = "deadlock-api";
+      repo = "deadlock-api-ingest";
 
       inputs.nixpkgs.follows = "nixpkgs";
     };

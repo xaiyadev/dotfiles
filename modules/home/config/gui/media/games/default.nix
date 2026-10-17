@@ -11,6 +11,7 @@ in
     ./bottles.nix
     ./minecraft.nix
     ./steam.nix
+    ./deadlock.nix
   ];
 
   options.sylveon.programs.game-clients = mkOption {
@@ -19,6 +20,7 @@ in
         "bottles"
         "minecraft"
         "steam"
+        "deadlock"
       ])
     );
     default = null;
