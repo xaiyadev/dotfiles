@@ -25,9 +25,30 @@
     ];
   };
 
-  # add webdav mount TODO: move?
+  # windows C:/ filesystem
+  fileSystems."/mnt/windows" = {
+    device = "/dev/disk/by-uuid/207E0ABD7E0A8BAA";
+    fsType = "ntfs3";
+    options = [
+      "nofail"
+      "x-systemd.automount"
+      "x-systemd.idle-timeout=600"
+      "x-gvfs-hide" # don't list the fstab mount next to the raw device
+
+      # set permissions for users
+      "users"
+      "gid=users"
+
+      "dmask=0007" # dirs: 0770
+      "fmask=0117" # files: 0660
+    ];
+  };
+
+  # webdav mount
+  # with security support
   age.secrets.davfs-webdav.rekeyFile = "${inputs.self}/secrets/davfs-webdav.age";
-  services.davfs2 = {
+
+  services.davfs2 = { # TODO: move?
     enable = true;
     settings.globalSection.use_locks = false;
   };
@@ -45,6 +66,8 @@
       "noauto"
       "x-systemd.automount"
       "x-systemd.idle-timeout=600"
+      "x-gvfs-hide" # don't list the fstab mount next to the raw device
+
       "_netdev"
 
       # set permissions for users
