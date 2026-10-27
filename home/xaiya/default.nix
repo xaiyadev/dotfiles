@@ -3,6 +3,7 @@
 
   imports = [
     ./config
+    ./extraPackages.nix
   ];
 
   sylveon = {
@@ -17,8 +18,6 @@
       anytype.enable = true;
 
       keepassxc.enable = true;
-
-      neovim.enable = true;
 
       music-players = [ "tidal" ];
 
