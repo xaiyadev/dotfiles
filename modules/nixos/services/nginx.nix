@@ -54,6 +54,7 @@ in
         extraDomainNames = [ "xaiya.dev" ]; # Using this because *. doesnt take the original
 
         dnsProvider = "cloudflare";
+        dnsResolver = "1.1.1.1:53"; # use cloudflares dns-resolver instead of the systems one
         webroot = null;
 
         environmentFile = config.age.secrets.cloudflare-acme.path;
