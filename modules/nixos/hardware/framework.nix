@@ -15,14 +15,16 @@ in
         defaultStrategy = "almost-silent";
 
         strategies.almost-silent = {
-          fanSpeedUpdateFrequency = 10;
+          fanSpeedUpdateFrequency = 5;
           movingAverageInterval = 60;
           speedCurve = [
-            { temp = 0;  speed = 22;  }
-            { temp = 82; speed = 22;  }   # until ~82 no audibale fans
-            { temp = 86; speed = 28;  }
-            { temp = 89; speed = 60;  }
-            { temp = 91; speed = 100; }   # if reaching over 91, cooldown the laptop
+            { temp = 0;   speed = 22;  }
+            { temp = 82;  speed = 22;  }   # programming / normal work: inaudible
+            { temp = 86;  speed = 30;  }
+            { temp = 90;  speed = 40;  }
+            { temp = 94;  speed = 55;  }
+            { temp = 97;  speed = 75;  }
+            { temp = 100; speed = 100; }   # Tctl limit, APU throttles itself here
           ];
         };
       };

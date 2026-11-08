@@ -11,7 +11,7 @@ in
 
       kernelParams = [
         "amdgpu.abmlevel=0" # Fix color accuracy in power saving mode
-        "amdgpu.runpm=0" # disable dGPU runtime suspend (fix dGPU failing while system is running) # TODO: framework only?
+        # "amdgpu.runpm=0" # disable dGPU runtime suspend (fix dGPU failing while system is running) # TODO: framework only?
         "acpi_backlight=native"
       ];
     };

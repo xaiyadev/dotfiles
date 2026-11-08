@@ -18,6 +18,18 @@ let
     ;
 
   modifier = "Mod4";
+  
+  powerToggle = pkgs.writeShellScript "power-toggle" ''
+    current=$(tuned-adm active | ${pkgs.gnused}/bin/sed 's/.*: //') # get the text after ":" to see the profile
+    if [ "$current" = "fw-quiet" ]; then
+      next="fw-performance"
+    else
+      next="fw-quiet"
+    fi
+    tuned-adm profile "$next" \
+      && ${pkgs.libnotify}/bin/notify-send -t 2000 "Power profile" "$next" # send notifiction TODO: change notification system?
+  '';
+
   inherit (osConfig.sylveon.graphical) sway;
 
 in
@@ -164,6 +176,13 @@ in
           # Background Services
           { command = getExe pkgs.sway-audio-idle-inhibit; }
           { command = "${getExe config.programs.vicinae.package} server"; }
+
+          # set power-profile based on user
+          {
+            command = "tuned-adm profile ${ 
+              if config.home.username == "xaiya" then "fw-performance" else "fw-quiet" 
+            }";
+          }
         ];
 
         keybindings = mkOptionDefault {
@@ -174,6 +193,7 @@ in
 
           "${modifier}+e" = "exec ${pkgs.nemo-with-extensions}/bin/nemo";
           "${modifier}+o" = "exec ${getExe pkgs.anytype}";
+          "${modifier}+F12" = "exec ${powerToggle}";
         };
       };
 
