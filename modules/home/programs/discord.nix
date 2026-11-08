@@ -30,6 +30,10 @@ in
       };
     };
 
+    # home-manager and discord are overlap each other and error out
+    # with force we write the home-manager .bak file ontop of the discord .bak file
+    home.file."${config.xdg.configHome}/${cfg.configName}/settings.json".force = true;
+
     xdg.configFile = {
       "moonlight-mod/stable.json".source =
         settingsFormat.generate "moonlight-settings.json" cfg.moonlight.settings;
