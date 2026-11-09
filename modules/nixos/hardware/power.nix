@@ -74,13 +74,12 @@ in
             default = "balanced";
           };
 
+          # tuned-ppd needs a unique tuned profile per PPD mode (it maps back and forth)
           profiles = {
             power-saver = "fw-quiet";
             balanced = "fw-performance";
-            performance = "fw-performance";
+            performance = "throughput-performance"; # stock tuned profile, needed or else tuned crashes
           };
-
-          battery.balanced = "fw-quiet";
         };
       };
     };

@@ -21,13 +21,17 @@ let
   
   powerToggle = pkgs.writeShellScript "power-toggle" ''
     current=$(tuned-adm active | ${pkgs.gnused}/bin/sed 's/.*: //') # get the text after ":" to see the profile
+
+    # change profile depending on the current
     if [ "$current" = "fw-quiet" ]; then
       next="fw-performance"
     else
       next="fw-quiet"
     fi
+
+    # run new profile and notify
     tuned-adm profile "$next" \
-      && ${pkgs.libnotify}/bin/notify-send -t 2000 "Power profile" "$next" # send notifiction TODO: change notification system?
+      && ${pkgs.libnotify}/bin/notify-send -t 2000 "Power profile" "Switched power profile to: $next" # send notifiction TODO: change notification system?
   '';
 
   inherit (osConfig.sylveon.graphical) sway;
