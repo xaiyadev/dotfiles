@@ -19,6 +19,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    xaipkgs = {
+      type = "github";
+      owner = "xaiyadev";
+      repo = "nix-pkgs";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # deadlock related flakes
     grimoire = {
       type = "github";

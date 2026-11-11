@@ -6,6 +6,7 @@
     ./extraPackages.nix
   ];
 
+
   sylveon = {
     profiles.user = {
       gaming.enable = true;
