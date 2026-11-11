@@ -1,39 +1,34 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.I3
+import "../data"
+import "ui"
 
-Item {
+// Sway workspaces with the waybar icons; click to switch
+RowLayout {
     id: root
 
-    implicitWidth: layout.implicitWidth
-    implicitHeight: layout.implicitHeight
+    spacing: 12
 
-    RowLayout {
-        id: layout
-        anchors.verticalCenter: parent.verticalCenter
-        spacing: 8
+    Repeater {
+        model: I3.workspaces.values.slice().sort((a, b) => a.number - b.number)
 
-        Repeater {
-            model: I3.workspaces
+        MouseArea {
+            id: ws
+            required property I3Workspace modelData
 
-            delegate: Rectangle {
-                required property I3Workspace modelData
-                id: wsDelegate
+            implicitWidth: label.implicitWidth
+            implicitHeight: 20
+            cursorShape: Qt.PointingHandCursor
+            onClicked: I3.dispatch(`workspace "${modelData.name}"`)
 
-                implicitWidth: 10
-                color: "#1e1e2e"
-
-                Text {
-                    anchors.centerIn: parent
-                    text: wsDelegate.modelData.name
-
-                    color: modelData.focused ? "#f2cdcd" : "#cdd6f4"
-
-                    font {
-                        family: "JetBrainsMono Nerd Font"
-                        pixelSize: 14
-                    }
-                }
+            StyledText {
+                id: label
+                anchors.centerIn: parent
+                text: Glyphs.workspaces[ws.modelData.name] ?? ws.modelData.name
+                color: ws.modelData.urgent ? Theme.red : ws.modelData.focused ? Theme.flamingo : Theme.text
+                font.bold: ws.modelData.focused
+                font.pixelSize: ws.modelData.focused ? 15 : Theme.fontSize
             }
         }
     }

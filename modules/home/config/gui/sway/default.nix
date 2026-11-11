@@ -9,6 +9,7 @@
 let
   inherit (lib)
     mkIf
+    mkForce
     mkOptionDefault
     concatStringsSep
     getExe
@@ -39,7 +40,6 @@ let
 in
 {
   imports = [
-    ./waybar # Title bar TODO: replace with eww?
     ./kanshi # Window/Output manager
     ./quickshell
   ];
@@ -62,6 +62,9 @@ in
         defaultWorkspace = "1";
 
         menu = "${getExe config.programs.vicinae.package} toggle";
+
+        # using quickshell
+        bars = mkForce [ ];
 
         output."*" = {
           bg = "${self}/assets/wallpaper/current.png fill";
@@ -176,6 +179,8 @@ in
             command = getExe pkgs.kanshi;
             always = true;
           }
+
+          { command = getExe config.programs.quickshell.package; }
 
           # Background Services
           { command = getExe pkgs.sway-audio-idle-inhibit; }

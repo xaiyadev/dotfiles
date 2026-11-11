@@ -1,15 +1,19 @@
 import Quickshell
-import Quickshell.Io
-import QtQuick.Layouts
 import QtQuick
+import QtQuick.Layouts
+import Quickshell.Wayland
 
 import "../components"
+import "../data"
+import "../services"
+import "../components/ui"
 
 Scope {
   Variants {
     model: Quickshell.screens // create variants for each screen
 
     PanelWindow {
+      id: bar
       required property var modelData
       screen: modelData
 
@@ -19,62 +23,77 @@ Scope {
         right: true
       }
 
-      implicitHeight: 36
+      implicitHeight: Theme.barHeight
       color: "transparent"
 
       margins {
-        top: 10
-        left: 10
-        right: 10
+        top: Theme.barMargin
+        left: Theme.barMargin
+        right: Theme.barMargin
+      }
+
+      // keep-awake (toggle in the session hub)
+      IdleInhibitor {
+        window: bar
+        enabled: IdleInhibit.enabled
       }
 
       // Background of the Bar
       Rectangle {
         anchors.fill: parent
-        radius: 12
-        color: "#1e1e2e"
+        radius: Theme.radius
+        color: Theme.base
       }
 
-      // modules
+      // left: workspaces + focused window
       RowLayout {
         anchors {
           left: parent.left
-          leftMargin: 15
-
+          leftMargin: 18
           verticalCenter: parent.verticalCenter
         }
-
-        height: 20
-        spacing: 10
+        spacing: 24
 
         Workspaces { }
+        Windows { screen: bar.screen }
       }
 
-      RowLayout {
-        anchors {
-          horizontalCenter: parent.horizontalCenter
-          verticalCenter: parent.verticalCenter
-        }
-
-        height: 20
-        spacing: 10
-
-        Clock { }
+      // center: clock
+      Clock {
+        anchors.centerIn: parent
       }
 
+      // right: tray | audio/network/bluetooth | brightness, battery | notifications, session
       RowLayout {
         anchors {
           right: parent.right
-          rightMargin: 15
-
+          rightMargin: 18
           verticalCenter: parent.verticalCenter
         }
+        spacing: 18
 
-        height: 20
-        spacing: 10
+        Tray { id: tray }
+        Divider { visible: tray.visible }
+        ControlGroup { }
+        Divider { }
 
-        Volume { }
-        MprisPlayer { }
+        // laptop: brightness, battery / Framework hub
+        RowLayout {
+          spacing: 22
+
+          BrightnessIndicator { }
+          FrameworkHub { }
+        }
+
+        Divider { }
+
+        // notifications, session (power + keep-awake)
+        RowLayout {
+          spacing: 16
+
+          NotificationIndicator { }
+          SessionHub { }
+        }
       }
     }
   }

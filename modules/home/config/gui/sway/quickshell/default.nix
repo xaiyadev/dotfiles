@@ -12,12 +12,14 @@ in
     programs.quickshell = {
       enable = true;
 
-      # install quickshell package with extra icon dependencies
       package = pkgs.symlinkJoin {
         name = "wrapped-quickshell";
         paths = [
           pkgs.quickshell
           pkgs.adwaita-icon-theme
+          pkgs.brightnessctl
+          pkgs.framework-tool
+          pkgs.networkmanagerapplet  # nm-connection-editor
         ];
 
         meta.mainProgram = pkgs.quickshell.meta.mainProgram;
