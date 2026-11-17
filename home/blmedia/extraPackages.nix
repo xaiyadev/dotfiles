@@ -1,5 +1,5 @@
 { inputs', ... }: {
   sylveon.packages = { 
-    neovim = inputs'.xaivim.packages.default.override { withCord = false; };
+    neovim = inputs'.xaivim.packages.default.override { profile = "blmedia"; };
   };
 }
