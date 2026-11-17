@@ -21,9 +21,7 @@ Scope {
         audio: {
           volume: Pipewire.sinkVolume,
           muted: Pipewire.sinkMuted,
-          exclusive: Pipewire.sinkExclusive,
-          owner: AlsaExclusive.owner,
-          outputs: Pipewire.sinks.length,
+outputs: Pipewire.sinks.length,
           player: Mpris.selectedPlayer?.identity ?? null
         },
         network: { wifi: Network.wifiEnabled, connected: Network.activeWifi?.name ?? null, icon: Network.icon },
@@ -36,14 +34,11 @@ Scope {
           raw: Power.rawPercent,
           fullAt: Power.fullAt,
           charging: Power.charging,
-          full: Power.full,
-          profile: Power.profile
+          full: Power.full
         },
         framework: {
           available: FrameworkTool.available,
           chargeLimit: FrameworkTool.chargeLimit,
-          micSwitchOn: FrameworkTool.micSwitchOn,
-          cameraSwitchOn: FrameworkTool.cameraSwitchOn,
           bay: FrameworkTool.bayModule,
           firmware: FrameworkTool.firmware.length
         },
@@ -55,7 +50,6 @@ Scope {
           nvmeTemp: SystemStats.nvmeTemp,
           dgpuAwake: SystemStats.dgpuAwake
         },
-        privacy: { mic: Privacy.micApps, camera: Privacy.cameraApps, cameraPresent: Privacy.cameraPresent },
         notifications: { count: Notifications.count, dnd: Notifications.doNotDisturb },
         gameMode: { active: GameMode.active, main: GameMode.mainOutput },
         keepAwake: IdleInhibit.enabled

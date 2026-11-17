@@ -42,7 +42,10 @@ PanelWindow {
     // short sound for every notification popup (not in do-not-disturb, those don't pop up)
     Process {
         id: sound
-        command: ["pw-play", Config.notificationSound]
+        command: ["sh", "-c",
+            `f=$(find /nix/store -name "message-new-instant.oga" -path "*/sound-theme-freedesktop*" ! -name "*.drv" 2>/dev/null | head -1)
+             [ -n "$f" ] && pw-play "$f"`
+        ]
     }
 
     ColumnLayout {

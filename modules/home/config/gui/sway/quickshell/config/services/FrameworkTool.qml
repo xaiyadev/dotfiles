@@ -10,26 +10,11 @@ import "../lib/Parsers.js" as Parsers
 // Framework EC data via framework_tool (needs root: run with `sudo -n`, passwordless for wheel).
 // Uses framework_tool from PATH, else ~/.local/state/quickshell/framework-tool (a GC root
 // until it's installed system-wide). Parsing: lib/Parsers.js.
-// Live (privacy switches, EC temperatures, fans, throttling): while a hub tab that shows them is
-//   open (`liveWanted`, set by FrameworkHub), or the privacy switches only while the mic /
-//   camera is in use (the bar dot ignores devices whose switch is off).
-// Static (charge limit, expansion bay, input modules, firmware): at startup, retried on demand.
+// Static data (charge limit, expansion bay, input modules, firmware) is read at startup.
 Singleton {
     id: root
 
-    property bool liveWanted: false
     property bool available: false
-
-    // privacy sliders: true = device connected (switch open)
-    property bool micSwitchOn: true
-    property bool cameraSwitchOn: true
-
-    // EC sensors
-    property int leftFanRpm: 0
-    property int rightFanRpm: 0
-    property var temperatures: []      // [{ name, celsius }]
-    property bool softThrottle: false
-    property bool hardThrottle: false
 
     // static
     property int chargeLimit: 0
@@ -63,28 +48,6 @@ Singleton {
     }
 
     Process {
-        id: live
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const s = root.sectionsOf(this.text);
-                if (s["--privacy"]?.length) {
-                    const privacy = Parsers.parseFrameworkPrivacy(s["--privacy"]);
-                    root.micSwitchOn = privacy.micOn;
-                    root.cameraSwitchOn = privacy.cameraOn;
-                }
-                if (s["--thermal"]?.length) {
-                    const thermal = Parsers.parseFrameworkThermal(s["--thermal"]);
-                    root.leftFanRpm = thermal.leftFanRpm;
-                    root.rightFanRpm = thermal.rightFanRpm;
-                    root.softThrottle = thermal.softThrottle;
-                    root.hardThrottle = thermal.hardThrottle;
-                    root.temperatures = thermal.temperatures;
-                }
-            }
-        }
-    }
-
-    Process {
         id: staticInfo
         stdout: StdioCollector {
             onStreamFinished: {
@@ -102,24 +65,4 @@ Singleton {
     function loadStatic(): void { run(staticInfo, ["--charge-limit", "--expansion-bay", "--inputdeck", "--versions"]); }
 
     Component.onCompleted: loadStatic()
-
-    Timer {
-        interval: 3000
-        running: root.liveWanted
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: {
-            root.run(live, ["--privacy", "--thermal"]);
-            if (!root.staticLoaded) root.loadStatic();
-        }
-    }
-
-    // hub closed / other tab, but mic or camera in use: keep the switch positions current
-    Timer {
-        interval: 5000
-        running: !root.liveWanted && Privacy.active
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: root.run(live, ["--privacy"])
-    }
 }

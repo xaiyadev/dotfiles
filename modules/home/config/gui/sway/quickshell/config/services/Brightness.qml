@@ -39,20 +39,17 @@ Singleton {
         onExited: if (root.pending) root.send()
     }
 
-    // backlight device, found once with brightnessctl -m ("amdgpu_bl2,backlight,37316,57%,65535")
+    // backlight device, found once from sysfs
     property string device: ""
 
     Process {
         running: true
-        command: ["brightnessctl", "-m", "--class=backlight"]
+        command: ["sh", "-c", "ls /sys/class/backlight/ 2>/dev/null | head -1"]
         stdout: StdioCollector {
             onStreamFinished: {
-                const info = Parsers.parseBrightnessctl(this.text);
-                root.available = info !== null;
-                if (info) {
-                    root.device = info.device;
-                    root.value = info.value;
-                }
+                const name = this.text.trim();
+                root.available = name !== "";
+                root.device = name;
             }
         }
     }

@@ -3,44 +3,38 @@ pragma Singleton
 import Quickshell
 import QtQuick
 
-// The bar's own icon set (assets/icons): 16px grid, 2px round strokes, filled core shapes,
-// levels shown with faint parts (like GNOME). Recoloured by ui/Icon.
+// Adwaita symbolic icon names (set via //@ pragma IconTheme Adwaita in shell.qml).
 Singleton {
-    function file(name: string): string { return Qt.resolvedUrl("../assets/icons/" + name + ".svg"); }
-
     // audio
-    readonly property string music: file("music")
+    readonly property string music: "audio-x-generic-symbolic"
     function volume(level: real, muted: bool): string {
-        if (muted || level <= 0) return file("volume-muted");
-        return file(level > 0.66 ? "volume-high" : level > 0.33 ? "volume-medium" : "volume-low");
+        if (muted || level <= 0) return "audio-volume-muted-symbolic";
+        return level > 0.66 ? "audio-volume-high-symbolic" : level > 0.33 ? "audio-volume-medium-symbolic" : "audio-volume-low-symbolic";
     }
 
-    // network (signal strength 0..1)
-    readonly property string wired: file("wired")
-    readonly property string wifiOffline: file("wifi-offline")
-    readonly property string wifiDisabled: file("wifi-disabled")
+    // network
+    readonly property string wired: "network-wired-symbolic"
+    readonly property string wifiOffline: "network-wireless-offline-symbolic"
+    readonly property string wifiDisabled: "network-wireless-disabled-symbolic"
     function wifi(strength: real): string {
-        return file(strength > 0.75 ? "wifi-excellent" : strength > 0.5 ? "wifi-good" : strength > 0.25 ? "wifi-ok" : "wifi-weak");
+        return strength > 0.75 ? "network-wireless-signal-excellent-symbolic"
+             : strength > 0.5  ? "network-wireless-signal-good-symbolic"
+             : strength > 0.25 ? "network-wireless-signal-ok-symbolic"
+             : "network-wireless-signal-weak-symbolic";
     }
-    readonly property string tailscale: file("tailscale")
-
-    readonly property string bluetooth: file("bluetooth")
-    readonly property string bluetoothOff: file("bluetooth-off")
+    readonly property string tailscale: "network-vpn-symbolic"
+    readonly property string bluetooth: "bluetooth-active-symbolic"
+    readonly property string bluetoothOff: "bluetooth-disabled-symbolic"
 
     // display / laptop
-    function brightness(level: real): string {
-        return file(level < 0.34 ? "brightness-low" : level < 0.67 ? "brightness-medium" : "brightness-high");
-    }
-    readonly property string laptop: file("laptop")
-    readonly property string monitor: file("monitor")
-    readonly property string phone: file("phone")
-    readonly property string lock: file("lock")
+    function brightness(level: real): string { return "display-brightness-symbolic"; }
+    readonly property string laptop: "computer-symbolic"
+    readonly property string phone: "phone-symbolic"
+    readonly property string lock: "system-lock-screen-symbolic"
 
-    // session / notifications / clock
-    readonly property string power: file("power")
-    readonly property string focus: file("focus")
-    readonly property string eye: file("eye")
-    readonly property string bell: file("bell")
-    readonly property string bellOff: file("bell-off")
-    readonly property string clock: file("clock")
+    // notifications / session / clock
+    readonly property string eye: "view-reveal-symbolic"
+    readonly property string bell: "preferences-system-notifications-symbolic"
+    readonly property string bellOff: "notifications-disabled-symbolic"
+    readonly property string clock: "preferences-system-time-symbolic"
 }

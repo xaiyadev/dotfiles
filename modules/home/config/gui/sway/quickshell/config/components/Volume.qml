@@ -5,53 +5,24 @@ import "../services"
 import "../data"
 import "ui"
 
-// Audio: volume in the bar (music note in exclusive mode).
-// Popup, two columns like the network popup: media player left,
-// volume + output selection right (hidden in exclusive mode).
+// Audio: volume in the bar.
+// Popup: media player left, volume + output selection right.
 BarModule {
     id: root
 
-    // switched with a fade when exclusive mode changes
-    property bool displayExclusive: Pipewire.sinkExclusive
-
     readonly property bool showPlayer: Mpris.selectedPlayer !== null
-    readonly property bool showVolume: !Pipewire.sinkExclusive
 
     kind: "audio"
-    icon: displayExclusive ? Icons.music : Pipewire.sinkIcon
-    popupWidth: showPlayer && showVolume ? 600 : 300
+    icon: Pipewire.sinkIcon
+    popupWidth: showPlayer ? 600 : 300
 
     onMiddleClicked: if (Mpris.selectedPlayer?.canTogglePlaying) Mpris.selectedPlayer.togglePlaying()
-    onScrolled: (delta) => {
-        if (!Pipewire.sinkExclusive) Pipewire.setSinkVolume(Pipewire.sinkVolume + (delta > 0 ? 0.02 : -0.02));
-    }
-
-    SequentialAnimation {
-        id: exclusiveFade
-        NumberAnimation { target: root.row; property: "opacity"; to: 0; duration: 400; easing.type: Easing.OutCubic }
-        ScriptAction { script: root.displayExclusive = Pipewire.sinkExclusive }
-        NumberAnimation { target: root.row; property: "opacity"; to: 1; duration: 400; easing.type: Easing.OutCubic }
-    }
-
-    Connections {
-        target: Pipewire
-        function onSinkExclusiveChanged() { exclusiveFade.restart() }
-    }
+    onScrolled: (delta) => Pipewire.setSinkVolume(Pipewire.sinkVolume + (delta > 0 ? 0.02 : -0.02))
 
     // ---- popup ----
 
-    // exclusive mode without a player: nothing else to show
-    StyledText {
-        Layout.fillWidth: true
-        visible: !root.showPlayer && !root.showVolume
-        text: "Exclusive mode" + (AudioFormat.text !== "" ? "  ·  " + AudioFormat.text : "")
-        color: Theme.subtext0
-        horizontalAlignment: Text.AlignHCenter
-    }
-
     RowLayout {
         Layout.fillWidth: true
-        visible: root.showPlayer || root.showVolume
         spacing: 16
 
         // ---- player ----
@@ -62,15 +33,14 @@ BarModule {
 
         Separator {
             vertical: true
-            visible: root.showPlayer && root.showVolume
+            visible: root.showPlayer
         }
 
-        // ---- volume + outputs (PipeWire volume does nothing in exclusive mode) ----
+        // ---- volume + outputs ----
         ColumnLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.preferredWidth: 1
-            visible: root.showVolume
             spacing: 6
 
             PanelHeader {

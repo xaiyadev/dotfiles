@@ -19,7 +19,18 @@ Singleton {
 
     function iconPath(id: string, name: string, fallback: string): string {
         const entry = entryFor(id, name);
-        return source(entry?.icon || id || fallback, fallback);
+        const iconName = entry?.icon || id || fallback;
+        if (!iconName) return "";
+
+        // Absolute path or URL — use directly
+        if (iconName.startsWith("/")) return "file://" + iconName;
+        if (iconName.includes("://")) return iconName;
+
+        // Use the icon if the current theme has it
+        if (Quickshell.iconPath(iconName, true) !== "") return Quickshell.iconPath(iconName, false);
+
+        // Fall back to the Papirus icon
+        return "file://" + Config.fallbackIconDir + iconName.replace(/-symbolic$/, "") + ".svg";
     }
 
     // Tray icons are "image://icon/<name>" requests; if the icon theme doesn't have <name>

@@ -7,9 +7,7 @@ import QtQuick
 import '../data'
 import "../lib/Parsers.js" as Parsers
 
-// Bit depth / sample rate of what is currently playing.
-// Exclusive mode: read the real hardware params from /proc/asound.
-// Shared mode:    read the negotiated format of the player's PipeWire stream.
+// Bit depth / sample rate of what is currently playing, read from the player's PipeWire stream.
 Singleton {
     id: root
 
@@ -35,23 +33,6 @@ Singleton {
         if (from !== source) return;
         bitDepth = format.bitDepth;
         sampleRate = format.sampleRate;
-    }
-
-    Process {
-        id: hwParams
-
-        command: [
-            "sh", "-c",
-            `for f in /proc/asound/card"$1"/pcm*p/sub0/hw_params; do
-                 grep -q '^format' "$f" 2>/dev/null && { cat "$f"; exit; }
-             done`,
-            "_",
-            AlsaExclusive.alsaCard !== undefined ? String(AlsaExclusive.alsaCard) : ""
-        ]
-
-        stdout: StdioCollector {
-            onStreamFinished: root.apply("alsa", Parsers.parseHwParams(this.text))
-        }
     }
 
     Process {
@@ -104,9 +85,8 @@ Singleton {
     }
 
     function refreshFromOutput(): void {
-        source = AlsaExclusive.exclusive ? "alsa" : "pipewire";
-        if (source === "alsa") hwParams.running = true;
-        else pwDump.running = true;
+        source = "pipewire";
+        pwDump.running = true;
     }
 
     function refresh(): void {
@@ -125,8 +105,4 @@ Singleton {
         onTriggered: root.refresh()
     }
 
-    Connections {
-        target: AlsaExclusive
-        function onExclusiveChanged() { if (root.active) root.refresh(); }
-    }
 }

@@ -71,6 +71,4 @@ Singleton {
         QsPipewire.Pipewire.preferredDefaultAudioSink = node;
     }
 
-    // Whether the sink is in Exclusive mode or not
-    readonly property bool sinkExclusive: AlsaExclusive.exclusive
 }

@@ -22,19 +22,7 @@ Singleton {
         return (player.isPlaying ? 2 : 0) + (isMusicPlayer(player) ? 1 : 0);
     }
 
-    // In exclusive mode: the player that holds the audio device (matched by process name)
-    readonly property QsMpris.MprisPlayer exclusivePlayer: {
-        const owner = AlsaExclusive.owner.toLowerCase();
-        if (owner === "") return null;
-        return players.find(player => {
-            const ids = [player.identity, player.desktopEntry].filter(id => id).map(id => id.toLowerCase());
-            return ids.some(id => id.includes(owner) || owner.includes(id));
-        }) ?? null;
-    }
-
-    // the exclusive player always wins; otherwise by score
     readonly property QsMpris.MprisPlayer selectedPlayer: {
-        if (exclusivePlayer) return exclusivePlayer;
         let best = null;
         for (const player of players) {
             if (best === null || score(player) > score(best)) best = player;

@@ -17,7 +17,6 @@ in
         paths = [
           pkgs.quickshell
           pkgs.adwaita-icon-theme
-          pkgs.brightnessctl
           pkgs.framework-tool
           pkgs.networkmanagerapplet  # nm-connection-editor
         ];

@@ -14,7 +14,7 @@ import "../lib/Parsers.js" as Parsers
 Singleton {
     id: root
 
-    readonly property bool active: Popups.currentKind === "framework"
+    readonly property bool active: Popups.currentKind === "system"
 
     property real cpuUsage: 0      // 0..1
     property real memUsedGiB: 0

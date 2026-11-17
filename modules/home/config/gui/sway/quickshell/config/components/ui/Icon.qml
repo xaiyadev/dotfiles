@@ -17,8 +17,7 @@ Item {
 
     IconImage {
         anchors.fill: parent
-        // theme icon name, or a file (own icons, see data/Icons.qml)
-        source: root.icon === "" ? "" : root.icon.includes(":/") ? root.icon : Quickshell.iconPath(root.icon, true)
+        source: root.icon === "" ? "" : Quickshell.iconPath(root.icon, true)
 
         layer.enabled: true
         layer.effect: MultiEffect {

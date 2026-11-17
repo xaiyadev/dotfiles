@@ -63,7 +63,7 @@ Scope {
         anchors.centerIn: parent
       }
 
-      // right: tray | audio/network/bluetooth | brightness, battery | notifications, session
+      // right: tray | audio/network/bluetooth | notifications, battery, session
       RowLayout {
         anchors {
           right: parent.right
@@ -77,23 +77,7 @@ Scope {
         ControlGroup { }
         Divider { }
 
-        // laptop: brightness, battery / Framework hub
-        RowLayout {
-          spacing: 22
-
-          BrightnessIndicator { }
-          FrameworkHub { }
-        }
-
-        Divider { }
-
-        // notifications, session (power + keep-awake)
-        RowLayout {
-          spacing: 16
-
-          NotificationIndicator { }
-          SessionHub { }
-        }
+        SystemHub { }
       }
     }
   }

@@ -11,13 +11,6 @@ function bitsFromFormat(format) {
     return m ? parseInt(m[1]) : 0;
 }
 
-// /proc/asound/cardN/pcmXp/sub0/hw_params -> { bitDepth, sampleRate }
-function parseHwParams(text) {
-    const format = /format:\s*(\S+)/.exec(text);
-    const rate = /rate:\s*(\d+)/.exec(text);
-    return { bitDepth: format ? bitsFromFormat(format[1]) : 0, sampleRate: rate ? parseInt(rate[1]) : 0 };
-}
-
 // SONE log line "[resolve_play_uri]: ... bitDepth=Some(16), sampleRate=Some(44100) ..." -> { bitDepth, sampleRate } | null
 function parseSoneLog(text) {
     const bits = /bitDepth=Some\((\d+)\)/.exec(text);
@@ -54,22 +47,7 @@ function formatAudio(bitDepth, sampleRate) {
     return bitDepth > 0 ? bitDepth + "-bit  ·  " + khz : khz;
 }
 
-// "true .sone-wrapped" / "false" -> { exclusive, owner }
-function parseAlsaOwner(text) {
-    const parts = text.trim().split(" ");
-    const exclusive = parts[0] === "true";
-    return { exclusive: exclusive, owner: exclusive ? parts.slice(1).join(" ") : "" };
-}
-
 // ---------------------------------------------------------------- display
-
-// brightnessctl -m: "amdgpu_bl2,backlight,37316,57%,65535" -> { device: "amdgpu_bl2", value: 0.569 } | null
-function parseBrightnessctl(text) {
-    const f = text.trim().split(",");
-    if (f.length < 5) return null;
-    const value = parseBacklight(f[2], f[4]);
-    return value === null ? null : { device: f[0], value: value };
-}
 
 // swaymsg -r -t get_outputs -> name of the main monitor: a `preferred` one ("<make> <model>"
 // contains it), else the external output with the highest refresh rate (then biggest, then
@@ -86,53 +64,6 @@ function mainOutput(outputs, preferred) {
 }
 
 // ---------------------------------------------------------------- power
-
-// lines "bat <cycles> <charge_full µAh> <charge_full_design µAh> <voltage_min_design µV>" and
-// "port <n> <online> <voltage_max µV> <current_max µA>"
-function parsePowerSysfs(text) {
-    const result = { cycles: 0, fullWh: 0, designWh: 0, ports: [] };
-    for (const line of text.split("\n")) {
-        const f = line.trim().split(/\s+/);
-        if (f[0] === "bat") {
-            result.cycles = parseInt(f[1]);
-            result.fullWh = parseInt(f[2]) * parseInt(f[4]) / 1e12;
-            result.designWh = parseInt(f[3]) * parseInt(f[4]) / 1e12;
-        } else if (f[0] === "port") {
-            const volts = parseInt(f[3]) / 1e6;
-            const amps = parseInt(f[4]) / 1e6;
-            result.ports.push({ name: "Port " + parseInt(f[1]), online: f[2] === "1", volts: volts, amps: amps, watts: volts * amps });
-        }
-    }
-    return result;
-}
-
-// "Current active profile: fw-quiet" -> "fw-quiet"
-function parseTunedActive(text) {
-    const m = /:\s*(\S+)/.exec(text);
-    return m ? m[1] : "";
-}
-
-// "profile=fw-quiet\nboost=0\nfan=almost-silent\n..." -> { "fw-quiet": { boost: "0", fan: "almost-silent" } }
-function parseProfileDetails(text) {
-    const details = {};
-    let current = null;
-    for (const line of text.split("\n")) {
-        const i = line.indexOf("=");
-        if (i < 0) continue;
-        const key = line.slice(0, i), value = line.slice(i + 1);
-        if (key === "profile") current = details[value] = {};
-        else if (current) current[key] = value;
-    }
-    return details;
-}
-
-// 11520 -> "3 h 12 min", 300 -> "5 min", 0 -> ""
-function formatDuration(seconds) {
-    if (seconds <= 0) return "";
-    const h = Math.floor(seconds / 3600);
-    const m = Math.round((seconds % 3600) / 60);
-    return h > 0 ? h + " h " + m + " min" : m + " min";
-}
 
 // ---------------------------------------------------------------- system
 
@@ -193,33 +124,6 @@ function frameworkSections(text) {
 }
 
 function afterColon(line) { return line.slice(line.indexOf(":") + 1).trim(); }
-
-// --privacy -> { micOn, cameraOn } (on = device connected, switch open)
-function parseFrameworkPrivacy(lines) {
-    const result = { micOn: true, cameraOn: true };
-    for (const line of lines) {
-        if (line.includes("Microphone:")) result.micOn = afterColon(line) === "Connected";
-        if (line.includes("Camera:")) result.cameraOn = afterColon(line) === "Connected";
-    }
-    return result;
-}
-
-// --thermal -> { leftFanRpm, rightFanRpm, softThrottle, hardThrottle, temperatures: [{ name, celsius }] }
-function parseFrameworkThermal(lines) {
-    const result = { leftFanRpm: 0, rightFanRpm: 0, softThrottle: false, hardThrottle: false, temperatures: [] };
-    for (const line of lines) {
-        const v = afterColon(line);
-        if (line.includes("Left Fan:")) result.leftFanRpm = parseInt(v);
-        else if (line.includes("Right Fan:")) result.rightFanRpm = parseInt(v);
-        else if (line.includes("Soft (")) result.softThrottle = v === "true";
-        else if (line.includes("Hard (")) result.hardThrottle = v === "true";
-        else if (/^\s+\S+@\S+:\s+-?\d+ C$/.test(line)) {
-            const celsius = parseInt(v);
-            if (celsius > 0) result.temperatures.push({ name: line.trim().split(":")[0].replace(/(_f75303)?@.*$/, ""), celsius: celsius });
-        }
-    }
-    return result;
-}
 
 // --charge-limit "Minimum 0%, Maximum 80%" -> 80
 function parseChargeLimit(lines) {

@@ -20,10 +20,6 @@ Singleton {
         "AOC CQ32G4"    // home
     ]
 
-    // sound for notification popups: freedesktop "message-new-instant", but with both channels
-    // mixed evenly (the original is ~8 dB louder on the left, so it sounded one-sided)
-    readonly property string notificationSound: Quickshell.shellPath("assets/sounds/notification.ogg")
-
     // icons the Adwaita theme doesn't have are taken from here (e.g. EasyEffects in the tray)
     readonly property string fallbackIconDir: "/etc/profiles/per-user/" + Quickshell.env("USER") + "/share/icons/Papirus/22x22/apps/"
 }
