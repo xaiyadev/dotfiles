@@ -1,0 +1,29 @@
+name: Validate Nix Flake
+
+on:
+  workflow_dispatch:
+    push:
+      - "**.nix"
+      - "flake.lock"
+
+permissions: {}
+
+jobs:
+  check-flake:
+    name: Check x68_64 linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v27 
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - uses: nix-community/cache-nix-action@v5 
+        with:
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
+          restore-prefixes-first-match: nix-${{ runner.os }}- 
+
+      - run: nix flake check
