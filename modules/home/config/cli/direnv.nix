@@ -11,6 +11,10 @@
       package = pkgs.nix-direnv.override { nix = config.nix.package; };
     };
 
+    config = {
+      warn_timeout = "2h"; 
+    };
+
     # store direnv in cache and not per project
     # https://github.com/direnv/direnv/wiki/Customizing-cache-location#hashed-directories
     stdlib = ''
