@@ -12,124 +12,182 @@ ColumnLayout {
 
     readonly property var player: Mpris.selectedPlayer
 
+    // local estimate so the bar advances every second without waiting for MPRIS position events
+    property real trackPosition: player?.position ?? 0
+
+    function formatTime(secs: real): string {
+        const s = Math.floor(secs);
+        const m = Math.floor(s / 60);
+        return m + ":" + String(s % 60).padStart(2, "0");
+    }
+
+    Connections {
+        target: root.player
+        function onPositionChanged() { root.trackPosition = root.player.position; }
+    }
+
+    Timer {
+        running: root.player?.isPlaying ?? false
+        interval: 1000
+        repeat: true
+        onTriggered: root.trackPosition += 1
+    }
+
     Layout.fillWidth: true
     spacing: 10
-    visible: player !== null
 
-    // --- player icon + name ---
+    // --- cover (left) + metadata/controls (right) ---
     RowLayout {
-        Layout.alignment: Qt.AlignHCenter
-        spacing: 8
+        Layout.fillWidth: true
+        spacing: 12
 
-        IconImage {
-            implicitSize: 18
-            source: Mpris.playerIconPath
+        ClippingRectangle {
+            implicitWidth: 100
+            implicitHeight: 100
+            radius: 8
+            color: Theme.surface0
+            Layout.alignment: Qt.AlignTop
+
+            Image {
+                id: cover
+                anchors.fill: parent
+                source: root.player?.trackArtUrl ?? ""
+                fillMode: Image.PreserveAspectCrop
+                asynchronous: true
+                sourceSize { width: 200; height: 200 }
+            }
+
+            Icon {
+                anchors.centerIn: parent
+                visible: cover.status !== Image.Ready
+                icon: Icons.music
+                size: 36
+            }
         }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignTop
+            spacing: 2
+
+            // player name (left) + app icon (right)
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 6
+
+                StyledText {
+                    Layout.fillWidth: true
+                    text: root.player?.identity ?? ""
+                    color: Theme.subtext0
+                    font.pixelSize: Theme.smallFontSize
+                    elide: Text.ElideRight
+                }
+
+                IconImage {
+                    implicitSize: 16
+                    source: Mpris.playerIconPath
+                }
+            }
+
+            StyledText {
+                Layout.fillWidth: true
+                Layout.topMargin: 2
+                text: root.player?.trackTitle ?? ""
+                font.pixelSize: Theme.fontSize - 1
+                font.bold: true
+                elide: Text.ElideRight
+            }
+
+            StyledText {
+                Layout.fillWidth: true
+                text: root.player?.trackArtist ?? ""
+                color: Theme.subtext0
+                font.pixelSize: Theme.smallFontSize
+                elide: Text.ElideRight
+            }
+
+            Item { Layout.fillHeight: true; implicitHeight: 4 }
+
+            // controls
+            RowLayout {
+                Layout.alignment: Qt.AlignHCenter
+                spacing: 10
+
+                ControlButton {
+                    icon: "media-playlist-shuffle-symbolic"
+                    enabled: root.player?.shuffleSupported ?? false
+                    active: root.player?.shuffle ?? false
+                    onClicked: if (root.player) root.player.shuffle = !root.player.shuffle
+                }
+
+                ControlButton {
+                    Layout.leftMargin: 8
+                    icon: "media-skip-backward-symbolic"
+                    enabled: root.player?.canGoPrevious ?? false
+                    onClicked: root.player.previous()
+                }
+
+                ControlButton {
+                    icon: root.player?.isPlaying ? "media-playback-pause-symbolic" : "media-playback-start-symbolic"
+                    size: 24
+                    enabled: root.player?.canTogglePlaying ?? false
+                    onClicked: root.player.togglePlaying()
+                }
+
+                ControlButton {
+                    icon: "media-skip-forward-symbolic"
+                    enabled: root.player?.canGoNext ?? false
+                    onClicked: root.player.next()
+                }
+
+                ControlButton {
+                    Layout.leftMargin: 8
+                    icon: root.player?.loopState === QsMpris.MprisLoopState.Track
+                        ? "media-playlist-repeat-song-symbolic" : "media-playlist-repeat-symbolic"
+                    enabled: root.player?.loopSupported ?? false
+                    active: (root.player?.loopState ?? QsMpris.MprisLoopState.None) !== QsMpris.MprisLoopState.None
+                    onClicked: {
+                        if (!root.player) return;
+                        const s = root.player.loopState;
+                        root.player.loopState = s === QsMpris.MprisLoopState.None ? QsMpris.MprisLoopState.Playlist
+                            : s === QsMpris.MprisLoopState.Playlist ? QsMpris.MprisLoopState.Track
+                            : QsMpris.MprisLoopState.None;
+                    }
+                }
+            }
+        }
+    }
+
+    // --- progress bar (full width, below cover+content row) ---
+    Slider {
+        id: progressBar
+        Layout.fillWidth: true
+        visible: (root.player?.lengthSupported ?? false) && (root.player?.length ?? 0) > 0
+        value: root.player?.length > 0 ? Math.min(1, root.trackPosition / root.player.length) : 0
+        onMoved: (v) => {
+            if (root.player?.canSeek) {
+                root.player.position = v * root.player.length;
+                root.trackPosition = v * root.player.length;
+            }
+        }
+    }
+
+    RowLayout {
+        Layout.fillWidth: true
+        visible: progressBar.visible
 
         StyledText {
-            text: root.player?.identity ?? ""
+            text: root.formatTime(root.trackPosition)
             color: Theme.subtext0
-            font.pixelSize: Theme.smallFontSize + 1
-        }
-    }
-
-    // --- cover ---
-    ClippingRectangle {
-        Layout.alignment: Qt.AlignHCenter
-        implicitWidth: 240
-        implicitHeight: 240
-        radius: 10
-        color: Theme.surface0
-
-        Image {
-            id: cover
-            anchors.fill: parent
-            source: root.player?.trackArtUrl ?? ""
-            fillMode: Image.PreserveAspectCrop
-            asynchronous: true
-            sourceSize { width: 480; height: 480 }
+            font.pixelSize: Theme.smallFontSize - 2
         }
 
-        Icon {
-            anchors.centerIn: parent
-            visible: cover.status !== Image.Ready
-            icon: Icons.music
-            size: 64
-        }
-    }
+        Item { Layout.fillWidth: true }
 
-    // --- title / artist ---
-    StyledText {
-        Layout.fillWidth: true
-        Layout.topMargin: 4
-        text: root.player?.trackTitle ?? ""
-        horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: 15
-        font.bold: true
-    }
-
-    StyledText {
-        Layout.fillWidth: true
-        Layout.topMargin: -6
-        text: root.player?.trackArtist ?? ""
-        color: Theme.subtext0
-        horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: Theme.smallFontSize + 1
-    }
-
-    // --- bit depth / sample rate ---
-    StyledText {
-        Layout.fillWidth: true
-        visible: AudioFormat.text !== ""
-        text: AudioFormat.text
-        color: Theme.overlay0
-        horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: Theme.smallFontSize
-    }
-
-    // --- media controls ---
-    RowLayout {
-        Layout.alignment: Qt.AlignHCenter
-        Layout.topMargin: 4
-        spacing: 18
-
-        ControlButton {
-            icon: "media-playlist-shuffle-symbolic"
-            visible: root.player?.shuffleSupported ?? false
-            active: root.player?.shuffle ?? false
-            onClicked: root.player.shuffle = !root.player.shuffle
-        }
-
-        ControlButton {
-            icon: "media-skip-backward-symbolic"
-            enabled: root.player?.canGoPrevious ?? false
-            onClicked: root.player.previous()
-        }
-
-        ControlButton {
-            icon: root.player?.isPlaying ? "media-playback-pause-symbolic" : "media-playback-start-symbolic"
-            size: 26
-            enabled: root.player?.canTogglePlaying ?? false
-            onClicked: root.player.togglePlaying()
-        }
-
-        ControlButton {
-            icon: "media-skip-forward-symbolic"
-            enabled: root.player?.canGoNext ?? false
-            onClicked: root.player.next()
-        }
-
-        ControlButton {
-            icon: root.player?.loopState === QsMpris.MprisLoopState.Track
-                ? "media-playlist-repeat-song-symbolic" : "media-playlist-repeat-symbolic"
-            visible: root.player?.loopSupported ?? false
-            active: (root.player?.loopState ?? QsMpris.MprisLoopState.None) !== QsMpris.MprisLoopState.None
-            onClicked: {
-                const s = root.player.loopState;
-                root.player.loopState = s === QsMpris.MprisLoopState.None ? QsMpris.MprisLoopState.Playlist
-                    : s === QsMpris.MprisLoopState.Playlist ? QsMpris.MprisLoopState.Track
-                    : QsMpris.MprisLoopState.None;
-            }
+        StyledText {
+            text: root.formatTime(root.player?.length ?? 0)
+            color: Theme.subtext0
+            font.pixelSize: Theme.smallFontSize - 2
         }
     }
 

@@ -27,19 +27,22 @@ Singleton {
         if (iconName.includes("://")) return iconName;
 
         // Use the icon if the current theme has it
-        if (Quickshell.iconPath(iconName, true) !== "") return Quickshell.iconPath(iconName, false);
+        const resolved = Quickshell.iconPath(iconName, false);
+        if (resolved !== "") return resolved;
 
         // Fall back to the Papirus icon
-        return "file://" + Config.fallbackIconDir + iconName.replace(/-symbolic$/, "") + ".svg";
+        return _papirus(iconName);
     }
 
-    // Tray icons are "image://icon/<name>" requests; if the icon theme doesn't have <name>
-    // (e.g. EasyEffects ships its icon only in its own package) Quickshell would draw a
-    // placeholder, so use the Papirus version of the app icon instead.
     function trayIcon(source: string): string {
         if (!source.startsWith("image://icon/")) return source;
         const name = source.slice("image://icon/".length).replace(/\?.*$/, "");
         if (Quickshell.iconPath(name, true) !== "") return source;
+        return _papirus(name);
+    }
+
+    // fallback return
+    function _papirus(name: string): string {
         return "file://" + Config.fallbackIconDir + name.replace(/-symbolic$/, "") + ".svg";
     }
 

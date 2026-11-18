@@ -6,17 +6,15 @@ import QtQuick
 
 import '../data'
 
-// Battery state via UPower. Charge limit read from the EC via FrameworkTool.
+// Battery state via UPower.
 Singleton {
     id: root
-
-    // Charge limit (read from the EC, 80 until known): this charge counts as 100% (like waybar's full-at)
-    readonly property int fullAt: FrameworkTool.chargeLimit > 0 ? FrameworkTool.chargeLimit : 80
 
     readonly property var device: UPower.devices.values.find(d => d.isLaptopBattery) ?? UPower.displayDevice
     readonly property bool present: device?.isPresent ?? false
 
     readonly property real rawPercent: (device?.percentage ?? 0) * 100
+    readonly property int fullAt: 80
     readonly property int percent: Math.min(100, Math.round(rawPercent / fullAt * 100))
 
     readonly property bool onBattery: UPower.onBattery

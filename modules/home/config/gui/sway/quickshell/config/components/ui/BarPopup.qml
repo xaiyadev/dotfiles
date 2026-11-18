@@ -12,8 +12,14 @@ PanelWindow {
 
     required property Item trigger
     property bool triggerHovered: false
+    property bool extraHovered: false
     property string kind: ""
     property int cardWidth: 300
+    property Component belowComponent: null
+    property Component below2Component: null
+    readonly property bool hasBelowCard: belowComponent !== null
+    readonly property bool hasBelow2Card: below2Component !== null
+    readonly property int innerCardGap: 8
 
     default property alias content: column.data
 
@@ -51,6 +57,8 @@ PanelWindow {
     WlrLayershell.namespace: "quickshell-popup"
     WlrLayershell.keyboardFocus: open ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
+    Keys.onEscapePressed: close()
+
     // shown on open, hidden after the close animation
     visible: false
     onOpenChanged: if (open) visible = true
@@ -59,7 +67,7 @@ PanelWindow {
 
     Timer {
         interval: 250
-        running: popup.open && !popup.triggerHovered && !bridge.containsMouse && !cardHover.hovered
+        running: popup.open && !popup.triggerHovered && !bridge.containsMouse && !cardHover.hovered && !popup.extraHovered
         onTriggered: popup.close()
     }
 
@@ -85,6 +93,8 @@ PanelWindow {
         x: popup.cardX
         width: popup.cardWidth
         height: card.height + Theme.popupGap
+            + (popup.hasBelowCard ? (popup.innerCardGap + belowCard.implicitHeight) : 0)
+            + (popup.hasBelow2Card ? (popup.innerCardGap + below2Card.implicitHeight) : 0)
         clip: true
 
         HoverHandler { id: cardHover }
@@ -109,13 +119,73 @@ PanelWindow {
             }
             Behavior on opacity { NumberAnimation { duration: 200 } }
 
-            focus: true
-            Keys.onEscapePressed: popup.close()
-
             ColumnLayout {
                 id: column
                 anchors { top: parent.top; left: parent.left; right: parent.right; margins: 16 }
                 spacing: 10
+            }
+        }
+
+        Rectangle {
+            id: belowCard
+            visible: popup.hasBelowCard
+            width: parent.width
+            radius: Theme.radius
+            color: Theme.base
+            border { width: 1; color: Theme.surface0 }
+            implicitHeight: belowColumn.implicitHeight + 32
+
+            y: popup.open ? (Theme.popupGap + card.height + popup.innerCardGap) : -(implicitHeight)
+            opacity: popup.open ? 1 : 0
+
+            Behavior on y { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
+            Behavior on opacity { NumberAnimation { duration: 200 } }
+
+            ColumnLayout {
+                id: belowColumn
+                anchors { top: parent.top; left: parent.left; right: parent.right; margins: 16 }
+                spacing: 10
+
+                Loader {
+                    id: belowLoader
+                    Layout.fillWidth: true
+                    active: popup.hasBelowCard
+                    sourceComponent: popup.belowComponent
+                    onLoaded: item.width = Qt.binding(() => width)
+                }
+            }
+        }
+
+        Rectangle {
+            id: below2Card
+            visible: popup.hasBelow2Card
+            width: parent.width
+            radius: Theme.radius
+            color: Theme.base
+            border { width: 1; color: Theme.surface0 }
+            implicitHeight: below2Column.implicitHeight + 32
+
+            y: popup.open
+                ? (Theme.popupGap + card.height + popup.innerCardGap
+                   + (popup.hasBelowCard ? belowCard.implicitHeight + popup.innerCardGap : 0))
+                : -(implicitHeight)
+            opacity: popup.open ? 1 : 0
+
+            Behavior on y { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
+            Behavior on opacity { NumberAnimation { duration: 200 } }
+
+            ColumnLayout {
+                id: below2Column
+                anchors { top: parent.top; left: parent.left; right: parent.right; margins: 16 }
+                spacing: 10
+
+                Loader {
+                    id: below2Loader
+                    Layout.fillWidth: true
+                    active: popup.hasBelow2Card
+                    sourceComponent: popup.below2Component
+                    onLoaded: item.width = Qt.binding(() => width)
+                }
             }
         }
     }

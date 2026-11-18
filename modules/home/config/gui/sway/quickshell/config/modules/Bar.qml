@@ -55,7 +55,6 @@ Scope {
         spacing: 24
 
         Workspaces { }
-        Windows { screen: bar.screen }
       }
 
       // center: clock
@@ -75,9 +74,6 @@ Scope {
         Tray { id: tray }
         Divider { visible: tray.visible }
         ControlGroup { }
-        Divider { }
-
-        SystemHub { }
       }
     }
   }

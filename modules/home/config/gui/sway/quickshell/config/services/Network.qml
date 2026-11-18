@@ -38,6 +38,6 @@ Singleton {
         when: root.wifiDevice !== null
         target: root.wifiDevice
         property: "scannerEnabled"
-        value: Popups.currentKind === "network"
+        value: Popups.currentKind === "network" || Popups.currentKind === "controls"
     }
 }

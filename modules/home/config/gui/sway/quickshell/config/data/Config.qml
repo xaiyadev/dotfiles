@@ -14,8 +14,6 @@ Singleton {
         "nm-applet"    // network, see the Wi-Fi popup
     ]
 
-    // main monitor per setup ("<make> <model>"), see services/GameMode.qml; otherwise the
-    // external monitor with the highest refresh rate is used
     readonly property list<string> preferredMainMonitors: [
         "AOC CQ32G4"    // home
     ]

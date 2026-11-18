@@ -25,7 +25,7 @@ RowLayout {
             StyledText {
                 id: label
                 anchors.centerIn: parent
-                text: Glyphs.workspaces[ws.modelData.name] ?? ws.modelData.name
+                text: ws.modelData.number === 10 ? "0" : String(ws.modelData.number)
                 color: ws.modelData.urgent ? Theme.red : ws.modelData.focused ? Theme.flamingo : Theme.text
                 font.bold: ws.modelData.focused
                 font.pixelSize: ws.modelData.focused ? 15 : Theme.fontSize

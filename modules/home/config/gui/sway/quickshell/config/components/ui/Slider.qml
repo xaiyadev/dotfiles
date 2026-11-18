@@ -15,14 +15,14 @@ Item {
     Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width
-        height: 4
-        radius: 2
+        height: 8
+        radius: 3
         color: Theme.surface0
 
         Rectangle {
             width: parent.width * Math.max(0, Math.min(1, root.value))
             height: parent.height
-            radius: 2
+            radius: 3
             color: Theme.text
         }
     }

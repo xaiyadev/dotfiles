@@ -5,17 +5,17 @@ import Quickshell.Io
 import Quickshell.Services.Notifications
 import QtQuick
 
-// history: everything not dismissed yet (newest first); toasts: currently shown popups.
+// history: all received notifications (newest first), cleared only via clearAll(); toasts: currently shown popups.
 Singleton {
     id: root
 
     property bool doNotDisturb: false
 
-    readonly property var history: server.trackedNotifications.values.slice().reverse()
+    property var history: []
     readonly property int count: history.length
 
     // notifications shown as toasts right now
-    property list<Notification> toasts: []
+    property var toasts: []
 
     // receive time per notification id (Notification has no timestamp)
     // (entries are removed when the notification closes, see onNotification)
@@ -52,8 +52,10 @@ Singleton {
     }
 
     function clearAll(): void {
-        for (const n of history) n.dismiss();
+        const all = [...history];
+        history = [];
         toasts = [];
+        for (const n of all) n.dismiss();
     }
 
     // command line / keybinds: qs ipc call notifications toggleDnd | dnd | count | clear | list
@@ -86,7 +88,11 @@ Singleton {
             root.now = Date.now();
             const id = notification.id;
             root.receivedAt[id] = root.now;
-            notification.closed.connect(() => delete root.receivedAt[id]);
+            root.history = [notification, ...root.history];
+            notification.closed.connect(() => {
+                root.history = root.history.filter(n => n !== notification);
+                root.toasts = root.toasts.filter(n => n !== notification);
+            });
             if (!root.doNotDisturb || notification.urgency === NotificationUrgency.Critical)
                 root.toasts = [...root.toasts, notification].slice(-4);
         }

@@ -18,7 +18,7 @@ Singleton {
         .sort((a, b) => (b.connected - a.connected) || a.name.localeCompare(b.name))
     readonly property var connected: devices.filter(d => d.connected)
 
-    // connected devices are shown with the badge dot, see BluetoothIndicator
+
     readonly property string icon: enabled ? Icons.bluetooth : Icons.bluetoothOff
 
     function setEnabled(on: bool): void { if (adapter) adapter.enabled = on; }
