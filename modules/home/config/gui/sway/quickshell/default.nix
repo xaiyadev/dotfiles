@@ -16,9 +16,11 @@ in
         name = "wrapped-quickshell";
         paths = [
           pkgs.quickshell
-          pkgs.adwaita-icon-theme
-          pkgs.framework-tool
-          pkgs.networkmanagerapplet  # nm-connection-editor
+          pkgs.adwaita-icon-theme # icon theme for app and tray icons, see shell.qml
+          pkgs.material-symbols # icon font, see Theme.iconFont
+          pkgs.nerd-fonts.jetbrains-mono # see Theme.font
+          pkgs.sound-theme-freedesktop # toast sound, see Config.notificationSound
+          pkgs.networkmanagerapplet # nm-connection-editor
         ];
 
         meta.mainProgram = pkgs.quickshell.meta.mainProgram;

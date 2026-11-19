@@ -2,13 +2,12 @@ import QtQuick
 import QtQuick.Layouts
 import "../../data"
 
-// 1px line between sections of a popup (horizontal, or vertical between columns)
+// 1px line; horizontal between sections of a popup or `vertical` between groups in the bar
 Rectangle {
     property bool vertical: false
 
     Layout.fillWidth: !vertical
-    Layout.fillHeight: vertical
     implicitWidth: 1
-    implicitHeight: 1
-    color: Theme.surface0
+    implicitHeight: vertical ? 14 : 1
+    color: vertical ? Theme.surface1 : Theme.surface0
 }

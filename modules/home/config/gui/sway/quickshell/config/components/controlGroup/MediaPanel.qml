@@ -1,19 +1,19 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.Mpris as QsMpris
-import "../services"
-import "../data"
-import "ui"
+import "../../services"
+import "../../data"
+import "../ui"
 
-// Player name, cover, title / artist, source format and controls of the selected MPRIS player
+// cover, player name, title / artist, controls and progress of the selected mpris player
 ColumnLayout {
     id: root
 
     readonly property var player: Mpris.selectedPlayer
 
-    // local estimate so the bar advances every second without waiting for MPRIS position events
-    property real trackPosition: player?.position ?? 0
+    readonly property real trackPosition: player?.position ?? 0
 
     function formatTime(secs: real): string {
         const s = Math.floor(secs);
@@ -21,48 +21,31 @@ ColumnLayout {
         return m + ":" + String(s % 60).padStart(2, "0");
     }
 
-    Connections {
-        target: root.player
-        function onPositionChanged() { root.trackPosition = root.player.position; }
-    }
-
+    // mpris only tells us about the position on seeks, so we ask for it every second while
+    // playing and the popup is open (this is how the quickshell docs do it)
     Timer {
-        running: root.player?.isPlaying ?? false
+        running: (root.player?.isPlaying ?? false) && (root.QsWindow.window?.visible ?? false)
         interval: 1000
         repeat: true
-        onTriggered: root.trackPosition += 1
+        triggeredOnStart: true
+        onTriggered: root.player.positionChanged()
     }
 
     Layout.fillWidth: true
     spacing: 10
 
-    // --- cover (left) + metadata/controls (right) ---
+    // cover on the left, info and controls on the right
     RowLayout {
         Layout.fillWidth: true
         spacing: 12
 
-        ClippingRectangle {
+        ImageTile {
+            Layout.alignment: Qt.AlignTop
             implicitWidth: 100
             implicitHeight: 100
-            radius: 8
-            color: Theme.surface0
-            Layout.alignment: Qt.AlignTop
-
-            Image {
-                id: cover
-                anchors.fill: parent
-                source: root.player?.trackArtUrl ?? ""
-                fillMode: Image.PreserveAspectCrop
-                asynchronous: true
-                sourceSize { width: 200; height: 200 }
-            }
-
-            Icon {
-                anchors.centerIn: parent
-                visible: cover.status !== Image.Ready
-                icon: Icons.music
-                size: 36
-            }
+            source: root.player?.trackArtUrl ?? ""
+            fallbackIcon: "music_note"
+            fallbackSize: 36
         }
 
         ColumnLayout {
@@ -80,11 +63,10 @@ ColumnLayout {
                     text: root.player?.identity ?? ""
                     color: Theme.subtext0
                     font.pixelSize: Theme.smallFontSize
-                    elide: Text.ElideRight
                 }
 
                 IconImage {
-                    implicitSize: 16
+                    implicitSize: Theme.smallIconSize
                     source: Mpris.playerIconPath
                 }
             }
@@ -93,9 +75,8 @@ ColumnLayout {
                 Layout.fillWidth: true
                 Layout.topMargin: 2
                 text: root.player?.trackTitle ?? ""
-                font.pixelSize: Theme.fontSize - 1
+                font.pixelSize: Theme.mediumFontSize
                 font.bold: true
-                elide: Text.ElideRight
             }
 
             StyledText {
@@ -103,7 +84,6 @@ ColumnLayout {
                 text: root.player?.trackArtist ?? ""
                 color: Theme.subtext0
                 font.pixelSize: Theme.smallFontSize
-                elide: Text.ElideRight
             }
 
             Item { Layout.fillHeight: true; implicitHeight: 4 }
@@ -114,7 +94,7 @@ ColumnLayout {
                 spacing: 10
 
                 ControlButton {
-                    icon: "media-playlist-shuffle-symbolic"
+                    icon: "shuffle"
                     enabled: root.player?.shuffleSupported ?? false
                     active: root.player?.shuffle ?? false
                     onClicked: if (root.player) root.player.shuffle = !root.player.shuffle
@@ -122,20 +102,20 @@ ColumnLayout {
 
                 ControlButton {
                     Layout.leftMargin: 8
-                    icon: "media-skip-backward-symbolic"
+                    icon: "skip_previous"
                     enabled: root.player?.canGoPrevious ?? false
                     onClicked: root.player.previous()
                 }
 
                 ControlButton {
-                    icon: root.player?.isPlaying ? "media-playback-pause-symbolic" : "media-playback-start-symbolic"
+                    icon: root.player?.isPlaying ? "pause" : "play_arrow"
                     size: 24
                     enabled: root.player?.canTogglePlaying ?? false
                     onClicked: root.player.togglePlaying()
                 }
 
                 ControlButton {
-                    icon: "media-skip-forward-symbolic"
+                    icon: "skip_next"
                     enabled: root.player?.canGoNext ?? false
                     onClicked: root.player.next()
                 }
@@ -143,7 +123,7 @@ ColumnLayout {
                 ControlButton {
                     Layout.leftMargin: 8
                     icon: root.player?.loopState === QsMpris.MprisLoopState.Track
-                        ? "media-playlist-repeat-song-symbolic" : "media-playlist-repeat-symbolic"
+                        ? "repeat_one" : "repeat"
                     enabled: root.player?.loopSupported ?? false
                     active: (root.player?.loopState ?? QsMpris.MprisLoopState.None) !== QsMpris.MprisLoopState.None
                     onClicked: {
@@ -158,7 +138,7 @@ ColumnLayout {
         }
     }
 
-    // --- progress bar (full width, below cover+content row) ---
+    // progress bar over the full width
     Slider {
         id: progressBar
         Layout.fillWidth: true
@@ -167,7 +147,6 @@ ColumnLayout {
         onMoved: (v) => {
             if (root.player?.canSeek) {
                 root.player.position = v * root.player.length;
-                root.trackPosition = v * root.player.length;
             }
         }
     }
@@ -179,7 +158,7 @@ ColumnLayout {
         StyledText {
             text: root.formatTime(root.trackPosition)
             color: Theme.subtext0
-            font.pixelSize: Theme.smallFontSize - 2
+            font.pixelSize: Theme.tinyFontSize
         }
 
         Item { Layout.fillWidth: true }
@@ -187,7 +166,7 @@ ColumnLayout {
         StyledText {
             text: root.formatTime(root.player?.length ?? 0)
             color: Theme.subtext0
-            font.pixelSize: Theme.smallFontSize - 2
+            font.pixelSize: Theme.tinyFontSize
         }
     }
 
@@ -207,15 +186,9 @@ ColumnLayout {
             icon: btn.icon
             size: btn.size
             scale: mouse.pressed ? 0.85 : (mouse.containsMouse ? 1.1 : 1)
-            Behavior on scale { NumberAnimation { duration: 120 } }
+            Behavior on scale { NumberAnimation { duration: Theme.fastAnimation } }
         }
 
-        MouseArea {
-            id: mouse
-            anchors.fill: parent
-            hoverEnabled: true
-            cursorShape: Qt.PointingHandCursor
-            onClicked: btn.clicked()
-        }
+        ClickArea { id: mouse; onClicked: btn.clicked() }
     }
 }

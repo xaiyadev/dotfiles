@@ -1,27 +1,25 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import "../../data"
 
-// Card that drops down out of the bar below its trigger.
-// Transparent overlay on the trigger's screen; only the card takes input.
-// Closes when the mouse is over neither the trigger, the bar above the card, nor the card.
+// card that drops down out of the bar below its trigger; its a transparent overlay on the
+// triggers screen where only the card takes input. closes once the mouse leaves the trigger,
+// the bit of bar above the card and the card itself
 PanelWindow {
     id: popup
 
     required property Item trigger
     property bool triggerHovered: false
     property bool extraHovered: false
-    property string kind: ""
     property int cardWidth: 300
-    property Component belowComponent: null
-    property Component below2Component: null
-    readonly property bool hasBelowCard: belowComponent !== null
-    readonly property bool hasBelow2Card: below2Component !== null
-    readonly property int innerCardGap: 8
+    // extra cards stacked below the main one (e.g. notifications, media)
+    property list<Component> cards: []
 
-    default property alias content: column.data
+    default property alias content: mainCard.content
 
     readonly property bool open: Popups.current === popup
     readonly property var barWindow: trigger.QsWindow.window
@@ -37,6 +35,7 @@ PanelWindow {
     function close(): void { Popups.close(popup); }
 
     onCardWidthChanged: if (open) updatePosition()
+    Component.onDestruction: Popups.close(popup)
 
     // centred below the trigger, kept on screen
     function updatePosition(): void {
@@ -49,7 +48,7 @@ PanelWindow {
     screen: barWindow?.screen ?? null
 
     anchors { top: true; bottom: true; left: true; right: true }
-    // respect the bars' exclusive zones -> the overlay starts directly below the bar
+    // respect the exclusive zone of the bar so the overlay starts right below it
     exclusionMode: ExclusionMode.Normal
     color: "transparent"
 
@@ -57,24 +56,23 @@ PanelWindow {
     WlrLayershell.namespace: "quickshell-popup"
     WlrLayershell.keyboardFocus: open ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
-    Keys.onEscapePressed: close()
-
     // shown on open, hidden after the close animation
     visible: false
     onOpenChanged: if (open) visible = true
 
     mask: Region { item: clipArea }
 
+    // short delay so crossing the gap between trigger and card doesnt close it
     Timer {
         interval: 250
         running: popup.open && !popup.triggerHovered && !bridge.containsMouse && !cardHover.hovered && !popup.extraHovered
         onTriggered: popup.close()
     }
 
-    // part of the bar directly above the card: keeps the popup open while moving between
-    // trigger and card. Lives in the bar window, underneath the modules, takes no buttons.
-    // (MouseArea, not HoverHandler: HoverHandler stays "hovered" when the pointer moves
-    // straight into another surface)
+    // the part of the bar right above the card, keeps the popup open while moving from the trigger
+    // to the card. lives in the bar window under the modules and takes no clicks
+    // (MouseArea and not HoverHandler, that one stays "hovered" when the pointer goes straight
+    // into another surface)
     MouseArea {
         id: bridge
         parent: popup.barWindow?.contentItem ?? null
@@ -87,104 +85,49 @@ PanelWindow {
         acceptedButtons: Qt.NoButton
     }
 
-    // the card slides down out of this area
+    // the cards slide down out of this area
     Item {
         id: clipArea
         x: popup.cardX
         width: popup.cardWidth
-        height: card.height + Theme.popupGap
-            + (popup.hasBelowCard ? (popup.innerCardGap + belowCard.implicitHeight) : 0)
-            + (popup.hasBelow2Card ? (popup.innerCardGap + below2Card.implicitHeight) : 0)
+        height: stack.implicitHeight + Theme.popupGap
         clip: true
+
+        // Escape closes it (Keys only works on items, not on the window)
+        focus: true
+        Keys.onEscapePressed: popup.close()
 
         HoverHandler { id: cardHover }
 
-        Rectangle {
-            id: card
+        ColumnLayout {
+            id: stack
             width: parent.width
-            height: column.implicitHeight + 32
-            radius: Theme.radius
-            color: Theme.base
-            border { width: 1; color: Theme.surface0 }
+            spacing: Theme.popupGap
 
-            y: popup.open ? Theme.popupGap : -height
+            y: popup.open ? Theme.popupGap : -implicitHeight
             opacity: popup.open ? 1 : 0
 
             Behavior on y {
                 NumberAnimation {
-                    duration: 250
+                    duration: Theme.slowAnimation
                     easing.type: Easing.OutCubic
                     onRunningChanged: if (!running && !popup.open) popup.visible = false
                 }
             }
-            Behavior on opacity { NumberAnimation { duration: 200 } }
+            Behavior on opacity { NumberAnimation { duration: Theme.mediumAnimation } }
 
-            ColumnLayout {
-                id: column
-                anchors { top: parent.top; left: parent.left; right: parent.right; margins: 16 }
-                spacing: 10
+            Card {
+                id: mainCard
+                Layout.fillWidth: true
             }
-        }
 
-        Rectangle {
-            id: belowCard
-            visible: popup.hasBelowCard
-            width: parent.width
-            radius: Theme.radius
-            color: Theme.base
-            border { width: 1; color: Theme.surface0 }
-            implicitHeight: belowColumn.implicitHeight + 32
-
-            y: popup.open ? (Theme.popupGap + card.height + popup.innerCardGap) : -(implicitHeight)
-            opacity: popup.open ? 1 : 0
-
-            Behavior on y { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
-            Behavior on opacity { NumberAnimation { duration: 200 } }
-
-            ColumnLayout {
-                id: belowColumn
-                anchors { top: parent.top; left: parent.left; right: parent.right; margins: 16 }
-                spacing: 10
-
-                Loader {
-                    id: belowLoader
+            Repeater {
+                model: popup.cards
+                Card {
+                    id: extraCard
                     Layout.fillWidth: true
-                    active: popup.hasBelowCard
-                    sourceComponent: popup.belowComponent
-                    onLoaded: item.width = Qt.binding(() => width)
-                }
-            }
-        }
-
-        Rectangle {
-            id: below2Card
-            visible: popup.hasBelow2Card
-            width: parent.width
-            radius: Theme.radius
-            color: Theme.base
-            border { width: 1; color: Theme.surface0 }
-            implicitHeight: below2Column.implicitHeight + 32
-
-            y: popup.open
-                ? (Theme.popupGap + card.height + popup.innerCardGap
-                   + (popup.hasBelowCard ? belowCard.implicitHeight + popup.innerCardGap : 0))
-                : -(implicitHeight)
-            opacity: popup.open ? 1 : 0
-
-            Behavior on y { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
-            Behavior on opacity { NumberAnimation { duration: 200 } }
-
-            ColumnLayout {
-                id: below2Column
-                anchors { top: parent.top; left: parent.left; right: parent.right; margins: 16 }
-                spacing: 10
-
-                Loader {
-                    id: below2Loader
-                    Layout.fillWidth: true
-                    active: popup.hasBelow2Card
-                    sourceComponent: popup.below2Component
-                    onLoaded: item.width = Qt.binding(() => width)
+                    required property Component modelData
+                    Loader { Layout.fillWidth: true; sourceComponent: extraCard.modelData }
                 }
             }
         }

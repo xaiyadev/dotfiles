@@ -3,21 +3,28 @@ pragma Singleton
 import Quickshell
 import QtQuick
 
-// Personal settings in one place
 Singleton {
-    // players that count as "real" music players and beat e.g. a browser (identity / desktop entry)
+    // music players that win over every other player in the media panel
     readonly property list<string> musicPlayers: ["sone", "tidal", "spotify"]
 
-    // tray items that are not shown (item id)
+    // tray items that should be hidden
     readonly property list<string> hiddenTrayItems: [
         "vicinae",     // launcher
         "nm-applet"    // network, see the Wi-Fi popup
     ]
 
-    readonly property list<string> preferredMainMonitors: [
-        "AOC CQ32G4"    // home
-    ]
+    // the battery charge limit; percent gets scaled so that this shows up as 100%
+    readonly property int chargeLimit: 80
 
-    // icons the Adwaita theme doesn't have are taken from here (e.g. EasyEffects in the tray)
-    readonly property string fallbackIconDir: "/etc/profiles/per-user/" + Quickshell.env("USER") + "/share/icons/Papirus/22x22/apps/"
+    // gravatar hashes per user for the avatar in the control popup
+    readonly property var avatars: ({
+        "xaiya":   "3c840e20aedb665ac4a8b5d1daaf8fd9",
+        "blmedia": "6d8aebedc2d80c49e6f1e86a2e9e0c1f"
+    })
+
+    // looked up in the user profile, the packages for it are in default.nix
+    readonly property string profileShare: "/etc/profiles/per-user/" + Quickshell.env("USER") + "/share/"
+
+    // played for every toast
+    readonly property string notificationSound: profileShare + "sounds/freedesktop/stereo/message-new-instant.oga"
 }

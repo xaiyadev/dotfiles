@@ -1,7 +1,7 @@
 import QtQuick
 import "../../data"
 
-// Small clickable icon (calendar arrows, close, copy, ...), optionally with a hover / selected background
+// small clickable icon (device picker, clear all, ...), can have a hover / selected background
 Rectangle {
     id: root
 
@@ -9,27 +9,20 @@ Rectangle {
     property int iconSize: 14
     property bool selected: false
     property bool showBackground: true
-    property color iconColor: selected || hovered ? Theme.text : Theme.subtext0
     readonly property bool hovered: mouse.containsMouse
     signal clicked()
 
     implicitWidth: iconSize + (showBackground ? 12 : 6)
     implicitHeight: implicitWidth
-    radius: 6
+    radius: Theme.smallRadius
     color: !showBackground ? "transparent" : selected ? Theme.surface1 : hovered ? Theme.surface0 : "transparent"
 
     Icon {
         anchors.centerIn: parent
         icon: root.icon
         size: root.iconSize
-        color: root.iconColor
+        color: root.selected || root.hovered ? Theme.text : Theme.subtext0
     }
 
-    MouseArea {
-        id: mouse
-        anchors.fill: parent
-        hoverEnabled: true
-        cursorShape: Qt.PointingHandCursor
-        onClicked: root.clicked()
-    }
+    ClickArea { id: mouse; onClicked: root.clicked() }
 }

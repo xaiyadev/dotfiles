@@ -1,7 +1,7 @@
 import QtQuick
 import "../../data"
 
-// Horizontal 0..1 slider: click, drag or scroll
+// horizontal 0..1 slider, click, drag or scroll it
 Item {
     id: root
 
@@ -27,9 +27,9 @@ Item {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
+    ClickArea {
+        // without hover positionChanged only comes while pressed, otherwise just moving over it would set the value
+        hoverEnabled: false
         onPressed: (event) => root.emit(event.x / width)
         onPositionChanged: (event) => root.emit(event.x / width)
         onWheel: (event) => root.emit(root.value + (event.angleDelta.y > 0 ? 0.02 : -0.02))

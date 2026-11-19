@@ -3,13 +3,12 @@ pragma Singleton
 import Quickshell
 import QtQuick
 
-import '../data'
-
-// Resolve an application's icon from its desktop entry.
-// Tries the id, then Quickshell's heuristic (name / StartupWMClass), then the display name.
+// finds icons for apps through their desktop entry; only the icon theme (Adwaita, then hicolor
+// where apps put their own icons) is used, nothing else
 Singleton {
+    // tries the id, then quickshells heuristic (name / StartupWMClass), then the display name
     function entryFor(id: string, name: string): var {
-        DesktopEntries.applications.values; // re-evaluate bindings once desktop entries have loaded
+        DesktopEntries.applications.values; // so bindings update once the desktop entries are loaded
         return (id ? DesktopEntries.byId(id) : null)
             ?? (id ? DesktopEntries.heuristicLookup(id) : null)
             ?? (name ? DesktopEntries.heuristicLookup(name) : null)
@@ -17,39 +16,25 @@ Singleton {
             ?? null;
     }
 
+    // `fallback` is a theme icon for when the app has none we can find
     function iconPath(id: string, name: string, fallback: string): string {
-        const entry = entryFor(id, name);
-        const iconName = entry?.icon || id || fallback;
-        if (!iconName) return "";
-
-        // Absolute path or URL — use directly
-        if (iconName.startsWith("/")) return "file://" + iconName;
-        if (iconName.includes("://")) return iconName;
-
-        // Use the icon if the current theme has it
-        const resolved = Quickshell.iconPath(iconName, false);
-        if (resolved !== "") return resolved;
-
-        // Fall back to the Papirus icon
-        return _papirus(iconName);
+        const iconName = entryFor(id, name)?.icon || id;
+        return (iconName ? source(iconName) : "") || (fallback ? source(fallback) : "");
     }
 
+    // tray icons come as image://icon/<name>, use a generic icon if the theme doesnt know the name
     function trayIcon(source: string): string {
-        if (!source.startsWith("image://icon/")) return source;
+        // apps with their own icon dir send it as ?path=, the theme doesnt know those
+        if (!source.startsWith("image://icon/") || source.includes("?path=")) return source;
         const name = source.slice("image://icon/".length).replace(/\?.*$/, "");
-        if (Quickshell.iconPath(name, true) !== "") return source;
-        return _papirus(name);
+        return Quickshell.iconPath(name, true) !== "" ? source : Quickshell.iconPath("application-x-executable");
     }
 
-    // fallback return
-    function _papirus(name: string): string {
-        return "file://" + Config.fallbackIconDir + name.replace(/-symbolic$/, "") + ".svg";
-    }
-
-    // icon name or absolute path (some apps, e.g. kitty, use a file path) -> image source
-    function source(icon: string, fallback: string): string {
+    // icon name, absolute path (some apps like kitty send one) or url to an image source;
+    // empty if the theme doesnt have the icon
+    function source(icon: string): string {
         if (icon.startsWith("/")) return "file://" + icon;
         if (icon.includes("://")) return icon;
-        return Quickshell.iconPath(icon, fallback);
+        return Quickshell.iconPath(icon, true);
     }
 }

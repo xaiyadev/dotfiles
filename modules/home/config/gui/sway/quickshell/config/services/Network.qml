@@ -4,11 +4,7 @@ import Quickshell
 import Quickshell.Networking as QsNet
 import QtQuick
 
-import '../data'
-
 Singleton {
-    id: root
-
     readonly property var devices: QsNet.Networking.devices.values
     readonly property var wifiDevice: devices.find(d => d.type === QsNet.DeviceType.Wifi) ?? null
     readonly property var wiredDevice: devices.find(d => d.type === QsNet.DeviceType.Wired && d.connected) ?? null
@@ -16,15 +12,26 @@ Singleton {
     readonly property bool wifiEnabled: QsNet.Networking.wifiEnabled
     readonly property var activeWifi: wifiDevice?.networks.values.find(n => n.connected) ?? null
 
-    // connected first, then known networks, then by signal
+    // connected first, then known networks, then by signal; the signal in 4 steps so rows dont
+    // jump around on every tiny change while scanning
     readonly property var networks: (wifiDevice?.networks.values ?? []).slice().sort((a, b) =>
-        (b.connected - a.connected) || (b.known - a.known) || (b.signalStrength - a.signalStrength))
+        (b.connected - a.connected) || (b.known - a.known)
+        || (Math.round(b.signalStrength * 4) - Math.round(a.signalStrength * 4))
+        || a.name.localeCompare(b.name))
 
     readonly property string icon: {
-        if (wiredDevice) return Icons.wired;
-        if (!wifiEnabled) return Icons.wifiDisabled;
-        if (!activeWifi) return Icons.wifiOffline;
-        return Icons.wifi(activeWifi.signalStrength);   // signalStrength is 0..1
+        if (wiredDevice) return "lan";
+        if (!wifiEnabled) return "signal_wifi_off";
+        if (!activeWifi) return "signal_wifi_0_bar";
+        return wifiIcon(activeWifi.signalStrength);
+    }
+
+    // signal bars for a strength of 0..1
+    function wifiIcon(strength: real): string {
+        return strength > 0.75 ? "signal_wifi_4_bar"
+             : strength > 0.5  ? "network_wifi_3_bar"
+             : strength > 0.25 ? "network_wifi_2_bar"
+             : "network_wifi_1_bar";
     }
 
     function isSecured(network): bool {
@@ -32,12 +39,4 @@ Singleton {
     }
 
     function setWifiEnabled(enabled: bool): void { QsNet.Networking.wifiEnabled = enabled; }
-
-    // scan for networks only while the network popup is open
-    Binding {
-        when: root.wifiDevice !== null
-        target: root.wifiDevice
-        property: "scannerEnabled"
-        value: Popups.currentKind === "network" || Popups.currentKind === "controls"
-    }
 }
