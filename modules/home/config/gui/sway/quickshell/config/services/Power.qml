@@ -4,7 +4,7 @@ import Quickshell
 import Quickshell.Services.UPower
 import QtQuick
 
-import "../data"
+import qs.data
 
 // battery state from upower, scaled to the charge limit (Config.chargeLimit)
 Singleton {

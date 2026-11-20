@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../data"
+import qs.data
 
 // quick settings tile with an icon, title and status line; click toggles it. with `hasMenu`
 // there is an arrow on the right that opens its menu (right click on the tile does the same)

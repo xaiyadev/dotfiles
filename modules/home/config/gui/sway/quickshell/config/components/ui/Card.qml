@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../data"
+import qs.data
 
 // rounded panel with a border; children go into a ColumnLayout with `padding` around it
 Rectangle {

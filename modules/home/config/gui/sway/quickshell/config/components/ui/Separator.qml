@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../data"
+import qs.data
 
 // 1px line; horizontal between sections of a popup or `vertical` between groups in the bar
 Rectangle {

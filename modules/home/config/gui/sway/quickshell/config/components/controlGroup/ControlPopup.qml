@@ -1,10 +1,13 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
-import "../../services"
-import "../../data"
-import "../ui"
+import qs.services
+import qs.data
+import qs.components
+import qs.components.ui
 
 // quick settings (user, tiles, volume) with the notifications and media cards below it
 BarPopup {
@@ -37,7 +40,7 @@ BarPopup {
     }
 
     Component { id: notificationsCard; NotificationPanel {} }
-    Component { id: mediaCard; MediaPanel {} }
+    Component { id: mediaCard; MediaPanel { polling: popup.visible } }
 
     // header
     RowLayout {
@@ -106,15 +109,15 @@ BarPopup {
         ToggleTile {
             icon: "notifications_off"
             title: "Silent"
-            active: Notifications.doNotDisturb
-            onClicked: Notifications.doNotDisturb = !Notifications.doNotDisturb
+            active: ShellState.doNotDisturb
+            onClicked: ShellState.doNotDisturb = !ShellState.doNotDisturb
         }
 
         ToggleTile {
             icon: "coffee"
             title: "Awake"
-            active: IdleInhibit.enabled
-            onClicked: IdleInhibit.enabled = !IdleInhibit.enabled
+            active: ShellState.idleInhibit
+            onClicked: ShellState.idleInhibit = !ShellState.idleInhibit
         }
     }
 
@@ -149,12 +152,11 @@ BarPopup {
     }
 
     // menus opened from the tiles and volume rows
-    WifiMenu { id: wifiMenu; anchor.window: popup }
-    BluetoothMenu { id: btMenu; anchor.window: popup }
+    WifiMenu { id: wifiMenu }
+    BluetoothMenu { id: btMenu }
 
     DevicePicker {
         id: sinkPicker
-        anchor.window: popup
         devices: Pipewire.sinks
         current: Pipewire.sink
         itemIcon: "volume_up"
@@ -163,7 +165,6 @@ BarPopup {
 
     DevicePicker {
         id: sourcePicker
-        anchor.window: popup
         devices: Pipewire.sources
         current: Pipewire.source
         itemIcon: "mic"

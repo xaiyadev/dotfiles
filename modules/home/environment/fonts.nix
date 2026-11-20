@@ -73,6 +73,9 @@ in
 
     sylveon.packages = {
       inherit (pkgs.maple-mono) truetype;
+
+      # icon font
+      inherit (pkgs) material-symbols;
     };
   };
 }

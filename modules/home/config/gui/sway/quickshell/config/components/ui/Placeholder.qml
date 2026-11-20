@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../data"
+import qs.data
 
 // greyed out "nothing here" text ("No notifications", "Wi-Fi is off", ...)
 StyledText {

@@ -1,5 +1,5 @@
 import QtQuick
-import "../../data"
+import qs.data
 
 // small clickable icon (device picker, clear all, ...), can have a hover / selected background
 Rectangle {

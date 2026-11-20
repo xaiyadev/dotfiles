@@ -1,5 +1,5 @@
 import QtQuick
-import "../../data"
+import qs.data
 
 // material symbols icon; `icon` is the name of the symbol (fonts.google.com/icons), the font
 // turns it into the glyph. way cheaper than recoloring theme icons with an effect each

@@ -4,8 +4,8 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.I3
-import "../data"
-import "ui"
+import qs.data
+import qs.components.ui
 
 // workspaces of one monitor; the focused one in bold, the one shown on this monitor (while
 // another monitor has focus) in the accent too

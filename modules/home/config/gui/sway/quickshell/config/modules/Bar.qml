@@ -5,11 +5,10 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Wayland
 
-import "../components"
-import "../components/controlGroup"
-import "../components/ui"
-import "../data"
-import "../services"
+import qs.components
+import qs.components.controlGroup
+import qs.components.ui
+import qs.data
 
 Scope {
     Variants {
@@ -31,7 +30,7 @@ Scope {
             // keep-awake, toggled by the "Awake" tile in the control popup
             IdleInhibitor {
                 window: bar
-                enabled: IdleInhibit.enabled
+                enabled: ShellState.idleInhibit
             }
 
             Rectangle {

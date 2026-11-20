@@ -4,7 +4,7 @@ import Quickshell
 import Quickshell.Services.Mpris as QsMpris
 import QtQuick
 
-import "../data"
+import qs.data
 
 Singleton {
     // players without a track (e.g. an idle browser tab) are left out
@@ -23,7 +23,5 @@ Singleton {
 
     readonly property QsMpris.MprisPlayer selectedPlayer: players.reduce((best, p) => !best || score(p) > score(best) ? p : best, null)
 
-    // icon of the selected player; goes through the desktop entry lookup in Apps because SONE
-    // reports an id that doesnt match its .desktop file and chromium sends none at all
-    readonly property string playerIconPath: Apps.iconPath(selectedPlayer?.desktopEntry ?? "", selectedPlayer?.identity ?? "", "audio-x-generic")
+    readonly property string playerIconPath: AppIcons.iconPath(selectedPlayer?.desktopEntry ?? "", selectedPlayer?.identity ?? "", "audio-x-generic")
 }

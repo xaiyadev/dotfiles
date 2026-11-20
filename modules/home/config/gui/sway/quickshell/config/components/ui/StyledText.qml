@@ -1,5 +1,5 @@
 import QtQuick
-import "../../data"
+import qs.data
 
 Text {
     color: Theme.text

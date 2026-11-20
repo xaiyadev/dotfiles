@@ -12,9 +12,8 @@ Singleton {
     readonly property bool wifiEnabled: QsNet.Networking.wifiEnabled
     readonly property var activeWifi: wifiDevice?.networks.values.find(n => n.connected) ?? null
 
-    // connected first, then known networks, then by signal; the signal in 4 steps so rows dont
-    // jump around on every tiny change while scanning
-    readonly property var networks: (wifiDevice?.networks.values ?? []).slice().sort((a, b) =>
+    // get the visible networks and order them
+    readonly property var networks: (wifiDevice?.networks.values ?? []).filter(n => n.name !== "").sort((a, b) =>
         (b.connected - a.connected) || (b.known - a.known)
         || (Math.round(b.signalStrength * 4) - Math.round(a.signalStrength * 4))
         || a.name.localeCompare(b.name))
@@ -26,7 +25,6 @@ Singleton {
         return wifiIcon(activeWifi.signalStrength);
     }
 
-    // signal bars for a strength of 0..1
     function wifiIcon(strength: real): string {
         return strength > 0.75 ? "signal_wifi_4_bar"
              : strength > 0.5  ? "network_wifi_3_bar"
@@ -34,9 +32,18 @@ Singleton {
              : "network_wifi_1_bar";
     }
 
+    // check if password is needed
     function isSecured(network): bool {
         return network.security !== QsNet.WifiSecurityType.Open && network.security !== QsNet.WifiSecurityType.Unknown;
     }
 
     function setWifiEnabled(enabled: bool): void { QsNet.Networking.wifiEnabled = enabled; }
+
+    // connect and disconnect from connections
+    // if password needed send prompt  TODO: implement prompt
+    function toggleConnection(network): void {
+        if (network.connected) network.disconnect();
+        else if (network.known || !isSecured(network)) network.connect();
+        else Quickshell.execDetached(["notify-send", "-a", "Quickshell", "Wi-Fi", "WIFI logins not implemented yet"]);
+    }
 }

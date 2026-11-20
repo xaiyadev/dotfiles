@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
-import "../../data"
+import qs.data
 
 // clickable row with an icon, title, optional subtitle and a trailing icon; `compact` is the
 // tighter one for the tray menus

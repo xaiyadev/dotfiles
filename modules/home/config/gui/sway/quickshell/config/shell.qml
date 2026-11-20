@@ -2,7 +2,7 @@
 
 import Quickshell
 
-import "modules"
+import qs.modules
 
 Scope {
     Bar { }

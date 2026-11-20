@@ -3,8 +3,8 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import "../../services"
-import "../ui"
+import qs.services
+import qs.components.ui
 
 // paired bluetooth devices, click to (dis)connect
 SubPopup {

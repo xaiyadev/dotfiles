@@ -1,5 +1,5 @@
 import QtQuick
-import "../../data"
+import qs.data
 
 // battery drawn like the Adwaita audio / Wi-Fi icons (2px outline, filled level);
 // the fill pulses every 10s while charging

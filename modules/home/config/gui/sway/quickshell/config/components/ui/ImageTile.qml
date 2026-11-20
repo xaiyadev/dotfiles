@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell.Widgets
-import "../../data"
+import qs.data
 
 // rounded image with a fallback icon until it is loaded (avatar, cover art, notification image)
 ClippingRectangle {

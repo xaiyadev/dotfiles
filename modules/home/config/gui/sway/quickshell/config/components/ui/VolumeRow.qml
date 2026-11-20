@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../data"
+import qs.data
 
 // icon (click to mute), slider, percentage and an optional device picker button
 RowLayout {

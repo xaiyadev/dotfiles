@@ -1,17 +1,18 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.Mpris as QsMpris
-import "../../services"
-import "../../data"
-import "../ui"
+import qs.services
+import qs.data
+import qs.components.ui
 
 // cover, player name, title / artist, controls and progress of the selected mpris player
 ColumnLayout {
     id: root
 
-    readonly property var player: Mpris.selectedPlayer
+    readonly property QsMpris.MprisPlayer player: Mpris.selectedPlayer
+    // position polling only runs while this is true, ControlPopup binds it to its visibility
+    property bool polling: false
 
     readonly property real trackPosition: player?.position ?? 0
 
@@ -24,7 +25,7 @@ ColumnLayout {
     // mpris only tells us about the position on seeks, so we ask for it every second while
     // playing and the popup is open (this is how the quickshell docs do it)
     Timer {
-        running: (root.player?.isPlaying ?? false) && (root.QsWindow.window?.visible ?? false)
+        running: root.polling && (root.player?.isPlaying ?? false)
         interval: 1000
         repeat: true
         triggeredOnStart: true
@@ -43,7 +44,7 @@ ColumnLayout {
             Layout.alignment: Qt.AlignTop
             implicitWidth: 100
             implicitHeight: 100
-            source: root.player?.trackArtUrl ?? ""
+            source: root.player ? root.player.trackArtUrl : ""
             fallbackIcon: "music_note"
             fallbackSize: 36
         }
@@ -143,7 +144,8 @@ ColumnLayout {
         id: progressBar
         Layout.fillWidth: true
         visible: (root.player?.lengthSupported ?? false) && (root.player?.length ?? 0) > 0
-        value: root.player?.length > 0 ? Math.min(1, root.trackPosition / root.player.length) : 0
+        value: (root.player?.length ?? 0) > 0 ? Math.min(1, root.trackPosition / root.player.length) : 0
+        live: false
         onMoved: (v) => {
             if (root.player?.canSeek) {
                 root.player.position = v * root.player.length;
@@ -156,7 +158,8 @@ ColumnLayout {
         visible: progressBar.visible
 
         StyledText {
-            text: root.formatTime(root.trackPosition)
+            // where it would seek to while dragging
+            text: root.formatTime(progressBar.dragging ? progressBar.dragValue * root.player.length : root.trackPosition)
             color: Theme.subtext0
             font.pixelSize: Theme.tinyFontSize
         }

@@ -3,8 +3,8 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import "../data"
-import "ui"
+import qs.data
+import qs.components.ui
 
 // menu of a tray item in the bars style instead of qts unstyled platform menu;
 // submenus open in place with a "Back" row

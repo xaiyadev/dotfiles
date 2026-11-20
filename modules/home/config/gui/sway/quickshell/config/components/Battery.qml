@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../services"
-import "../../data"
+import qs.services
+import qs.data
+import qs.components.ui
 
 // battery icon and percentage; hidden on machines without a battery
 RowLayout {
@@ -9,7 +10,7 @@ RowLayout {
 
     property int fontSize: Theme.fontSize
     readonly property color levelColor: Power.percent <= 20 ? Theme.red
-        : Power.percent <= 30 ? Theme.rosewater
+        : Power.percent <= 30 ? Theme.peach
         : Theme.text
 
     visible: Power.present

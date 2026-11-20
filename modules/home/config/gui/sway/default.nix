@@ -242,17 +242,6 @@ in
     };
 
     services = {
-      swaync = {
-        enable = true;
-
-        settings = {
-          positionX = "right";
-          positionY = "top";
-
-          image-visibility = "never";
-        };
-      };
-
       swayidle = {
         enable = true;
 

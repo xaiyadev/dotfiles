@@ -4,9 +4,9 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
 import Quickshell.Services.Notifications
-import "../services"
-import "../data"
-import "ui"
+import qs.services
+import qs.data
+import qs.components.ui
 
 // one notification, used for the toasts and in the history; leave() plays the out animation first
 Rectangle {
@@ -16,7 +16,10 @@ Rectangle {
     property bool isToast: false
     readonly property bool hovered: hover.hovered
 
-    // goes 1 -> 0 after the fade out so the cards below slide up
+    // a toast got clicked away; only hides the toast, the notification stays in the history
+    signal hidden()
+
+    // needed for the fade animation
     property real collapse: 1
     property bool leaving: false
 
@@ -27,8 +30,8 @@ Rectangle {
         leaveAnim.start();
     }
 
-    readonly property string appIconSource: notification.appIcon !== "" ? Apps.source(notification.appIcon) : ""
-    readonly property string imageSource: notification.image !== "" ? Apps.source(notification.image) : ""
+    readonly property string appIconSource: AppIcons.source(notification.appIcon)
+    readonly property string imageSource: AppIcons.source(notification.image)
     readonly property var defaultAction: notification.actions.find(a => a.identifier === "default") ?? null
     readonly property var otherActions: notification.actions.filter(a => a.identifier !== "default")
 
@@ -60,9 +63,7 @@ Rectangle {
 
     ClickArea {
         enabled: !root.leaving
-        onClicked: root.leave(() => root.isToast
-            ? Notifications.hideToast(root.notification)
-            : root.notification?.dismiss())
+        onClicked: root.leave(() => root.isToast ? root.hidden() : root.notification?.dismiss())
     }
 
     RowLayout {

@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../data"
+import qs.data
 
 // small button, e.g. "Network settings" in a menu or an action on a notification;
 // `highlighted` is for the main action and gets the accent as background

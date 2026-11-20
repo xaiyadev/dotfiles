@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell
-import "ui"
+import qs.components.ui
 
 StyledText {
     text: Qt.formatTime(clock.date, "HH:mm")

@@ -4,10 +4,10 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
-import "../../services"
-import "../../data"
-import ".."
-import "../ui"
+import qs.services
+import qs.data
+import qs.components
+import qs.components.ui
 
 // notification history, grouped by age, with "clear all"
 ColumnLayout {
@@ -55,7 +55,7 @@ ColumnLayout {
             spacing: 8
 
             Repeater {
-                model: ScriptModel { id: notifModel; values: [...Notifications.history] }
+                model: ScriptModel { id: notifModel; values: Notifications.history }
 
                 // first card of each age group gets a divider with the group name, see Notifications.ageGroup
                 // the previous one comes from the model and not from the history, that one already
@@ -64,9 +64,9 @@ ColumnLayout {
                     id: entry
                     required property var modelData
                     required property int index
-                    readonly property string group: Notifications.ageGroup(modelData)
+                    readonly property string group: Notifications.ageGroup(modelData.time)
                     readonly property bool firstOfGroup: index === 0
-                        || Notifications.ageGroup(notifModel.values[index - 1]) !== group
+                        || Notifications.ageGroup(notifModel.values[index - 1]?.time ?? 0) !== group
 
                     Layout.fillWidth: true
                     spacing: 8
@@ -87,7 +87,7 @@ ColumnLayout {
                         Separator { }
                     }
 
-                    NotificationCard { notification: entry.modelData }
+                    NotificationCard { notification: entry.modelData.notification }
                 }
             }
         }

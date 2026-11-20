@@ -1,9 +1,8 @@
 import QtQuick
 import Quickshell
-import "../../data"
+import qs.data
 
-// small card that drops down below an item inside a BarPopup (device pickers, network list, ...);
-// children go into a ColumnLayout
+
 PopupWindow {
     id: root
 
@@ -12,28 +11,37 @@ PopupWindow {
     property bool shown: false
     readonly property bool hovered: hover.hovered
 
+    // minHeight needed even if the content changes (e.g WIFI scans)
+    property int reservedHeight: 0
+
     function open(): void {
         shown = false;
         visible = true;
         Qt.callLater(() => { shown = true; });
     }
 
-    // only starts the animation, the window hides itself once its done
+    // just starts the animation, it will close by itself
     function close(): void { shown = false; }
 
-    // opens below `item` (relative to the content of the parent popup) or closes it if open
+    // open this popup right below the item given
     function toggleBelow(item: Item): void {
         if (shown) return close();
+
+        anchor.window = item.QsWindow.window;
         const pos = item.mapToItem(anchor.window.contentItem, 0, item.height + 4);
         anchor.rect.x = Math.round(pos.x);
         anchor.rect.y = Math.round(pos.y);
+
         open();
     }
 
     visible: false
     color: "transparent"
+
     implicitWidth: 240
-    implicitHeight: card.implicitHeight
+    implicitHeight: Math.max(card.implicitHeight, reservedHeight)
+
+    mask: Region { item: card }
 
     HoverHandler { id: hover }
 

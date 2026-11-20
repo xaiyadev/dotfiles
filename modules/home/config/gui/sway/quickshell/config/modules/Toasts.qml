@@ -8,17 +8,48 @@ import Quickshell.Services.Notifications
 import QtQuick
 import QtQuick.Layouts
 
-import "../components"
-import "../services"
-import "../data"
+import qs.components
+import qs.services
+import qs.data
 
-// notification popups top right below the bar on the focused screen; they go away after a
-// few seconds (not while hovered), critical ones stay until clicked away
 PanelWindow {
     id: root
 
+    readonly property int maxToasts: 4
+
+    // shown notifications, oldest first
+    property var toasts: []
+    property var hoveredToasts: []
+
+    function show(notification): void {
+        if (toasts.length >= maxToasts)
+            hide(toasts.find(n => !hoveredToasts.includes(n)) ?? toasts[0]);
+        toasts = [...toasts, notification];
+    }
+
+    function hide(notification): void {
+        toasts = toasts.filter(n => n !== notification);
+        hoveredToasts = hoveredToasts.filter(n => n !== notification);
+    }
+
+    function setHovered(notification, hovered: bool): void {
+        const others = hoveredToasts.filter(n => n !== notification);
+        hoveredToasts = hovered ? [...others, notification] : others;
+    }
+
+    Connections {
+        target: Notifications
+
+        function onNotified(notification): void {
+            if (ShellState.doNotDisturb && notification.urgency !== NotificationUrgency.Critical) return;
+
+            notification.closed.connect(() => root.hide(notification));
+            root.show(notification);
+        }
+    }
+
     screen: Quickshell.screens.find(s => s.name === I3.focusedMonitor?.name) ?? Quickshell.screens[0]
-    visible: Notifications.toasts.length > 0
+    visible: toasts.length > 0
 
     anchors { top: true; right: true }
     margins { top: Theme.popupGap; right: Theme.barMargin }
@@ -41,10 +72,8 @@ PanelWindow {
         spacing: 8
 
         Repeater {
-            // ScriptModel so already shown toasts keep their timer and animation when a new one comes in
-            model: ScriptModel { values: [...Notifications.toasts] }
+            model: ScriptModel { values: root.toasts }
 
-            // wrapper fades in, the card itself animates out on leave()
             Item {
                 id: toast
                 required property var modelData
@@ -65,16 +94,16 @@ PanelWindow {
                     width: parent.width
                     notification: toast.modelData
                     isToast: true
-                    onHoveredChanged: Notifications.setToastHovered(toast.modelData, hovered)
+                    onHoveredChanged: root.setHovered(toast.modelData, hovered)
+                    onHidden: root.hide(toast.modelData)
                 }
 
-                // expireTimeout is in seconds; unset (-1) and 0 ("never") both get 5s so nothing stays up forever
                 Timer {
                     interval: toast.modelData.expireTimeout > 0 ? toast.modelData.expireTimeout * 1000 : 5000
                     running: !card.hovered && toast.modelData.urgency !== NotificationUrgency.Critical
                     onTriggered: {
                         const n = toast.modelData;
-                        card.leave(() => Notifications.hideToast(n));
+                        card.leave(() => root.hide(n));
                     }
                 }
             }

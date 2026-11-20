@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../services"
-import "../../data"
-import "../ui"
+import qs.services
+import qs.data
+import qs.components
+import qs.components.ui
 
 Item {
     id: root
@@ -15,15 +16,15 @@ Item {
         anchors.centerIn: parent
         spacing: 10
 
-        Icon { icon: Pipewire.sinkIcon; color: Theme.subtext0 }
-        Icon { icon: Network.icon; color: Theme.subtext0 }
+        Icon { icon: Pipewire.sinkIcon }
+        Icon { icon: Network.icon }
 
         // notification bell, the dot shows while there is anything in the history (not in do-not-disturb)
         Icon {
             Layout.leftMargin: 6
-            icon: Notifications.doNotDisturb ? "notifications_off" : "notifications"
+            icon: ShellState.doNotDisturb ? "notifications_off" : "notifications"
             Rectangle {
-                visible: Notifications.count > 0 && !Notifications.doNotDisturb
+                visible: Notifications.count > 0 && !ShellState.doNotDisturb
                 anchors { right: parent.right; bottom: parent.bottom; rightMargin: -3; bottomMargin: -2 }
                 width: 8; height: 8; radius: 4
                 color: Theme.accent

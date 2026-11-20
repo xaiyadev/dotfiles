@@ -3,10 +3,11 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Services.SystemTray
-import "../services"
-import "../data"
-import "ui"
+import qs.services
+import qs.data
+import qs.components.ui
 
 RowLayout {
     id: root
@@ -58,21 +59,10 @@ RowLayout {
                 color: trayItem.menuOpen ? Theme.surface1 : trayItem.containsMouse ? Theme.surface0 : "transparent"
             }
 
-            // tray icon names often dont resolve, so fall back to a generic icon
-            Image {
-                property int attempt: 0
-                readonly property var sources: [
-                    Apps.trayIcon(trayItem.modelData.icon),
-                    Quickshell.iconPath("application-x-executable")
-                ]
-
+            IconImage {
                 anchors.centerIn: parent
-                width: Theme.iconSize
-                height: Theme.iconSize
-                sourceSize { width: Theme.iconSize * 2; height: Theme.iconSize * 2 }
-                source: sources[attempt]
-                onStatusChanged: if (status === Image.Error && attempt < sources.length - 1) attempt++
-                onSourcesChanged: attempt = 0
+                implicitSize: Theme.iconSize
+                source: AppIcons.trayIcon(trayItem.modelData.icon)
             }
         }
     }

@@ -12,13 +12,13 @@ Singleton {
     readonly property color subtext0: "#a6adc8"
     readonly property color text: "#cdd6f4"
     readonly property color flamingo: "#f2cdcd"
-    readonly property color rosewater: "#f5e0dc"
+    readonly property color peach: "#fab387"
     readonly property color red: "#f38ba8"
 
     readonly property color accent: flamingo
 
     // fonts
-    readonly property string font: "JetBrainsMono Nerd Font" // from default.nix
+    readonly property string font: "Maple Mono"
     readonly property int fontSize: 14
     readonly property int mediumFontSize: 13
     readonly property int smallFontSize: 12
