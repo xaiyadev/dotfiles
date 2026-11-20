@@ -33,6 +33,7 @@ in
           "Noto Serif"
 
           # icon fonts
+          "Symbols Nerd Font Mono" # nerd font glyphs (neovim, prompt, etc.)
           "Material Icons"
           "Material Design Icons"
         ];
@@ -76,6 +77,7 @@ in
 
       # icon font
       inherit (pkgs) material-symbols;
+      inherit (pkgs.nerd-fonts) symbols-only;
     };
   };
 }
