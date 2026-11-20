@@ -1,34 +1,39 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../data"
+import qs.data
 
-// Small button, e.g. "open the full app" at the bottom of a popup
+// small button, e.g. "Network settings" in a menu or an action on a notification;
+// `highlighted` is for the main action and gets the accent as background
 Rectangle {
     id: root
 
     property string icon: ""
     property string text: ""
+    property bool highlighted: false
     signal clicked()
+
+    readonly property color foreground: highlighted ? Theme.base : Theme.text
 
     implicitHeight: 30
     implicitWidth: content.implicitWidth + 24
-    radius: 8
-    color: mouse.containsMouse ? Theme.surface1 : Theme.surface0
+    radius: Theme.mediumRadius
+    color: highlighted
+        ? (mouse.containsMouse ? Qt.lighter(Theme.accent, 1.08) : Theme.accent)
+        : (mouse.containsMouse ? Theme.surface1 : Theme.surface0)
 
     RowLayout {
         id: content
         anchors.centerIn: parent
         spacing: 8
 
-        Icon { icon: root.icon; size: 14; visible: root.icon !== "" }
-        StyledText { text: root.text; font.pixelSize: Theme.smallFontSize }
+        Icon { icon: root.icon; size: 14; color: root.foreground; visible: root.icon !== "" }
+        StyledText {
+            text: root.text
+            color: root.foreground
+            font.bold: root.highlighted
+            font.pixelSize: Theme.smallFontSize
+        }
     }
 
-    MouseArea {
-        id: mouse
-        anchors.fill: parent
-        hoverEnabled: true
-        cursorShape: Qt.PointingHandCursor
-        onClicked: root.clicked()
-    }
+    ClickArea { id: mouse; onClicked: root.clicked() }
 }

@@ -1,34 +1,54 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../data"
+import Quickshell.Widgets
+import qs.data
 
-// Clickable row: icon, title, optional subtitle, trailing text / icon
+// clickable row with an icon, title, optional subtitle and a trailing icon; `compact` is the
+// tighter one for the tray menus
 Rectangle {
     id: root
 
     property string icon: ""
+    // image instead of a symbol (tray menus send those), only used without `icon`
+    property string iconSource: ""
+    property color iconColor: active ? Theme.accent : Theme.text
+    // keeps the icon column without an icon, so the texts of a menu line up
+    property bool reserveIcon: false
     property string text: ""
     property string subtext: ""
-    property string trailing: ""
     property string trailingIcon: ""
     property bool active: false
-    property bool interactive: true
+    property bool bold: active
+    property bool compact: false
     signal clicked()
 
     Layout.fillWidth: true
-    implicitHeight: subtext !== "" ? 44 : 34
-    radius: 8
-    color: mouse.containsMouse && interactive ? Theme.surface0 : "transparent"
+    implicitHeight: compact ? 30 : subtext !== "" ? 44 : 34
+    radius: compact ? Theme.smallRadius : Theme.mediumRadius
+    color: mouse.containsMouse ? Theme.surface0 : "transparent"
+    opacity: enabled ? 1 : 0.4
 
     RowLayout {
         anchors { fill: parent; leftMargin: 8; rightMargin: 8 }
-        spacing: 10
+        spacing: root.compact ? 8 : 10
 
-        Icon {
-            icon: root.icon
-            size: 16
-            color: root.active ? Theme.accent : Theme.text
-            visible: root.icon !== ""
+        Item {
+            implicitWidth: Theme.smallIconSize
+            implicitHeight: Theme.smallIconSize
+            visible: root.reserveIcon || root.icon !== "" || root.iconSource !== ""
+
+            Icon {
+                anchors.centerIn: parent
+                icon: root.icon
+                size: Theme.smallIconSize
+                color: root.iconColor
+            }
+
+            IconImage {
+                anchors.fill: parent
+                visible: root.icon === "" && root.iconSource !== ""
+                source: root.iconSource
+            }
         }
 
         ColumnLayout {
@@ -39,8 +59,8 @@ Rectangle {
                 Layout.fillWidth: true
                 text: root.text
                 color: root.active ? Theme.accent : Theme.text
-                font.pixelSize: Theme.smallFontSize + 1
-                font.bold: root.active
+                font.pixelSize: Theme.mediumFontSize
+                font.bold: root.bold
             }
 
             StyledText {
@@ -48,15 +68,8 @@ Rectangle {
                 visible: root.subtext !== ""
                 text: root.subtext
                 color: Theme.subtext0
-                font.pixelSize: Theme.smallFontSize - 1
+                font.pixelSize: Theme.tinyFontSize
             }
-        }
-
-        StyledText {
-            visible: root.trailing !== ""
-            text: root.trailing
-            color: Theme.subtext0
-            font.pixelSize: Theme.smallFontSize
         }
 
         Icon {
@@ -67,12 +80,5 @@ Rectangle {
         }
     }
 
-    MouseArea {
-        id: mouse
-        anchors.fill: parent
-        hoverEnabled: true
-        enabled: root.interactive
-        cursorShape: Qt.PointingHandCursor
-        onClicked: root.clicked()
-    }
+    ClickArea { id: mouse; onClicked: root.clicked() }
 }

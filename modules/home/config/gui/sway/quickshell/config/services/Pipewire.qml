@@ -4,73 +4,43 @@ import Quickshell
 import Quickshell.Services.Pipewire as QsPipewire
 import QtQuick
 
-import '../data'
-
 Singleton {
-    id: root
-
-    // Track the default audio sink (volume / mute)
+    // without tracking them the audio properties (volume, mute) of the nodes stay empty
     QsPipewire.PwObjectTracker {
-        objects: [QsPipewire.Pipewire.defaultAudioSink]
+        objects: [QsPipewire.Pipewire.defaultAudioSink, QsPipewire.Pipewire.defaultAudioSource]
     }
 
-    // Default audio sink (speakers/headphones)
+    // output (speakers / headphones)
     readonly property QsPipewire.PwNode sink: QsPipewire.Pipewire.defaultAudioSink
     readonly property real sinkVolume: sink?.audio?.volume ?? 0
     readonly property bool sinkMuted: sink?.audio?.muted ?? false
+    readonly property string sinkIcon: sinkMuted || sinkVolume <= 0 ? "volume_off"
+        : sinkVolume > 0.66 ? "volume_up"
+        : sinkVolume > 0.33 ? "volume_down"
+        : "volume_mute"
 
-    // icon for the volume / mute state (data/Icons.qml)
-    readonly property string sinkIcon: Icons.volume(sinkVolume, sinkMuted)
-
-    // Volume percentage string
-    readonly property string sinkVolumeText: Math.round(sinkVolume * 100) + "%"
-
-    // All outputs (to switch between them; includes virtual ones like EasyEffects)
+    // all outputs to pick from, virtual ones like easyeffects included
     readonly property list<QsPipewire.PwNode> sinks: QsPipewire.Pipewire.nodes.values
         .filter(node => node.type === QsPipewire.PwNodeType.AudioSink)
 
-    // capture streams and the connections into them: tracked, otherwise their properties
-    // (media.name, needed for the "Peak detect" filter) and link states are unknown
-    QsPipewire.PwObjectTracker {
-        objects: [
-            ...QsPipewire.Pipewire.nodes.values.filter(node => node.type === QsPipewire.PwNodeType.AudioInStream),
-            ...QsPipewire.Pipewire.linkGroups.values.filter(group => group.target?.type === QsPipewire.PwNodeType.AudioInStream)
-        ]
+    // input (microphone)
+    readonly property QsPipewire.PwNode source: QsPipewire.Pipewire.defaultAudioSource
+    readonly property real sourceVolume: source?.audio?.volume ?? 0
+    readonly property bool sourceMuted: source?.audio?.muted ?? false
+    readonly property string sourceIcon: sourceMuted ? "mic_off" : "mic"
+
+    readonly property list<QsPipewire.PwNode> sources: QsPipewire.Pipewire.nodes.values
+        .filter(node => node.type === QsPipewire.PwNodeType.AudioSource)
+
+    function setVolume(node, volume: real): void {
+        if (node?.audio) node.audio.volume = Math.max(0, Math.min(1, volume));
     }
 
-    // Apps currently recording audio (microphone in use): capture streams with an *active*
-    // connection (paused / idle ones don't count). Works with EasyEffects in between, the
-    // apps record from its virtual source. Mixer level meters ("Peak detect") are ignored.
-    readonly property list<QsPipewire.PwNode> recordingStreams: {
-        const active = QsPipewire.Pipewire.linkGroups.values
-            .filter(group => group.state === QsPipewire.PwLinkState.Active)
-            .map(group => group.target);
-
-        return QsPipewire.Pipewire.nodes.values
-            .filter(node => node.type === QsPipewire.PwNodeType.AudioInStream
-                && !(node.properties["media.name"] ?? "").toLowerCase().includes("peak detect")
-                && active.includes(node));
+    function toggleMute(node): void {
+        if (node?.audio) node.audio.muted = !node.audio.muted;
     }
 
-    function streamAppName(node): string {
-        return node.properties["application.name"] || node.description || node.name;
-    }
+    function setDefaultSink(node): void { QsPipewire.Pipewire.preferredDefaultAudioSink = node; }
 
-    // Functions to control sink (speakers)
-    function setSinkVolume(volume: real): void {
-        if (sink?.audio) {
-            sink.audio.volume = Math.max(0, Math.min(1, volume));
-        }
-    }
-
-    function toggleSinkMute(): void {
-        if (sink?.audio) sink.audio.muted = !sink.audio.muted;
-    }
-
-    function setDefaultSink(node): void {
-        QsPipewire.Pipewire.preferredDefaultAudioSink = node;
-    }
-
-    // Whether the sink is in Exclusive mode or not
-    readonly property bool sinkExclusive: AlsaExclusive.exclusive
+    function setDefaultSource(node): void { QsPipewire.Pipewire.preferredDefaultAudioSource = node; }
 }

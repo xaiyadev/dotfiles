@@ -9,21 +9,13 @@ let
 in
 {
   config = mkIf sway.enable {
-    programs.quickshell = {
-      enable = true;
+    programs.quickshell.enable = true;
 
-      package = pkgs.symlinkJoin {
-        name = "wrapped-quickshell";
-        paths = [
-          pkgs.quickshell
-          pkgs.adwaita-icon-theme
-          pkgs.brightnessctl
-          pkgs.framework-tool
-          pkgs.networkmanagerapplet  # nm-connection-editor
-        ];
-
-        meta.mainProgram = pkgs.quickshell.meta.mainProgram;
-      };
+    # packages needed by quickshell
+    sylveon.packages = {
+      inherit (pkgs) adwaita-icon-theme; # icon themes mostly used for apps
+      inherit (pkgs) sound-theme-freedesktop; # sound pack
+      inherit (pkgs) libnotify; # notifications
     };
 
     # get the quickshell configuration into the config directory

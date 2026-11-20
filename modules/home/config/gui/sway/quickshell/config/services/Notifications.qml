@@ -1,27 +1,22 @@
 pragma Singleton
 
 import Quickshell
-import Quickshell.Io
 import Quickshell.Services.Notifications
 import QtQuick
 
-// history: everything not dismissed yet (newest first); toasts: currently shown popups.
+// keeps every notification (newest first) until it gets dismissed or cleared; the popups are in modules/Toasts.qml
 Singleton {
     id: root
 
-    property bool doNotDisturb: false
+    readonly property int maxHistory: 50
 
-    readonly property var history: server.trackedNotifications.values.slice().reverse()
+    // { notification, time } entries
+    property var history: []
     readonly property int count: history.length
 
-    // notifications shown as toasts right now
-    property list<Notification> toasts: []
+    // every new notification, modules/Toasts.qml decides if it gets a toast
+    signal notified(notification: Notification)
 
-    // receive time per notification id (Notification has no timestamp)
-    // (entries are removed when the notification closes, see onNotification)
-    property var receivedAt: ({})
-
-    // "now" for the relative times, ticks every 30 s so "now" / "3 min" stay current
     property real now: Date.now()
 
     Timer {
@@ -31,50 +26,40 @@ Singleton {
         onTriggered: root.now = Date.now()
     }
 
-    function timeOf(notification): string {
-        const t = receivedAt[notification.id];
-        if (!t) return "";
-        const minutes = Math.floor((now - t) / 60000);
-        if (minutes < 1) return "now";
-        if (minutes < 60) return minutes + " min";
-        return Qt.formatTime(new Date(t), "HH:mm");
-    }
-
-    function hideToast(notification): void {
-        toasts = toasts.filter(n => n !== notification);
-    }
-
-    // click on a notification: run its default action if it has one
-    function activate(notification): void {
-        const action = notification.actions.find(a => a.identifier === "default");
-        if (action) action.invoke();
-        else notification.dismiss();
+    // groups in the notification hub
+    function ageGroup(time: real): string {
+        const minutes = (now - time) / 60000;
+        if (minutes < 1) return "Just now";
+        if (minutes < 5) return "Few minutes ago";
+        if (minutes < 15) return "Last 15 min";
+        if (minutes < 30) return "Last 30 min";
+        if (minutes < 60) return "Last hour";
+        const today = new Date(now);
+        today.setHours(0, 0, 0, 0);
+        if (time >= today.getTime()) return "Today";
+        if (time >= today.getTime() - 86400000) return "Yesterday";
+        return "Older";
     }
 
     function clearAll(): void {
-        for (const n of history) n.dismiss();
-        toasts = [];
+        for (const e of history) e.notification.dismiss();
     }
 
-    // command line / keybinds: qs ipc call notifications toggleDnd | dnd | count | clear | list
-    IpcHandler {
-        target: "notifications"
+    function add(notification): void {
+        notification.tracked = true;
 
-        function toggleDnd(): void { root.doNotDisturb = !root.doNotDisturb; }
-        function dnd(): bool { return root.doNotDisturb; }
-        function count(): int { return root.count; }
-        function clear(): void { root.clearAll(); }
-        function list(): string {
-            return root.history.map(n => [n.id, n.appName, n.summary, "urgency=" + n.urgency,
-                "expire=" + n.expireTimeout, "transient=" + n.transient, "image=" + n.image,
-                "icon=" + n.appIcon, "toast=" + root.toasts.includes(n)].join(" | ")).join("\n");
-        }
+        notification.closed.connect(() => {
+            root.history = root.history.filter(e => e.notification !== notification);
+        });
+
+        now = Date.now();
+        history = [{ notification, time: now }, ...history];
+
+        for (const e of history.slice(maxHistory)) e.notification.expire();
     }
 
     NotificationServer {
-        id: server
-
-        keepOnReload: true
+        keepOnReload: false
         persistenceSupported: true
         bodySupported: true
         bodyMarkupSupported: true
@@ -82,13 +67,8 @@ Singleton {
         imageSupported: true
 
         onNotification: (notification) => {
-            notification.tracked = true;
-            root.now = Date.now();
-            const id = notification.id;
-            root.receivedAt[id] = root.now;
-            notification.closed.connect(() => delete root.receivedAt[id]);
-            if (!root.doNotDisturb || notification.urgency === NotificationUrgency.Critical)
-                root.toasts = [...root.toasts, notification].slice(-4);
+            root.add(notification);
+            root.notified(notification);
         }
     }
 }
