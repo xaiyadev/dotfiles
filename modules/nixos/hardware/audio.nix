@@ -23,7 +23,7 @@ in
 
       audio.enable = true;
       pulse.enable = true;
-      jack.enable = true;
+      # jack.enable = true; deprecated;  TODO: Use the `pw-jack` wrapper from `pipewire.jack` where necessary instead.
 
       alsa = {
         enable = true;

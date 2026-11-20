@@ -11,7 +11,7 @@ in
     hardware.fw-fanctrl = {
       enable = true;
 
-      config = {
+      settings = {
         defaultStrategy = "almost-silent";
 
         strategies.almost-silent = {
