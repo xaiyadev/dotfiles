@@ -23,7 +23,6 @@ in
 
       audio.enable = true;
       pulse.enable = true;
-      # jack.enable = true; deprecated;  TODO: Use the `pw-jack` wrapper from `pipewire.jack` where necessary instead.
 
       alsa = {
         enable = true;
@@ -32,6 +31,7 @@ in
 
       extraLadspaPackages = [ pkgs.rnnoise-plugin ];
 
+      # --- configuration for my DAC
       wireplumber.extraConfig."51-alsa-dx1ii" = {
         "monitor.alsa.rules" = [
           {
@@ -48,10 +48,8 @@ in
         ];
       };
 
-
       extraConfig = {
         pipewire = {
-          # configuration for my Topping DX1 II/Hi-Res bit-perfect streaming
           "default" = {
             "context.properties" = {
               "default.clock.quantum" = 512;

@@ -10,6 +10,8 @@
       laptop.enable = true;
     };
 
+    devices.framework.enable = true;
+
     users = [
       "xaiya"
       "blmedia"

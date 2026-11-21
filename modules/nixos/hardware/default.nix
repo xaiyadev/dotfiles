@@ -4,11 +4,12 @@
     ./cpu.nix
     ./gpu
     ./power.nix # power-management (for mostly system that have batteries (laptops))
-    ./audio.nix # Audio settings and configuration (pipewire; alsa; etc.)
     ./bluetooth.nix
     ./yubikey.nix
 
     ./firmware.nix # updating firmware
-    ./framework.nix # configuration for framework-specific tools (e.g fw-fanctrl)
+    ./fw-fanctrl.nix # configuration for framework-specific tools (e.g fw-fanctrl)
+
+    ./media # media configuration (e.g video and audio)
   ];
 }
