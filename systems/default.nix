@@ -19,6 +19,9 @@
 
       # Home server
       apricot = { };
+
+      # VPS, public services (pds)
+      apple = { };
     };
   };
 }

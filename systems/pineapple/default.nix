@@ -8,6 +8,7 @@
     profiles = {
       graphical.enable = true;
       laptop.enable = true;
+      gaming.enable = true;
     };
 
     users = [

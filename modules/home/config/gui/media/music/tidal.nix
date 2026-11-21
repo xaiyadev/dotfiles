@@ -17,7 +17,7 @@ let
       .${config.catppuccin.flavor}.colors;
 in
 {
-  config = mkIf (any (x: x == "tidal") players) {
+  config = mkIf (players != null && any (x: x == "tidal") players) {
     # install music client
     sylveon.packages = { inherit (pkgs) sone; };
 

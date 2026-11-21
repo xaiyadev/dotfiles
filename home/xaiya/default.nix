@@ -1,4 +1,9 @@
-{ ... }:
+{ config, lib, ... }:
+let
+  inherit (lib) mkMerge mkIf;
+
+  profiles = config.sylveon.profiles;
+in
 {
 
   imports = [
@@ -7,27 +12,28 @@
   ];
 
 
-  sylveon = {
-    profiles.user = {
-      gaming.enable = true;
-    };
+  sylveon = mkMerge 
+    [
+      (mkIf profiles.graphical.enable {
+        programs = {
+          chromium.enable = true;
+          discord.enable = true;
+        
+          anytype.enable = true;
+        
+          keepassxc.enable = true;
+        
+          music-players = [ "tidal" ];
+        };
+      })
 
-    programs = {
-      chromium.enable = true;
-      discord.enable = true;
-
-      anytype.enable = true;
-
-      keepassxc.enable = true;
-
-      music-players = [ "tidal" ];
-
-      game-clients = [ 
-        "steam" 
-        "bottles"
-        "minecraft" 
-        "deadlock"
-      ];
-    };
-  };
+      (mkIf profiles.gaming.enable {
+        programs.game-clients = [ 
+          "steam" 
+          "bottles"
+          "minecraft" 
+          "deadlock"
+        ];
+      })
+    ];
 }

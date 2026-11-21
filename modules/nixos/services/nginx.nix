@@ -10,25 +10,34 @@ let
   cfg = config.sylveon.services.nginx;
 in
 {
-  options.sylveon.services.nginx.enable = mkEnableOption "Enable Nginx proxy";
+  options.sylveon.services.nginx = {
+    enable = mkEnableOption "Enable Nginx proxy";
+    public = mkEnableOption "listening on every interface and opening 80/443, instead of only the tailnet";
+  };
 
   config = mkIf cfg.enable {
     age.secrets.cloudflare-acme.rekeyFile = "${self}/secrets/cloudflare-acme.age";
 
     users.users.nginx.extraGroups = [ "acme" ];
 
+    networking.firewall.allowedTCPPorts = mkIf cfg.public [
+      80
+      443
+    ];
+
     services.nginx = {
       enable = true;
 
       # only bind to tailnet (tailscale) (should rewrite this into more detail for tailscale? TODO)
-      defaultListenAddresses = [ "100.111.243.3" ];
+      defaultListenAddresses = mkIf (!cfg.public) [ "100.111.243.3" ];
 
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
 
-      virtualHosts."xaiya.dev" = {
+      # landing page for the tailnet only
+      virtualHosts."xaiya.dev" = mkIf (!cfg.public) {
         useACMEHost = "xaiya.dev";
         forceSSL = true;
 

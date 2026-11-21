@@ -1,22 +1,47 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
-  inherit (lib) mkForce;
+  inherit (lib) mkForce mkOption mkEnableOption;
+  inherit (lib.types) enum str;
+
+  cfg = config.sylveon.boot;
 in
 {
-  boot.loader = {
-    timeout = mkForce 5; # Timeout after 5 seconds
+  options.sylveon.boot = {
+    loader = mkOption {
+      type = enum [ "grub" ];
+      default = "grub";
+    };
 
-    efi.canTouchEfiVariables = true;
+    efi.enable = mkEnableOption "Whether or not to boot with UEFI or BIOS" // {
+      default = true;
+    };
 
-    grub = {
-      enable = true;
+    device = mkOption {
+      type = str;
+      default = "nodev";
+      example = "/dev/vda";
+      description = ''
+        Disk grub gets installed into. 
+        "nodev" only installs the EFI binary
+      '';
+    };
+  };
 
-      configurationLimit = 3;
+  config = {
+    boot.loader = {
+      timeout = mkForce 5; # Timeout after 5 seconds
 
-      useOSProber = true;
-      efiSupport = true;
+      efi.canTouchEfiVariables = cfg.efi.enable;
 
-      device = "nodev";
+      grub = {
+        enable = cfg.loader == "grub";
+        inherit (cfg) device;
+
+        configurationLimit = 3;
+
+        useOSProber = true;
+        efiSupport = cfg.efi.enable;
+      };
     };
   };
 }
