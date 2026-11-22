@@ -11,7 +11,7 @@ let
   players = config.sylveon.programs.music-players;
 in
 {
-  config = mkIf (any (x: x == "youtube-music") players) {
+  config = mkIf (players != null && any (x: x == "youtube-music") players) {
     sylveon.packages = { inherit (pkgs) pear-desktop; };
   };
 }

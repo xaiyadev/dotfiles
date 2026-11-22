@@ -5,8 +5,10 @@
   ...
 }:
 let
-  inherit (lib) mkOption;
+  inherit (lib) mkOption mkIf;
   inherit (lib.types) nullOr enum;
+
+  cfg = config.sylveon.hardware.gpu;
 in
 {
 
@@ -27,9 +29,8 @@ in
     '';
   };
 
-  config = {
+  config = (mkIf (cfg != null) {
     services.xserver.enable = true;
-
     hardware = {
       graphics = {
         enable = true;
@@ -41,5 +42,5 @@ in
         ];
       };
     };
-  };
+  });
 }

@@ -8,9 +8,13 @@ let
 in
 {
   imports = [
+    # -- clients
     ./spotify.nix
     ./tidal.nix
     ./youtube-music.nix
+
+    # -- scrobbler
+    ./multi-scrobbler.nix
   ];
 
   options.sylveon.programs.music-players = mkOption {

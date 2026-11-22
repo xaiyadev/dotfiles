@@ -12,7 +12,7 @@ let
   players = config.sylveon.programs.music-players;
 in
 {
-  config = mkIf (any (x: x == "spotify") players) {
+  config = mkIf (players != null && any (x: x == "spotify") players) {
     sylveon.packages = {
       inherit (pkgs) spotify;
     };

@@ -7,6 +7,7 @@
     ./kitchenowl.nix
     ./webdav.nix
     ./paperless.nix
+    ./pds.nix
 
     ./gameCloud
   ];
