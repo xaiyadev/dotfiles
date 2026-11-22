@@ -1,4 +1,4 @@
-{pkgs, ... }: {
+{ self, ... }: {
   imports = [
     ./fileSystem.nix
   ];
@@ -24,6 +24,13 @@
     };
 
     services.docker.enable = true;
+  };
+  
+  #  TODO: find a spot to safe this
+  age.secrets."multi-scrobbler-env" = {
+    rekeyFile = "${self}/secrets/multi-scrobbler-env.age";
+    group = "users";
+    mode = "440";
   };
 
   nixpkgs.hostPlatform = "x86_64-linux";
