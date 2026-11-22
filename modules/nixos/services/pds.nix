@@ -29,8 +29,8 @@ in
         '';
     };
 
-    # user handles are subdomains of the pds (<name>.pds.xaiya.dev), so we gotta get acme certs for them too
-    security.acme.certs."xaiya.dev".extraDomainNames = [ "*.${hostname}" ];
+    # own cert for the pds
+    security.acme.certs.${hostname}.extraDomainNames = [ "*.${hostname}" ];
 
     services = {
       tranquil-pds = {
@@ -43,8 +43,11 @@ in
           server = {
             inherit hostname;
 
-            contact_email = "d.schumin@proton.me";
-            trusted_proxy_count = 1; # nginx terminates TLS
+            trusted_proxy_count = 1;
+
+            # no mail server yet -> cant verify
+            # TODO: remove once email is configured 
+            disable_account_verification_gate = true;
           };
 
           # TODO: configure a mail-server
@@ -53,7 +56,7 @@ in
       };
 
       nginx.virtualHosts.${hostname} = {
-        useACMEHost = "xaiya.dev";
+        useACMEHost = hostname;
         forceSSL = true;
 
         serverAliases = [ "*.${hostname}" ];
@@ -99,7 +102,7 @@ in
       };
     };
 
-    # the hardened unit only allows writes to the blob dir; the store and working dir live in dataDir too
+    # the hardened unit only allows writes to the blob dir; allow writing to it
     systemd.services.tranquil-pds.serviceConfig.ReadWritePaths = [ pds.dataDir ];
   };
 }

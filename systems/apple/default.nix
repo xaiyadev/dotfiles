@@ -29,13 +29,18 @@ in
         public = true; # Our vps handles the public traffic
       };
 
-      # -- services
+      # services
       pds.enable = true;
     };
   };
 
-  # this is a public vps; ssh is only reachable through the tailscale vpn
+  # this is a public vps, we dont want others to ssh into it ( TODO: make this a public option? no ssh in general for public address?)
   services.openssh.openFirewall = mkForce false;
+
+  # only ipv4 is used  TODO: set as option?
+  # -> disabled in the kernel, so networkmanager can't turn it back on
+  boot.kernelParams = [ "ipv6.disable=1" ];
+  networking.enableIPv6 = false; 
 
   nixpkgs.hostPlatform = "x86_64-linux";
   system.stateVersion = "25.05";

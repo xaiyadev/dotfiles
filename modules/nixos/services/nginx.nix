@@ -28,7 +28,7 @@ in
     services.nginx = {
       enable = true;
 
-      # only bind to tailnet (tailscale) (should rewrite this into more detail for tailscale? TODO)
+      # only bind to tailscale ( TODO: should rewrite this into more detail for tailscale?)
       defaultListenAddresses = mkIf (!cfg.public) [ "100.111.243.3" ];
 
       recommendedGzipSettings = true;
@@ -36,7 +36,7 @@ in
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
 
-      # landing page for the tailnet only
+      # landing page for tailscale/private network only
       virtualHosts."xaiya.dev" = mkIf (!cfg.public) {
         useACMEHost = "xaiya.dev";
         forceSSL = true;
@@ -54,19 +54,23 @@ in
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = "d.schumin@proton.me";
 
-      certs."xaiya.dev" = {
+      # public/cloudflare certificats
+      defaults = {
+        email = "d.schumin@proton.me";
         group = "nginx";
 
-        domain = "*.xaiya.dev";
-        extraDomainNames = [ "xaiya.dev" ]; # Using this because *. doesnt take the original
-
         dnsProvider = "cloudflare";
-        dnsResolver = "1.1.1.1:53"; # use cloudflares dns-resolver instead of the systems one
+        dnsResolver = "1.1.1.1:53";
         webroot = null;
 
         environmentFile = config.age.secrets.cloudflare-acme.path;
+      };
+
+      # certificats for the tailscale network
+      certs."xaiya.dev" = mkIf (!cfg.public) {
+        domain = "*.xaiya.dev";
+        extraDomainNames = [ "xaiya.dev" ]; # Using this because *. doesnt take the original
       };
     };
   };
